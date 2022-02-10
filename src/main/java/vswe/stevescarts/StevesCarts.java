@@ -22,6 +22,7 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsItems.init();
 		StevesCartsBlocks.init();
 		MODULAR_MINECART_ENTITY = Registry.register(Registry.ENTITY_TYPE, id("cart"), FabricEntityTypeBuilder.<ModularMinecartEntity>create(SpawnGroup.MISC, ModularMinecartEntity::new).dimensions(EntityDimensions.fixed(1, 1)).build());
+		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 	}
 
 	public static Identifier id(String s) {
