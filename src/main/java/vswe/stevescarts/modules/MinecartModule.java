@@ -1,5 +1,6 @@
 package vswe.stevescarts.modules;
 
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 
@@ -18,6 +19,13 @@ public abstract class MinecartModule {
 
 	public MinecartModuleType<?> getType() {
 		return this.type;
+	}
+
+	public NbtCompound writeNbt(NbtCompound nbt) {
+		return nbt;
+	}
+
+	public void readNbt(NbtCompound nbt) {
 	}
 
 	public void init() {
