@@ -6,9 +6,10 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.modules.MinecartModule;
 
 public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntity> {
-	protected ModularMinecartRenderer(EntityRendererFactory.Context ctx) {
+	public ModularMinecartRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
 	}
 
@@ -20,6 +21,9 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
     // TODO
     @Override
     public void render(ModularMinecartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+		for (MinecartModule module : entity.getModules()) {
+
+		}
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
 }

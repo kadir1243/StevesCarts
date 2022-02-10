@@ -17,7 +17,7 @@ import java.util.Map;
 public class ModuleRenderDispatcher {
 	private final TextRenderer textRenderer;
 	private final ItemRenderer itemRenderer;
-	public final Map<MinecartModuleType<?>, ModuleRenderer<? extends MinecartModule>> RENDERERS = new HashMap<>();
+	public final Map<MinecartModuleType<?>, ModuleRenderer<? extends MinecartModule>> renderers = new HashMap<>();
 
 	public ModuleRenderDispatcher(TextRenderer textRenderer, ItemRenderer itemRenderer) {
 		this.textRenderer = textRenderer;
@@ -26,7 +26,7 @@ public class ModuleRenderDispatcher {
 
 	public <T extends MinecartModule> void render(T module, float entityYaw, float entityPitch, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		//noinspection unchecked
-		ModuleRenderer<T> renderer = (ModuleRenderer<T>) RENDERERS.get(module.getType());
+		ModuleRenderer<T> renderer = (ModuleRenderer<T>) renderers.get(module.getType());
 		if (renderer == null) {
 			throw new NullPointerException("No renderer for module " + module.getType().toString());
 		}
@@ -43,5 +43,9 @@ public class ModuleRenderDispatcher {
 
 	public TextRenderer getTextRenderer() {
 		return textRenderer;
+	}
+
+	public void register(MinecartModuleType<?> type, ModuleRenderer<? extends MinecartModule> renderer) {
+		renderers.put(type, renderer);
 	}
 }
