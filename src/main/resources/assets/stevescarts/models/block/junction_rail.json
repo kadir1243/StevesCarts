@@ -1,6 +1,6 @@
 {
-  "parent": "block/rail_flat",
+  "parent": "minecraft:block/rail_flat",
   "textures": {
-    "rail": "stevescarts:block/junction_rail"
+    "rail": "stevescarts:blocks/junction_rail"
   }
 }
