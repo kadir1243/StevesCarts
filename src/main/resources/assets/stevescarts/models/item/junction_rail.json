@@ -1,0 +1,6 @@
+{
+  "parent": "block/rail_flat",
+  "textures": {
+    "layer0": "stevescarts:block/junction_rail"
+  }
+}
