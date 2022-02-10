@@ -7,4 +7,5 @@ import vswe.stevescarts.StevesCarts;
 
 public class StevesCartsItemGroups {
 	public static final ItemGroup COMPONENTS = FabricItemGroupBuilder.create(StevesCarts.id("components_group")).icon(() -> new ItemStack(StevesCartsItems.IRON_WHEELS)).build();
+	public static final ItemGroup BLOCKS = FabricItemGroupBuilder.create(StevesCarts.id("blocks_group")).icon(() -> new ItemStack(StevesCartsItems.IRON_WHEELS)).build();
 }
