@@ -3,7 +3,7 @@
     "facing=up,connected=false": {
       "model": "stevescarts:block/batteries_upgrade_upgrade_idle"
     },
-    "facing=down,connected=true": {
+    "facing=south,connected=true": {
       "x": 180,
       "model": "stevescarts:block/batteries_upgrade_upgrade"
     },
@@ -14,7 +14,7 @@
       "y": 270,
       "model": "stevescarts:block/batteries_upgrade_upgrade"
     },
-    "facing=south,connected=true": {
+    "facing=down,connected=true": {
       "y": 90,
       "model": "stevescarts:block/batteries_upgrade_upgrade_horizontal"
     },
