@@ -1,0 +1,6 @@
+{
+  "parent": "stevescarts:block/upgrade",
+  "textures": {
+    "layer0": "stevescarts:blocks/solar_panel_upgrade_icon"
+  ,"front": "stevescarts:blocks/upgrade_side_0_icon"}
+}
