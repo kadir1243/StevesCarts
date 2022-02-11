@@ -70,11 +70,11 @@ public class UpgradeBlock extends Block {
 		double thickness = 0.125;
 		DIRECTIONAL_SHAPES = new VoxelShape[6];
 		DISCONNECTED_SHAPE = VoxelShapes.cuboid(margin, thickness, margin, 1 - margin, 1 - thickness, 1 - margin);
-		DIRECTIONAL_SHAPES[Direction.DOWN.getId()] = VoxelShapes.cuboid(margin, 0, margin, 1 - margin, thickness, 1 - margin);
-		DIRECTIONAL_SHAPES[Direction.UP.getId()] = VoxelShapes.cuboid(margin, 1 - thickness, margin, 1 - margin, 1, 1 - margin);
-		DIRECTIONAL_SHAPES[Direction.WEST.getId()] = VoxelShapes.cuboid(0, margin, margin, thickness, 1 - margin, 1 - margin);
-		DIRECTIONAL_SHAPES[Direction.EAST.getId()] = VoxelShapes.cuboid(1 - thickness, margin, margin, 1, 1 - margin, 1 - margin);
-		DIRECTIONAL_SHAPES[Direction.NORTH.getId()] = VoxelShapes.cuboid(margin, margin, 0, 1 - margin, 1 - margin, thickness);
-		DIRECTIONAL_SHAPES[Direction.SOUTH.getId()] = VoxelShapes.cuboid(margin, margin, 1 - thickness, 1 - margin, 1 - margin, 1);
+		DIRECTIONAL_SHAPES[Direction.DOWN.getId()] = VoxelShapes.cuboid(margin, 1 - thickness, margin, 1 - margin, 1, 1 - margin);
+		DIRECTIONAL_SHAPES[Direction.UP.getId()] = VoxelShapes.cuboid(margin, 0, margin, 1 - margin, thickness, 1 - margin);
+		DIRECTIONAL_SHAPES[Direction.NORTH.getId()] = VoxelShapes.cuboid(margin, margin, 1 - thickness, 1 - margin, 1 - margin, 1);
+		DIRECTIONAL_SHAPES[Direction.SOUTH.getId()] = VoxelShapes.cuboid(margin, margin, 0, 1 - margin, 1 - margin, thickness);
+		DIRECTIONAL_SHAPES[Direction.WEST.getId()] = VoxelShapes.cuboid(1 - thickness, margin, margin, 1, 1 - margin, 1 - margin);
+		DIRECTIONAL_SHAPES[Direction.EAST.getId()] = VoxelShapes.cuboid(0, margin, margin, thickness, 1 - margin, 1 - margin);
 	}
 }

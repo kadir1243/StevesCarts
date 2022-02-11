@@ -6,7 +6,7 @@
       "model": "stevescarts:block/industrial_espionage_upgrade_upgrade_idle"
     },
     "facing=south,connected=true": {
-      "x": 90,
+      "y": 90,
       "model": "stevescarts:block/industrial_espionage_upgrade_upgrade"
     },
     "facing=east,connected=true": {
