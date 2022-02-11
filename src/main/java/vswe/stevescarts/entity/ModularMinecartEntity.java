@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
@@ -68,6 +69,27 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		}
 	}
 
+	private void setModuleData(Multimap<MinecartModuleType<?>, NbtCompound> moduleData) {
+		List<MinecartModule> modules = new ArrayList<>();
+		moduleData.forEach((moduleType, nbt) -> {
+			MinecartModule module = moduleType.createModule(this);
+			module.readNbt(nbt);
+			modules.add(module);
+		});
+		this.setModules(modules);
+	}
+
+	private static Multimap<MinecartModuleType<?>, NbtCompound> readModuleData(PacketByteBuf buf) {
+		Multimap<MinecartModuleType<?>, NbtCompound> map = ArrayListMultimap.create();
+		int size = buf.readVarInt();
+		for (int i = 0; i < size; i++) {
+			MinecartModuleType<?> type = MinecartModuleType.REGISTRY.get(buf.readVarInt());
+			NbtCompound compound = buf.readNbt();
+			map.put(type, compound);
+		}
+		return map;
+	}
+
 	private void setModules(List<MinecartModule> modules) {
 		this.modules = modules;
 	}
@@ -88,18 +110,11 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 				double vX = buf.readDouble();
 				double vY = buf.readDouble();
 				double vZ = buf.readDouble();
-				int moduleCount = buf.readVarInt();
-				Multimap<MinecartModuleType<?>, NbtCompound> moduleData = ArrayListMultimap.create();
-				for (int i = 0; i < moduleCount; i++) {
-					MinecartModuleType<?> moduleType = MinecartModuleType.REGISTRY.get(buf.readVarInt());
-					NbtCompound nbt = buf.readNbt();
-					moduleData.put(moduleType, nbt);
-				}
+				Multimap<MinecartModuleType<?>, NbtCompound> moduleData = readModuleData(buf);
 				client.execute(() -> {
 					ClientWorld world = MinecraftClient.getInstance().world;
 					ModularMinecartEntity entity = StevesCarts.MODULAR_MINECART_ENTITY.create(world);
 					if (entity != null && world != null) {
-						List<MinecartModule> modules = new ArrayList<>();
 						entity.updatePosition(x, y, z);
 						entity.updateTrackedPosition(x, y, z);
 						entity.setPitch(pitch);
@@ -107,12 +122,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 						entity.setVelocity(vX, vY, vZ);
 						entity.setId(entityID);
 						entity.setUuid(entityUUID);
-						moduleData.forEach((moduleType, nbt) -> {
-							MinecartModule module = moduleType.createModule(entity);
-							module.readNbt(nbt);
-							modules.add(module);
-						});
-						entity.setModules(modules);
+						entity.setModuleData(moduleData);
 						world.addEntity(entityID, entity);
 					}
 				});
@@ -131,6 +141,37 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			buf.writeDouble(entity.getVelocity().x);
 			buf.writeDouble(entity.getVelocity().y);
 			buf.writeDouble(entity.getVelocity().z);
+			entity.writeModuleData(buf);
+			return ServerPlayNetworking.createS2CPacket(ID, buf);
+		}
+	}
+
+	public static class UpdatePacket {
+		public static final Identifier ID = StevesCarts.id("update_modules");
+
+		@Environment(EnvType.CLIENT)
+		public static void init() {
+			ClientPlayNetworking.registerGlobalReceiver(ID, (client, handler, buf, responseSender) -> {
+				int entityID = buf.readVarInt();
+				Multimap<MinecartModuleType<?>, NbtCompound> moduleData = readModuleData(buf);
+				client.execute(() -> {
+					Entity entity = MinecraftClient.getInstance().world.getEntityById(entityID);
+					if (entity == null) {
+						StevesCarts.LOGGER.error("Received update packet for non-existent entity with id {}", entityID);
+						return;
+					} else if (!(entity instanceof ModularMinecartEntity)) {
+						StevesCarts.LOGGER.error("Received update packet for non-cart entity with id {}", entityID);
+						return;
+					}
+					ModularMinecartEntity cart = (ModularMinecartEntity) entity;
+					cart.setModuleData(moduleData);
+				});
+			});
+		}
+
+		private static Packet<?> create(ModularMinecartEntity entity) {
+			PacketByteBuf buf = PacketByteBufs.create();
+			buf.writeVarInt(entity.getId());
 			entity.writeModuleData(buf);
 			return ServerPlayNetworking.createS2CPacket(ID, buf);
 		}

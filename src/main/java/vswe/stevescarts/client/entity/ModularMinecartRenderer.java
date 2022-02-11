@@ -3,7 +3,9 @@ package vswe.stevescarts.client.entity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
@@ -26,4 +28,8 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		}
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
+
+	public static void renderAsItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+
+	}
 }
