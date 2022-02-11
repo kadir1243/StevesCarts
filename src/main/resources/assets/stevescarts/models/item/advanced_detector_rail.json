@@ -1,5 +1,5 @@
 {
-  "parent": "block/rail_flat",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "stevescarts:blocks/advanced_detector_rail"
   }
