@@ -25,7 +25,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
     // TODO
     @Override
     public void render(ModularMinecartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-		for (MinecartModule module : entity.getModules()) {
+		for (MinecartModule module : entity.getModuleList()) {
 			StevesCartsClient.getModuleRenderDispatcher().render(module, yaw, tickDelta, matrices, vertexConsumers, light);
 		}
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);

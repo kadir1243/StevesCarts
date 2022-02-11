@@ -2,44 +2,33 @@ package vswe.stevescarts.entity;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
+import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.collection.Int2ObjectBiMap;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.entity.network.SpawnPacket;
+import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.hull.HullModule;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 // TODO
 public class ModularMinecartEntity extends AbstractMinecartEntity {
-	public List<MinecartModule> modules = new ArrayList<>();
+	public Map<Integer, MinecartModule> modules = new HashMap<>();
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
-	}
-
-	public ModularMinecartEntity(World world, double x, double y, double z, MinecartModuleType<? extends HullModule> hull) {
-		super(StevesCarts.MODULAR_MINECART_ENTITY, world, x, y, z);
-		HullModule hullModule = hull.createModule(this);
-		this.modules.add(hullModule);
 	}
 
 	@Override
@@ -57,29 +46,33 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		return ItemStack.EMPTY; // TODO
 	}
 
-	public List<MinecartModule> getModules() {
+	public Map<Integer, MinecartModule> getModules() {
 		return this.modules;
 	}
 
-	private void writeModuleData(PacketByteBuf buf) {
+	public Collection<MinecartModule> getModuleList() {
+		return this.modules.values();
+	}
+
+	public void writeModuleData(PacketByteBuf buf) {
 		buf.writeVarInt(this.modules.size());
-		for (MinecartModule module : this.modules) {
+		for (MinecartModule module : this.getModuleList()) {
 			buf.writeVarInt(MinecartModuleType.REGISTRY.getRawId(module.getType()));
 			buf.writeNbt(module.writeNbt(new NbtCompound()));
 		}
 	}
 
-	private void setModuleData(Multimap<MinecartModuleType<?>, NbtCompound> moduleData) {
+	public void setModuleData(Multimap<MinecartModuleType<?>, NbtCompound> moduleData, boolean update) {
 		List<MinecartModule> modules = new ArrayList<>();
 		moduleData.forEach((moduleType, nbt) -> {
 			MinecartModule module = moduleType.createModule(this);
 			module.readNbt(nbt);
 			modules.add(module);
 		});
-		this.setModules(modules);
+		this.setModules(modules.stream().collect(Collectors.toMap(MinecartModule::getId, Function.identity())), update);
 	}
 
-	private static Multimap<MinecartModuleType<?>, NbtCompound> readModuleData(PacketByteBuf buf) {
+	public static Multimap<MinecartModuleType<?>, NbtCompound> readModuleData(PacketByteBuf buf) {
 		Multimap<MinecartModuleType<?>, NbtCompound> map = ArrayListMultimap.create();
 		int size = buf.readVarInt();
 		for (int i = 0; i < size; i++) {
@@ -90,90 +83,25 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		return map;
 	}
 
-	private void setModules(List<MinecartModule> modules) {
+	private void setModules(Map<Integer, MinecartModule> modules, boolean update) {
 		this.modules = modules;
-	}
-
-	public static class SpawnPacket {
-		public static final Identifier ID = StevesCarts.id("spawn_minecart");
-
-		@Environment(EnvType.CLIENT)
-		public static void init() {
-			ClientPlayNetworking.registerGlobalReceiver(ID, (client, handler, buf, responseSender) -> {
-				UUID entityUUID = buf.readUuid();
-				int entityID = buf.readVarInt();
-				double x = buf.readDouble();
-				double y = buf.readDouble();
-				double z = buf.readDouble();
-				float pitch = (float) (buf.readByte() * 360) / 256.0F;
-				float yaw = (float) (buf.readByte() * 360) / 256.0F;
-				double vX = buf.readDouble();
-				double vY = buf.readDouble();
-				double vZ = buf.readDouble();
-				Multimap<MinecartModuleType<?>, NbtCompound> moduleData = readModuleData(buf);
-				client.execute(() -> {
-					ClientWorld world = MinecraftClient.getInstance().world;
-					ModularMinecartEntity entity = StevesCarts.MODULAR_MINECART_ENTITY.create(world);
-					if (entity != null && world != null) {
-						entity.updatePosition(x, y, z);
-						entity.updateTrackedPosition(x, y, z);
-						entity.setPitch(pitch);
-						entity.setYaw(yaw);
-						entity.setVelocity(vX, vY, vZ);
-						entity.setId(entityID);
-						entity.setUuid(entityUUID);
-						entity.setModuleData(moduleData);
-						world.addEntity(entityID, entity);
-					}
-				});
-			});
-		}
-
-		private static Packet<?> create(ModularMinecartEntity entity) {
-			PacketByteBuf buf = PacketByteBufs.create();
-			buf.writeUuid(entity.getUuid());
-			buf.writeVarInt(entity.getId());
-			buf.writeDouble(entity.getX());
-			buf.writeDouble(entity.getY());
-			buf.writeDouble(entity.getZ());
-			buf.writeByte(MathHelper.floor(entity.getPitch() * 256.0F / 360.0F));
-			buf.writeByte(MathHelper.floor(entity.getYaw() * 256.0F / 360.0F));
-			buf.writeDouble(entity.getVelocity().x);
-			buf.writeDouble(entity.getVelocity().y);
-			buf.writeDouble(entity.getVelocity().z);
-			entity.writeModuleData(buf);
-			return ServerPlayNetworking.createS2CPacket(ID, buf);
+		if (update) {
+			UpdatePacket.sendToTrackers(this);
 		}
 	}
 
-	public static class UpdatePacket {
-		public static final Identifier ID = StevesCarts.id("update_modules");
-
-		@Environment(EnvType.CLIENT)
-		public static void init() {
-			ClientPlayNetworking.registerGlobalReceiver(ID, (client, handler, buf, responseSender) -> {
-				int entityID = buf.readVarInt();
-				Multimap<MinecartModuleType<?>, NbtCompound> moduleData = readModuleData(buf);
-				client.execute(() -> {
-					Entity entity = MinecraftClient.getInstance().world.getEntityById(entityID);
-					if (entity == null) {
-						StevesCarts.LOGGER.error("Received update packet for non-existent entity with id {}", entityID);
-						return;
-					} else if (!(entity instanceof ModularMinecartEntity)) {
-						StevesCarts.LOGGER.error("Received update packet for non-cart entity with id {}", entityID);
-						return;
-					}
-					ModularMinecartEntity cart = (ModularMinecartEntity) entity;
-					cart.setModuleData(moduleData);
-				});
-			});
+	public void addModule(int id, MinecartModule module, boolean update) {
+		this.modules.put(id, module);
+		if (update) {
+			UpdatePacket.sendToTrackers(this);
 		}
+	}
 
-		private static Packet<?> create(ModularMinecartEntity entity) {
-			PacketByteBuf buf = PacketByteBufs.create();
-			buf.writeVarInt(entity.getId());
-			entity.writeModuleData(buf);
-			return ServerPlayNetworking.createS2CPacket(ID, buf);
+	private int nextId() {
+		int id = 0;
+		while (this.modules.containsKey(id)) {
+			id++;
 		}
+		return id;
 	}
 }

@@ -7,6 +7,7 @@ import vswe.stevescarts.entity.ModularMinecartEntity;
 public abstract class MinecartModule {
 	protected final ModularMinecartEntity minecart;
 	private final MinecartModuleType<?> type;
+	private int id;
 
 	protected MinecartModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
 		this.minecart = minecart;
@@ -22,16 +23,26 @@ public abstract class MinecartModule {
 	}
 
 	public NbtCompound writeNbt(NbtCompound nbt) {
+		nbt.putInt("id", this.getId());
 		return nbt;
 	}
 
 	public void readNbt(NbtCompound nbt) {
+		this.setId(nbt.getInt("id"));
 	}
 
 	public void init() {
 	}
 
 	public void preInit() {
+	}
+
+	public final int getId() {
+		return id;
+	}
+
+	public final void setId(int id) {
+		this.id = id;
 	}
 
 	/**
