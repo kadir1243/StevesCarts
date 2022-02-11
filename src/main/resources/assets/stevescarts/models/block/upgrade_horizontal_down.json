@@ -22,5 +22,8 @@
       "origin": [8, 8, 8],
       "children": [0]
     }
-  ]
+  ],
+  "textures": {
+    "particle": "#layer0"
+  }
 }
