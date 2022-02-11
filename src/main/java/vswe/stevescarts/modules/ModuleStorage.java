@@ -16,29 +16,41 @@ public class ModuleStorage {
 		return stack.getOrCreateNbt().getList("modules", NbtElement.COMPOUND_TYPE);
 	}
 
+	public static void setList(ItemStack stack, NbtList list) {
+		stack.getOrCreateNbt().put("modules", list);
+	}
+
 	public static List<MinecartModule> read(ItemStack stack) {
-		return read(stack.getOrCreateNbt(), null);
+		return read(getList(stack), null);
 	}
 
 	public static void write(ItemStack stack, Collection<MinecartModule> modules) {
-		NbtCompound nbt = stack.getOrCreateNbt();
-		write(nbt, modules);
+		setList(stack, write(new NbtList(), modules));
 	}
 
 	public static List<MinecartModule> read(NbtCompound nbt, @Nullable ModularMinecartEntity entity) {
-		NbtList list = nbt.getList("modules", NbtElement.COMPOUND_TYPE);
+		return read(nbt.getList("modules", NbtElement.COMPOUND_TYPE), entity);
+	}
+
+	public static NbtCompound write(NbtCompound nbt, Collection<MinecartModule> modules) {
+		NbtList list = new NbtList();
+		write(list, modules);
+		nbt.put("modules", list);
+		return nbt;
+	}
+
+	public static List<MinecartModule> read(NbtList nbt, @Nullable ModularMinecartEntity entity) {
 		List<MinecartModule> modules = new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
-			modules.add(MinecartModuleType.fromNbt(list.getCompound(i), entity));
+		for (int i = 0; i < nbt.size(); i++) {
+			modules.add(MinecartModuleType.fromNbt(nbt.getCompound(i), entity));
 		}
 		return modules;
 	}
 
-	public static void write(NbtCompound nbt, Collection<MinecartModule> modules) {
-		NbtList list = new NbtList();
+	public static NbtList write(NbtList nbt, Collection<MinecartModule> modules) {
 		for (MinecartModule module : modules) {
-			list.add(MinecartModuleType.toNbt(module));
+			nbt.add(MinecartModuleType.toNbt(module));
 		}
-		nbt.put("modules", list);
+		return nbt;
 	}
 }

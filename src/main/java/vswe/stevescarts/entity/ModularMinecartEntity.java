@@ -110,9 +110,14 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public void addModule(int id, MinecartModule module, boolean update) {
 		this.modules.put(id, module);
+		module.setId(id);
 		if (update) {
 			UpdatePacket.sendToTrackers(this);
 		}
+	}
+
+	public void addModule(MinecartModule module, boolean update) {
+		addModule(nextId(), module, update);
 	}
 
 	private int nextId() {
