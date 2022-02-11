@@ -1,0 +1,35 @@
+{
+  "variants": {
+    "connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade_idle"
+    },
+    "connected=true": {
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade"
+    },
+    "facing=down": {
+      "x": 180,
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade"
+    },
+    "facing=east": {
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade"
+    },
+    "facing=north": {
+      "y": 270,
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade"
+    },
+    "facing=south": {
+      "y": 90,
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade_horizontal"
+    },
+    "facing=up": {
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade_horizontal"
+    },
+    "facing=west": {
+      "y": 180,
+      "model": "stevescarts:industrial_espionage_upgrade_upgrade"
+    }
+  }
+}
+

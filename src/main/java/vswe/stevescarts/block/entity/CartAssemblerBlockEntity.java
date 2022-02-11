@@ -3,6 +3,7 @@ package vswe.stevescarts.block.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
 public class CartAssemblerBlockEntity extends BlockEntity {
@@ -18,5 +19,9 @@ public class CartAssemblerBlockEntity extends BlockEntity {
 	@Override
 	protected void writeNbt(NbtCompound nbt) {
 		super.writeNbt(nbt);
+	}
+
+	public void onLoad(ServerWorld world) {
+
 	}
 }

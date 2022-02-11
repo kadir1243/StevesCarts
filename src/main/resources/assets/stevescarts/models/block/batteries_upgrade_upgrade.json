@@ -1,0 +1,7 @@
+{
+  "parent": "stevescarts:block/upgrade",
+  "textures": {
+    "layer0": "stevescarts:blocks/batteries_upgrade_icon"
+  }
+}
+

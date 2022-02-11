@@ -1,0 +1,17 @@
+{
+  "elements": [
+    {
+      "name": "Cube",
+      "from": [ 3.0, 0.0, 3.0 ],
+      "to": [ 13.0, 2.0, 13.0 ],
+      "faces": {
+        "north": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 0.0, 0.0, 2.0 ] },
+        "east": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 0.0, 0.0, 2.0 ] },
+        "south": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 0.0, 0.0, 2.0 ] },
+        "west": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 0.0, 0.0, 2.0 ] },
+        "up": { "texture": "#layer0", "uv": [ 3.0, 3.0, 13.0, 13.0 ] },
+        "down": { "texture": "#layer0", "uv": [ 3.0, 3.0, 13.0, 13.0 ] }
+      }
+    }
+  ]
+}

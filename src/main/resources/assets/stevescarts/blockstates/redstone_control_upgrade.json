@@ -1,0 +1,35 @@
+{
+  "variants": {
+    "connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:redstone_control_upgrade_upgrade_idle"
+    },
+    "connected=true": {
+      "model": "stevescarts:redstone_control_upgrade_upgrade"
+    },
+    "facing=down": {
+      "x": 180,
+      "model": "stevescarts:redstone_control_upgrade_upgrade"
+    },
+    "facing=east": {
+      "model": "stevescarts:redstone_control_upgrade_upgrade"
+    },
+    "facing=north": {
+      "y": 270,
+      "model": "stevescarts:redstone_control_upgrade_upgrade"
+    },
+    "facing=south": {
+      "y": 90,
+      "model": "stevescarts:redstone_control_upgrade_upgrade_horizontal"
+    },
+    "facing=up": {
+      "model": "stevescarts:redstone_control_upgrade_upgrade_horizontal"
+    },
+    "facing=west": {
+      "y": 180,
+      "model": "stevescarts:redstone_control_upgrade_upgrade"
+    }
+  }
+}
+

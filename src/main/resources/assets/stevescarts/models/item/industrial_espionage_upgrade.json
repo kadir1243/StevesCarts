@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+	"layer0": "stevescarts:blocks/industrial_espionage_upgrade_icon"
+  }
+}

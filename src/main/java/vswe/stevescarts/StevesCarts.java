@@ -1,6 +1,7 @@
 package vswe.stevescarts;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vswe.stevescarts.block.StevesCartsBlocks;
+import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.item.StevesCartsItems;
@@ -25,6 +27,11 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsBlockEntities.init();
 		MODULAR_MINECART_ENTITY = Registry.register(Registry.ENTITY_TYPE, id("cart"), FabricEntityTypeBuilder.<ModularMinecartEntity>create(SpawnGroup.MISC, ModularMinecartEntity::new).dimensions(EntityDimensions.fixed(1, 1)).build());
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
+		ServerBlockEntityEvents.BLOCK_ENTITY_LOAD.register((blockEntity, world) -> {
+			if (blockEntity.getType() == StevesCartsBlockEntities.CART_ASSEMBLER) {
+				((CartAssemblerBlockEntity) blockEntity).onLoad(world);
+			}
+		});
 	}
 
 	public static Identifier id(String s) {

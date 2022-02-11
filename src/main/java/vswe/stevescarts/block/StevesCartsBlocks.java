@@ -10,7 +10,28 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.item.StevesCartsItemGroups;
 
 public class StevesCartsBlocks {
-	public static final Block CART_ASSEMBLER = registerBlockAndItem("cart_assembler", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
+	public static final UpgradeBlock BATTERIES = registerBlockAndItem("batteries_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock POWER_CRYSTAL = registerBlockAndItem("power_crystal_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock MODULE_KNOWLEDGE = registerBlockAndItem("module_knowledge_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock INDUSTRIAL_ESPIONAGE = registerBlockAndItem("industrial_espionage_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock EXPERIENCED_ASSEMBLER = registerBlockAndItem("experienced_assembler_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock NEW_ERA = registerBlockAndItem("new_era_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock CO2_FRIENDLY = registerBlockAndItem("co2_friendly_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock GENERIC_ENGINE = registerBlockAndItem("generic_engine_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock MODULE_INPUT = registerBlockAndItem("module_input_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock PRODUCTION_INPUT = registerBlockAndItem("production_input_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock CART_DEPLOYER = registerBlockAndItem("cart_deployer_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock CART_MODIFIER = registerBlockAndItem("cart_modifier_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock CART_CRANE = registerBlockAndItem("cart_crane_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock REDSTONE_CONTROL = registerBlockAndItem("redstone_control_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock CREATIVE_MODE = registerBlockAndItem("creative_mode_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock QUICK_DEMOLISHER = registerBlockAndItem("quick_demolisher_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock ENTROPY = registerBlockAndItem("entropy_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock MANAGER_BRIDGE = registerBlockAndItem("manager_bridge_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock THERMAL_ENGINE = registerBlockAndItem("thermal_engine_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+	public static final UpgradeBlock SOLAR_PANEL = registerBlockAndItem("solar_panel_upgrade", new UpgradeBlock(FabricBlockSettings.of(Material.METAL).strength(5.0F, 6.0F)));
+
+	public static final Block CART_ASSEMBLER = registerBlockAndItem("cart_assembler", new CartAssemblerBlock(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block CARGO_MANAGER = registerBlockAndItem("cargo_manager", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block LIQUID_MANAGER = registerBlockAndItem("liquid_manager", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block EXTERNAL_DISTRIBUTOR = registerBlockAndItem("external_distributor", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
@@ -29,7 +50,7 @@ public class StevesCartsBlocks {
 	public static void init() {
 	}
 
-	public static Block registerBlockAndItem(String name, Block block) {
+	public static <T extends Block> T registerBlockAndItem(String name, T block) {
 		Registry.register(Registry.BLOCK, StevesCarts.id(name), block);
 		Registry.register(Registry.ITEM, StevesCarts.id(name), new BlockItem(block, new Item.Settings().group(StevesCartsItemGroups.BLOCKS)));
 		return block;
