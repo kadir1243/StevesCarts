@@ -1,34 +1,31 @@
 {
   "variants": {
-    "connected=false": {
+    "facing=up,connected=false": {
       "y": 0,
       "z": 0,
-      "model": "stevescarts:production_input_upgrade_upgrade_idle"
+      "model": "stevescarts:block/production_input_upgrade_upgrade_idle"
     },
-    "connected=true": {
-      "model": "stevescarts:production_input_upgrade_upgrade"
-    },
-    "facing=down": {
+    "facing=down,connected=true": {
       "x": 180,
-      "model": "stevescarts:production_input_upgrade_upgrade"
+      "model": "stevescarts:block/production_input_upgrade_upgrade"
     },
-    "facing=east": {
-      "model": "stevescarts:production_input_upgrade_upgrade"
+    "facing=east,connected=true": {
+      "model": "stevescarts:block/production_input_upgrade_upgrade"
     },
-    "facing=north": {
+    "facing=north,connected=true": {
       "y": 270,
-      "model": "stevescarts:production_input_upgrade_upgrade"
+      "model": "stevescarts:block/production_input_upgrade_upgrade"
     },
-    "facing=south": {
+    "facing=south,connected=true": {
       "y": 90,
-      "model": "stevescarts:production_input_upgrade_upgrade_horizontal"
+      "model": "stevescarts:block/production_input_upgrade_upgrade_horizontal"
     },
-    "facing=up": {
-      "model": "stevescarts:production_input_upgrade_upgrade_horizontal"
+    "facing=up,connected=true": {
+      "model": "stevescarts:block/production_input_upgrade_upgrade_horizontal"
     },
-    "facing=west": {
+    "facing=west,connected=true": {
       "y": 180,
-      "model": "stevescarts:production_input_upgrade_upgrade"
+      "model": "stevescarts:block/production_input_upgrade_upgrade"
     }
   }
 }

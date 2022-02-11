@@ -14,6 +14,8 @@ import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.StevesCartsItems;
 
+import static vswe.stevescarts.block.StevesCartsBlocks.*;
+
 public class StevesCartsClient implements ClientModInitializer {
 	private static ModuleRenderDispatcher moduleRenderDispatcher;
 

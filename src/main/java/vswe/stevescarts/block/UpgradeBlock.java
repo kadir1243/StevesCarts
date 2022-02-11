@@ -15,7 +15,7 @@ public class UpgradeBlock extends Block {
 	public static final BooleanProperty CONNECTED = BooleanProperty.of("connected");
 
 	public UpgradeBlock(Settings settings) {
-		super(settings);
+		super(settings.nonOpaque());
 		this.setDefaultState(this.getStateManager().getDefaultState().with(CONNECTED, false).with(Properties.FACING, Direction.UP));
 	}
 
@@ -45,8 +45,8 @@ public class UpgradeBlock extends Block {
 	@Nullable
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		if (ctx.getWorld().getBlockState(ctx.getBlockPos()).isOf(StevesCartsBlocks.CART_ASSEMBLER)) {
-			return this.getDefaultState().with(CONNECTED, true).with(Properties.FACING, ctx.getPlayerLookDirection());
+		if (ctx.getWorld().getBlockState(ctx.getBlockPos()).isOf(StevesCartsBlocks.CART_ASSEMBLER) || ctx.getWorld().getBlockState(ctx.getBlockPos().offset(ctx.getPlayerLookDirection())).isOf(StevesCartsBlocks.CART_ASSEMBLER)) {
+			return this.getDefaultState().with(CONNECTED, true).with(Properties.FACING, ctx.getPlayerLookDirection().getOpposite());
 		}
 		return super.getPlacementState(ctx);
 	}

@@ -2,6 +2,6 @@
   "parent": "stevescarts:block/upgrade_horizontal",
   "textures": {
     "layer0": "stevescarts:blocks/experienced_assembler_upgrade_icon"
-  }
+  ,"front": "stevescarts:blocks/upgrade_side_0_icon"}
 }
 

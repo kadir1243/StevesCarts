@@ -5,12 +5,12 @@
       "from": [ 0.0, 3.0, 3.0 ],
       "to": [ 2.0, 13.0, 13.0 ],
       "faces": {
-        "north": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 3.0, 2.0, 13.0 ] },
+        "north": { "texture": "#front", "uv": [ 0.0, 3.0, 2.0, 13.0 ] },
         "east": { "texture": "#layer0", "uv": [ 3.0, 3.0, 13.0, 13.0 ] },
-        "south": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 3.0, 2.0, 13.0 ] },
+        "south": { "texture": "#front", "uv": [ 0.0, 3.0, 2.0, 13.0 ] },
         "west": { "texture": "#layer0", "uv": [ 3.0, 3.0, 13.0, 13.0 ] },
-        "up": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 3.0, 2.0, 13.0 ] },
-        "down": { "texture": "stevescarts:blocks/upgrade_side_0_icon", "uv": [ 0.0, 3.0, 2.0, 13.0 ] }
+        "up": { "texture": "#front", "uv": [ 0.0, 3.0, 2.0, 13.0 ] },
+        "down": { "texture": "#front", "uv": [ 0.0, 3.0, 2.0, 13.0 ] }
       }
     }
   ]
