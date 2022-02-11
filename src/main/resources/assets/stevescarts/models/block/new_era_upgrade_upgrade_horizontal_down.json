@@ -1,0 +1,6 @@
+{
+  "parent": "stevescarts:block/upgrade_horizontal_down",
+  "textures": {
+    "layer0": "stevescarts:blocks/new_era_upgrade_icon"
+  ,"front": "stevescarts:blocks/upgrade_side_0_icon"}
+}

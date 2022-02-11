@@ -17,8 +17,7 @@
       "model": "stevescarts:block/production_input_upgrade_upgrade"
     },
     "facing=down,connected=true": {
-      "y": 90,
-      "model": "stevescarts:block/production_input_upgrade_upgrade_horizontal"
+      "model": "stevescarts:block/production_input_upgrade_upgrade_horizontal_down"
     },
     "facing=up,connected=true": {
       "model": "stevescarts:block/production_input_upgrade_upgrade_horizontal"

@@ -1,0 +1,7 @@
+{
+  "parent": "stevescarts:block/upgrade_horizontal_down",
+  "textures": {
+    "layer0": "stevescarts:blocks/creative_mode_upgrade_icon"
+  ,"front": "stevescarts:blocks/upgrade_side_0_icon"}
+}
+

@@ -1,0 +1,26 @@
+{
+  "credit": "Made with Blockbench",
+  "elements": [
+    {
+      "name": "Cube",
+      "from": [3, 14, 3],
+      "to": [13, 16, 13],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 22, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 0, 2], "texture": "#front"},
+        "east": {"uv": [0, 0, 0, 2], "texture": "#front"},
+        "south": {"uv": [0, 0, 0, 2], "texture": "#front"},
+        "west": {"uv": [0, 0, 0, 2], "texture": "#front"},
+        "up": {"uv": [3, 3, 13, 13], "texture": "#layer0"},
+        "down": {"uv": [3, 3, 13, 13], "texture": "#layer0"}
+      }
+    }
+  ],
+  "groups": [
+    {
+      "name": "upgrade_horizontal_down",
+      "origin": [8, 8, 8],
+      "children": [0]
+    }
+  ]
+}
