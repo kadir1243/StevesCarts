@@ -18,11 +18,8 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.hull.HullModule;
 
 public class ModularMinecartItem extends Item {
-	private final MinecartModuleType<? extends HullModule> hull;
-
-	public ModularMinecartItem(Settings settings, MinecartModuleType<? extends HullModule> hull) {
+	public ModularMinecartItem(Settings settings) {
 		super(settings.maxCount(1));
-		this.hull = hull;
 	}
 
 	@Override
@@ -40,11 +37,11 @@ public class ModularMinecartItem extends Item {
 			if (railShape.isAscending()) {
 				d = 0.5;
 			}
-			ModularMinecartEntity entity = new ModularMinecartEntity(world, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.0625 + d, (double)blockPos.getZ() + 0.5, this.hull);
-			if (itemStack.hasCustomName()) {
-				entity.setCustomName(itemStack.getName());
-			}
-			world.spawnEntity(entity);
+//			ModularMinecartEntity entity = new ModularMinecartEntity(world, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.0625 + d, (double)blockPos.getZ() + 0.5,);
+//			if (itemStack.hasCustomName()) {
+//				entity.setCustomName(itemStack.getName());
+//			}
+//			world.spawnEntity(entity);
 			world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
 		}
 		itemStack.decrement(1);
