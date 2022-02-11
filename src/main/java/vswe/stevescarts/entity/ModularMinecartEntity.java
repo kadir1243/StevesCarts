@@ -17,6 +17,7 @@ import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.modules.hull.HullModule;
 
 import java.util.*;
@@ -52,6 +53,23 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public Collection<MinecartModule> getModuleList() {
 		return this.modules.values();
+	}
+
+	@Override
+	protected void readCustomDataFromNbt(NbtCompound nbt) {
+		super.readCustomDataFromNbt(nbt);
+		this.setModules(
+				ModuleStorage.read(nbt, this)
+				.stream()
+				.collect(Collectors.toMap(MinecartModule::getId, Function.identity())),
+				false
+		);
+	}
+
+	@Override
+	protected void writeCustomDataToNbt(NbtCompound nbt) {
+		super.writeCustomDataToNbt(nbt);
+		ModuleStorage.write(nbt, this.getModuleList());
 	}
 
 	public void writeModuleData(PacketByteBuf buf) {
