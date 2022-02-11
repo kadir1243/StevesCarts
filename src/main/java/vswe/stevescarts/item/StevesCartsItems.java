@@ -9,7 +9,7 @@ import vswe.stevescarts.modules.MinecartModuleType;
 public class StevesCartsItems {
 //	public static final ModularMinecartItem WOODEN_HULL = register("wooden_hull", new ModularMinecartItem(new Item.Settings(), MinecartModuleType.WOODEN_HULL));
 
-	public static final Item MODULAR_CART = register("modular_cart", new Item(new Item.Settings().maxCount(1)));
+	public static final ModularMinecartItem MODULAR_CART = register("modular_cart", new ModularMinecartItem(new Item.Settings().maxCount(1)));
 
 	// Components
 	public static final CartComponentItem WOODEN_WHEELS = registerSimpleComponent("wooden_wheels");
