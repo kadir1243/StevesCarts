@@ -28,7 +28,7 @@ public class StevesCartsClient implements ClientModInitializer {
 		ModularMinecartEntity.SpawnPacket.init();
 		ModularMinecartEntity.UpdatePacket.init();
 		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.ADVANCED_DETECTOR_RAIL, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.ADVANCED_DETECTOR_RAIL, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.JUNCTION_RAIL, RenderLayer.getCutout());
 		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.MODULAR_CART, ModularMinecartRenderer::renderAsItem);
 	}
 

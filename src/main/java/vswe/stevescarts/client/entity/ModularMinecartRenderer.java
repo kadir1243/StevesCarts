@@ -7,6 +7,8 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import vswe.stevescarts.client.StevesCartsClient;
+import vswe.stevescarts.client.modules.ModuleRenderDispatcher;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
 
@@ -24,7 +26,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
     @Override
     public void render(ModularMinecartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
 		for (MinecartModule module : entity.getModules()) {
-
+			StevesCartsClient.getModuleRenderDispatcher().render(module, yaw, tickDelta, matrices, vertexConsumers, light);
 		}
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }

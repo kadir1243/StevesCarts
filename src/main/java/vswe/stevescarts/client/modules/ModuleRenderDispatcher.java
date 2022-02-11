@@ -7,6 +7,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
+import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 
@@ -24,7 +25,7 @@ public class ModuleRenderDispatcher {
 		this.itemRenderer = itemRenderer;
 	}
 
-	public <T extends MinecartModule> void render(T module, float entityYaw, float entityPitch, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
+	public <T extends MinecartModule> void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		//noinspection unchecked
 		ModuleRenderer<T> renderer = (ModuleRenderer<T>) renderers.get(module.getType());
 		if (renderer == null) {
@@ -33,7 +34,7 @@ public class ModuleRenderDispatcher {
 		Vec3d offset = module.getPositionOffset();
 		matrices.push();
 		matrices.translate(offset.x, offset.y, offset.z);
-		renderer.render(module, entityYaw, entityPitch, matrices, vertexConsumers, entityLight);
+		renderer.render(module, entityYaw, tickDelta, matrices, vertexConsumers, entityLight);
 		matrices.pop();
 	}
 

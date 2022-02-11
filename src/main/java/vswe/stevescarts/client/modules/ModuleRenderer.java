@@ -13,7 +13,7 @@ public abstract class ModuleRenderer<T extends MinecartModule> {
 	public ModuleRenderer() {
 	}
 
-	public abstract void render(T module, float entityYaw, float entityPitch, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight);
+	public abstract void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight);
 
 	public abstract Identifier getTexture(T module);
 
