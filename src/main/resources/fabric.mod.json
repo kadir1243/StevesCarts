@@ -20,6 +20,9 @@
       "vswe.stevescarts.client.StevesCartsClient"
     ]
   },
+  "mixins": [
+    "stevescarts.mixins.json"
+  ],
   "depends": {
     "minecraft": "^1.18.1",
     "fabric": "*"

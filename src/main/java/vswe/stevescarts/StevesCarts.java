@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vswe.stevescarts.advancement.StevesCartsStats;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
@@ -25,6 +26,7 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsItems.init();
 		StevesCartsBlocks.init();
 		StevesCartsBlockEntities.init();
+		StevesCartsStats.init();
 		MODULAR_MINECART_ENTITY = Registry.register(Registry.ENTITY_TYPE, id("cart"), FabricEntityTypeBuilder.<ModularMinecartEntity>create(SpawnGroup.MISC, ModularMinecartEntity::new).dimensions(EntityDimensions.fixed(1, 1)).build());
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 		ServerBlockEntityEvents.BLOCK_ENTITY_LOAD.register((blockEntity, world) -> {

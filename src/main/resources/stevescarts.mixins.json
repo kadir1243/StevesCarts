@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "vswe.stevescarts.mixins",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "StatsAccessor"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
