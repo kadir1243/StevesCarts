@@ -1,4 +1,4 @@
-package vswe.stevescarts.screen;
+package vswe.stevescarts.screen.widget;
 
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 

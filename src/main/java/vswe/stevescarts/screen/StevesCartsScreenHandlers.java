@@ -6,7 +6,7 @@ import net.minecraft.screen.ScreenHandlerType;
 import vswe.stevescarts.StevesCarts;
 
 public class StevesCartsScreenHandlers {
-	public static final ScreenHandlerType<CartAssemblerHandler> CART_ASSEMBLER = ScreenHandlerRegistry.<CartAssemblerHandler>registerSimple(StevesCarts.id("cart_assembler"), (syncId, playerInventory) -> new CartAssemblerHandler(syncId, playerInventory, ScreenHandlerContext.EMPTY));
+	public static final ScreenHandlerType<CartAssemblerHandler> CART_ASSEMBLER = ScreenHandlerRegistry.registerSimple(StevesCarts.id("cart_assembler"), (syncId, playerInventory) -> new CartAssemblerHandler(syncId, playerInventory, ScreenHandlerContext.EMPTY));
 
 	public static void init() {
 	}

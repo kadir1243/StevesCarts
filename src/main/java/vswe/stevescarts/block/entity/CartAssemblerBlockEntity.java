@@ -17,7 +17,7 @@ import vswe.stevescarts.StevesCarts;
 import java.util.Collections;
 
 public class CartAssemblerBlockEntity extends BlockEntity implements SidedInventory {
-	private static final int SIZE;
+	public static final int SIZE;
 	private ItemStack hull = ItemStack.EMPTY;
 	private final DefaultedList<ItemStack> engines = DefaultedList.ofSize(5, ItemStack.EMPTY);
 	private ItemStack tool = ItemStack.EMPTY;
