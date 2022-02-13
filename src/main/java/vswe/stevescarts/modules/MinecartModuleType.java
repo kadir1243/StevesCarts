@@ -5,6 +5,7 @@ import com.mojang.serialization.Lifecycle;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -127,6 +128,22 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return type.createModule(cart);
 	}
 
+	public static boolean isModule(ItemStack stack) {
+		return isModule(stack.getItem());
+	}
+
+	public static boolean isHull(ItemStack stack) {
+		return isHull(stack.getItem());
+	}
+
+	public static boolean isModule(Item item) {
+		return item instanceof ModuleItem;
+	}
+
+	public static boolean isHull(Item item) {
+		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.HULL);
+	}
+
 	public static <T extends MinecartModule> Builder<T> builder() {
 		return new Builder<>();
 	}
@@ -171,7 +188,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 		@ApiStatus.Internal
 		Builder<T> id(String id) {
-			this.id = StevesCarts.id(id);
+			this.id = new Identifier(StevesCarts.id(id).getNamespace(), "module_" + StevesCarts.id(id).getPath());
 			return this;
 		}
 
@@ -211,10 +228,13 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 
 		public Hull<T> hull() {
+			this.moduleCost(0);
+			this.category(ModuleCategory.HULL);
 			return new Hull<>(this);
 		}
 
 		public Tool<T> tool() {
+			this.category(ModuleCategory.TOOL);
 			return new Tool<>(this);
 		}
 	}
@@ -375,7 +395,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		public MinecartModuleType<T> buildAndRegister() {
 			this.validate();
 			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), new ToolData(this.unbreakable)));
-			this.finalItem = Registry.register(Registry.ITEM, type.getId(), this.itemFactory.apply(new Item.Settings(), type));
+			this.finalItem = Registry.register(Registry.ITEM, this.id, this.itemFactory.apply(new Item.Settings(), type));
 			return type;
 		}
 	}

@@ -1,13 +1,12 @@
 package vswe.stevescarts.item.modules;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import vswe.stevescarts.item.StevesCartsItemGroups;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
 
@@ -17,11 +16,11 @@ public class ModuleItem extends Item {
 	private final MinecartModuleType<?> type;
 
 	public ModuleItem(Settings settings, MinecartModuleType<?> type) {
-		super(settings);
+		super(settings.group(StevesCartsItemGroups.MODULES).maxCount(1));
 		this.type = type;
 	}
 
-	public boolean isIn(ModuleCategory category) {
+	public boolean isOf(ModuleCategory category) {
 		return this.type.getCategory() == category;
 	}
 

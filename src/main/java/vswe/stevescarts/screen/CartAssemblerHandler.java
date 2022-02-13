@@ -14,6 +14,7 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.world.World;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
+import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 
@@ -32,10 +33,10 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.setInsets(Insets.ROOT_PANEL);
 		WPlayerInvPanel playerInventoryPanel = this.createPlayerInventoryPanel(false);
 		this.addCentered(playerInventoryPanel, rootPanel.getHeight() - playerInventoryPanel.getHeight());
-		WCart cart = new WCart(() -> null, 187, 120); // TODO
+		WCart cart = new WCart(() -> null, 187, 120);
 		this.addCentered(cart, 4);
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, 0);
-		hullSlot.setFilter(stack -> true); // TODO
+		hullSlot.setFilter(MinecartModuleType::isHull);
 		rootPanel.add(hullSlot, 12, 18);
 		rootPanel.validate(this);
 	}
