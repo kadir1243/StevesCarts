@@ -16,6 +16,7 @@ import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.item.StevesCartsItems;
+import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
 public class StevesCarts implements ModInitializer {
@@ -25,6 +26,7 @@ public class StevesCarts implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		StevesCartsItems.init();
+		StevesCartsModuleTypes.init();
 		StevesCartsBlocks.init();
 		StevesCartsBlockEntities.init();
 		StevesCartsStats.init();
