@@ -1,5 +1,7 @@
 package vswe.stevescarts.client.modules;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -9,6 +11,7 @@ import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.MinecartModule;
 
+@Environment(EnvType.CLIENT)
 public abstract class ModuleRenderer<T extends MinecartModule> {
 	public ModuleRenderer() {
 	}
