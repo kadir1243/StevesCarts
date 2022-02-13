@@ -1,3 +1,8 @@
 {
-  "screen.stevescarts.cart_assembler": "Cart Assembler"
+  "screen.stevescarts.cart_assembler": "Cart Assembler",
+
+  "tooltip.stevescarts.hull.modular_capacity": "Module Capacity: %s",
+  "tooltip.stevescarts.hull.engine_max_count": "Max Engines: %s",
+  "tooltip.stevescarts.hull.addon_max_count": "Max Addons: %s",
+  "tooltip.stevescarts.hull.complexity_max": "Max Complexity: %s"
 }
