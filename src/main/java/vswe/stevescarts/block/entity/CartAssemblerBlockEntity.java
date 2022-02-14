@@ -34,11 +34,15 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		super.readNbt(nbt);
+		DefaultedList<ItemStack> list = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+		Inventories.readNbt(nbt, DefaultedList.ofSize(this.size(), ItemStack.EMPTY));
+		this.readInventoryList(list);
 	}
 
 	@Override
 	protected void writeNbt(NbtCompound nbt) {
 		super.writeNbt(nbt);
+		Inventories.writeNbt(nbt, this.getInventoryList());
 	}
 
 	public void onLoad(ServerWorld world) {
@@ -145,6 +149,20 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 			this.fuel = stack;
 		} else {
 			StevesCarts.LOGGER.error("Invalid slot: " + slot);
+		}
+	}
+
+	public DefaultedList<ItemStack> getInventoryList() {
+		DefaultedList<ItemStack> list = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+		for (int i = 0; i < this.size(); ++i) {
+			list.set(i, this.getStack(i));
+		}
+		return list;
+	}
+
+	public void readInventoryList(DefaultedList<ItemStack> list) {
+		for (int i = 0; i < this.size(); ++i) {
+			this.setStack(i, list.get(i));
 		}
 	}
 
