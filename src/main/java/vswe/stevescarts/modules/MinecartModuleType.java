@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -327,10 +328,10 @@ public final class MinecartModuleType<T extends MinecartModule> {
 				throw new IllegalArgumentException("Complexity max must be greater than 0");
 			}
 			if (this.defaultTooltip) {
-				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.modular_capacity", this.modularCapacity));
-				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.engine_max_count", this.engineMaxCount));
-				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.addon_max_count", this.addonMaxCount));
-				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.complexity_max", this.complexityMax));
+				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.modular_capacity", this.modularCapacity).formatted(Formatting.YELLOW));
+				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.complexity_max", this.complexityMax).formatted(Formatting.DARK_PURPLE));
+				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.engine_max_count", this.engineMaxCount).formatted(Formatting.GOLD));
+				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.addon_max_count", this.addonMaxCount).formatted(Formatting.GREEN));
 			}
 			this.validate();
 			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), new HullData(this.modularCapacity, this.engineMaxCount, this.addonMaxCount, this.complexityMax)));

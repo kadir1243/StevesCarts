@@ -4,5 +4,9 @@
   "tooltip.stevescarts.hull.modular_capacity": "Module Capacity: %s",
   "tooltip.stevescarts.hull.engine_max_count": "Max Engines: %s",
   "tooltip.stevescarts.hull.addon_max_count": "Max Addons: %s",
-  "tooltip.stevescarts.hull.complexity_max": "Max Complexity: %s"
+  "tooltip.stevescarts.hull.complexity_max": "Max Complexity: %s",
+
+  "itemGroup.stevescarts.components_group": "Steves Carts Components",
+  "itemGroup.stevescarts.blocks_group": "Steves Carts Blocks",
+  "itemGroup.stevescarts.modules_group": "Steves Carts Modules"
 }

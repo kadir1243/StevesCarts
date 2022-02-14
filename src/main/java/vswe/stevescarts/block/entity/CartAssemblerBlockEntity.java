@@ -99,27 +99,25 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 
 	@Override
 	public ItemStack removeStack(int slot, int amount) {
-		ItemStack original = this.getStack(slot);
 		if (slot == 0) {
-			Inventories.splitStack(Collections.singletonList(this.hull), 0, amount);
+			return Inventories.splitStack(Collections.singletonList(this.hull), 0, amount);
 		} else if (slot >= 1 && slot <= 5) {
-			Inventories.splitStack(this.engines, slot - 1, amount);
+			return Inventories.splitStack(this.engines, slot - 1, amount);
 		} else if (slot == 6) {
-			Inventories.splitStack(Collections.singletonList(this.tool), 0, amount);
+			return Inventories.splitStack(Collections.singletonList(this.tool), 0, amount);
 		} else if (slot >= 7 && slot <= 12) {
-			Inventories.splitStack(this.attachments, slot - 1, amount);
+			return Inventories.splitStack(this.attachments, slot - 7, amount);
 		} else if (slot >= 13 && slot <= 16) {
-			Inventories.splitStack(this.storage, slot - 1, amount);
+			return Inventories.splitStack(this.storage, slot - 13, amount);
 		} else if (slot >= 17 && slot <= 28) {
-			Inventories.splitStack(this.addons, slot - 1, amount);
+			return Inventories.splitStack(this.addons, slot - 17, amount);
 		} else if (slot == 29) {
-			Inventories.splitStack(Collections.singletonList(this.output), 0, amount);
+			return Inventories.splitStack(Collections.singletonList(this.output), 0, amount);
 		} else if (slot == 30) {
-			Inventories.splitStack(Collections.singletonList(this.fuel), 0, amount);
+			return Inventories.splitStack(Collections.singletonList(this.fuel), 0, amount);
 		} else {
-			StevesCarts.LOGGER.error("Invalid slot: " + slot);
+			throw new IndexOutOfBoundsException("Invalid slot: " + slot);
 		}
-		return original;
 	}
 
 	@Override
