@@ -137,12 +137,20 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return isHull(stack.getItem());
 	}
 
+	public static boolean isEngine(ItemStack stack) {
+		return isEngine(stack.getItem());
+	}
+
 	public static boolean isModule(Item item) {
 		return item instanceof ModuleItem;
 	}
 
 	public static boolean isHull(Item item) {
 		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.HULL);
+	}
+
+	public static boolean isEngine(Item item) {
+		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.ENGINE);
 	}
 
 	public static <T extends MinecartModule> Builder<T> builder() {

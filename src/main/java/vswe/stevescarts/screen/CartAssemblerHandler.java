@@ -17,6 +17,7 @@ import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
+import vswe.stevescarts.screen.widget.WModuleSlot;
 
 import java.util.Collections;
 
@@ -29,7 +30,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		this.context = context;
 		WFixedPanel rootPanel = new WFixedPanel();
 		this.setRootPanel(rootPanel);
-		rootPanel.setSize(432, 216);
+		rootPanel.setSize(436, 220);
 		rootPanel.setInsets(Insets.ROOT_PANEL);
 		WPlayerInvPanel playerInventoryPanel = this.createPlayerInventoryPanel(false);
 		this.addCentered(playerInventoryPanel, rootPanel.getHeight() - playerInventoryPanel.getHeight());
@@ -38,6 +39,18 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, 0);
 		hullSlot.setFilter(MinecartModuleType::isHull);
 		rootPanel.add(hullSlot, 12, 18);
+		WModuleSlot engineSlots = new WModuleSlot(this.blockInventory, 1, 5, 1);
+		engineSlots.setFilter(MinecartModuleType::isEngine);
+		rootPanel.add(engineSlots, 7, 59);
+		// TODO: set filters
+		WModuleSlot toolSlot = new WModuleSlot(this.blockInventory, 6, 1, 1);
+		rootPanel.add(toolSlot, 7, 89);
+		WModuleSlot attachmentSlots = new WModuleSlot(this.blockInventory, 7, 6, 1);
+		rootPanel.add(attachmentSlots, 7, 119);
+		WModuleSlot storageSlots = new WModuleSlot(this.blockInventory, 13, 4, 1);
+		rootPanel.add(storageSlots, 7, 149);
+		WModuleSlot addonsSlots = new WModuleSlot(this.blockInventory, 17, 6, 2);
+		rootPanel.add(addonsSlots, 7, 179);
 		rootPanel.validate(this);
 	}
 
