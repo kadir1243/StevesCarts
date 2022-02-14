@@ -14,6 +14,7 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.world.World;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
+import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
@@ -51,6 +52,11 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(storageSlots, 7, 149);
 		WModuleSlot addonsSlots = new WModuleSlot(this.blockInventory, 17, 6, 2);
 		rootPanel.add(addonsSlots, 7, 179);
+		WItemSlot outputSlot = WItemSlot.outputOf(this.blockInventory, 29);
+		outputSlot.setFilter((stack) -> stack.isOf(StevesCartsItems.MODULAR_CART));
+		rootPanel.add(outputSlot, 330, 182);
+		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, 30);
+		rootPanel.add(fuelSlot, 376, 182);
 		rootPanel.validate(this);
 	}
 
