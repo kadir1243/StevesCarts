@@ -16,6 +16,7 @@ import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.ModuleCategory;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 import vswe.stevescarts.screen.widget.WModuleSlot;
@@ -39,18 +40,23 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		this.addCentered(cart, 4);
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, 0);
 		hullSlot.setFilter(MinecartModuleType::isHull);
+		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
+			if (MinecartModuleType.isHull(stack)) {
+
+			}
+		}));
 		rootPanel.add(hullSlot, 12, 18);
-		WModuleSlot engineSlots = new WModuleSlot(this.blockInventory, 1, 5, 1);
+		WModuleSlot engineSlots = new WModuleSlot(this.blockInventory, 1, 5, 1, ModuleCategory.ENGINE);
 		engineSlots.setFilter(MinecartModuleType::isEngine);
 		rootPanel.add(engineSlots, 7, 59);
 		// TODO: set filters
-		WModuleSlot toolSlot = new WModuleSlot(this.blockInventory, 6, 1, 1);
+		WModuleSlot toolSlot = new WModuleSlot(this.blockInventory, 6, 1, 1, ModuleCategory.TOOL);
 		rootPanel.add(toolSlot, 7, 89);
-		WModuleSlot attachmentSlots = new WModuleSlot(this.blockInventory, 7, 6, 1);
+		WModuleSlot attachmentSlots = new WModuleSlot(this.blockInventory, 7, 6, 1, ModuleCategory.ATTACHMENT);
 		rootPanel.add(attachmentSlots, 7, 119);
-		WModuleSlot storageSlots = new WModuleSlot(this.blockInventory, 13, 4, 1);
+		WModuleSlot storageSlots = new WModuleSlot(this.blockInventory, 13, 4, 1, ModuleCategory.STORAGE);
 		rootPanel.add(storageSlots, 7, 149);
-		WModuleSlot addonsSlots = new WModuleSlot(this.blockInventory, 17, 6, 2);
+		WModuleSlot addonsSlots = new WModuleSlot(this.blockInventory, 17, 6, 2, ModuleCategory.ADDON);
 		rootPanel.add(addonsSlots, 7, 179);
 		WItemSlot outputSlot = WItemSlot.outputOf(this.blockInventory, 29);
 		outputSlot.setFilter((stack) -> stack.isOf(StevesCartsItems.MODULAR_CART));
