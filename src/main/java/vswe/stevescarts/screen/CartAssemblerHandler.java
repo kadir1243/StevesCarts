@@ -11,12 +11,14 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
+import vswe.stevescarts.screen.widget.WAssembleButton;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 import vswe.stevescarts.screen.widget.WModuleSlot;
@@ -36,14 +38,14 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.setInsets(Insets.ROOT_PANEL);
 		WPlayerInvPanel playerInventoryPanel = this.createPlayerInventoryPanel(false);
 		this.addCentered(playerInventoryPanel, rootPanel.getHeight() - playerInventoryPanel.getHeight());
+		WAssembleButton assembleButton = new WAssembleButton(new TranslatableText("screen.stevescarts.cart_assembler.assemble"));
+		rootPanel.add(assembleButton, 330, 142, 79, 9);
 		WCart cart = new WCart(() -> null, 187, 120);
 		this.addCentered(cart, 4);
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, 0);
 		hullSlot.setFilter(MinecartModuleType::isHull);
 		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
-			if (MinecartModuleType.isHull(stack)) {
-
-			}
+			assembleButton.setEnabled(MinecartModuleType.isHull(stack));
 		}));
 		rootPanel.add(hullSlot, 12, 18);
 		WModuleSlot engineSlots = new WModuleSlot(this.blockInventory, 1, 5, 1, ModuleCategory.ENGINE);

@@ -14,8 +14,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.modules.hull.HullModule;
+
+import java.util.List;
 
 public class ModularMinecartItem extends Item {
 	public ModularMinecartItem(Settings settings) {
@@ -46,5 +50,11 @@ public class ModularMinecartItem extends Item {
 		}
 		itemStack.decrement(1);
 		return ActionResult.success(world.isClient);
+	}
+
+	public static ItemStack create(List<MinecartModule> modules) {
+		ItemStack stack = StevesCartsItems.MODULAR_CART.getDefaultStack();
+		ModuleStorage.write(stack, modules);
+		return stack;
 	}
 }

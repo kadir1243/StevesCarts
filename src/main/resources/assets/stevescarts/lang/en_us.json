@@ -1,5 +1,6 @@
 {
   "screen.stevescarts.cart_assembler": "Cart Assembler",
+  "screen.stevescarts.cart_assembler.assemble:": "Assemble",
 
   "tooltip.stevescarts.hull.modular_capacity": "Module Capacity: %s",
   "tooltip.stevescarts.hull.engine_max_count": "Max Engines: %s",
