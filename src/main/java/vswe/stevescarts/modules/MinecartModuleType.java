@@ -28,6 +28,7 @@ import java.util.function.Supplier;
 public final class MinecartModuleType<T extends MinecartModule> {
 	public static final Registry<MinecartModuleType<? extends MinecartModule>> REGISTRY = FabricRegistryBuilder.<MinecartModuleType<? extends MinecartModule>, SimpleRegistry<MinecartModuleType<? extends MinecartModule>>>
 			from(new SimpleRegistry<>(RegistryKey.ofRegistry(StevesCarts.id("module_type")), Lifecycle.stable())).buildAndRegister();
+	public static final RegistryKey<Registry<MinecartModuleType<? extends MinecartModule>>> REGISTRY_KEY = RegistryKey.ofRegistry(StevesCarts.id("module_type"));
 	private final BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory;
 	private final Supplier<Item> item;
 	private final ModuleCategory category;
@@ -197,7 +198,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 		@ApiStatus.Internal
 		Builder<T> id(String id) {
-			this.id = new Identifier(StevesCarts.id(id).getNamespace(), "module_" + StevesCarts.id(id).getPath());
+			this.id = new Identifier(StevesCarts.id(id).getNamespace(), StevesCarts.id(id).getPath());
 			return this;
 		}
 

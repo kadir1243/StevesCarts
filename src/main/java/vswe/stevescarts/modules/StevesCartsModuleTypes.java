@@ -1,6 +1,7 @@
 package vswe.stevescarts.modules;
 
 import vswe.stevescarts.modules.hull.HullModule;
+import vswe.stevescarts.modules.tags.ModuleTags;
 
 public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<HullModule> WOODEN_HULL = MinecartModuleType.<HullModule>builder().hull().id("wooden_hull").factory(HullModule::new).modularCapacity(50).engineMaxCount(1).addonMaxCount(0).complexityMax(15).buildAndRegister();
@@ -11,5 +12,6 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<HullModule> CREATIVE_HULL = MinecartModuleType.<HullModule>builder().hull().id("creative_hull").factory(HullModule::new).modularCapacity(10000).engineMaxCount(5).addonMaxCount(12).complexityMax(1500).buildAndRegister();
 
 	public static void init() {
+		ModuleTags.init();
 	}
 }

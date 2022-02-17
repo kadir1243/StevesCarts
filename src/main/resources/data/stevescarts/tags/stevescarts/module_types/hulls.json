@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "stevescarts:wooden_hull",
+    "stevescarts:standard_hull",
+    "stevescarts:reinforced_hull",
+    "stevescarts:mechanical_pig",
+    "stevescarts:galgadorian_hull",
+    "stevescarts:creative_hull"
+  ]
+}
