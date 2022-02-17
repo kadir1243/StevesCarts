@@ -63,8 +63,12 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty());
 	}
 
-	public T createModule(ModularMinecartEntity cart) {
+	public T createModule(@Nullable ModularMinecartEntity cart) {
 		return factory.apply(cart, this);
+	}
+
+	public T createModule() {
+		return this.createModule(null);
 	}
 
 	@Override

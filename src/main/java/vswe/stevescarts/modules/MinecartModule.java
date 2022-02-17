@@ -2,10 +2,12 @@ package vswe.stevescarts.modules;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 
 public abstract class MinecartModule {
-	protected final ModularMinecartEntity minecart;
+	@Nullable
+	protected ModularMinecartEntity minecart;
 	private final MinecartModuleType<?> type;
 	private int id;
 
@@ -14,8 +16,13 @@ public abstract class MinecartModule {
 		this.type = type;
 	}
 
+	@Nullable
 	public ModularMinecartEntity getMinecart() {
 		return this.minecart;
+	}
+
+	public void setMinecart(@Nullable ModularMinecartEntity minecart) {
+		this.minecart = minecart;
 	}
 
 	public MinecartModuleType<?> getType() {

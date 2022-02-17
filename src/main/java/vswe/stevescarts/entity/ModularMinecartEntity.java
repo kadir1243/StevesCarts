@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 // TODO
 public class ModularMinecartEntity extends AbstractMinecartEntity {
-	public Map<Integer, MinecartModule> modules = new HashMap<>();
+	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -111,6 +111,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void addModule(int id, MinecartModule module, boolean update) {
 		this.modules.put(id, module);
 		module.setId(id);
+		module.setMinecart(this);
 		if (update) {
 			UpdatePacket.sendToTrackers(this);
 		}
