@@ -16,3 +16,4 @@
 !Jenkinsfile
 !settings.gradle
 !/LICENSE
+.DS_Store
