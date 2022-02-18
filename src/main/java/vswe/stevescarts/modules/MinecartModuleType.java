@@ -38,6 +38,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final List<Text> tooltip;
 	private final Optional<HullData> hullData;
 	private final Optional<ToolData> toolData;
+	private final TranslatableText translationKey;
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData) {
 		this.factory = factory;
@@ -49,6 +50,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.tooltip = tooltip;
 		this.hullData = hullData;
 		this.toolData = toolData;
+		this.translationKey = new TranslatableText("module." + id.getNamespace() + "." + id.getPath());
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData) {
@@ -110,6 +112,10 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 	public ToolData getToolData() {
 		return toolData.orElseThrow(() -> new IllegalStateException("Not a tool: " + this));
+	}
+
+	public TranslatableText getTranslationKey() {
+		return translationKey;
 	}
 
 	public void appendTooltip(List<Text> tooltip, TooltipContext context) {

@@ -8,7 +8,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
@@ -18,6 +18,7 @@ import vswe.stevescarts.modules.MinecartModuleType;
 public class ChestModule extends MinecartModule implements Configurable, Inventory {
 	private final int slotsWidth;
 	private final int slotsHeight;
+	private final Text label;
 	private final int size;
 	private final DefaultedList<ItemStack> inventory;
 
@@ -25,6 +26,7 @@ public class ChestModule extends MinecartModule implements Configurable, Invento
 		super(minecart, type);
 		this.slotsWidth = slotsWidth;
 		this.slotsHeight = slotsHeight;
+		this.label = type.getTranslationKey();
 		this.size = slotsWidth * slotsHeight;
 		this.inventory = DefaultedList.ofSize(this.size, ItemStack.EMPTY);
 	}
@@ -50,7 +52,7 @@ public class ChestModule extends MinecartModule implements Configurable, Invento
 	}
 
 	public void configure(WPlainPanel panel) {
-		WLabel label = new WLabel(new TranslatableText("screen.stevescarts.chest.title"));
+		WLabel label = new WLabel(this.label);
 		WItemSlot slots = WItemSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
 		panel.add(label, 0, 0);
 		panel.add(slots, 0, 15);

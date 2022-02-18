@@ -1,5 +1,6 @@
 package vswe.stevescarts.item.modules;
 
+import com.google.common.base.Suppliers;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,13 +12,16 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ModuleItem extends Item {
-	private final MinecartModuleType<?> type;
+	protected final MinecartModuleType<?> type;
+	private final Supplier<String> translationKey;
 
 	public ModuleItem(Settings settings, MinecartModuleType<?> type) {
 		super(settings.group(StevesCartsItemGroups.MODULES).maxCount(1));
 		this.type = type;
+		this.translationKey = Suppliers.memoize(() -> this.type.getTranslationKey().getKey());
 	}
 
 	public boolean isOf(ModuleCategory category) {
@@ -31,5 +35,10 @@ public class ModuleItem extends Item {
 
 	public MinecartModuleType<?> getType() {
 		return type;
+	}
+
+	@Override
+	protected String getOrCreateTranslationKey() {
+		return this.translationKey.get();
 	}
 }
