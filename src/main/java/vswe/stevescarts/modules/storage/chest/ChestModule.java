@@ -8,15 +8,14 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import vswe.stevescarts.entity.ModularMinecartEntity;
-import vswe.stevescarts.modules.Controllable;
+import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 
-public class ChestModule extends MinecartModule implements Controllable, Inventory {
+public class ChestModule extends MinecartModule implements Configurable, Inventory {
 	private final int slotsWidth;
 	private final int slotsHeight;
 	private final int size;

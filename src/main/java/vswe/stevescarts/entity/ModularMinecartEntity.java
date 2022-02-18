@@ -4,6 +4,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -26,7 +26,7 @@ import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
-import vswe.stevescarts.screen.CartHandler;
+import vswe.stevescarts.screen.ModularCartHandler;
 
 import java.util.*;
 import java.util.function.Function;
@@ -157,9 +157,26 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			return ActionResult.PASS;
 		}
 		if (!player.world.isClient) {
-			CartHandler.openCartScreen((ServerPlayerEntity) player, this);
-			return ActionResult.CONSUME;
+			player.openHandledScreen(this.new CartScreenHandlerFactory());
 		}
-		return super.interact(player, hand);
+		return ActionResult.success(player.world.isClient);
+	}
+
+	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {
+		@Override
+		public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+			buf.writeInt(ModularMinecartEntity.this.getId());
+		}
+
+		@Override
+		public Text getDisplayName() {
+			return ModularMinecartEntity.this.getDisplayName();
+		}
+
+		@Nullable
+		@Override
+		public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+			return new ModularCartHandler(syncId, inv, ModularMinecartEntity.this);
+		}
 	}
 }
