@@ -11,22 +11,30 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.ModuleRenderer;
 import vswe.stevescarts.client.modules.hull.model.HullModel;
+import vswe.stevescarts.client.modules.hull.model.HullTopModel;
 import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.hull.HullModule;
+
+import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public class HullRenderer<T extends HullModule> extends ModuleRenderer<T> {
 	private final Identifier texture;
 	private final HullModel model;
+	private final HullTopModel topModel;
 
-	public HullRenderer(Identifier texture) {
+	public HullRenderer(Identifier texture, Identifier topTexture) {
 		this.texture = texture;
 		this.model = new HullModel(texture);
+		this.topModel = new HullTopModel(topTexture);
 	}
 
 	@Override
 	public void render(T module, float entityYaw, float entityPitch, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		VertexConsumer consumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(this.texture));
 		this.model.render(matrices, consumer, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+		if (Objects.requireNonNull(module.getMinecart()).shouldRenderTop()) {
+			this.topModel.render(matrices, consumer, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+		}
 	}
 }

@@ -2,6 +2,8 @@ package vswe.stevescarts.entity;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
@@ -120,6 +122,11 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public void addModule(MinecartModule module, boolean update) {
 		addModule(nextId(), module, update);
+	}
+
+	@Environment(EnvType.CLIENT)
+	public boolean shouldRenderTop() {
+		return true; // TODO
 	}
 
 	private int nextId() {

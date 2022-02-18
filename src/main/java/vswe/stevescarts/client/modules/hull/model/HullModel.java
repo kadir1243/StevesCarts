@@ -12,16 +12,8 @@ import vswe.stevescarts.client.modules.model.ModuleModel;
 
 @Environment(EnvType.CLIENT)
 public class HullModel extends ModuleModel {
-	private final Identifier texture;
-
 	public HullModel(Identifier texture) {
-		super(getTexturedModelData().createModel());
-		this.texture = texture;
-	}
-
-	@Override
-	public Identifier getTexture() {
-		return texture;
+		super(getTexturedModelData().createModel(), texture);
 	}
 
 	public static TexturedModelData getTexturedModelData() {

@@ -10,12 +10,18 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.ModuleStorage;
 
+import java.util.Collection;
+import java.util.Objects;
+
 public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntity> {
+	private static final ModularMinecartEntity FAKE_ENTITY = Objects.requireNonNull(StevesCarts.MODULAR_MINECART_ENTITY.create(null));
+
 	public ModularMinecartRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
 	}
@@ -78,7 +84,11 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		matrices.push();
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		matrices.translate(1.0F, 1.0F, 0.0F);
-		for (MinecartModule module : ModuleStorage.read(stack)) {
+		Collection<MinecartModule> modules = ModuleStorage.read(stack);
+		FAKE_ENTITY.modules.clear();
+		for (MinecartModule module : modules) {
+			FAKE_ENTITY.addModule(module, false);
+			module.setMinecart(FAKE_ENTITY);
 			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light);
 		}
 		matrices.pop();

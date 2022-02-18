@@ -7,15 +7,15 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.modules.hull.HullRenderer;
-import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static vswe.stevescarts.StevesCarts.id;
 
 @Environment(EnvType.CLIENT)
 public class ModuleRenderDispatcher {
@@ -54,11 +54,11 @@ public class ModuleRenderDispatcher {
 	}
 
 	public void init() {
-		register(StevesCartsModuleTypes.WOODEN_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/wooden_hull.png")));
-		register(StevesCartsModuleTypes.STANDARD_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/standard_hull.png")));
-		register(StevesCartsModuleTypes.REINFORCED_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/reinforced_hull.png")));
-		register(StevesCartsModuleTypes.MECHANICAL_PIG, new HullRenderer<>(StevesCarts.id("textures/modules/hull/mechanical_pig.png")));
-		register(StevesCartsModuleTypes.GALGADORIAN_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/galgadorian_hull.png")));
-		register(StevesCartsModuleTypes.CREATIVE_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/creative_hull.png")));
+		register(StevesCartsModuleTypes.WOODEN_HULL, new HullRenderer<>(id("textures/modules/hull/wooden_hull.png"), id("textures/modules/hull/wooden_hull_top.png")));
+		register(StevesCartsModuleTypes.STANDARD_HULL, new HullRenderer<>(id("textures/modules/hull/standard_hull.png"), id("textures/modules/hull/standard_hull_top.png")));
+		register(StevesCartsModuleTypes.REINFORCED_HULL, new HullRenderer<>(id("textures/modules/hull/reinforced_hull.png"), id("textures/modules/hull/reinforced_hull_top.png")));
+		register(StevesCartsModuleTypes.MECHANICAL_PIG, new HullRenderer<>(id("textures/modules/hull/mechanical_pig.png"), id("textures/modules/hull/mechanical_pig_top.png")));
+		register(StevesCartsModuleTypes.GALGADORIAN_HULL, new HullRenderer<>(id("textures/modules/hull/galgadorian_hull.png"), id("textures/modules/hull/galgadorian_hull_top.png")));
+		register(StevesCartsModuleTypes.CREATIVE_HULL, new HullRenderer<>(id("textures/modules/hull/creative_hull.png"), id("textures/modules/hull/creative_hull_top.png")));
 	}
 }
