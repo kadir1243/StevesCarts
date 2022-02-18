@@ -5,18 +5,28 @@ import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
+import vswe.stevescarts.screen.CartHandler;
 
 import java.util.*;
 import java.util.function.Function;
@@ -139,5 +149,17 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public void forceUpdate() {
 		UpdatePacket.sendToTrackers(this);
+	}
+
+	@Override
+	public ActionResult interact(PlayerEntity player, Hand hand) {
+		if (!this.isAlive()) {
+			return ActionResult.PASS;
+		}
+		if (!player.world.isClient) {
+			CartHandler.openCartScreen((ServerPlayerEntity) player, this);
+			return ActionResult.CONSUME;
+		}
+		return super.interact(player, hand);
 	}
 }

@@ -9,6 +9,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import vswe.stevescarts.modules.MinecartModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +34,8 @@ public abstract class ModuleModel extends Model {
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
 		this.root.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+	}
+
+	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
 	}
 }

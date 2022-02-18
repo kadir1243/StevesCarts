@@ -35,7 +35,7 @@ public class StevesCartsClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.ADVANCED_DETECTOR_RAIL, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.JUNCTION_RAIL, RenderLayer.getCutout());
 		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.MODULAR_CART, ModularMinecartRenderer::renderAsItem);
-		ScreenRegistry.register(StevesCartsScreenHandlers.CART_ASSEMBLER, CartAssemblerScreen::new);
+		StevesCartsScreenHandlers.initClient();
 	}
 
 	public static ModuleRenderDispatcher getModuleRenderDispatcher() {

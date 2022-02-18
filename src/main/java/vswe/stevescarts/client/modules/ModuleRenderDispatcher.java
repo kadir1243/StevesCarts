@@ -8,6 +8,7 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
 import vswe.stevescarts.client.modules.hull.HullRenderer;
+import vswe.stevescarts.client.modules.storage.FrontChestRenderer;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
@@ -60,5 +61,6 @@ public class ModuleRenderDispatcher {
 		register(StevesCartsModuleTypes.MECHANICAL_PIG, new HullRenderer<>(id("textures/modules/hull/mechanical_pig.png"), id("textures/modules/hull/mechanical_pig_top.png")));
 		register(StevesCartsModuleTypes.GALGADORIAN_HULL, new HullRenderer<>(id("textures/modules/hull/galgadorian_hull.png"), id("textures/modules/hull/galgadorian_hull_top.png")));
 		register(StevesCartsModuleTypes.CREATIVE_HULL, new HullRenderer<>(id("textures/modules/hull/creative_hull.png"), id("textures/modules/hull/creative_hull_top.png")));
+		register(StevesCartsModuleTypes.FRONT_CHEST, new FrontChestRenderer(id("textures/modules/storage/front_chest.png")));
 	}
 }

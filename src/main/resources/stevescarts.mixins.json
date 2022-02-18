@@ -3,6 +3,7 @@
   "package": "vswe.stevescarts.mixins",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "ServerPlayerEntityAccessor",
     "StatsAccessor"
   ],
   "client": [],
