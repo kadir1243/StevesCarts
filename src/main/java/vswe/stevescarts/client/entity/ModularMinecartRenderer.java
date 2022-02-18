@@ -84,7 +84,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		matrices.push();
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion((float) Math.PI));
-//		matrices.translate(-1.0F, -0.17F, 0.0F);
+		matrices.translate(1.0F, 0.17F, 0.0F);
 		Collection<MinecartModule> modules = ModuleStorage.read(stack);
 		FAKE_ENTITY.modules.clear();
 		for (MinecartModule module : modules) {
