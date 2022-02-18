@@ -2,6 +2,7 @@ package vswe.stevescarts.modules;
 
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.modules.storage.chest.FrontChestModule;
+import vswe.stevescarts.modules.storage.chest.TopChestModule;
 import vswe.stevescarts.modules.tags.ModuleTags;
 
 public class StevesCartsModuleTypes {
@@ -13,6 +14,7 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<HullModule> CREATIVE_HULL = MinecartModuleType.<HullModule>builder().hull().id("creative_hull").factory(HullModule::new).modularCapacity(10000).engineMaxCount(5).addonMaxCount(12).complexityMax(1500).buildAndRegister();
 
 	public static final MinecartModuleType<FrontChestModule> FRONT_CHEST = MinecartModuleType.<FrontChestModule>builder().id("front_chest").category(ModuleCategory.STORAGE).factory(FrontChestModule::new).sides(ModuleSide.FRONT).moduleCost(5).buildAndRegister();
+	public static final MinecartModuleType<TopChestModule> TOP_CHEST = MinecartModuleType.<TopChestModule>builder().id("front_chest").category(ModuleCategory.STORAGE).factory(TopChestModule::new).sides(ModuleSide.TOP).moduleCost(6).buildAndRegister();
 
 	public static void init() {
 		ModuleTags.init();

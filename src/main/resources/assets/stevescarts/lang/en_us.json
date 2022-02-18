@@ -11,6 +11,7 @@
   "module.stevescarts.galgadorian_hull": "Galgadorian Hull",
   "module.stevescarts.creative_hull": "Creative Hull",
   "module.stevescarts.front_chest": "Front Chest",
+  "module.stevescarts.top_chest": "Top Chest",
 
   "tooltip.stevescarts.hull.modular_capacity": "Module Capacity: %s",
   "tooltip.stevescarts.hull.engine_max_count": "Max Engines: %s",

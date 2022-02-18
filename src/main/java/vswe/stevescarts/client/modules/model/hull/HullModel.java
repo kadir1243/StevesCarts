@@ -1,4 +1,4 @@
-package vswe.stevescarts.client.modules.hull.model;
+package vswe.stevescarts.client.modules.model.hull;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

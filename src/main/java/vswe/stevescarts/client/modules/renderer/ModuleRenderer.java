@@ -1,4 +1,4 @@
-package vswe.stevescarts.client.modules;
+package vswe.stevescarts.client.modules.renderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -6,9 +6,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.StevesCartsClient;
-import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.MinecartModule;
 
 @Environment(EnvType.CLIENT)

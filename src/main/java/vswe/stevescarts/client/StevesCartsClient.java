@@ -6,20 +6,16 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.client.entity.ModularMinecartRenderer;
-import vswe.stevescarts.client.modules.ModuleRenderDispatcher;
-import vswe.stevescarts.client.screen.CartAssemblerScreen;
+import vswe.stevescarts.client.modules.renderer.ModuleRenderDispatcher;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
-
-import static vswe.stevescarts.block.StevesCartsBlocks.*;
 
 @Environment(EnvType.CLIENT)
 public class StevesCartsClient implements ClientModInitializer {

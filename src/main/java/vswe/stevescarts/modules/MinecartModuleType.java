@@ -39,8 +39,10 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final Optional<HullData> hullData;
 	private final Optional<ToolData> toolData;
 	private final TranslatableText translationKey;
+	private final boolean allowDuplicates;
+	private final boolean shouldRenderTop;
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData) {
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop) {
 		this.factory = factory;
 		this.item = item;
 		this.category = category;
@@ -51,18 +53,20 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.hullData = hullData;
 		this.toolData = toolData;
 		this.translationKey = new TranslatableText("module." + id.getNamespace() + "." + id.getPath());
+		this.allowDuplicates = allowDuplicates;
+		this.shouldRenderTop = true;
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData));
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData), false, true);
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, HullData hullData) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty());
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty(), false, true);
 	}
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty());
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop) {
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop);
 	}
 
 	public T createModule(@Nullable ModularMinecartEntity cart) {
@@ -116,6 +120,14 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 	public TranslatableText getTranslationKey() {
 		return translationKey;
+	}
+
+	public boolean allowsDuplicates() {
+		return allowDuplicates;
+	}
+
+	public boolean shouldRenderTop() {
+		return shouldRenderTop;
 	}
 
 	public void appendTooltip(List<Text> tooltip, TooltipContext context) {
@@ -209,6 +221,8 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		protected int moduleCost = 0;
 		protected final ImmutableList.Builder<Text> tooltip = ImmutableList.builder();
 		protected Item finalItem = null;
+		protected boolean allowDuplicates = false;
+		protected boolean shouldRenderTop = true;
 
 		protected Builder() {
 		}
@@ -249,6 +263,16 @@ public final class MinecartModuleType<T extends MinecartModule> {
 			return this;
 		}
 
+		public Builder<T> allowDuplicates() {
+			this.allowDuplicates = true;
+			return this;
+		}
+
+		public Builder<T> noRenderTop() {
+			this.shouldRenderTop = false;
+			return this;
+		}
+
 		public Builder<T> sides(ModuleSide... sides) {
 			this.sides.addAll(Arrays.asList(sides));
 			return this;
@@ -274,7 +298,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 		public MinecartModuleType<T> buildAndRegister() {
 			this.validate();
-			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build()));
+			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), this.allowDuplicates, this.shouldRenderTop));
 			this.finalItem = Registry.register(Registry.ITEM, type.getId(), this.itemFactory.apply(new Item.Settings(), type));
 			return type;
 		}

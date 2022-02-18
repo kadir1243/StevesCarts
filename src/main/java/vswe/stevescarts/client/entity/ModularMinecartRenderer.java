@@ -31,7 +31,6 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		return null;
 	}
 
-    // TODO
     @Override
     public void render(ModularMinecartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
 		super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);

@@ -1,4 +1,4 @@
-package vswe.stevescarts.client.modules.storage.model;
+package vswe.stevescarts.client.modules.model.storage;
 
 import net.minecraft.client.model.*;
 import net.minecraft.util.Identifier;

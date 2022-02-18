@@ -136,7 +136,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	@Environment(EnvType.CLIENT)
 	public boolean shouldRenderTop() {
-		return true; // TODO
+		return this.getModuleList().stream().anyMatch(module -> !module.getType().shouldRenderTop());
 	}
 
 	private int nextId() {

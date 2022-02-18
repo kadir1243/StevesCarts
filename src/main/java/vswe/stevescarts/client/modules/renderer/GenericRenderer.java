@@ -1,21 +1,22 @@
-package vswe.stevescarts.client.modules.storage;
+package vswe.stevescarts.client.modules.renderer;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import vswe.stevescarts.client.modules.ModuleRenderer;
-import vswe.stevescarts.client.modules.storage.model.FrontChestModel;
+import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.storage.chest.FrontChestModule;
 
-public class FrontChestRenderer extends ModuleRenderer<FrontChestModule> {
-	private final Identifier texture;
-	private final FrontChestModel model;
+import java.util.function.Function;
 
-	public FrontChestRenderer(Identifier texture) {
+public class GenericRenderer extends ModuleRenderer<FrontChestModule> {
+	private final Identifier texture;
+	private final ModuleModel model;
+
+	public GenericRenderer(Identifier texture, Function<Identifier, ModuleModel> modelFactory) {
 		this.texture = texture;
-		this.model = new FrontChestModel(texture);
+		this.model = modelFactory.apply(texture);
 	}
 
 	@Override
