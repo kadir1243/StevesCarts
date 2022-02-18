@@ -55,5 +55,10 @@ public class ModuleRenderDispatcher {
 
 	public void init() {
 		register(StevesCartsModuleTypes.WOODEN_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/wooden_hull.png")));
+		register(StevesCartsModuleTypes.STANDARD_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/standard_hull.png")));
+		register(StevesCartsModuleTypes.REINFORCED_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/reinforced_hull.png")));
+		register(StevesCartsModuleTypes.MECHANICAL_PIG, new HullRenderer<>(StevesCarts.id("textures/modules/hull/mechanical_pig.png")));
+		register(StevesCartsModuleTypes.GALGADORIAN_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/galgadorian_hull.png")));
+		register(StevesCartsModuleTypes.CREATIVE_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/creative_hull.png")));
 	}
 }
