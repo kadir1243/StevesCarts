@@ -13,10 +13,6 @@ import vswe.stevescarts.client.modules.model.ModuleModel;
 @Environment(EnvType.CLIENT)
 public class HullModel extends ModuleModel {
 	public HullModel(Identifier texture) {
-		super(getTexturedModelData().createModel(), texture);
-	}
-
-	public static TexturedModelData getTexturedModelData() {
-		return MinecartEntityModel.getTexturedModelData();
+		super(MinecartEntityModel.getTexturedModelData().createModel(), texture);
 	}
 }
