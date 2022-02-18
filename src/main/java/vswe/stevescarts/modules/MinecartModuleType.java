@@ -146,6 +146,22 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return isEngine(stack.getItem());
 	}
 
+	public static boolean isTool(ItemStack stack) {
+		return isTool(stack.getItem());
+	}
+
+	public static boolean isAttachment(ItemStack stack) {
+		return isAttachment(stack.getItem());
+	}
+
+	public static boolean isStorage(ItemStack stack) {
+		return isStorage(stack.getItem());
+	}
+
+	public static boolean isAddon(ItemStack stack) {
+		return isAddon(stack.getItem());
+	}
+
 	public static boolean isModule(Item item) {
 		return item instanceof ModuleItem;
 	}
@@ -156,6 +172,22 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 	public static boolean isEngine(Item item) {
 		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.ENGINE);
+	}
+
+	public static boolean isTool(Item item) {
+		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.TOOL);
+	}
+
+	public static boolean isAttachment(Item item) {
+		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.ATTACHMENT);
+	}
+
+	public static boolean isStorage(Item item) {
+		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.STORAGE);
+	}
+
+	public static boolean isAddon(Item item) {
+		return isModule(item) && ((ModuleItem) item).isOf(ModuleCategory.ADDON);
 	}
 
 	public static <T extends MinecartModule> Builder<T> builder() {

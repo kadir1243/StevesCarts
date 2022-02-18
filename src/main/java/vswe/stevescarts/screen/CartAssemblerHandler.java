@@ -64,15 +64,18 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WModuleSlot engineSlots = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.ENGINE_SLOT_START, 5, 1, ModuleCategory.ENGINE);
 		engineSlots.setFilter(MinecartModuleType::isEngine);
 		rootPanel.add(engineSlots, 7, 59);
-		// TODO: set filters
 		WModuleSlot toolSlot = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.TOOL_SLOT, 1, 1, ModuleCategory.TOOL);
 		rootPanel.add(toolSlot, 7, 89);
+		toolSlot.setFilter(MinecartModuleType::isTool);
 		WModuleSlot attachmentSlots = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.ATTACHMENT_SLOT_START, 6, 1, ModuleCategory.ATTACHMENT);
 		rootPanel.add(attachmentSlots, 7, 119);
+		attachmentSlots.setFilter(MinecartModuleType::isAttachment);
 		WModuleSlot storageSlots = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.STORAGE_SLOT_START, 4, 1, ModuleCategory.STORAGE);
 		rootPanel.add(storageSlots, 7, 149);
+		storageSlots.setFilter(MinecartModuleType::isStorage);
 		WModuleSlot addonsSlots = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.ADDON_SLOT_START, 6, 2, ModuleCategory.ADDON);
 		rootPanel.add(addonsSlots, 7, 179);
+		addonsSlots.setFilter(MinecartModuleType::isAddon);
 		this.outputSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.OUTPUT_SLOT);
 		this.outputSlot.setFilter((stack) -> stack.isOf(StevesCartsItems.MODULAR_CART));
 		rootPanel.add(this.outputSlot, 330, 182);
