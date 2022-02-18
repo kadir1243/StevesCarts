@@ -37,9 +37,7 @@ public class HullRenderer<T extends HullModule> extends ModuleRenderer<T> {
 		this.model.render(matrices, consumer, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 		if (Objects.requireNonNull(module.getMinecart()).shouldRenderTop()) {
 			VertexConsumer topConsumer = vertexConsumers.getBuffer(this.topModel.getLayer(this.topTexture));
-			matrices.push();
 			this.topModel.render(matrices, topConsumer, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-			matrices.pop();
 		}
 	}
 }
