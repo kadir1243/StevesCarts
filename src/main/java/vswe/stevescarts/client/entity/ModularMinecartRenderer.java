@@ -75,8 +75,11 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
     }
 
 	public static void renderAsItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+		matrices.push();
+		matrices.scale(-1.0f, -1.0f, 1.0f);
 		for (MinecartModule module : ModuleStorage.read(stack)) {
 			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light);
 		}
+		matrices.pop();
 	}
 }
