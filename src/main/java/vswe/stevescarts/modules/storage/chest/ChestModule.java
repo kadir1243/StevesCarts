@@ -53,7 +53,7 @@ public class ChestModule extends MinecartModule implements Configurable, Invento
 		WLabel label = new WLabel(new TranslatableText("screen.stevescarts.chest.title"));
 		WItemSlot slots = WItemSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
 		panel.add(label, 0, 0);
-		panel.add(slots, 15, 0);
+		panel.add(slots, 0, 15);
 	}
 
 	@Override

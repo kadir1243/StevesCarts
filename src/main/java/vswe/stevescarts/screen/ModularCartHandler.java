@@ -23,10 +23,14 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		this.setRootPanel(panel);
 		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).collect(Collectors.toList());
 		WListPanel<Configurable, WPlainPanel> panelList = new WListPanel<>(panels, WPlainPanel::new, Configurable::configure);
-		panelList.setSize(230, 256);
-		addCentered(panelList, 16);
-		addCentered(createPlayerInventoryPanel(true), 180);
+		addCentered(panelList, 16, 230, 160);
+		addCentered(createPlayerInventoryPanel(true), 184);
 		panel.validate(this);
+	}
+
+	public void addCentered(WWidget widget, int y, int width, int height) {
+		WPlainPanel root = (WPlainPanel) this.getRootPanel();
+		root.add(widget, (root.getWidth() - width) / 2 - root.getInsets().left(), y, width, height);
 	}
 
 	public ModularCartHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
