@@ -10,6 +10,7 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.screen.CartAssemblerScreen;
+import vswe.stevescarts.client.screen.ModularCartScreen;
 
 public class StevesCartsScreenHandlers {
 	public static final ScreenHandlerType<CartAssemblerHandler> CART_ASSEMBLER = ScreenHandlerRegistry.registerSimple(StevesCarts.id("cart_assembler"), (syncId, playerInventory) -> new CartAssemblerHandler(syncId, playerInventory, ScreenHandlerContext.EMPTY));
@@ -23,5 +24,6 @@ public class StevesCartsScreenHandlers {
 	@Environment(EnvType.CLIENT)
 	public static void initClient() {
 		ScreenRegistry.register(StevesCartsScreenHandlers.CART_ASSEMBLER, CartAssemblerScreen::new);
+		ScreenRegistry.register(StevesCartsScreenHandlers.MODULAR_CART, ModularCartScreen::new);
 	}
 }
