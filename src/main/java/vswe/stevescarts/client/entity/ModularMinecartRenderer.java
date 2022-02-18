@@ -83,7 +83,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 	public static void renderAsItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		matrices.push();
 		matrices.scale(-1.0f, -1.0f, 1.0f);
-		matrices.translate(1.0F, 1.0F, 0.0F);
+		matrices.translate(-1.0F, -0.25F, 0.0F);
 		Collection<MinecartModule> modules = ModuleStorage.read(stack);
 		FAKE_ENTITY.modules.clear();
 		for (MinecartModule module : modules) {

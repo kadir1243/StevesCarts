@@ -32,9 +32,6 @@ public abstract class ModuleModel extends Model {
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-		matrices.push();
-		MinecraftClient.getInstance().getTextureManager().bindTexture(this.texture);
 		this.root.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-		matrices.pop();
 	}
 }
