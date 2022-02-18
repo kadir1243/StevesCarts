@@ -18,8 +18,6 @@ public abstract class ModuleRenderer<T extends MinecartModule> {
 
 	public abstract void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight);
 
-	public abstract Identifier getTexture(T module);
-
 	public ModuleRenderDispatcher getDispatcher() {
 		return StevesCartsClient.getModuleRenderDispatcher();
 	}
@@ -31,6 +29,4 @@ public abstract class ModuleRenderer<T extends MinecartModule> {
 	public ItemRenderer getItemRenderer() {
 		return this.getDispatcher().getItemRenderer();
 	}
-
-	public abstract ModuleModel getModel();
 }

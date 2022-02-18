@@ -28,6 +28,7 @@ public class StevesCartsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		moduleRenderDispatcher = new ModuleRenderDispatcher(MinecraftClient.getInstance().textRenderer, MinecraftClient.getInstance().getItemRenderer());
+		moduleRenderDispatcher.init();
 		EntityRendererRegistry.register(StevesCarts.MODULAR_MINECART_ENTITY, ModularMinecartRenderer::new);
 		SpawnPacket.init();
 		UpdatePacket.init();

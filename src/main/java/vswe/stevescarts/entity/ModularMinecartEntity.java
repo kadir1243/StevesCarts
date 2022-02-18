@@ -2,15 +2,12 @@ package vswe.stevescarts.entity;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.collection.Int2ObjectBiMap;
 import net.minecraft.world.World;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.network.SpawnPacket;
@@ -18,7 +15,6 @@ import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
-import vswe.stevescarts.modules.hull.HullModule;
 
 import java.util.*;
 import java.util.function.Function;
@@ -30,6 +26,11 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
+	}
+
+	public ModularMinecartEntity(World world, double x, double y, double z, Collection<MinecartModule> modules) {
+		super(StevesCarts.MODULAR_MINECART_ENTITY, world, x, y, z);
+		modules.forEach(module -> this.addModule(module, false));
 	}
 
 	@Override
@@ -127,5 +128,9 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			id++;
 		}
 		return id;
+	}
+
+	public void forceUpdate() {
+		UpdatePacket.sendToTrackers(this);
 	}
 }

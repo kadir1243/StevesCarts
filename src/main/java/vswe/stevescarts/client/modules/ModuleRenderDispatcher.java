@@ -7,9 +7,12 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
+import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.client.modules.hull.HullRenderer;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.StevesCartsModuleTypes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,5 +51,9 @@ public class ModuleRenderDispatcher {
 
 	public void register(MinecartModuleType<?> type, ModuleRenderer<? extends MinecartModule> renderer) {
 		renderers.put(type, renderer);
+	}
+
+	public void init() {
+		register(StevesCartsModuleTypes.WOODEN_HULL, new HullRenderer<>(StevesCarts.id("textures/modules/hull/wooden_hull.png")));
 	}
 }

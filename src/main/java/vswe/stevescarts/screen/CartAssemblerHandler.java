@@ -9,21 +9,28 @@ import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
+import vswe.stevescarts.item.ModularMinecartItem;
 import vswe.stevescarts.item.StevesCartsItems;
+import vswe.stevescarts.item.modules.ModuleItem;
+import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
+import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.screen.widget.WAssembleButton;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 import vswe.stevescarts.screen.widget.WModuleSlot;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private final ScreenHandlerContext context;
@@ -65,6 +72,22 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, 30);
 		rootPanel.add(fuelSlot, 376, 182);
+		assembleButton.setOnClick(() -> {
+			if (!this.blockInventory.getStack(29).isEmpty()) {
+				return;
+			}
+			List<MinecartModule> modules = new ArrayList<>();
+			for (int i = 0; i < this.blockInventory.size(); i++) {
+				ItemStack stack = this.blockInventory.getStack(i);
+				if (stack.isEmpty()) {
+					continue;
+				}
+				modules.add(((ModuleItem) stack.getItem()).getType().createModule());
+				stack.decrement(1);
+			}
+			ItemStack stack = ModularMinecartItem.create(modules);
+			this.blockInventory.setStack(29, stack);
+		});
 		rootPanel.validate(this);
 	}
 

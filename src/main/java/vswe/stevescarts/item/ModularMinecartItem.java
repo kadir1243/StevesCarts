@@ -19,6 +19,7 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.modules.hull.HullModule;
 
+import java.util.Collection;
 import java.util.List;
 
 public class ModularMinecartItem extends Item {
@@ -41,18 +42,19 @@ public class ModularMinecartItem extends Item {
 			if (railShape.isAscending()) {
 				d = 0.5;
 			}
-//			ModularMinecartEntity entity = new ModularMinecartEntity(world, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.0625 + d, (double)blockPos.getZ() + 0.5,);
-//			if (itemStack.hasCustomName()) {
-//				entity.setCustomName(itemStack.getName());
-//			}
-//			world.spawnEntity(entity);
+			ModularMinecartEntity entity = new ModularMinecartEntity(world, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.0625 + d, (double)blockPos.getZ() + 0.5, ModuleStorage.read(itemStack));
+			entity.forceUpdate();
+			if (itemStack.hasCustomName()) {
+				entity.setCustomName(itemStack.getName());
+			}
+			world.spawnEntity(entity);
 			world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
 		}
 		itemStack.decrement(1);
 		return ActionResult.success(world.isClient);
 	}
 
-	public static ItemStack create(List<MinecartModule> modules) {
+	public static ItemStack create(Collection<MinecartModule> modules) {
 		ItemStack stack = StevesCartsItems.MODULAR_CART.getDefaultStack();
 		ModuleStorage.write(stack, modules);
 		return stack;

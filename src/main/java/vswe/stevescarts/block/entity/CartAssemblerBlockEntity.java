@@ -18,6 +18,18 @@ import java.util.Collections;
 
 public class CartAssemblerBlockEntity extends BlockEntity implements SidedInventory {
 	public static final int SIZE;
+	public static final int HULL_SLOT = 0;
+	public static final int ENGINE_SLOT_START = 1;
+	public static final int ENGINE_SLOT_END = 5;
+	public static final int TOOL_SLOT = 6;
+	public static final int ATTACHMENT_SLOT_START = 7;
+	public static final int ATTACHMENT_SLOT_END = 12;
+	public static final int STORAGE_SLOT_START = 13;
+	public static final int STORAGE_SLOT_END = 16;
+	public static final int ADDON_SLOT_START = 17;
+	public static final int ADDON_SLOT_END = 28;
+	public static final int OUTPUT_SLOT = 29;
+	public static final int FUEL_SLOT = 30;
 	private ItemStack hull = ItemStack.EMPTY;
 	private final DefaultedList<ItemStack> engines = DefaultedList.ofSize(5, ItemStack.EMPTY);
 	private ItemStack tool = ItemStack.EMPTY;
@@ -81,21 +93,21 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 
 	@Override
 	public ItemStack getStack(int slot) {
-		if (slot == 0) {
+		if (slot == HULL_SLOT) {
 			return this.hull;
-		} else if (slot >= 1 && slot <= 5) {
-			return this.engines.get(slot - 1);
-		} else if (slot == 6) {
+		} else if (slot >= ENGINE_SLOT_START && slot <= ENGINE_SLOT_END) {
+			return this.engines.get(slot - ENGINE_SLOT_START);
+		} else if (slot == TOOL_SLOT) {
 			return this.tool;
-		} else if (slot >= 7 && slot <= 12) {
-			return this.attachments.get(slot - 7);
-		} else if (slot >= 13 && slot <= 16) {
-			return this.storage.get(slot - 13);
-		} else if (slot >= 17 && slot <= 28) {
-			return this.addons.get(slot - 17);
-		} else if (slot == 29) {
+		} else if (slot >= ATTACHMENT_SLOT_START && slot <= ATTACHMENT_SLOT_END) {
+			return this.attachments.get(slot - ATTACHMENT_SLOT_START);
+		} else if (slot >= STORAGE_SLOT_START && slot <= STORAGE_SLOT_END) {
+			return this.storage.get(slot - STORAGE_SLOT_START);
+		} else if (slot >= ADDON_SLOT_START && slot <= ADDON_SLOT_END) {
+			return this.addons.get(slot - ADDON_SLOT_START);
+		} else if (slot == OUTPUT_SLOT) {
 			return this.output;
-		} else if (slot == 30) {
+		} else if (slot == FUEL_SLOT) {
 			return this.fuel;
 		}
 		throw new IndexOutOfBoundsException("Invalid slot: " + slot);
@@ -103,21 +115,21 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 
 	@Override
 	public ItemStack removeStack(int slot, int amount) {
-		if (slot == 0) {
+		if (slot == HULL_SLOT) {
 			return Inventories.splitStack(Collections.singletonList(this.hull), 0, amount);
-		} else if (slot >= 1 && slot <= 5) {
-			return Inventories.splitStack(this.engines, slot - 1, amount);
-		} else if (slot == 6) {
+		} else if (slot >= ENGINE_SLOT_START && slot <= ENGINE_SLOT_END) {
+			return Inventories.splitStack(this.engines, slot - ENGINE_SLOT_START, amount);
+		} else if (slot == TOOL_SLOT) {
 			return Inventories.splitStack(Collections.singletonList(this.tool), 0, amount);
-		} else if (slot >= 7 && slot <= 12) {
-			return Inventories.splitStack(this.attachments, slot - 7, amount);
-		} else if (slot >= 13 && slot <= 16) {
-			return Inventories.splitStack(this.storage, slot - 13, amount);
-		} else if (slot >= 17 && slot <= 28) {
-			return Inventories.splitStack(this.addons, slot - 17, amount);
-		} else if (slot == 29) {
+		} else if (slot >= ATTACHMENT_SLOT_START && slot <= ATTACHMENT_SLOT_END) {
+			return Inventories.splitStack(this.attachments, slot - ATTACHMENT_SLOT_START, amount);
+		} else if (slot >= STORAGE_SLOT_START && slot <= STORAGE_SLOT_END) {
+			return Inventories.splitStack(this.storage, slot - STORAGE_SLOT_START, amount);
+		} else if (slot >= ADDON_SLOT_START && slot <= ADDON_SLOT_END) {
+			return Inventories.splitStack(this.addons, slot - ADDON_SLOT_START, amount);
+		} else if (slot == OUTPUT_SLOT) {
 			return Inventories.splitStack(Collections.singletonList(this.output), 0, amount);
-		} else if (slot == 30) {
+		} else if (slot == FUEL_SLOT) {
 			return Inventories.splitStack(Collections.singletonList(this.fuel), 0, amount);
 		} else {
 			throw new IndexOutOfBoundsException("Invalid slot: " + slot);
@@ -131,21 +143,21 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 
 	@Override
 	public void setStack(int slot, ItemStack stack) {
-		if (slot == 0) {
+		if (slot == HULL_SLOT) {
 			this.hull = stack;
-		} else if (slot >= 1 && slot <= 5) {
-			this.engines.set(slot - 1, stack);
-		} else if (slot == 6) {
+		} else if (slot >= ENGINE_SLOT_START && slot <= ENGINE_SLOT_END) {
+			this.engines.set(slot - ENGINE_SLOT_START, stack);
+		} else if (slot == TOOL_SLOT) {
 			this.tool = stack;
-		} else if (slot >= 7 && slot <= 12) {
-			this.attachments.set(slot - 7, stack);
-		} else if (slot >= 13 && slot <= 16) {
-			this.storage.set(slot - 13, stack);
-		} else if (slot >= 17 && slot <= 28) {
-			this.addons.set(slot - 17, stack);
-		} else if (slot == 29) {
+		} else if (slot >= ATTACHMENT_SLOT_START && slot <= ATTACHMENT_SLOT_END) {
+			this.attachments.set(slot - ATTACHMENT_SLOT_START, stack);
+		} else if (slot >= STORAGE_SLOT_START && slot <= STORAGE_SLOT_END) {
+			this.storage.set(slot - STORAGE_SLOT_START, stack);
+		} else if (slot >= ADDON_SLOT_START && slot <= ADDON_SLOT_END) {
+			this.addons.set(slot - ADDON_SLOT_START, stack);
+		} else if (slot == OUTPUT_SLOT) {
 			this.output = stack;
-		} else if (slot == 30) {
+		} else if (slot == FUEL_SLOT) {
 			this.fuel = stack;
 		} else {
 			StevesCarts.LOGGER.error("Invalid slot: " + slot);

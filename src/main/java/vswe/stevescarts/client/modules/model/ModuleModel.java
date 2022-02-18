@@ -16,28 +16,24 @@ import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public abstract class ModuleModel extends Model {
+	private final ModelPart root;
 	protected List<ModelPart> models = new ArrayList<>();
 
-	public ModuleModel(Function<Identifier, RenderLayer> layerFactory) {
+	public ModuleModel(Function<Identifier, RenderLayer> layerFactory, ModelPart root) {
 		super(layerFactory);
+		this.root = root;
 	}
 
-	public ModuleModel() {
-		super(RenderLayer::getEntityCutoutNoCull);
+	public ModuleModel(ModelPart root) {
+		this(RenderLayer::getEntityCutoutNoCull, root);
 	}
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
 		matrices.push();
 		MinecraftClient.getInstance().getTextureManager().bindTexture(getTexture());
-		for (ModelPart model : models) {
-			model.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-		}
+		this.root.render(matrices, vertices, light, overlay, red, green, blue, alpha);
 		matrices.pop();
-	}
-
-	public void addModel(ModelPart model) {
-		models.add(model);
 	}
 
 	public abstract Identifier getTexture();

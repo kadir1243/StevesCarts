@@ -28,4 +28,8 @@ public class ModuleItem extends Item {
 	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
 		tooltip.addAll(this.type.getTooltip());
 	}
+
+	public MinecartModuleType<?> getType() {
+		return type;
+	}
 }
