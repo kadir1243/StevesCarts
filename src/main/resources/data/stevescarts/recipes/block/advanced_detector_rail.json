@@ -10,7 +10,7 @@
       "item": "minecraft:redstone"
     },
     "#": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "P": {
       "item": "minecraft:stone_pressure_plate"

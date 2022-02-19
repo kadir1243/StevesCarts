@@ -10,7 +10,7 @@
       "item": "stevescarts:reinforced_metal"
     },
     "X": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {

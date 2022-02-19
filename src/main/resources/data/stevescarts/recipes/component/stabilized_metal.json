@@ -10,7 +10,7 @@
       "item": "stevescarts:refined_hardener"
     },
     "#": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "M": {
       "item": "stevescarts:hardened_mesh"

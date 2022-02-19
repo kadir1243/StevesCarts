@@ -6,7 +6,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "X": {
       "tag": "minecraft:base_stone_overworld"

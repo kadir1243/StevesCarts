@@ -10,7 +10,7 @@
       "item": "stevescarts:solar_panel"
     },
     "X": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "P": {
       "item": "stevescarts:simple_pcb"

@@ -10,7 +10,7 @@
       "tag": "minecraft:base_stone_overworld"
     },
     "X": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "R": {
       "item": "stevescarts:simple_pcb"

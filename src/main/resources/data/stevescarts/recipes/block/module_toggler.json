@@ -16,7 +16,7 @@
       "tag": "minecraft:base_stone_overworld"
     },
     "I": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "G": {
       "item": "minecraft:gold_ingot"

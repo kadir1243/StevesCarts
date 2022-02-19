@@ -9,7 +9,7 @@
       "tag": "minecraft:base_stone_overworld"
     },
     "#": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {
