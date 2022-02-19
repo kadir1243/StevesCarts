@@ -12,7 +12,7 @@
       "tag": "c:iron_ingots"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {

@@ -10,7 +10,7 @@
       "tag": "c:iron_ingots"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     },
     "#": {
       "item": "stevescarts:reinforced_metal"

@@ -7,10 +7,10 @@
   ],
   "key": {
     "O": {
-      "item": "minecraft:orange_dye"
+      "tag": "c:orange_dyes"
     },
     "B": {
-      "item": "minecraft:blue_dye"
+      "tag": "c:blue_dyes"
     },
     "#": {
       "tag": "minecraft:base_stone_overworld"
@@ -22,7 +22,7 @@
       "tag": "c:gold_ingots"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     },
     "X": {
       "item": "stevescarts:dynamite"

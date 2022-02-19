@@ -7,13 +7,13 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:glass_pane"
+      "tag": "c:glass_panes"
     },
     "#": {
       "item": "minecraft:fermented_spider_eye"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {

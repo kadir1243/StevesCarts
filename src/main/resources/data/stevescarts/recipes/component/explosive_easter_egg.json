@@ -19,7 +19,7 @@
       "item": "minecraft:gunpowder"
     },
     "G": {
-      "item": "minecraft:green_dye"
+      "tag": "c:green_dyes"
     }
   },
   "result": {

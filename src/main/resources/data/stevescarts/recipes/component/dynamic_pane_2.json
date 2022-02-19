@@ -9,7 +9,7 @@
       "item": "stevescarts:iron_pane"
     },
     "X": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {

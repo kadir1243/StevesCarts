@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:green_dye"
+      "tag": "c:green_dyes"
     },
     "X": {
       "tag": "c:iron_ingots"

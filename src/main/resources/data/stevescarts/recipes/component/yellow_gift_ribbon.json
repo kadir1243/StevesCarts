@@ -16,7 +16,7 @@
       "item": "minecraft:string"
     },
     "X": {
-      "item": "minecraft:yellow_dye"
+      "tag": "c:yellow_dyes"
     }
   },
   "result": {

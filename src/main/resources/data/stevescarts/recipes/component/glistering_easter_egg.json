@@ -19,7 +19,7 @@
       "item": "minecraft:gunpowder"
     },
     "B": {
-      "item": "minecraft:blue_dye"
+      "tag": "c:blue_dyes"
     }
   },
   "result": {

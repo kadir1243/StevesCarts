@@ -10,7 +10,7 @@
       "item": "minecraft:redstone_torch"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     },
     "D": {
       "item": "stevescarts:detector_unit"

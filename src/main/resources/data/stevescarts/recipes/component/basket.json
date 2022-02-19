@@ -13,7 +13,7 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:stick"
+      "tag": "c:wood_sticks"
     },
     "#": {
       "tag": "c:iron_ingots"

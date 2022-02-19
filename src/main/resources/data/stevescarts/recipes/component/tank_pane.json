@@ -7,10 +7,10 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:glass_pane"
+      "tag": "c:glass_panes"
     },
     "X": {
-      "item": "minecraft:glass"
+      "tag": "c:glass_blocks"
     }
   },
   "result": {

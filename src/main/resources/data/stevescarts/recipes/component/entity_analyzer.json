@@ -10,7 +10,7 @@
       "item": "stevescarts:simple_pcb"
     },
     "X": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     },
     "#": {
       "tag": "c:iron_ingots"

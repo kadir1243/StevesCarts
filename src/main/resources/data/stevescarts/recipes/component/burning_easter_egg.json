@@ -16,10 +16,10 @@
       "tag": "c:eggs"
     },
     "R": {
-      "item": "minecraft:red_dye"
+      "tag": "c:red_dyes"
     },
     "Y": {
-      "item": "minecraft:yellow_dye"
+      "tag": "c:yellow_dyes"
     },
     "#": {
       "item": "minecraft:blaze_powder"

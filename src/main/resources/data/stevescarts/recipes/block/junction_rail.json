@@ -10,7 +10,7 @@
       "item": "minecraft:rail"
     },
     "#": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {

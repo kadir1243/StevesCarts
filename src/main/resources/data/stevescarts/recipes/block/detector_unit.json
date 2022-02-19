@@ -7,7 +7,7 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:cobblestone"
+      "tag": "c:cobblestone"
     },
     "S": {
       "item": "minecraft:stone_pressure_plate"
@@ -16,7 +16,7 @@
       "tag": "c:iron_ingots"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "c:redstone_dusts"
     },
     "P": {
       "item": "stevescarts:simple_pcb"

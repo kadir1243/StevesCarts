@@ -13,7 +13,7 @@
   ],
   "key": {
     "D": {
-      "item": "minecraft:diamond"
+      "tag": "c:diamonds"
     },
     "X": {
       "item": "minecraft:white_wool"
