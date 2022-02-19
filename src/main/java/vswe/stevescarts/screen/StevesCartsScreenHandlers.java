@@ -18,7 +18,6 @@ public class StevesCartsScreenHandlers {
 	public static final Identifier PACKET_ASSEMBLE_CLICK = StevesCarts.id("assemble_click");
 
 	public static void init() {
-		ServerPlayNetworking.registerGlobalReceiver(PACKET_ASSEMBLE_CLICK, (server, player, handler, buf, responseSender) -> server.execute(() -> CartAssemblerHandler.handleAssembleClick(player)));
 	}
 
 	@Environment(EnvType.CLIENT)

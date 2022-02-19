@@ -1,6 +1,8 @@
 package vswe.stevescarts.screen;
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
+import io.github.cottonmc.cotton.gui.networking.NetworkSide;
+import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel;
@@ -43,6 +45,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 
 	public CartAssemblerHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
 		super(StevesCartsScreenHandlers.CART_ASSEMBLER, syncId, playerInventory, getBlockInventory(context, CartAssemblerBlockEntity.SIZE), getBlockPropertyDelegate(context));
+		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> handleAssembleClick((ServerPlayerEntity) playerInventory.player));
 		playerInventory.onOpen(playerInventory.player);
 		this.context = context;
 		WFixedPanel rootPanel = new WFixedPanel();
@@ -81,7 +84,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(this.outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.FUEL_SLOT);
 		rootPanel.add(fuelSlot, 376, 182);
-		assembleButton.setOnClick(() -> ClientPlayNetworking.send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, PacketByteBufs.empty()));
+		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {}));
 		rootPanel.validate(this);
 	}
 
