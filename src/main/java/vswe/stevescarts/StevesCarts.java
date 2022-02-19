@@ -15,6 +15,7 @@ import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.gen.CompRecipeGen;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
@@ -32,12 +33,13 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsStats.init();
 		StevesCartsScreenHandlers.init();
 		MODULAR_MINECART_ENTITY = Registry.register(Registry.ENTITY_TYPE, id("cart"), FabricEntityTypeBuilder.<ModularMinecartEntity>create(SpawnGroup.MISC, ModularMinecartEntity::new).dimensions(EntityDimensions.fixed(1, 1)).build());
-		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 		ServerBlockEntityEvents.BLOCK_ENTITY_LOAD.register((blockEntity, world) -> {
 			if (blockEntity.getType() == StevesCartsBlockEntities.CART_ASSEMBLER) {
 				((CartAssemblerBlockEntity) blockEntity).onLoad(world);
 			}
 		});
+		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
+		CompRecipeGen.conc();
 	}
 
 	public static Identifier id(String s) {

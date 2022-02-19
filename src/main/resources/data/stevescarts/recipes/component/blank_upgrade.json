@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "#R#",
+    "XLX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "#": {
+      "item": "stevescarts:reinforced_metal"
+    },
+    "L": {
+      "item": "stevescarts:advanced_pcb"
+    }
+  },
+  "result": {
+    "count": 2,
+    "item": "stevescarts:blank_upgrade"
+  }
+}

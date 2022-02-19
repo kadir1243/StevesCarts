@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "stevescarts:is_event",
+      "event": "easter"
+    }
+  ],
+  "pattern": [
+    "#S#",
+    "#X#",
+    "#S#"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:egg"
+    },
+    "#": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "result": {
+    "item": "stevescarts:chocolate_easter_egg"
+  }
+}
