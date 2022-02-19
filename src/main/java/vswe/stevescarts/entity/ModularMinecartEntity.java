@@ -23,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
+import vswe.stevescarts.item.ModularMinecartItem;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
@@ -57,7 +58,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	@Override
 	public ItemStack getPickBlockStack() {
-		return ItemStack.EMPTY; // TODO
+		return ModularMinecartItem.create(this.getModuleList());
 	}
 
 	public Map<Integer, MinecartModule> getModules() {
