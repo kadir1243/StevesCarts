@@ -11,11 +11,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import vswe.stevescarts.entity.ModularMinecartEntity;
-import vswe.stevescarts.modules.Configurable;
-import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
-import vswe.stevescarts.screen.widget.WMovableSlots;
 
 public class ChestModule extends StorageModule implements Inventory {
 	private final int slotsWidth;
