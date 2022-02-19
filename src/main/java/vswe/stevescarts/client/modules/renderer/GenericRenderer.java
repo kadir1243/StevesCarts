@@ -6,11 +6,11 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.ModuleModel;
-import vswe.stevescarts.modules.storage.chest.FrontChestModule;
+import vswe.stevescarts.modules.MinecartModule;
 
 import java.util.function.Function;
 
-public class GenericRenderer extends ModuleRenderer<FrontChestModule> {
+public class GenericRenderer extends ModuleRenderer<MinecartModule> {
 	private final Identifier texture;
 	private final ModuleModel model;
 
@@ -20,7 +20,7 @@ public class GenericRenderer extends ModuleRenderer<FrontChestModule> {
 	}
 
 	@Override
-	public void render(FrontChestModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
+	public void render(MinecartModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		VertexConsumer consumer = vertexConsumers.getBuffer(this.model.getLayer(this.texture));
 		this.model.render(matrices, consumer, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 	}

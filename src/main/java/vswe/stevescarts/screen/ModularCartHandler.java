@@ -1,5 +1,6 @@
 package vswe.stevescarts.screen;
 
+import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WListPanel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
@@ -23,6 +24,13 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		this.setRootPanel(panel);
 		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).collect(Collectors.toList());
 		WListPanel<Configurable, WPlainPanel> panelList = new WListPanel<>(panels, WPlainPanel::new, Configurable::configure);
+
+		WListPanel<Configurable, WPlainPanel> fakeList = new WListPanel<>(panels, WPlainPanel::new, Configurable::configure);
+		GuiDescription fakeDescription = new SyncedGuiDescription(null, 0, playerInventory);
+		fakeList.validate(fakeDescription);
+		int height = fakeList.streamChildren().filter(WPlainPanel.class::isInstance).mapToInt(WWidget::getHeight).max().orElseThrow();
+		panelList.setListItemHeight(height + 2);
+
 		addCentered(panelList, 16, 230, 160);
 		addCentered(createPlayerInventoryPanel(true), 184);
 		panel.validate(this);

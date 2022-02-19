@@ -56,6 +56,7 @@ public class ChestModule extends MinecartModule implements Configurable, Invento
 		WItemSlot slots = WItemSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
 		panel.add(label, 0, 0);
 		panel.add(slots, 0, 15);
+		panel.setSize(this.slotsWidth * 18 + 4, this.slotsHeight * 18 + 18);
 	}
 
 	@Override
