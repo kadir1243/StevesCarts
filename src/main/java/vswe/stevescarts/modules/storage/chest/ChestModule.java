@@ -14,8 +14,10 @@ import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.storage.StorageModule;
+import vswe.stevescarts.screen.widget.WMovableSlots;
 
-public class ChestModule extends MinecartModule implements Configurable, Inventory {
+public class ChestModule extends StorageModule implements Inventory {
 	private final int slotsWidth;
 	private final int slotsHeight;
 	private final Text label;

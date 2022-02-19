@@ -149,7 +149,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		if (type == null) {
 			throw new IllegalArgumentException("No module type in NBT");
 		}
-		return type.createModule(cart);
+		MinecartModule module = type.createModule(cart);
+		module.readNbt(nbt);
+		return module;
 	}
 
 	public static boolean isModule(ItemStack stack) {

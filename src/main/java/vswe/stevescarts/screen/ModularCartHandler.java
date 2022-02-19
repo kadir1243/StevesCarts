@@ -1,38 +1,38 @@
 package vswe.stevescarts.screen;
 
-import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
-import io.github.cottonmc.cotton.gui.widget.WListPanel;
+import io.github.cottonmc.cotton.gui.widget.WBox;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
+import io.github.cottonmc.cotton.gui.widget.data.Axis;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import vswe.stevescarts.entity.ModularMinecartEntity;
-import vswe.stevescarts.modules.Configurable;
+import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ModularCartHandler extends SyncedGuiDescription {
 	public ModularCartHandler(int syncId, PlayerInventory playerInventory, ModularMinecartEntity minecartEntity) {
 		super(StevesCartsScreenHandlers.MODULAR_CART, syncId, playerInventory);
 		WPlainPanel panel = new WFixedPanel();
 		panel.setInsets(new Insets(3, 0, 7, 0));
-		panel.setSize(256, 270);
+		panel.setSize(400, 280);
 		this.setRootPanel(panel);
-		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).collect(Collectors.toList());
-		WListPanel<Configurable, WPlainPanel> panelList = new WListPanel<>(panels, WPlainPanel::new, Configurable::configure);
+		WBox box = new WBox(Axis.HORIZONTAL);
+		panel.add(box, 20, 30);
+		box.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		List<StorageModule> panels = minecartEntity.getModuleList().stream().filter(StorageModule.class::isInstance).map(StorageModule.class::cast).toList();
+		for (StorageModule storageModule : panels) {
+			WPlainPanel inPanel = new WPlainPanel();
+			storageModule.configure(inPanel);
+			box.add(inPanel);
+		}
 
-		WListPanel<Configurable, WPlainPanel> fakeList = new WListPanel<>(panels, WPlainPanel::new, Configurable::configure);
-		GuiDescription fakeDescription = new SyncedGuiDescription(null, 0, playerInventory);
-		fakeList.validate(fakeDescription);
-		int height = fakeList.streamChildren().filter(WPlainPanel.class::isInstance).mapToInt(WWidget::getHeight).max().orElseThrow();
-		panelList.setListItemHeight(height + 2);
-
-		addCentered(panelList, 16, 230, 160);
-		addCentered(createPlayerInventoryPanel(true), 184);
+		panel.add(this.createPlayerInventoryPanel(), 10, 184);
 		panel.validate(this);
 	}
 
