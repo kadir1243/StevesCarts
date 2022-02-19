@@ -10,7 +10,7 @@
       "item": "minecraft:blue_dye"
     },
     "X": {
-      "item": "minecraft:gold_ingot"
+      "tag": "c:gold_ingots"
     },
     "#": {
       "item": "minecraft:redstone"

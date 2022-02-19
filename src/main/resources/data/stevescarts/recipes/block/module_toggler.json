@@ -19,7 +19,7 @@
       "tag": "c:iron_ingots"
     },
     "G": {
-      "item": "minecraft:gold_ingot"
+      "tag": "c:gold_ingots"
     },
     "R": {
       "item": "minecraft:redstone"

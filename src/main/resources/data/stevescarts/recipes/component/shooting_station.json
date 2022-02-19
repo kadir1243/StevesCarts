@@ -13,7 +13,7 @@
       "item": "minecraft:redstone"
     },
     "G": {
-      "item": "minecraft:gold_ingot"
+      "tag": "c:gold_ingots"
     },
     "D": {
       "item": "minecraft:dispenser"
