@@ -61,7 +61,9 @@ public class ModuleRenderDispatcher {
 		register(StevesCartsModuleTypes.MECHANICAL_PIG, new HullRenderer<>(id("textures/modules/hull/mechanical_pig.png"), id("textures/modules/hull/mechanical_pig_top.png")));
 		register(StevesCartsModuleTypes.GALGADORIAN_HULL, new HullRenderer<>(id("textures/modules/hull/galgadorian_hull.png"), id("textures/modules/hull/galgadorian_hull_top.png")));
 		register(StevesCartsModuleTypes.CREATIVE_HULL, new HullRenderer<>(id("textures/modules/hull/creative_hull.png"), id("textures/modules/hull/creative_hull_top.png")));
+
 		register(StevesCartsModuleTypes.FRONT_CHEST, new GenericRenderer(id("textures/modules/storage/front_chest.png"), FrontChestModel::new));
 		register(StevesCartsModuleTypes.TOP_CHEST, new GenericRenderer(id("textures/modules/storage/top_chest.png"), TopChestModel::new));
+		register(StevesCartsModuleTypes.SIDE_CHESTS, new SideChestsRenderer(id("textures/modules/storage/side_chests.png")));
 	}
 }
