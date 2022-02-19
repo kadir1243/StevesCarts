@@ -7,17 +7,22 @@ import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class ModularCartHandler extends SyncedGuiDescription {
+	private final WeakReference<ModularMinecartEntity> minecartEntity;
+
 	public ModularCartHandler(int syncId, PlayerInventory playerInventory, ModularMinecartEntity minecartEntity) {
 		super(StevesCartsScreenHandlers.MODULAR_CART, syncId, playerInventory);
+		this.minecartEntity = new WeakReference<>(minecartEntity);
 		WPlainPanel panel = new WFixedPanel();
 		panel.setInsets(new Insets(3, 0, 7, 0));
 		panel.setSize(400, 280);
@@ -34,6 +39,12 @@ public class ModularCartHandler extends SyncedGuiDescription {
 
 		panel.add(this.createPlayerInventoryPanel(), 10, 184);
 		panel.validate(this);
+	}
+
+	@Override
+	public void close(PlayerEntity player) {
+		super.close(player);
+		this.minecartEntity.get().onScreenClose();
 	}
 
 	public void addCentered(WWidget widget, int y, int width, int height) {

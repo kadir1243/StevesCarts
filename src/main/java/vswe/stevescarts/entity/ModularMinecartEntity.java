@@ -37,7 +37,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-// TODO
 public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
 
@@ -176,7 +175,9 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			return ActionResult.PASS;
 		}
 		if (!player.world.isClient) {
-			player.openHandledScreen(this.new CartScreenHandlerFactory());
+			if (player.openHandledScreen(this.new CartScreenHandlerFactory()).isPresent()) {
+				this.onScreenOpen();
+			}
 		}
 		return ActionResult.success(player.world.isClient);
 	}
