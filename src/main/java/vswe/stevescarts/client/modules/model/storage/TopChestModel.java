@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.storage.chest.FrontChestModule;
+import vswe.stevescarts.modules.storage.chest.TopChestModule;
 
 public class TopChestModel extends ModuleModel {
 	private final ModelPart lid;
@@ -35,7 +36,7 @@ public class TopChestModel extends ModuleModel {
 	@Override
 	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
 		super.animateModel(module, limbAngle, limbDistance, tickDelta);
-		this.lid.setAngles(((FrontChestModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
-		this.lock.setAngles(((FrontChestModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
+		this.lid.setAngles(((TopChestModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
+		this.lock.setAngles(((TopChestModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
 	}
 }
