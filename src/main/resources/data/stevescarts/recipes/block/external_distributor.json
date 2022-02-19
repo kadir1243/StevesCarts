@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#R#",
+    "X#X"
+  ],
+  "key": {
+    "X": {
+      "tag": "minecraft:base_stone_overworld"
+    },
+    "#": {
+      "item": "stevescarts:simple_pcb"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "stevescarts:external_distributor"
+  }
+}
