@@ -4,11 +4,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.item.component.CartComponentItem;
-import vswe.stevescarts.modules.MinecartModuleType;
 
 public class StevesCartsItems {
-//	public static final ModularMinecartItem WOODEN_HULL = register("wooden_hull", new ModularMinecartItem(new Item.Settings(), MinecartModuleType.WOODEN_HULL));
-
 	public static final ModularMinecartItem MODULAR_CART = register("modular_cart", new ModularMinecartItem(new Item.Settings().maxCount(1)));
 
 	// Components
