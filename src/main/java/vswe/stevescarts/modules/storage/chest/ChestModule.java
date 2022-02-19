@@ -3,6 +3,7 @@ package vswe.stevescarts.modules.storage.chest;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import net.minecraft.block.entity.ChestLidAnimator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
@@ -15,11 +16,12 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
 
 public class ChestModule extends StorageModule implements Inventory {
-	private final int slotsWidth;
-	private final int slotsHeight;
-	private final Text label;
-	private final int size;
-	private final DefaultedList<ItemStack> inventory;
+	protected final int slotsWidth;
+	protected final int slotsHeight;
+	protected final Text label;
+	protected final int size;
+	protected final DefaultedList<ItemStack> inventory;
+	protected final ChestLidAnimator chestLidAnimator = new ChestLidAnimator();
 
 	protected ChestModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, int slotsWidth, int slotsHeight) {
 		super(minecart, type);
@@ -113,5 +115,30 @@ public class ChestModule extends StorageModule implements Inventory {
 	@Override
 	public void clear() {
 		this.inventory.clear();
+	}
+
+	@Override
+	public void tick() {
+		if (this.minecart.world.isClient) {
+			this.chestLidAnimator.step();
+		}
+	}
+
+	@Override
+	public void onScreenOpen() {
+		if (this.minecart.world.isClient) {
+			this.chestLidAnimator.setOpen(true);
+		}
+	}
+
+	@Override
+	public void onScreenClose() {
+		if (this.minecart.world.isClient) {
+			this.chestLidAnimator.setOpen(false);
+		}
+	}
+
+	public float getOpenProgress(float delta) {
+		return this.chestLidAnimator.getProgress(delta);
 	}
 }

@@ -22,7 +22,7 @@ public class WModuleSlot extends WItemSlot {
 	@Environment(EnvType.CLIENT)
 	private static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		WModuleSlot slot = (WModuleSlot) panel;
-		for(int x = 0; x < slot.getWidth()/18; ++x) {
+		for (int x = 0; x < slot.getWidth() / 18; ++x) {
 			for (int y = 0; y < slot.getHeight() / 18; ++y) {
 				ScreenDrawing.texturedRect(matrices, left + x * 18, top + y * 18, 18, 18, OPEN_TEXTURE, 0xFFFFFFFF);
 				ScreenDrawing.drawBeveledPanel(matrices, left + x * 18, top + y * 18, 18, 18, 0xB8000000, 0x4C000000, 0xB8FFFFFF);
@@ -40,7 +40,7 @@ public class WModuleSlot extends WItemSlot {
 
 	@Override
 	protected ValidatedSlot createSlotPeer(Inventory inventory, int index, int x, int y) {
-		ModuleSlot mSlot =  new ModuleSlot(inventory, index, x, y);
+		ModuleSlot mSlot = new ModuleSlot(inventory, index, x, y);
 		peers.put(index, mSlot);
 		return mSlot;
 	}

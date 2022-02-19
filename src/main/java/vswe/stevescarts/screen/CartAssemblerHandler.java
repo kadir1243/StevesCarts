@@ -76,7 +76,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(this.outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.FUEL_SLOT);
 		rootPanel.add(fuelSlot, 376, 182);
-		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {}));
+		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {
+		}));
 		rootPanel.validate(this);
 		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> handleAssembleClick((ServerPlayerEntity) playerInventory.player));
 		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_HULL_ADD, (buf) -> {

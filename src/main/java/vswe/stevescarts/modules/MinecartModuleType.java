@@ -20,7 +20,10 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.item.modules.ModuleItem;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
@@ -478,7 +481,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 	}
 
-	public record HullData(int modularCapacity, int engineMaxCount, int addonMaxCount, int complexityMax) {}
+	public record HullData(int modularCapacity, int engineMaxCount, int addonMaxCount, int complexityMax) {
+	}
 
-	public record ToolData(boolean unbreakable) {}
+	public record ToolData(boolean unbreakable) {
+	}
 }

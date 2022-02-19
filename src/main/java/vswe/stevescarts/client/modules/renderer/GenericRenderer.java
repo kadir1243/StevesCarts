@@ -22,6 +22,7 @@ public class GenericRenderer extends ModuleRenderer<MinecartModule> {
 	@Override
 	public void render(MinecartModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		VertexConsumer consumer = vertexConsumers.getBuffer(this.model.getLayer(this.texture));
+		this.model.animateModel(module, 0, 0, tickDelta);
 		this.model.render(matrices, consumer, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 }

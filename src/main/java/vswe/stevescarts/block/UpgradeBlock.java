@@ -64,7 +64,7 @@ public class UpgradeBlock extends Block {
 		}
 		return DISCONNECTED_SHAPE;
 	}
-	
+
 	static {
 		double margin = 0.1875;
 		double thickness = 0.125;

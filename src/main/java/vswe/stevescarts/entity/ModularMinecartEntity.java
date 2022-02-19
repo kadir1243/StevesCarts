@@ -29,7 +29,11 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.screen.ModularCartHandler;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -74,8 +78,8 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		super.readCustomDataFromNbt(nbt);
 		this.setModules(
 				ModuleStorage.read(nbt, this)
-				.stream()
-				.collect(Collectors.toMap(MinecartModule::getId, Function.identity())),
+						.stream()
+						.collect(Collectors.toMap(MinecartModule::getId, Function.identity())),
 				false
 		);
 	}
@@ -84,6 +88,20 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		ModuleStorage.write(nbt, this.getModuleList());
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		this.modules.values().forEach(MinecartModule::tick);
+	}
+
+	public void onScreenOpen() {
+		this.modules.values().forEach(MinecartModule::onScreenOpen);
+	}
+
+	public void onScreenClose() {
+		this.modules.values().forEach(MinecartModule::onScreenClose);
 	}
 
 	public void writeModuleData(PacketByteBuf buf) {

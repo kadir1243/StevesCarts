@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 
 public abstract class MinecartModule {
-	@Nullable
 	protected ModularMinecartEntity minecart;
 	private final MinecartModuleType<?> type;
 	private int id;
@@ -16,7 +15,6 @@ public abstract class MinecartModule {
 		this.type = type;
 	}
 
-	@Nullable
 	public ModularMinecartEntity getMinecart() {
 		return this.minecart;
 	}
@@ -58,5 +56,14 @@ public abstract class MinecartModule {
 	 */
 	public Vec3d getPositionOffset() {
 		return Vec3d.ZERO;
+	}
+
+	public void tick() {
+	}
+
+	public void onScreenOpen() {
+	}
+
+	public void onScreenClose() {
 	}
 }

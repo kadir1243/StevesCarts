@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import vswe.stevescarts.screen.CartAssemblerHandler;
 import vswe.stevescarts.screen.ModularCartHandler;
 
 @Environment(EnvType.CLIENT)

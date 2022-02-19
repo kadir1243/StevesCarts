@@ -14,11 +14,11 @@ import vswe.stevescarts.StevesCarts;
 
 public class WAssembleButton extends WButton {
 	@Environment(EnvType.CLIENT)
-	private static final Texture ENABLED = new Texture(StevesCarts.id("textures/gui/assemble_button.png"), 0.0F, 0.0F, 1.0F, 1.0F/3.0F);
+	private static final Texture ENABLED = new Texture(StevesCarts.id("textures/gui/assemble_button.png"), 0.0F, 0.0F, 1.0F, 1.0F / 3.0F);
 	@Environment(EnvType.CLIENT)
-	private static final Texture HOVERED = new Texture(StevesCarts.id("textures/gui/assemble_button.png"), 0.0F, 1.0F/3.0F, 1.0F, 2.0F/3.0F);
+	private static final Texture HOVERED = new Texture(StevesCarts.id("textures/gui/assemble_button.png"), 0.0F, 1.0F / 3.0F, 1.0F, 2.0F / 3.0F);
 	@Environment(EnvType.CLIENT)
-	private static final Texture DISABLED = new Texture(StevesCarts.id("textures/gui/assemble_button.png"), 0.0F, 2.0F/3.0F, 1.0F, 1.0F);
+	private static final Texture DISABLED = new Texture(StevesCarts.id("textures/gui/assemble_button.png"), 0.0F, 2.0F / 3.0F, 1.0F, 1.0F);
 
 	public WAssembleButton(Text label) {
 		super(label);
