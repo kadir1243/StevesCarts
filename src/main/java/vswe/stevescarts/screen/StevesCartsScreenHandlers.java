@@ -16,6 +16,7 @@ public class StevesCartsScreenHandlers {
 	public static final ScreenHandlerType<CartAssemblerHandler> CART_ASSEMBLER = ScreenHandlerRegistry.registerSimple(StevesCarts.id("cart_assembler"), (syncId, playerInventory) -> new CartAssemblerHandler(syncId, playerInventory, ScreenHandlerContext.EMPTY));
 	public static final ScreenHandlerType<ModularCartHandler> MODULAR_CART = ScreenHandlerRegistry.registerExtended(StevesCarts.id("modular_cart"), ModularCartHandler::new);
 	public static final Identifier PACKET_ASSEMBLE_CLICK = StevesCarts.id("assemble_click");
+	public static final Identifier PACKET_HULL_ADD = StevesCarts.id("hull_add");
 
 	public static void init() {
 	}

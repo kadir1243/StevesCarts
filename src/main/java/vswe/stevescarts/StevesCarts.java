@@ -15,7 +15,6 @@ import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
 import vswe.stevescarts.entity.ModularMinecartEntity;
-import vswe.stevescarts.gen.CompRecipeGen;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
@@ -39,7 +38,6 @@ public class StevesCarts implements ModInitializer {
 			}
 		});
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
-		CompRecipeGen.conc();
 	}
 
 	public static Identifier id(String s) {

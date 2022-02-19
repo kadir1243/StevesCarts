@@ -11,7 +11,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.inventory.Inventory;
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
+import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.screen.slot.ModuleSlot;
 
 public class WModuleSlot extends WItemSlot {
@@ -41,6 +43,10 @@ public class WModuleSlot extends WItemSlot {
 		ModuleSlot mSlot =  new ModuleSlot(inventory, index, x, y);
 		peers.put(index, mSlot);
 		return mSlot;
+	}
+
+	public void toggleSlots(MinecartModuleType<? extends HullModule> type) {
+//		type.getCategory()
 	}
 
 	@Override
