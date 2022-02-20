@@ -174,10 +174,9 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		if (!this.isAlive()) {
 			return ActionResult.PASS;
 		}
-		if (!player.world.isClient) {
-			if (player.openHandledScreen(this.new CartScreenHandlerFactory()).isPresent()) {
-				this.onScreenOpen();
-			}
+		if (!player.world.isClient && !player.isSpectator()) {
+			player.openHandledScreen(this.new CartScreenHandlerFactory());
+			this.onScreenOpen();
 		}
 		return ActionResult.success(player.world.isClient);
 	}

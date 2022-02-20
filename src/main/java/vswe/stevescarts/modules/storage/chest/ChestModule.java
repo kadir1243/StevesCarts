@@ -139,6 +139,6 @@ public class ChestModule extends StorageModule implements Inventory {
 	}
 
 	public float getOpenProgress(float delta) {
-		return this.chestLidAnimator.getProgress(delta);
+		return -this.chestLidAnimator.getProgress(delta);
 	}
 }

@@ -35,7 +35,6 @@ public class FrontChestModel extends ModuleModel {
 	@Override
 	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
 		super.animateModel(module, limbAngle, limbDistance, tickDelta);
-		this.lid.setAngles(((FrontChestModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
-		this.lock.setAngles(((FrontChestModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
+		this.lid.pitch = this.lock.pitch = ((FrontChestModule) module).getOpenProgress(tickDelta) * 1.5707964f;
 	}
 }

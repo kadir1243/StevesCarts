@@ -9,7 +9,6 @@ import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.MinecartModule;
-import vswe.stevescarts.modules.storage.chest.FrontChestModule;
 import vswe.stevescarts.modules.storage.chest.SideChestsModule;
 
 public class SideChestsModel extends ModuleModel {
@@ -27,14 +26,13 @@ public class SideChestsModel extends ModuleModel {
 		ModelPartData modelPartData = modelData.getRoot();
 		modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 7).cuboid(8.0f, 3.0f, 2.0f, 16, 6, 4), ModelTransform.pivot(-16.0f, -5.5f, -14.0f));
 		modelPartData.addChild("lid", ModelPartBuilder.create().uv(0, 0).cuboid(8.0f, -3.0f, -4.0f, 16, 3, 4), ModelTransform.pivot(-16.0f, -1.5f, -8.0f));
-		modelPartData.addChild("lock", ModelPartBuilder.create().uv(0, 17).cuboid(1.0f, 1.5f, 0.5f, 2, 3, 1), ModelTransform.pivot(14.0f, -3.0f, -5.5f));
+		modelPartData.addChild("lock", ModelPartBuilder.create().uv(0, 17).cuboid(-15.0f, -1.5f, -7.5f, 2, 3, 1), ModelTransform.pivot(14.0f, -1.5f, -5.5f));
 		return TexturedModelData.of(modelData, 64, 32);
 	}
 
 	@Override
 	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
 		super.animateModel(module, limbAngle, limbDistance, tickDelta);
-		this.lid.setAngles(((SideChestsModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
-		this.lock.setAngles(((SideChestsModule) module).getOpenProgress(tickDelta) * 1.5707964f, 0.0F, 0.0F);
+		this.lid.pitch = this.lock.pitch = ((SideChestsModule) module).getOpenProgress(tickDelta) * 1.5707964f;
 	}
 }

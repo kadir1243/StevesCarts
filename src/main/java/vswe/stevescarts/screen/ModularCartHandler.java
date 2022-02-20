@@ -39,6 +39,7 @@ public class ModularCartHandler extends SyncedGuiDescription {
 
 		panel.add(this.createPlayerInventoryPanel(), 10, 184);
 		panel.validate(this);
+		this.minecartEntity.get().onScreenOpen();
 	}
 
 	@Override
