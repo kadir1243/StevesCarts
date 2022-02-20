@@ -15,12 +15,13 @@ import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.ModuleStorage;
+import vswe.stevescarts.screen.widget.WCart;
 
 import java.util.Collection;
 import java.util.Objects;
 
 public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntity> {
-	private static final ModularMinecartEntity FAKE_ENTITY = Objects.requireNonNull(StevesCarts.MODULAR_MINECART_ENTITY.create(null));
+	public static final ModularMinecartEntity FAKE_ENTITY = Objects.requireNonNull(StevesCarts.MODULAR_MINECART_ENTITY.create(null));
 
 	public ModularMinecartRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);
@@ -82,6 +83,9 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 	public static void renderAsItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		matrices.push();
 		matrices.scale(-1.0f, -1.0f, 1.0f);
+		if (WCart.renderingCart) {
+			matrices.scale(4, 4, 4);
+		}
 		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion((float) Math.PI));
 		matrices.translate(1.0F, 0.17F, 0.0F);
 		Collection<MinecartModule> modules = ModuleStorage.read(stack);

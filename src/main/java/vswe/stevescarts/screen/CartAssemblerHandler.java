@@ -24,6 +24,7 @@ import vswe.stevescarts.item.modules.ModuleItem;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
+import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.screen.widget.WAssembleButton;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
@@ -48,13 +49,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		this.addCentered(playerInventoryPanel, rootPanel.getHeight() - playerInventoryPanel.getHeight());
 		WAssembleButton assembleButton = new WAssembleButton(new TranslatableText("screen.stevescarts.cart_assembler.assemble"));
 		rootPanel.add(assembleButton, 330, 142, 79, 9);
-		WCart cart = new WCart(() -> null, 187, 120);
-		this.addCentered(cart, 4);
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.HULL_SLOT);
 		hullSlot.setFilter(MinecartModuleType::isHull);
-		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
-			assembleButton.setEnabled(MinecartModuleType.isHull(stack));
-		}));
 		rootPanel.add(hullSlot, 12, 18);
 		WModuleSlot engineSlots = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.ENGINE_SLOT_START, 5, 1, ModuleCategory.ENGINE);
 		engineSlots.setFilter(MinecartModuleType::isEngine);
@@ -73,16 +69,52 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		addonsSlots.setFilter(MinecartModuleType::isAddon);
 		this.outputSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.OUTPUT_SLOT);
 		this.outputSlot.setFilter((stack) -> stack.isOf(StevesCartsItems.MODULAR_CART));
+		WCart cart = new WCart(() -> {
+			List<MinecartModuleType<?>> types = new ArrayList<>();
+			if (assembleButton.isEnabled()) {
+				for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
+					ItemStack stack = this.blockInventory.getStack(i);
+					if (!stack.isEmpty() && MinecartModuleType.isModule(stack)) {
+						types.add(((ModuleItem) stack.getItem()).getType());
+					}
+				}
+			}
+			return types;
+		}, 187, 120);
+		this.addCentered(cart, 4);
 		rootPanel.add(this.outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.FUEL_SLOT);
 		rootPanel.add(fuelSlot, 376, 182);
-		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {
+		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {}));
+		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
+			assembleButton.setEnabled(MinecartModuleType.isHull(stack));
+			MinecartModuleType<? extends HullModule> e = MinecartModuleType.isHull(stack) ? (MinecartModuleType<? extends HullModule>) ((ModuleItem) stack.getItem()).getType() : null;
+			addonsSlots.toggleSlots(e);
+			storageSlots.toggleSlots(e);
+			attachmentSlots.toggleSlots(e);
+			toolSlot.toggleSlots(e);
+			engineSlots.toggleSlots(e);
 		}));
+		WItemSlot.ChangeListener moduleListener = ((slot, inventory, index, stack) -> {
+			hullSlot.setModifiable(!((WModuleSlot) slot).hasModule());
+		});
+		addonsSlots.addChangeListener(moduleListener);
+		storageSlots.addChangeListener(moduleListener);
+		attachmentSlots.addChangeListener(moduleListener);
+		toolSlot.addChangeListener(moduleListener);
+		engineSlots.addChangeListener(moduleListener);
+		WItemSlot.ChangeListener cartListener = ((slot, inventory, index, stack) -> {
+			cart.markDirty();
+		});
+		hullSlot.addChangeListener(cartListener);
+		engineSlots.addChangeListener(cartListener);
+		toolSlot.addChangeListener(cartListener);
+		attachmentSlots.addChangeListener(cartListener);
+		storageSlots.addChangeListener(cartListener);
+		addonsSlots.addChangeListener(cartListener);
+		this.outputSlot.addChangeListener(cartListener);
 		rootPanel.validate(this);
 		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> handleAssembleClick((ServerPlayerEntity) playerInventory.player));
-		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_HULL_ADD, (buf) -> {
-			handleAssembleClick((ServerPlayerEntity) playerInventory.player);
-		});
 	}
 
 	public static void handleAssembleClick(ServerPlayerEntity player) {

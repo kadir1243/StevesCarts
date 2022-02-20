@@ -25,7 +25,7 @@ public class HullRenderer<T extends HullModule> extends ModuleRenderer<T> {
 	@Override
 	public void render(T module, float entityYaw, float entityPitch, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		this.model.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-		if (Objects.requireNonNull(module.getMinecart()).shouldRenderTop()) {
+		if (Objects.nonNull(module.getMinecart()) && module.getMinecart().shouldRenderTop()) {
 			this.topModel.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 		}
 	}
