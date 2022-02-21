@@ -1,0 +1,7 @@
+{
+  "parent": "stevescarts:block/upgrade_horizontal_down",
+  "textures": {
+    "layer0": "stevescarts:blocks/manager_bridge_upgrade_icon"
+  ,"front": "stevescarts:blocks/upgrade_side_0_icon"}
+}
+

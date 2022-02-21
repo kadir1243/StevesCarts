@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#P#",
+    "#X#",
+    "#P#"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:redstone_dusts"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    },
+    "P": {
+      "item": "minecraft:stone_pressure_plate"
+    }
+  },
+  "result": {
+    "item": "stevescarts:advanced_detector_rail",
+    "count": 2
+  }
+}

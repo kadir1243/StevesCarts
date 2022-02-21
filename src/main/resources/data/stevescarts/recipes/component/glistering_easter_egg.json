@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "stevescarts:is_event",
+      "event": "easter"
+    }
+  ],
+  "pattern": [
+    "###",
+    "#X#",
+    "#B#"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:gold_nugget"
+    },
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "B": {
+      "tag": "c:blue_dyes"
+    }
+  },
+  "result": {
+    "item": "stevescarts:glistering_easter_egg"
+  }
+}

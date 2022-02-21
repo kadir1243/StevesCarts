@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:redstone_dusts"
+    },
+    "X": {
+      "item": "stevescarts:detector_unit"
+    }
+  },
+  "result": {
+    "item": "stevescarts:detector_redstone_unit"
+  }
+}

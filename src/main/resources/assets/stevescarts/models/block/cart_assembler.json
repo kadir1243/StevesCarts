@@ -1,5 +1,5 @@
 {
-  "parent": "block/cube_bottom_top",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "particle":"stevescarts:blocks/cart_assembler_top",
     "top":"stevescarts:blocks/cart_assembler_top",

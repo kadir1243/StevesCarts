@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##X"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:galgadorian_metal"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "item": "stevescarts:galgadorian_saw_blade"
+  }
+}

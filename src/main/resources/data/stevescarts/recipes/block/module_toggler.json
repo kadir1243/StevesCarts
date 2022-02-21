@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OGB",
+    "#I#",
+    "RXR"
+  ],
+  "key": {
+    "O": {
+      "tag": "c:orange_dyes"
+    },
+    "B": {
+      "tag": "c:blue_dyes"
+    },
+    "#": {
+      "tag": "minecraft:base_stone_overworld"
+    },
+    "I": {
+      "tag": "c:iron_ingots"
+    },
+    "G": {
+      "tag": "c:gold_ingots"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    },
+    "X": {
+      "item": "stevescarts:dynamite"
+    }
+  },
+  "result": {
+    "item": "stevescarts:module_toggler"
+  }
+}

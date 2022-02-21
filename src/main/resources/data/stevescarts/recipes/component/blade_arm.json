@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    " X ",
+    "# #"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:iron_ingots"
+    },
+    "#": {
+      "item": "stevescarts:iron_blade"
+    }
+  },
+  "result": {
+    "item": "stevescarts:blade_arm"
+  }
+}

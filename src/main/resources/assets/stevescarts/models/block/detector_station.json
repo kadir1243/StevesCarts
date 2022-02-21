@@ -1,5 +1,5 @@
 {
-  "parent": "block/cube",
+  "parent": "minecraft:block/cube",
   "textures": {
     "particle":"stevescarts:blocks/detector_station_top",
     "up":"stevescarts:blocks/detector_station_top",

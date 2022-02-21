@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "stevescarts:iron_pane"
+    }
+  },
+  "result": {
+    "item": "stevescarts:huge_iron_pane"
+  }
+}

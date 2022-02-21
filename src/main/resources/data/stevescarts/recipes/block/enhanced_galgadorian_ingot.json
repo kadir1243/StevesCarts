@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:enhanced_galgadorian_block",
+      "data": 2
+    }
+  },
+  "result": {
+    "item": "stevescarts:enhanced_galgadorian_ingot",
+    "count": 9
+  }
+}

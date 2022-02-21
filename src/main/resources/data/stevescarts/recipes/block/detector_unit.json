@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XSX",
+    "IPI",
+    "XRX"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:cobblestone"
+    },
+    "S": {
+      "item": "minecraft:stone_pressure_plate"
+    },
+    "I": {
+      "tag": "c:iron_ingots"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    },
+    "P": {
+      "item": "stevescarts:simple_pcb"
+    }
+  },
+  "result": {
+    "item": "stevescarts:detector_unit"
+  }
+}

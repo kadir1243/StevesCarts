@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:rail"
+    },
+    "#": {
+      "tag": "c:redstone_dusts"
+    }
+  },
+  "result": {
+    "item": "stevescarts:junction_rail"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "RDR",
+    " X "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:redstone_torch"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    },
+    "D": {
+      "item": "stevescarts:detector_unit"
+    },
+    "X": {
+      "item": "stevescarts:simple_pcb"
+    }
+  },
+  "result": {
+    "item": "stevescarts:detector_junction"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#X#",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "P": {
+      "item": "stevescarts:simple_pcb"
+    },
+    "X": {
+      "tag": "c:redstone_dusts"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "item": "stevescarts:entity_analyzer"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "vswe.stevescarts.mixins",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "ServerPlayerEntityAccessor",
+    "SlotAccessor",
+    "StatsAccessor"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

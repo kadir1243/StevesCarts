@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "facing=up,connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade_idle"
+    },
+    "facing=south,connected=true": {
+      "y": 90,
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade"
+    },
+    "facing=east,connected=true": {
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade"
+    },
+    "facing=north,connected=true": {
+      "y": 270,
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade"
+    },
+    "facing=down,connected=true": {
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade_horizontal_down"
+    },
+    "facing=up,connected=true": {
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade_horizontal"
+    },
+    "facing=west,connected=true": {
+      "y": 180,
+      "model": "stevescarts:block/cart_deployer_upgrade_upgrade"
+    }
+  }
+}
+

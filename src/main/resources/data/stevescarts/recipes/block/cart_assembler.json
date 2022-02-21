@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#X#",
+    "R#R"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:base_stone_overworld"
+    },
+    "X": {
+      "tag": "c:iron_ingots"
+    },
+    "R": {
+      "item": "stevescarts:simple_pcb"
+    }
+  },
+  "result": {
+    "item": "stevescarts:cart_assembler"
+  }
+}

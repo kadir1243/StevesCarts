@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##X",
+    "##B",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:milk_bucket"
+    },
+    "X": {
+      "item": "minecraft:cookie"
+    },
+    "#": {
+      "item": "minecraft:wool",
+      "data": 14
+    }
+  },
+  "result": {
+    "item": "stevescarts:sock"
+  }
+}
