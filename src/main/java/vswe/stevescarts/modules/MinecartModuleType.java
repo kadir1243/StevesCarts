@@ -3,7 +3,6 @@ package vswe.stevescarts.modules;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Lifecycle;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -41,7 +40,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final List<Text> tooltip;
 	private final Optional<HullData> hullData;
 	private final Optional<ToolData> toolData;
-	private final TranslatableText translationKey;
+	private final TranslatableText translationText;
 	private final boolean allowDuplicates;
 	private final boolean shouldRenderTop;
 
@@ -55,7 +54,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.tooltip = tooltip;
 		this.hullData = hullData;
 		this.toolData = toolData;
-		this.translationKey = new TranslatableText("module." + id.getNamespace() + "." + id.getPath());
+		this.translationText = new TranslatableText("module." + id.getNamespace() + "." + id.getPath());
 		this.allowDuplicates = allowDuplicates;
 		this.shouldRenderTop = true;
 	}
@@ -121,8 +120,8 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return toolData.orElseThrow(() -> new IllegalStateException("Not a tool: " + this));
 	}
 
-	public TranslatableText getTranslationKey() {
-		return translationKey;
+	public TranslatableText getTranslationText() {
+		return translationText;
 	}
 
 	public boolean allowsDuplicates() {
@@ -133,11 +132,8 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return shouldRenderTop;
 	}
 
-	public void appendTooltip(List<Text> tooltip, TooltipContext context) {
+	public void appendTooltip(List<Text> tooltip) {
 		tooltip.addAll(this.tooltip);
-		if (context.isAdvanced()) {
-			// TODO
-		}
 	}
 
 	public static NbtCompound toNbt(MinecartModule module) {

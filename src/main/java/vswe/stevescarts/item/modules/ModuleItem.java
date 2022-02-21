@@ -21,7 +21,7 @@ public class ModuleItem extends Item {
 	public ModuleItem(Settings settings, MinecartModuleType<?> type) {
 		super(settings.group(StevesCartsItemGroups.MODULES).maxCount(1));
 		this.type = type;
-		this.translationKey = Suppliers.memoize(() -> this.type.getTranslationKey().getKey());
+		this.translationKey = Suppliers.memoize(() -> this.type.getTranslationText().getKey());
 	}
 
 	public boolean isOf(ModuleCategory category) {
@@ -30,7 +30,7 @@ public class ModuleItem extends Item {
 
 	@Override
 	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-		tooltip.addAll(this.type.getTooltip());
+		this.type.appendTooltip(tooltip);
 	}
 
 	public MinecartModuleType<?> getType() {
