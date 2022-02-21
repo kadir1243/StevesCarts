@@ -71,6 +71,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.FRONT_CHEST, new GenericRenderer(id("textures/modules/storage/front_chest.png"), FrontChestModel::new));
 		register(StevesCartsModuleTypes.TOP_CHEST, new GenericRenderer(id("textures/modules/storage/top_chest.png"), TopChestModel::new));
 		register(StevesCartsModuleTypes.SIDE_CHESTS, new SideChestsRenderer(id("textures/modules/storage/side_chests.png")));
+		register(StevesCartsModuleTypes.FRONT_TANK, new FrontTankRenderer(id("textures/modules/storage/front_tank.png")));
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
 
