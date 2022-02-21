@@ -34,7 +34,7 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		for (StorageModule storageModule : panels) {
 			WPlainPanel inPanel = new WPlainPanel();
 			storageModule.configure(inPanel);
-			box.add(inPanel);
+			box.add(inPanel, inPanel.getWidth(), inPanel.getHeight());
 		}
 
 		panel.add(this.createPlayerInventoryPanel(), 10, 184);

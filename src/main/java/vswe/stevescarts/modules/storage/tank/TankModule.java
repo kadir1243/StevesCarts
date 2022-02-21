@@ -32,7 +32,7 @@ public class TankModule extends StorageModule  {
 
 	@Override
 	public void configure(WPlainPanel panel) { // TODO
-		InventoryStorage inventoryStorage = InventoryStorage.of(this.bucketInventory, null);
+//		InventoryStorage inventoryStorage = InventoryStorage.of(this.bucketInventory, null);
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot filledBucketSlot = WItemSlot.of(this.bucketInventory, 0);
@@ -41,7 +41,8 @@ public class TankModule extends StorageModule  {
 		filledBucketSlot.setFilter(itemStack -> itemStack.getItem() instanceof BucketItem);
 		emptyBucketSlot.setInsertingAllowed(false);
 		panel.add(filledBucketSlot, 0, 15);
-		panel.add(emptyBucketSlot, 0, 30);
+		panel.add(emptyBucketSlot, 0, 48);
 		panel.add(fluidSlot, 20, 15);
+		panel.setSize(60, 64);
 	}
 }
