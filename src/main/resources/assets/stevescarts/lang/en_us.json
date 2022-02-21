@@ -142,9 +142,8 @@
   "tooltip.stevescarts.hull.engine_max_count": "Max Engines: %s",
   "tooltip.stevescarts.hull.addon_max_count": "Max Addons: %s",
   "tooltip.stevescarts.hull.complexity_max": "Max Complexity: %s",
-  "tooltip.stevescarts.fluid.max": "Max Fluid: %s millibuckets",
-  "tooltip.stevescarts.fluid.current": "Current Fluid: %s millibuckets",
-  "tooltip.stevescarts.fluid.current.extra": "Current Fluid: %s millibuckets %s droplets",
+  "tooltip.stevescarts.fluid.max": "Max Fluid: ",
+  "tooltip.stevescarts.fluid.current": "Current Fluid: ",
   "tooltip.stevescarts.press_shift": "Press shift for more information",
 
   "itemGroup.stevescarts.components_group": "Steves Carts Components",

@@ -1,48 +1,57 @@
 package vswe.stevescarts.modules.storage.tank;
 
+import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.BucketItem;
+import net.minecraft.nbt.NbtCompound;
+import reborncore.common.fluid.FluidUtils;
+import reborncore.common.fluid.FluidValue;
+import reborncore.common.util.Tank;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.widget.WFluidSlot;
 
-import java.util.Optional;
-
 // TODO: Implement fluid transfer
-@SuppressWarnings("UnstableApiUsage")
 public class TankModule extends StorageModule  {
-	protected final long capacity;
 	protected final SimpleInventory bucketInventory = new SimpleInventory(2);
-	protected long amount = 0;
-	protected FluidVariant fluidVariant = FluidVariant.blank();
+	protected final Tank tank;
 
-	public TankModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, long capacity) {
+	public TankModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, FluidValue capacity) {
 		super(minecart, type);
-		this.capacity = capacity;
+		this.tank = new Tank("Tank", capacity, null);
 	}
 
 	@Override
-	public void configure(WPlainPanel panel) { // TODO
-//		InventoryStorage inventoryStorage = InventoryStorage.of(this.bucketInventory, null);
+	public NbtCompound writeNbt(NbtCompound nbt) {
+		this.tank.write(nbt);
+		return super.writeNbt(nbt);
+	}
+
+	@Override
+	public void readNbt(NbtCompound nbt) {
+		this.tank.read(nbt);
+		super.readNbt(nbt);
+	}
+
+	@Override
+	public void configure(WPlainPanel panel, SyncedGuiDescription description) {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot filledBucketSlot = WItemSlot.of(this.bucketInventory, 0);
 		WItemSlot emptyBucketSlot = WItemSlot.of(this.bucketInventory, 1);
-		WFluidSlot fluidSlot = new WFluidSlot(() -> this.amount, this.capacity);
-		filledBucketSlot.setFilter(itemStack -> itemStack.getItem() instanceof BucketItem);
+		WFluidSlot fluidSlot = new WFluidSlot(this.tank);
+		filledBucketSlot.addChangeListener((slot, inventory, index, stack) -> {
+			if (!FluidUtils.drainContainers(this.tank, this.bucketInventory, 0, 1)) {
+				FluidUtils.fillContainers(this.tank, this.bucketInventory, 0, 1);
+			}
+		});
 		emptyBucketSlot.setInsertingAllowed(false);
 		panel.add(filledBucketSlot, 0, 15);
 		panel.add(emptyBucketSlot, 0, 48);
 		panel.add(fluidSlot, 20, 15);
-		panel.setSize(60, 64);
+		panel.setSize(80, 64);
 	}
 }

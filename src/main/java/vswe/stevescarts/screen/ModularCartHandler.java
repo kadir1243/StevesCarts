@@ -33,7 +33,7 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		List<StorageModule> panels = minecartEntity.getModuleList().stream().filter(StorageModule.class::isInstance).map(StorageModule.class::cast).toList();
 		for (StorageModule storageModule : panels) {
 			WPlainPanel inPanel = new WPlainPanel();
-			storageModule.configure(inPanel);
+			storageModule.configure(inPanel, this);
 			box.add(inPanel, inPanel.getWidth(), inPanel.getHeight());
 		}
 

@@ -1,5 +1,6 @@
 package vswe.stevescarts.modules.storage.chest;
 
+import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
@@ -52,7 +53,8 @@ public class ChestModule extends StorageModule implements Inventory {
 		return slotsHeight;
 	}
 
-	public void configure(WPlainPanel panel) {
+	@Override
+	public void configure(WPlainPanel panel, SyncedGuiDescription description) {
 		WLabel label = new WLabel(this.label);
 		WItemSlot slots = WItemSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
 		panel.add(label, 0, 0);

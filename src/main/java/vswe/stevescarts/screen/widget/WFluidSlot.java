@@ -6,18 +6,15 @@ import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
+import reborncore.common.util.Tank;
 import vswe.stevescarts.StevesCarts;
-
-import java.util.function.LongSupplier;
 
 public class WFluidSlot extends WWidget {
 	public static final Texture TEXTURE = new Texture(StevesCarts.id("textures/gui/tank.png"), 0, 0, 1, 1);
-	private final LongSupplier current;
-	private final long max;
+	private final Tank tank;
 
-	public WFluidSlot(LongSupplier current, long max) {
-		this.current = current;
-		this.max = max;
+	public WFluidSlot(Tank tank) {
+		this.tank = tank;
 	}
 
 	@Override
@@ -28,15 +25,7 @@ public class WFluidSlot extends WWidget {
 
 	@Override
 	public void addTooltip(TooltipBuilder tooltip) {
-		long current = this.current.getAsLong();
-		tooltip.add(new TranslatableText("tooltip.stevescarts.fluid.max", this.max / 81));
-		long currentMb = current / 81;
-		if (currentMb > 0) {
-			if (currentMb * 81 == current) {
-				tooltip.add(new TranslatableText("tooltip.stevescarts.fluid.current", currentMb));
-			} else {
-				tooltip.add(new TranslatableText("tooltip.stevescarts.fluid.current.extra", currentMb, current - currentMb * 81));
-			}
-		}
+		tooltip.add(new TranslatableText("tooltip.stevescarts.fluid.max").append(this.tank.getFluidValueCapacity().toString()));
+		tooltip.add(new TranslatableText("tooltip.stevescarts.fluid.current").append(this.tank.getFluidAmount().toString()));
 	}
 }
