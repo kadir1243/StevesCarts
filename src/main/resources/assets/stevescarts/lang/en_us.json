@@ -99,6 +99,8 @@
   "module.stevescarts.top_chest": "Top Chest",
   "module.stevescarts.side_chests": "Side Chests",
   "module.stevescarts.front_tank": "Front Tank",
+  "module.stevescarts.top_tank": "Top Tank",
+  "module.stevescarts.side_tanks": "Side Tanks",
 
   "block.stevescarts.batteries_upgrade": "Upgrade: Batteries",
   "block.stevescarts.power_crystal_upgrade": "Upgrade: Power Crystal",

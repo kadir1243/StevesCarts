@@ -1,10 +1,11 @@
-package vswe.stevescarts.client.modules.renderer;
+package vswe.stevescarts.client.modules.renderer.storage;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.storage.SideChestsModel;
+import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
 import vswe.stevescarts.modules.storage.chest.SideChestsModule;
 
 public class SideChestsRenderer extends ModuleRenderer<SideChestsModule> {

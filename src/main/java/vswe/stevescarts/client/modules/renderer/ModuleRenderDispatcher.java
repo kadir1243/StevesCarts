@@ -13,6 +13,12 @@ import net.minecraft.util.math.Vec3d;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
+import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
+import vswe.stevescarts.client.modules.renderer.hull.MechanicalPigRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.FrontTankRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.SideChestsRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.SideTanksRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.TopTankRenderer;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
@@ -72,6 +78,8 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.TOP_CHEST, new GenericRenderer(id("textures/modules/storage/top_chest.png"), TopChestModel::new));
 		register(StevesCartsModuleTypes.SIDE_CHESTS, new SideChestsRenderer(id("textures/modules/storage/side_chests.png")));
 		register(StevesCartsModuleTypes.FRONT_TANK, new FrontTankRenderer(id("textures/modules/storage/front_tank.png")));
+		register(StevesCartsModuleTypes.TOP_TANK, new TopTankRenderer(id("textures/modules/storage/top_tank.png")));
+		register(StevesCartsModuleTypes.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
 

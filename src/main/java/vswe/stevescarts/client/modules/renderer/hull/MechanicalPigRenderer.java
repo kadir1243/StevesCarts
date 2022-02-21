@@ -1,4 +1,4 @@
-package vswe.stevescarts.client.modules.renderer;
+package vswe.stevescarts.client.modules.renderer.hull;
 
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;

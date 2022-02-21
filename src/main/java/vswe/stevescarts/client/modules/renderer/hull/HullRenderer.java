@@ -1,4 +1,4 @@
-package vswe.stevescarts.client.modules.renderer;
+package vswe.stevescarts.client.modules.renderer.hull;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,6 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.hull.HullModel;
 import vswe.stevescarts.client.modules.model.hull.HullTopModel;
+import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
 import vswe.stevescarts.modules.hull.HullModule;
 
 import java.util.Objects;

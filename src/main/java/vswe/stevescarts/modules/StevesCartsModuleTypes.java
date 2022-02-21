@@ -4,7 +4,10 @@ import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.modules.storage.chest.FrontChestModule;
 import vswe.stevescarts.modules.storage.chest.SideChestsModule;
 import vswe.stevescarts.modules.storage.chest.TopChestModule;
+import vswe.stevescarts.modules.storage.tank.FrontTankModule;
+import vswe.stevescarts.modules.storage.tank.SideTanksModule;
 import vswe.stevescarts.modules.storage.tank.TankModule;
+import vswe.stevescarts.modules.storage.tank.TopTankModule;
 import vswe.stevescarts.modules.tags.ModuleTags;
 
 public class StevesCartsModuleTypes {
@@ -18,7 +21,9 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<FrontChestModule> FRONT_CHEST = MinecartModuleType.<FrontChestModule>builder().id("front_chest").category(ModuleCategory.STORAGE).factory(FrontChestModule::new).sides(ModuleSide.FRONT).moduleCost(5).buildAndRegister();
 	public static final MinecartModuleType<TopChestModule> TOP_CHEST = MinecartModuleType.<TopChestModule>builder().id("top_chest").category(ModuleCategory.STORAGE).factory(TopChestModule::new).sides(ModuleSide.TOP).moduleCost(6).buildAndRegister();
 	public static final MinecartModuleType<SideChestsModule> SIDE_CHESTS = MinecartModuleType.<SideChestsModule>builder().id("side_chests").category(ModuleCategory.STORAGE).factory(SideChestsModule::new).sides(ModuleSide.LEFT, ModuleSide.RIGHT).moduleCost(3).buildAndRegister();
-	public static final MinecartModuleType<TankModule> FRONT_TANK = MinecartModuleType.<TankModule>builder().id("front_tank").category(ModuleCategory.STORAGE).factory(TankModule::new).sides(ModuleSide.FRONT).moduleCost(5).buildAndRegister(); // TODO
+	public static final MinecartModuleType<FrontTankModule> FRONT_TANK = MinecartModuleType.<FrontTankModule>builder().id("front_tank").category(ModuleCategory.STORAGE).factory(FrontTankModule::new).sides(ModuleSide.FRONT).moduleCost(15).buildAndRegister();
+	public static final MinecartModuleType<TopTankModule> TOP_TANK = MinecartModuleType.<TopTankModule>builder().id("top_tank").category(ModuleCategory.STORAGE).factory(TopTankModule::new).sides(ModuleSide.FRONT).moduleCost(22).buildAndRegister();
+	public static final MinecartModuleType<SideTanksModule> SIDE_TANKS = MinecartModuleType.<SideTanksModule>builder().id("side_tanks").category(ModuleCategory.STORAGE).factory(SideTanksModule::new).sides(ModuleSide.FRONT).moduleCost(10).buildAndRegister();
 
 	public static void init() {
 		ModuleTags.init();
