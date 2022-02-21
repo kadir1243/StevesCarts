@@ -14,7 +14,6 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.widget.WFluidSlot;
 
-// TODO: Implement fluid transfer
 public class TankModule extends StorageModule  {
 	protected final SimpleInventory bucketInventory = new SimpleInventory(2);
 	protected final Tank tank;
@@ -51,7 +50,7 @@ public class TankModule extends StorageModule  {
 		emptyBucketSlot.setInsertingAllowed(false);
 		panel.add(filledBucketSlot, 0, 15);
 		panel.add(emptyBucketSlot, 0, 48);
-		panel.add(fluidSlot, 20, 15);
+		panel.add(fluidSlot, 20, 15, 36, 51);
 		panel.setSize(80, 64);
 	}
 }
