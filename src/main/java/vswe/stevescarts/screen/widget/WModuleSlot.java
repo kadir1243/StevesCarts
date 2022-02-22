@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -41,18 +42,18 @@ public class WModuleSlot extends WItemSlot {
 				ScreenDrawing.texturedRect(matrices, left + x * 18, top + y * 18, 18, 18, OPEN_TEXTURE, 0xFFFFFFFF);
 				ScreenDrawing.drawBeveledPanel(matrices, left + x * 18, top + y * 18, 18, 18, 0xB8000000, 0x4C000000, 0xB8FFFFFF);
 				ModuleSlot mSlot = slot.peers.get(slot.startIndex + x + y * slot.slotsHigh);
-				float progress = mSlot.getAnimationProgress(0);
+				float progress = mSlot.getAnimationProgress(MinecraftClient.getInstance().getTickDelta());
 				Identifier image = OPEN_TEXTURE.image();
 				float u1 = 0.28125F;
 				float u2 = 0.53125F;
-				float v1 = ((1 - progress) * 8) / 32.0F;
+				float v1 = ((progress) * 8) / 32.0F;
 				float v2 = 0.25F;
 				int height = (int) ((1 - progress) * 8);
 				int width = 16;
 				int xPos = left + x * 18 + 1;
 				int yPos = top + y * 18 + 1;
 				ScreenDrawing.texturedRect(matrices, xPos, yPos, width, height, image, u1, v1, u2, v2, 0xFFFFFFFF);
-				ScreenDrawing.texturedRect(matrices, xPos, yPos + 8 + (8 - height), width, height, image, u1, v2, u2, v2 + v1, 0xFFFFFFFF);
+				ScreenDrawing.texturedRect(matrices, xPos, yPos + 8 + (8 - height), width, height, image, u1, v2, u2, v2 + ((1 - progress) * 8) / 32.0F, 0xFFFFFFFF);
 			}
 		}
 	};
