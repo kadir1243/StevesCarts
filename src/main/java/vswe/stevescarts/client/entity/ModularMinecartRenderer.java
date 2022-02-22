@@ -79,7 +79,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		}
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		for (MinecartModule module : entity.getModuleList()) {
-			StevesCartsClient.getModuleRenderDispatcher().renderProfiled(module, yaw, tickDelta, matrices, vertexConsumers, light);
+			StevesCartsClient.getModuleRenderDispatcher().render(module, yaw, tickDelta, matrices, vertexConsumers, light, true);
 		}
 		matrices.pop();
 	}
@@ -97,7 +97,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		for (MinecartModule module : modules) {
 			FAKE_ENTITY.addModule(module, false);
 			module.setMinecart(FAKE_ENTITY);
-			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light);
+			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light, false);
 		}
 		matrices.pop();
 	}

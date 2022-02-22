@@ -2,7 +2,6 @@ package vswe.stevescarts.client.modules.renderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -42,25 +41,36 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		this.itemRenderer = itemRenderer;
 	}
 
-	public <T extends MinecartModule> void renderProfiled(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
-		Profiler profiler = MinecraftClient.getInstance().getProfiler();
-		profiler.push("module." + module.getType().toString());
-		render(module, entityYaw, tickDelta, matrices, vertexConsumers, entityLight);
-		profiler.pop();
-	}
+	/**
+	 * Renders the specified module.
+	 *
+	 * @param module The module to render.
+	 * @param entityYaw The yaw of the entity.
+	 * @param tickDelta The time delta between ticks.
+	 * @param matrices The matrix stack.
+	 * @param vertexConsumers The vertex consumer provider.
+	 * @param entityLight The light level of the entity.
+	 * @param profile Whether to profile the rendering.
+	 * @param <T> The module type.
+	 */
+	public <T extends MinecartModule> void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight, boolean profile) {
+		if (module.getType().hasRenderer()) {
+			Profiler profiler = MinecraftClient.getInstance().getProfiler();
+			if (profile) profiler.push("module." + module.getType().toString());
 
-	public <T extends MinecartModule> void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
-		//noinspection unchecked
-		ModuleRenderer<T> renderer = (ModuleRenderer<T>) renderers.get(module.getType());
-		if (renderer == null) {
-			throw new NullPointerException("No renderer for module " + module.getType().toString());
-//			return;
+			//noinspection unchecked
+			ModuleRenderer<T> renderer = (ModuleRenderer<T>) renderers.get(module.getType());
+			if (renderer == null) {
+				throw new NullPointerException("No renderer for module " + module.getType().toString());
+			}
+			Vec3d offset = module.getPositionOffset();
+			matrices.push();
+			matrices.translate(offset.x, offset.y, offset.z);
+			renderer.render(module, entityYaw, tickDelta, matrices, vertexConsumers, entityLight);
+			matrices.pop();
+
+			if (profile) profiler.pop();
 		}
-		Vec3d offset = module.getPositionOffset();
-		matrices.push();
-		matrices.translate(offset.x, offset.y, offset.z);
-		renderer.render(module, entityYaw, tickDelta, matrices, vertexConsumers, entityLight);
-		matrices.pop();
 	}
 
 	public ItemRenderer getItemRenderer() {

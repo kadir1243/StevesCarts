@@ -43,8 +43,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final TranslatableText translationText;
 	private final boolean allowDuplicates;
 	private final boolean shouldRenderTop;
+	private final boolean hasRenderer;
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop) {
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer) {
 		this.factory = factory;
 		this.item = item;
 		this.category = category;
@@ -56,19 +57,20 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.toolData = toolData;
 		this.translationText = new TranslatableText("module." + id.getNamespace() + "." + id.getPath());
 		this.allowDuplicates = allowDuplicates;
-		this.shouldRenderTop = true;
+		this.shouldRenderTop = shouldRenderTop;
+		this.hasRenderer = hasRenderer;
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData), false, true);
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData), false, true, true);
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, HullData hullData) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty(), false, true);
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty(), false, true, true);
 	}
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop);
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer) {
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop, hasRenderer);
 	}
 
 	public T createModule(@Nullable ModularMinecartEntity cart) {
@@ -130,6 +132,10 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 	public boolean shouldRenderTop() {
 		return shouldRenderTop;
+	}
+
+	public boolean hasRenderer() {
+		return hasRenderer;
 	}
 
 	public void appendTooltip(List<Text> tooltip) {
@@ -224,6 +230,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		protected Item finalItem = null;
 		protected boolean allowDuplicates = false;
 		protected boolean shouldRenderTop = true;
+		protected boolean hasRenderer = false;
 
 		protected Builder() {
 		}
@@ -289,6 +296,10 @@ public final class MinecartModuleType<T extends MinecartModule> {
 			return this;
 		}
 
+		public void hasRenderer() {
+			this.hasRenderer = true;
+		}
+
 		protected void validate() {
 			if (this.id == null) {
 				throw new IllegalArgumentException("Module type ID is null");
@@ -299,7 +310,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 		public MinecartModuleType<T> buildAndRegister() {
 			this.validate();
-			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), this.allowDuplicates, this.shouldRenderTop));
+			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), this.allowDuplicates, this.shouldRenderTop, this.hasRenderer));
 			this.finalItem = Registry.register(Registry.ITEM, type.getId(), this.itemFactory.apply(new Item.Settings(), type));
 			return type;
 		}
