@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "minecraft:base_stone_overworld"
+      "tag": "minecraft:stone_crafting_materials"
     },
     "X": {
       "tag": "c:iron_ingots"

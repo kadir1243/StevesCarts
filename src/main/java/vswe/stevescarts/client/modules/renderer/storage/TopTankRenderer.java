@@ -6,6 +6,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.storage.FrontTankModel;
 import vswe.stevescarts.client.modules.model.storage.TopTankModel;
+import vswe.stevescarts.client.modules.renderer.FluidRenderUtil;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
 import vswe.stevescarts.modules.storage.tank.TankModule;
 
@@ -19,6 +20,6 @@ public class TopTankRenderer extends ModuleRenderer<TankModule> {
 	@Override
 	public void render(TankModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		this.model.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-		// TODO: render fluid
+		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), 0.0f, -8.5f, 0.0f, 14.0f, 5.0f, 10.0f);
 	}
 }

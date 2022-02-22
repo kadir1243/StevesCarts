@@ -7,7 +7,7 @@
   ],
   "key": {
     "X": {
-      "tag": "minecraft:base_stone_overworld"
+      "tag": "minecraft:stone_crafting_materials"
     },
     "#": {
       "item": "stevescarts:simple_pcb"

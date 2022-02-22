@@ -13,7 +13,7 @@
       "item": "minecraft:cookie"
     },
     "#": {
-      "item": "minecraft:wool"
+      "tag": "minecraft:wool"
     }
   },
   "result": {

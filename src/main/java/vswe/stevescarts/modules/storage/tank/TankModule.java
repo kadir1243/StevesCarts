@@ -53,4 +53,8 @@ public class TankModule extends StorageModule  {
 		panel.add(fluidSlot, 20, 15, 36, 51);
 		panel.setSize(80, 64);
 	}
+
+	public Tank getTank() {
+		return this.tank;
+	}
 }
