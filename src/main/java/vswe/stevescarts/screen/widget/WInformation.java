@@ -15,9 +15,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import vswe.stevescarts.StevesCarts;
 
-import java.util.Collections;
-import java.util.List;
-
 public class WInformation extends WPlainPanel {
 	public static final Texture INFORMATION_BUTTON = new Texture(StevesCarts.id("textures/gui/information.png"), 0, 0, 1, 1);
 	public static final TranslatableText TEXT = new TranslatableText("screen.stevescarts.cart_assembler.information");
@@ -35,15 +32,19 @@ public class WInformation extends WPlainPanel {
 	public WInformation() {
 		this.infoText.setVerticalAlignment(VerticalAlignment.TOP);
 		this.infoText.setHorizontalAlignment(HorizontalAlignment.LEFT);
-		this.add(this.infoText, 5, 15, 90, 0);
+		this.add(this.infoText, 0, 15, 105, 0);
 	}
 
-	public void setText(MutableText info) {
-		this.infoText.setText(info.formatted(Formatting.DARK_RED));
+	public void setErrText(MutableText err) {
+		this.setText(err.formatted(Formatting.DARK_RED));
+	}
+
+	public void setText(Text info) {
+		this.infoText.setText(info);
 	}
 
 	public void clear() {
-		this.setText((MutableText) LiteralText.EMPTY);
+		this.setText(LiteralText.EMPTY);
 	}
 
 	@Override

@@ -4,6 +4,7 @@
   "screen.stevescarts.cart_assembler.information": "INFORMATION",
   "screen.stevescarts.cart_assembler.duplicate_module": "%s does not support duplicates",
   "screen.stevescarts.cart_assembler.duplicate_side": "%s and %s occupy the same side (%s)",
+  "screen.stevescarts.cart_assembler.getting_started": "To start making a cart, please add a Hull of your choice to the Hull Slot",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",

@@ -14,10 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import org.apache.commons.lang3.tuple.Pair;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
@@ -37,13 +35,11 @@ import vswe.stevescarts.screen.widget.WModuleSlot;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private final ScreenHandlerContext context;
@@ -60,7 +56,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WPlayerInvPanel playerInventoryPanel = this.createPlayerInventoryPanel(false);
 		this.addCentered(playerInventoryPanel, rootPanel.getHeight() - playerInventoryPanel.getHeight());
 		WAssembleButton assembleButton = new WAssembleButton(new TranslatableText("screen.stevescarts.cart_assembler.assemble"));
-		rootPanel.add(assembleButton, 328, 167, 79, 9);
+		rootPanel.add(assembleButton, 328, 147, 79, 9);
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.HULL_SLOT);
 		hullSlot.setFilter(MinecartModuleType::isHull);
 		rootPanel.add(hullSlot, 12, 18);
@@ -99,7 +95,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(fuelSlot, 384, 182);
 		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {}));
 		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
-			assembleButton.setEnabled(MinecartModuleType.isHull(stack));
 			MinecartModuleType<? extends HullModule> e = MinecartModuleType.isHull(stack) ? (MinecartModuleType<? extends HullModule>) ((ModuleItem) stack.getItem()).getType() : null;
 			addonsSlots.toggleSlots(e);
 			storageSlots.toggleSlots(e);
@@ -120,17 +115,26 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		hullSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
 		this.outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
+			boolean invalid = false;
 			List<MinecartModuleType<?>> types = new ArrayList<>();
 			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
 				ItemStack stack2 = this.blockInventory.getStack(i);
+				if (i == CartAssemblerBlockEntity.HULL_SLOT) {
+					if (!MinecartModuleType.isHull(stack2)) {
+						invalid = true;
+						info.setText(new TranslatableText("screen.stevescarts.cart_assembler.getting_started"));
+						break;
+					}
+				}
 				if (!stack2.isEmpty() && MinecartModuleType.isModule(stack2)) {
 					types.add(((ModuleItem) stack2.getItem()).getType());
 				}
 			}
-			boolean invalid = false;
 			if (!types.isEmpty()) {
 				// Disallow duplicates if they should be disallowed
-				{
+				// This isn't a constant condition, but idea thinks it is one
+				//noinspection ConstantConditions
+				if (!invalid) {
 					Set<MinecartModuleType<?>> duplicates;
 					Set<MinecartModuleType<?>> uniques = new HashSet<>();
 					duplicates =  types.stream()
@@ -163,7 +167,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 						}
 						if (entry.getValue().size() > 1) {
 							invalid = true;
-							info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
+							info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
 							break;
 						}
 					}
