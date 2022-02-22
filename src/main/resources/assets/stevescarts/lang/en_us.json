@@ -103,6 +103,13 @@
   "module.stevescarts.top_tank": "Top Tank",
   "module.stevescarts.side_tanks": "Side Tanks",
 
+  "module.stevescarts.category.hull": "Hull",
+  "module.stevescarts.category.engines": "Engines",
+  "module.stevescarts.category.tool:": "Tool",
+  "module.stevescarts.category.attachments": "Attachments",
+  "module.stevescarts.category.storage": "Storage",
+  "module.stevescarts.category.addons": "Addons",
+
   "block.stevescarts.batteries_upgrade": "Upgrade: Batteries",
   "block.stevescarts.power_crystal_upgrade": "Upgrade: Power Crystal",
   "block.stevescarts.module_knowledge_upgrade": "Upgrade: Module Knowledge",

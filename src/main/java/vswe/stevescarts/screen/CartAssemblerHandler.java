@@ -103,7 +103,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			hullSlot.setModifiable(!((WModuleSlot) slot).hasModule());
 		});
 		WInformation info = new WInformation();
-		rootPanel.add(info, 12, 182);
+		rootPanel.add(info, 320, 17);
 		addonsSlots.addChangeListener(moduleListener);
 		storageSlots.addChangeListener(moduleListener);
 		attachmentSlots.addChangeListener(moduleListener);

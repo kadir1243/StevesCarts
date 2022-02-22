@@ -4,6 +4,7 @@ import io.github.cottonmc.cotton.gui.ValidatedSlot;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -29,6 +30,8 @@ public class WModuleSlot extends WItemSlot {
 	@Environment(EnvType.CLIENT)
 	private static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		WModuleSlot slot = (WModuleSlot) panel;
+		ScreenDrawing.texturedRect(matrices, left, top - 10, 79, 11, WAssembleButton.ENABLED, 0xFFFFFFFF);
+		ScreenDrawing.drawString(matrices, slot.category.getTranslation().asOrderedText(), HorizontalAlignment.CENTER, left + 3, top - 10, 73, slot.category.getTextColor());
 		for (int y = 0; y < slot.slotsHigh; ++y) {
 			for (int x = 0; x < slot.slotsWide; ++x) {
 				ScreenDrawing.texturedRect(matrices, left + x * 18, top + y * 18, 18, 18, OPEN_TEXTURE, 0xFFFFFFFF);

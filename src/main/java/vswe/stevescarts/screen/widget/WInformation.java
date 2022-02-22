@@ -3,8 +3,10 @@ package vswe.stevescarts.screen.widget;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import io.github.cottonmc.cotton.gui.widget.WText;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import vswe.stevescarts.StevesCarts;
@@ -21,7 +23,12 @@ public class WInformation extends WPlainPanel {
 		ScreenDrawing.drawString(matrices, TEXT.asOrderedText(), HorizontalAlignment.CENTER, left + 15, top, 85, 0xDDDDDD);
 	};
 
+	private final WText infoText = new WText(LiteralText.EMPTY);
 	private List<Text> info = Collections.emptyList();
+
+	public WInformation() {
+
+	}
 
 	public void setInfo(List<Text> info) {
 		this.info = info;
@@ -29,6 +36,7 @@ public class WInformation extends WPlainPanel {
 
 	@Override
 	public void addPainters() {
+		this.setBackgroundPainter(PAINTER);
 		super.addPainters();
 	}
 }
