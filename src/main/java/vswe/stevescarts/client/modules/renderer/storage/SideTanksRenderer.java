@@ -19,8 +19,11 @@ public class SideTanksRenderer extends ModuleRenderer<TankModule> {
 
 	@Override
 	public void render(TankModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
+		matrices.push();
+		matrices.scale(1.001F, 1.001F, 1.001F); // Fixes z-fighting
 		this.model.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -2.0f, -0.5f, -11.0f, 10.0f, 4.0f, 4.0f);
-		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -2.0f, -0.5f, 11.0f, 10.0f, 4.0f, 4.0f);
+		matrices.pop();
+		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -7.0f, -2.5f, -13.0f, 10.0f, 4.0f, 4.0f);
+		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -7.0f, -2.5f, 9.0f, 10.0f, 4.0f, 4.0f);
 	}
 }

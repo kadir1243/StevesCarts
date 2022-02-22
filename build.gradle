@@ -18,6 +18,10 @@ repositories {
 			includeGroup "io.github.cottonmc"
 		}
 	}
+	maven {
+		name = "BuildCraft"
+		url = "https://mod-buildcraft.com/maven"
+	}
 }
 
 sourceSets {
@@ -34,6 +38,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "RebornCore:RebornCore-1.18:${project.reborncore_version}"
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+	modImplementation "alexiil.mc.lib:libblockattributes-all:0.10.1-rc.2"
 }
 
 processResources {

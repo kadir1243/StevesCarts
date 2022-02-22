@@ -18,7 +18,10 @@ public class FrontTankRenderer extends ModuleRenderer<TankModule> {
 
 	@Override
 	public void render(TankModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
+		matrices.push();
+		matrices.scale(1.001F, 1.001F, 1.001F); // Fixes z-fighting
 		this.model.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
-		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -14.0f, 0.0f, 0.0f, 6.0f, 6.0f, 12.0f);
+		matrices.pop();
+		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -17.0f, -3.0f, -5.0f, 6.0f, 6.0f, 12.0f);
 	}
 }
