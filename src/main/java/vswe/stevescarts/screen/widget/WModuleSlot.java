@@ -30,6 +30,8 @@ public class WModuleSlot extends WItemSlot {
 	@Environment(EnvType.CLIENT)
 	private static final Texture OPEN_TEXTURE = new Texture(StevesCarts.id("textures/gui/module_slot.png"), 0.0F, 0.0F, 0.28125F, 0.5625F);
 	@Environment(EnvType.CLIENT)
+	private static final Texture CLOSED_TEXTURE = new Texture(StevesCarts.id("textures/gui/module_slot.png"), 0.28125F, 0.0F, 0.53125F, 0.5F);
+	@Environment(EnvType.CLIENT)
 	private static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		WModuleSlot slot = (WModuleSlot) panel;
 		ScreenDrawing.texturedRect(matrices, left, top - 10, 79, 11, WAssembleButton.ENABLED, 0xFFFFFFFF);
@@ -47,17 +49,23 @@ public class WModuleSlot extends WItemSlot {
 				System.out.println(slotIndex);
 				ModuleSlot mSlot = slot.peers.get(slotIndex);
 				float progress = mSlot.getAnimationProgress(MinecraftClient.getInstance().getTickDelta());
+				if (progress == 1.0F && mSlot.isValid()) {
+					continue;
+				}
+				int xPos = left + x * 18 + 1;
+				int yPos = top + y * 18 + 1;
+				if (progress == 0.0F && !mSlot.isValid()) {
+					ScreenDrawing.texturedRect(matrices, xPos, yPos, 16, 16, CLOSED_TEXTURE, 0xFFFFFFFF);
+					continue;
+				}
 				Identifier image = OPEN_TEXTURE.image();
 				float u1 = 0.28125F;
 				float u2 = 0.53125F;
 				float v1 = ((progress) * 8) / 32.0F;
 				float v2 = 0.25F;
 				int height = (int) ((1 - progress) * 8);
-				int width = 16;
-				int xPos = left + x * 18 + 1;
-				int yPos = top + y * 18 + 1;
-				ScreenDrawing.texturedRect(matrices, xPos, yPos, width, height, image, u1, v1, u2, v2, 0xFFFFFFFF);
-				ScreenDrawing.texturedRect(matrices, xPos, yPos + 8 + (8 - height), width, height, image, u1, v2, u2, v2 + ((1 - progress) * 8) / 32.0F, 0xFFFFFFFF);
+				ScreenDrawing.texturedRect(matrices, xPos, yPos, 16, height, image, u1, v1, u2, v2, 0xFFFFFFFF);
+				ScreenDrawing.texturedRect(matrices, xPos, yPos + 8 + (8 - height), 16, height, image, u1, v2, u2, v2 + ((1 - progress) * 8) / 32.0F, 0xFFFFFFFF);
 			}
 		}
 	};
