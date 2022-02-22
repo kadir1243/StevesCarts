@@ -2,7 +2,9 @@ package vswe.stevescarts.client.modules.renderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -10,6 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
@@ -37,6 +40,13 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 	public ModuleRenderDispatcher(TextRenderer textRenderer, ItemRenderer itemRenderer) {
 		this.textRenderer = textRenderer;
 		this.itemRenderer = itemRenderer;
+	}
+
+	public <T extends MinecartModule> void renderProfiled(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
+		Profiler profiler = MinecraftClient.getInstance().getProfiler();
+		profiler.push("module." + module.getType().toString());
+		render(module, entityYaw, tickDelta, matrices, vertexConsumers, entityLight);
+		profiler.pop();
 	}
 
 	public <T extends MinecartModule> void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {

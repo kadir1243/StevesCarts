@@ -1,5 +1,6 @@
 package vswe.stevescarts.client.entity;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -10,6 +11,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.entity.ModularMinecartEntity;
@@ -34,6 +36,8 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 
 	@Override
 	public void render(ModularMinecartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+		Profiler profiler = MinecraftClient.getInstance().getProfiler();
+		profiler.push("stevescarts:modular_cart");
 		super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 		matrices.push();
 		long l = (long) entity.getId() * 493286711L;
@@ -75,7 +79,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		}
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		for (MinecartModule module : entity.getModuleList()) {
-			StevesCartsClient.getModuleRenderDispatcher().render(module, yaw, tickDelta, matrices, vertexConsumers, light);
+			StevesCartsClient.getModuleRenderDispatcher().renderProfiled(module, yaw, tickDelta, matrices, vertexConsumers, light);
 		}
 		matrices.pop();
 	}
