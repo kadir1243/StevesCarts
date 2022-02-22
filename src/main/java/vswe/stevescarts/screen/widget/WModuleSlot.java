@@ -31,7 +31,11 @@ public class WModuleSlot extends WItemSlot {
 	private static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		WModuleSlot slot = (WModuleSlot) panel;
 		ScreenDrawing.texturedRect(matrices, left, top - 10, 79, 11, WAssembleButton.ENABLED, 0xFFFFFFFF);
-		ScreenDrawing.drawString(matrices, slot.category.getTranslation().asOrderedText(), HorizontalAlignment.CENTER, left + 3, top - 10, 73, slot.category.getTextColor());
+		matrices.push();
+		matrices.scale(1F, 0.8F, 1F);
+		matrices.translate(0F, (top - 10)/0.8F - (top - 10) + 1, 0F);
+		ScreenDrawing.drawString(matrices, slot.category.getTranslation().asOrderedText(), HorizontalAlignment.LEFT, left + 5, top - 8, 0, slot.category.getTextColor());
+		matrices.pop();
 		for (int y = 0; y < slot.slotsHigh; ++y) {
 			for (int x = 0; x < slot.slotsWide; ++x) {
 				ScreenDrawing.texturedRect(matrices, left + x * 18, top + y * 18, 18, 18, OPEN_TEXTURE, 0xFFFFFFFF);

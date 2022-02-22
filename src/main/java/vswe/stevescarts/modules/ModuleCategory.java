@@ -5,17 +5,17 @@ import net.minecraft.text.TranslatableText;
 import vswe.stevescarts.modules.hull.HullModule;
 
 public enum ModuleCategory {
-	HULL(1, 0xFFFFFF, new TranslatableText("module.stevescarts.category.hull")),
-	ENGINE(5, 0xFFA500, new TranslatableText("module.stevescarts.category.engines")) {
+	HULL(1, 0xFFFFFF, new TranslatableText("module.stevescarts.category.hull.title")),
+	ENGINE(5, 0xFFA500, new TranslatableText("module.stevescarts.category.engines.title")) {
 		@Override
 		public int getMax(MinecartModuleType<? extends HullModule> type) {
 			return type.getHullData().engineMaxCount();
 		}
 	},
-	TOOL(1, 0xFFA500, new TranslatableText("module.stevescarts.category.tool")),
-	ATTACHMENT(6, 0xFFA500, new TranslatableText("module.stevescarts.category.attachments")),
-	STORAGE(4, 0xFFA500, new TranslatableText("module.stevescarts.category.storage")),
-	ADDON(12, 0xFFA500, new TranslatableText("module.stevescarts.category.addons")) {
+	TOOL(1, 0xA020F0, new TranslatableText("module.stevescarts.category.tool.title")),
+	ATTACHMENT(6, 0x0D98BA, new TranslatableText("module.stevescarts.category.attachments.title")),
+	STORAGE(4, 0xFF4848, new TranslatableText("module.stevescarts.category.storage.title")),
+	ADDON(12, 0x056608, new TranslatableText("module.stevescarts.category.addons.title")) {
 		@Override
 		public int getMax(MinecartModuleType<? extends HullModule> type) {
 			return type.getHullData().addonMaxCount();

@@ -39,7 +39,9 @@ public class WAssembleButton extends WButton {
 			color = 0x222222;
 		}
 		matrices.push();
-		ScreenDrawing.drawString(matrices, this.getLabel().asOrderedText(), HorizontalAlignment.CENTER, x, y, this.width, color);
+		matrices.scale(1F, 0.8F, 1F);
+		matrices.translate(0F, (y + 1)/0.8F - (y + 1), 0F);
+		ScreenDrawing.drawString(matrices, this.getLabel().asOrderedText(), HorizontalAlignment.CENTER, x, y + 1, this.width, color);
 		matrices.pop();
 	}
 }

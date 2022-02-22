@@ -20,7 +20,11 @@ public class WInformation extends WPlainPanel {
 
 	public static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		ScreenDrawing.texturedRect(matrices, left, top, 100, 9, INFORMATION_BUTTON, 0xFFFFFFFF);
-		ScreenDrawing.drawString(matrices, TEXT.asOrderedText(), HorizontalAlignment.CENTER, left + 15, top, 85, 0xDDDDDD);
+		matrices.push();
+		matrices.scale(1F, 0.8F, 1F);
+		matrices.translate(0F, (top)/0.8F - (top) + 1, 0F);
+		ScreenDrawing.drawString(matrices, TEXT.asOrderedText(), HorizontalAlignment.CENTER, left + 12, top + 1, 85, 0xDDDDDD);
+		matrices.pop();
 	};
 
 	private final WText infoText = new WText(LiteralText.EMPTY);
