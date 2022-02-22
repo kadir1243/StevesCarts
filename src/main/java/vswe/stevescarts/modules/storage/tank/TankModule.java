@@ -4,8 +4,10 @@ import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import reborncore.common.fluid.FluidUtils;
 import reborncore.common.fluid.FluidValue;
 import reborncore.common.util.Tank;
@@ -26,12 +28,14 @@ public class TankModule extends StorageModule  {
 	@Override
 	public NbtCompound writeNbt(NbtCompound nbt) {
 		this.tank.write(nbt);
+		nbt.put("Buckets", this.bucketInventory.toNbtList());
 		return super.writeNbt(nbt);
 	}
 
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		this.tank.read(nbt);
+		this.bucketInventory.readNbtList(nbt.getList("Buckets", NbtElement.COMPOUND_TYPE));
 		super.readNbt(nbt);
 	}
 
