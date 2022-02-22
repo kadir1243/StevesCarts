@@ -30,8 +30,6 @@ public class WModuleSlot extends WItemSlot {
 	@Environment(EnvType.CLIENT)
 	private static final Texture OPEN_TEXTURE = new Texture(StevesCarts.id("textures/gui/module_slot.png"), 0.0F, 0.0F, 0.28125F, 0.5625F);
 	@Environment(EnvType.CLIENT)
-	private static final Texture CLOSED_TEXTURE = new Texture(StevesCarts.id("textures/gui/module_slot.png"), 0.28125F, 0.0F, 0.53125F, 0.5F);
-	@Environment(EnvType.CLIENT)
 	private static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		WModuleSlot slot = (WModuleSlot) panel;
 		ScreenDrawing.texturedRect(matrices, left, top - 10, 79, 11, WAssembleButton.ENABLED, 0xFFFFFFFF);
