@@ -296,8 +296,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 			return this;
 		}
 
-		public void hasRenderer() {
+		public Builder<T> hasRenderer() {
 			this.hasRenderer = true;
+			return this;
 		}
 
 		protected void validate() {
