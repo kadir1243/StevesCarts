@@ -40,24 +40,15 @@ public class WModuleSlot extends WItemSlot {
 		matrices.translate(0F, (top - 10)/0.8F - (top - 10) + 1, 0F);
 		ScreenDrawing.drawString(matrices, slot.category.getTranslation().asOrderedText(), HorizontalAlignment.LEFT, left + 5, top - 8, 0, slot.category.getTextColor());
 		matrices.pop();
-		System.out.println(((TranslatableText) slot.category.getTranslation()).getKey());
+		int index = slot.startIndex;
 		for (int y = 0; y < slot.slotsHigh; ++y) {
 			for (int x = 0; x < slot.slotsWide; ++x) {
 				ScreenDrawing.texturedRect(matrices, left + x * 18, top + y * 18, 18, 18, OPEN_TEXTURE, 0xFFFFFFFF);
 				ScreenDrawing.drawBeveledPanel(matrices, left + x * 18, top + y * 18, 18, 18, 0xB8000000, 0x4C000000, 0xB8FFFFFF);
-				int slotIndex = slot.startIndex + x + y * slot.slotsHigh;
-				System.out.println(slotIndex);
-				ModuleSlot mSlot = slot.peers.get(slotIndex);
+				ModuleSlot mSlot = slot.peers.get(index);
 				float progress = mSlot.getAnimationProgress(MinecraftClient.getInstance().getTickDelta());
-				if (progress == 1.0F && mSlot.isValid()) {
-					continue;
-				}
 				int xPos = left + x * 18 + 1;
 				int yPos = top + y * 18 + 1;
-				if (progress == 0.0F && !mSlot.isValid()) {
-					ScreenDrawing.texturedRect(matrices, xPos, yPos, 16, 16, CLOSED_TEXTURE, 0xFFFFFFFF);
-					continue;
-				}
 				Identifier image = OPEN_TEXTURE.image();
 				float u1 = 0.28125F;
 				float u2 = 0.53125F;
@@ -66,6 +57,7 @@ public class WModuleSlot extends WItemSlot {
 				int height = (int) ((1 - progress) * 8);
 				ScreenDrawing.texturedRect(matrices, xPos, yPos, 16, height, image, u1, v1, u2, v2, 0xFFFFFFFF);
 				ScreenDrawing.texturedRect(matrices, xPos, yPos + 8 + (8 - height), 16, height, image, u1, v2, u2, v2 + ((1 - progress) * 8) / 32.0F, 0xFFFFFFFF);
+				index++;
 			}
 		}
 	};
