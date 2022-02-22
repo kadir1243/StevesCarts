@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import org.apache.commons.lang3.tuple.Pair;
@@ -127,9 +128,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		addonsSlots.addChangeListener(cartListener);
 		this.outputSlot.addChangeListener(cartListener);
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
-			if (this.getNetworkSide() == NetworkSide.SERVER) { // Only validate on the client. The server doesn't care about the validity of the cart :p
-				return;
-			}
 			List<MinecartModuleType<?>> types = new ArrayList<>();
 			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
 				ItemStack stack2 = this.blockInventory.getStack(i);
@@ -141,8 +139,12 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			if (!types.isEmpty()) {
 				// Disallow duplicates if they should be disallowed
 				{
-					List<MinecartModuleType<?>> duplicates = new ArrayList<>(types);
-					duplicates.removeAll(new HashSet<>(types));
+					Set<MinecartModuleType<?>> duplicates;
+					Set<MinecartModuleType<?>> uniques = new HashSet<>();
+					duplicates =  types.stream()
+							.filter(ee -> !uniques.add(ee))
+							.collect(Collectors.toSet());
+
 					if (!duplicates.isEmpty()) {
 						for (MinecartModuleType<?> type : duplicates) {
 							if (type.allowsDuplicates()) {
@@ -169,12 +171,17 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 						}
 						if (entry.getValue().size() > 1) {
 							invalid = true;
-							info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getKey().asText(), entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
+							info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
 							break;
 						}
 					}
 				}
 			}
+
+			if (!invalid) {
+				info.clear();
+			}
+
 			assembleButton.setEnabled(!invalid);
 		});
 		engineSlots.addChangeListener(validator);

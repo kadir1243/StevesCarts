@@ -42,6 +42,10 @@ public class WInformation extends WPlainPanel {
 		this.infoText.setText(info.formatted(Formatting.DARK_RED));
 	}
 
+	public void clear() {
+		this.setText((MutableText) LiteralText.EMPTY);
+	}
+
 	@Override
 	public void validate(GuiDescription c) {
 		super.validate(c);
