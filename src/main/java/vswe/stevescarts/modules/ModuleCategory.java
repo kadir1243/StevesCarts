@@ -12,9 +12,9 @@ public enum ModuleCategory {
 			return type.getHullData().engineMaxCount();
 		}
 	},
-	TOOL(1, 0xA020F0, new TranslatableText("module.stevescarts.category.tool.title")),
-	ATTACHMENT(6, 0x0D98BA, new TranslatableText("module.stevescarts.category.attachments.title")),
-	STORAGE(4, 0xFF4848, new TranslatableText("module.stevescarts.category.storage.title")),
+	TOOL(1, 0x3A243B, new TranslatableText("module.stevescarts.category.tool.title")),
+	ATTACHMENT(6, 0x0A3DC9, new TranslatableText("module.stevescarts.category.attachments.title")),
+	STORAGE(4, 0x7A0800, new TranslatableText("module.stevescarts.category.storage.title")),
 	ADDON(12, 0x056608, new TranslatableText("module.stevescarts.category.addons.title")) {
 		@Override
 		public int getMax(MinecartModuleType<? extends HullModule> type) {
