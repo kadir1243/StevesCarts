@@ -123,7 +123,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	}
 
 	public TranslatableText getTranslationText() {
-		return translationText;
+		return translationText.copy();
 	}
 
 	public boolean allowsDuplicates() {

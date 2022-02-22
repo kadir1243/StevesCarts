@@ -119,6 +119,36 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		storageSlots.addChangeListener(cartListener);
 		addonsSlots.addChangeListener(cartListener);
 		this.outputSlot.addChangeListener(cartListener);
+		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
+			List<MinecartModuleType<?>> types = new ArrayList<>();
+			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
+				ItemStack stack2 = this.blockInventory.getStack(i);
+				if (!stack2.isEmpty() && MinecartModuleType.isModule(stack2)) {
+					types.add(((ModuleItem) stack2.getItem()).getType());
+				}
+			}
+			boolean invalid = false;
+			if (!types.isEmpty()) {
+				List<MinecartModuleType<?>> duplicates = new ArrayList<>(types);
+				duplicates.removeAll(new HashSet<>(types));
+				if (!duplicates.isEmpty()) {
+					for (MinecartModuleType<?> type : duplicates) {
+						if (type.allowsDuplicates()) {
+							continue;
+						}
+						invalid = true;
+						info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
+						break;
+					}
+				}
+			}
+			assembleButton.setEnabled(!invalid);
+		});
+		engineSlots.addChangeListener(validator);
+		toolSlot.addChangeListener(validator);
+		attachmentSlots.addChangeListener(validator);
+		storageSlots.addChangeListener(validator);
+		addonsSlots.addChangeListener(validator);
 		rootPanel.validate(this);
 		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> handleAssembleClick((ServerPlayerEntity) playerInventory.player));
 		ScreenNetworking.of(this, NetworkSide.CLIENT).receive(StevesCartsScreenHandlers.PACKET_INVALID_INFO, (buf) -> {

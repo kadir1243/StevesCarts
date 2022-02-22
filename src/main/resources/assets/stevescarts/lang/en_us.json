@@ -2,6 +2,7 @@
   "screen.stevescarts.cart_assembler": "Cart Assembler",
   "screen.stevescarts.cart_assembler.assemble": "ASSEMBLE",
   "screen.stevescarts.cart_assembler.information": "INFORMATION",
+  "screen.stevescarts.cart_assembler.duplicate_module": "%s does not support duplicates",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
