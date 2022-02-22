@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
@@ -28,10 +29,13 @@ import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.screen.widget.WAssembleButton;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
+import vswe.stevescarts.screen.widget.WInformation;
 import vswe.stevescarts.screen.widget.WModuleSlot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private final ScreenHandlerContext context;
@@ -98,6 +102,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WItemSlot.ChangeListener moduleListener = ((slot, inventory, index, stack) -> {
 			hullSlot.setModifiable(!((WModuleSlot) slot).hasModule());
 		});
+		WInformation info = new WInformation();
+		rootPanel.add(info, 12, 182);
 		addonsSlots.addChangeListener(moduleListener);
 		storageSlots.addChangeListener(moduleListener);
 		attachmentSlots.addChangeListener(moduleListener);
@@ -115,6 +121,13 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		this.outputSlot.addChangeListener(cartListener);
 		rootPanel.validate(this);
 		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> handleAssembleClick((ServerPlayerEntity) playerInventory.player));
+		ScreenNetworking.of(this, NetworkSide.CLIENT).receive(StevesCartsScreenHandlers.PACKET_INVALID_INFO, (buf) -> {
+			int count = buf.readByte();
+			Set<Text> texts = new HashSet<>(count);
+			for (int i = 0; i < count; i++) {
+				texts.add(buf.readText());
+			}
+		});
 	}
 
 	public static void handleAssembleClick(ServerPlayerEntity player) {

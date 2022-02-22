@@ -8,9 +8,11 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 
@@ -198,6 +200,11 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 	@Override
 	public void markDirty() {
 		super.markDirty();
+	}
+
+	public void scatter(World world, BlockPos pos) {
+		// TODO
+		ItemScatterer.spawn(world, pos, this);
 	}
 
 	static {

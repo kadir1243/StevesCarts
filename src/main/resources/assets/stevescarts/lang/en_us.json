@@ -1,6 +1,7 @@
 {
   "screen.stevescarts.cart_assembler": "Cart Assembler",
   "screen.stevescarts.cart_assembler.assemble": "Assemble",
+  "screen.stevescarts.cart_assembler.information": "Information",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
