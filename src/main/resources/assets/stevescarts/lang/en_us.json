@@ -3,6 +3,7 @@
   "screen.stevescarts.cart_assembler.assemble": "ASSEMBLE",
   "screen.stevescarts.cart_assembler.information": "INFORMATION",
   "screen.stevescarts.cart_assembler.duplicate_module": "%s does not support duplicates",
+  "screen.stevescarts.cart_assembler.duplicate_side": "%s and %s occupy the same side (%s)",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
@@ -154,6 +155,15 @@
   "tooltip.stevescarts.fluid.max": "Max Fluid: ",
   "tooltip.stevescarts.fluid.current": "Current Fluid: ",
   "tooltip.stevescarts.press_shift": "Press shift for more information",
+
+  "module.side.stevescarts.none": "None",
+  "module.side.stevescarts.left": "Left",
+  "module.side.stevescarts.right": "Right",
+  "module.side.stevescarts.top": "Top",
+  "module.side.stevescarts.bottom": "Bottom",
+  "module.side.stevescarts.front": "Front",
+  "module.side.stevescarts.back": "Back",
+  "module.side.stevescarts.center": "Center",
 
   "itemGroup.stevescarts.components_group": "Steves Carts Components",
   "itemGroup.stevescarts.blocks_group": "Steves Carts Blocks",

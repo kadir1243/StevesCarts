@@ -16,6 +16,7 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import org.apache.commons.lang3.tuple.Pair;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.CartAssemblerBlockEntity;
@@ -25,6 +26,7 @@ import vswe.stevescarts.item.modules.ModuleItem;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
+import vswe.stevescarts.modules.ModuleSide;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.screen.widget.WAssembleButton;
 import vswe.stevescarts.screen.widget.WCart;
@@ -33,9 +35,14 @@ import vswe.stevescarts.screen.widget.WInformation;
 import vswe.stevescarts.screen.widget.WModuleSlot;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private final ScreenHandlerContext context;
@@ -120,6 +127,9 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		addonsSlots.addChangeListener(cartListener);
 		this.outputSlot.addChangeListener(cartListener);
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
+			if (this.getNetworkSide() == NetworkSide.SERVER) { // Only validate on the client. The server doesn't care about the validity of the cart :p
+				return;
+			}
 			List<MinecartModuleType<?>> types = new ArrayList<>();
 			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
 				ItemStack stack2 = this.blockInventory.getStack(i);
@@ -129,16 +139,39 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			}
 			boolean invalid = false;
 			if (!types.isEmpty()) {
-				List<MinecartModuleType<?>> duplicates = new ArrayList<>(types);
-				duplicates.removeAll(new HashSet<>(types));
-				if (!duplicates.isEmpty()) {
-					for (MinecartModuleType<?> type : duplicates) {
-						if (type.allowsDuplicates()) {
+				// Disallow duplicates if they should be disallowed
+				{
+					List<MinecartModuleType<?>> duplicates = new ArrayList<>(types);
+					duplicates.removeAll(new HashSet<>(types));
+					if (!duplicates.isEmpty()) {
+						for (MinecartModuleType<?> type : duplicates) {
+							if (type.allowsDuplicates()) {
+								continue;
+							}
+							invalid = true;
+							info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
+							break;
+						}
+					}
+				}
+
+				// Disallow modules that share a side
+				if (!invalid) {
+					EnumMap<ModuleSide, List<MinecartModuleType<?>>> sideMap = new EnumMap<>(ModuleSide.class);
+					for (MinecartModuleType<?> type : types) {
+						for (ModuleSide side : type.getSides()) {
+							sideMap.computeIfAbsent(side, (s) -> new ArrayList<>()).add(type);
+						}
+					}
+					for (Map.Entry<ModuleSide, List<MinecartModuleType<?>>> entry : sideMap.entrySet()) {
+						if (!entry.getKey().occupiesSide()) {
 							continue;
 						}
-						invalid = true;
-						info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
-						break;
+						if (entry.getValue().size() > 1) {
+							invalid = true;
+							info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getKey().asText(), entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
+							break;
+						}
 					}
 				}
 			}

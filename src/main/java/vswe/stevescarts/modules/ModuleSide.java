@@ -21,11 +21,15 @@ public enum ModuleSide implements StringIdentifiable {
 	}
 
 	public Text asText() {
-		return new TranslatableText("stevescarts.module.side." + this.asString());
+		return new TranslatableText("module.side.stevescarts." + this.asString());
 	}
 
 	@Override
 	public String asString() {
 		return this.name;
+	}
+
+	public boolean occupiesSide() {
+		return this != NONE;
 	}
 }
