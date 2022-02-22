@@ -117,16 +117,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		attachmentSlots.addChangeListener(moduleListener);
 		toolSlot.addChangeListener(moduleListener);
 		engineSlots.addChangeListener(moduleListener);
-		WItemSlot.ChangeListener cartListener = ((slot, inventory, index, stack) -> {
-			cart.markDirty();
-		});
-		hullSlot.addChangeListener(cartListener);
-		engineSlots.addChangeListener(cartListener);
-		toolSlot.addChangeListener(cartListener);
-		attachmentSlots.addChangeListener(cartListener);
-		storageSlots.addChangeListener(cartListener);
-		addonsSlots.addChangeListener(cartListener);
-		this.outputSlot.addChangeListener(cartListener);
+		hullSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
+		this.outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			List<MinecartModuleType<?>> types = new ArrayList<>();
 			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
@@ -183,6 +175,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			}
 
 			assembleButton.setEnabled(!invalid);
+			cart.markDirty();
 		});
 		engineSlots.addChangeListener(validator);
 		toolSlot.addChangeListener(validator);
