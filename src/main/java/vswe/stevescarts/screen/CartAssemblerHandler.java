@@ -52,7 +52,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WPlayerInvPanel playerInventoryPanel = this.createPlayerInventoryPanel(false);
 		this.addCentered(playerInventoryPanel, rootPanel.getHeight() - playerInventoryPanel.getHeight());
 		WAssembleButton assembleButton = new WAssembleButton(new TranslatableText("screen.stevescarts.cart_assembler.assemble"));
-		rootPanel.add(assembleButton, 330, 172, 79, 9);
+		rootPanel.add(assembleButton, 328, 167, 79, 9);
 		WItemSlot hullSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.HULL_SLOT);
 		hullSlot.setFilter(MinecartModuleType::isHull);
 		rootPanel.add(hullSlot, 12, 18);
@@ -88,7 +88,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		this.addCentered(cart, 4);
 		rootPanel.add(this.outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.FUEL_SLOT);
-		rootPanel.add(fuelSlot, 380, 182);
+		rootPanel.add(fuelSlot, 384, 182);
 		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {}));
 		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
 			assembleButton.setEnabled(MinecartModuleType.isHull(stack));
@@ -103,7 +103,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			hullSlot.setModifiable(!((WModuleSlot) slot).hasModule());
 		});
 		WInformation info = new WInformation();
-		rootPanel.add(info, 320, 17);
+		rootPanel.add(info, 315, 17);
 		addonsSlots.addChangeListener(moduleListener);
 		storageSlots.addChangeListener(moduleListener);
 		attachmentSlots.addChangeListener(moduleListener);
