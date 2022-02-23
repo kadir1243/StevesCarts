@@ -32,11 +32,6 @@ public class WInventoryListPanel<D> extends WListPanel<D, WListEntryPanel> {
 			list.setHost(this.getHost());
 			list.layout();
 		});
-		if (this.validatePlayerInv) {
-			this.playerInv.validate(this.host);
-		}
-		validatePlayerInv = false;
-		((SyncedGuiDescription) this.host).sendContentUpdates();
 	}
 
 	public boolean isVisible(int x, int y) {

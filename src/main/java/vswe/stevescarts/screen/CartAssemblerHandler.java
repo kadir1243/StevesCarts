@@ -112,7 +112,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		attachmentSlots.addChangeListener(moduleListener);
 		toolSlot.addChangeListener(moduleListener);
 		engineSlots.addChangeListener(moduleListener);
-		hullSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
 		this.outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			boolean invalid = false;

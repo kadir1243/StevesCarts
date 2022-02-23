@@ -41,9 +41,9 @@ public class WMovableSlot extends WWidget {
 	@Nullable
 	private Icon icon = null;
 	private Inventory inventory;
-	private int startIndex = 0;
-	private int slotsWide = 1;
-	private int slotsHigh = 1;
+	int startIndex = 0;
+	int slotsWide = 1;
+	int slotsHigh = 1;
 	private boolean big = false;
 	private boolean insertingAllowed = true;
 	private boolean takingAllowed = true;
@@ -191,9 +191,6 @@ public class WMovableSlot extends WWidget {
 	@Override
 	public void validate(GuiDescription host) {
 		super.validate(host);
-		((ScreenHandler) host).slots.clear();
-		((ScreenHandlerAccessor) host).getTrackedStacks().clear();
-		((ScreenHandlerAccessor) host).getPreviousTrackedStacks().clear();
 		peers.clear();
 		int index = startIndex;
 
@@ -201,9 +198,6 @@ public class WMovableSlot extends WWidget {
 			for (int x = 0; x < slotsWide; x++) {
 				// The Slot object is offset +1 because it's the inner area of the slot.
 				MovableSlot slot = createSlotPeer(inventory, index, this.getAbsoluteX() + (x * 18) + 1, this.getAbsoluteY() + (y * 18) + 1);
-				if (!((WInventoryListPanel<WMovableSlot>) this.parent.getParent()).isVisible(slot.x, slot.y)) {
-					continue;
-				}
 				slot.setInsertingAllowed(insertingAllowed);
 				slot.setTakingAllowed(takingAllowed);
 				slot.setFilter(filter);
@@ -353,5 +347,9 @@ public class WMovableSlot extends WWidget {
 	@FunctionalInterface
 	public interface ChangeListener {
 		void onStackChanged(WMovableSlot slot, Inventory inventory, int index, ItemStack stack);
+	}
+
+	public List<MovableSlot> getPeers() {
+		return peers;
 	}
 }
