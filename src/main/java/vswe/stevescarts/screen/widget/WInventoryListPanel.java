@@ -1,16 +1,20 @@
 package vswe.stevescarts.screen.widget;
 
+import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WListPanel;
-import io.github.cottonmc.cotton.gui.widget.WWidget;
+import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel;
 import io.github.cottonmc.cotton.gui.widget.data.InputResult;
 
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
-public class WInventoryListPanel<D> extends WListPanel<D, WSlotPanel> {
-	public WInventoryListPanel(List<D> data, BiConsumer<D, WSlotPanel> configurator) {
-		super(data, WSlotPanel::new, configurator);
+public class WInventoryListPanel<D> extends WListPanel<D, WListEntryPanel> {
+	private final WPlayerInvPanel playerInv;
+	public boolean validatePlayerInv = false;
+
+	public WInventoryListPanel(List<D> data, BiConsumer<D, WListEntryPanel> configurator, WPlayerInvPanel playerInv) {
+		super(data, WListEntryPanel::new, configurator);
+		this.playerInv = playerInv;
 	}
 
 	@Override
@@ -21,6 +25,18 @@ public class WInventoryListPanel<D> extends WListPanel<D, WSlotPanel> {
 	@Override
 	public void layout() {
 		super.layout();
+		this.streamChildren().forEach(w -> {
+			if (!(w instanceof WListEntryPanel list)) {
+				return;
+			}
+			list.setHost(this.getHost());
+			list.layout();
+		});
+		if (this.validatePlayerInv) {
+			this.playerInv.validate(this.host);
+		}
+		validatePlayerInv = false;
+		((SyncedGuiDescription) this.host).sendContentUpdates();
 	}
 
 	public boolean isVisible(int x, int y) {

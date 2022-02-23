@@ -1,19 +1,15 @@
 package vswe.stevescarts.screen;
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
-import io.github.cottonmc.cotton.gui.widget.WBox;
-import io.github.cottonmc.cotton.gui.widget.WListPanel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
-import io.github.cottonmc.cotton.gui.widget.data.Axis;
-import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
-import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 import vswe.stevescarts.screen.widget.WInventoryListPanel;
 
@@ -31,10 +27,13 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		rootPanel.setSize(280, 300);
 		this.setRootPanel(rootPanel);
 		List<Configurable> configurables = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).toList();
-		WInventoryListPanel<Configurable, WPlainPanel> panels = new WInventoryListPanel<>(configurables, WPlainPanel::new, (configurable, configPanel) -> configurable.configure(configPanel, this));
+		WPlayerInvPanel panel = this.createPlayerInventoryPanel();
+		this.addCentered(panel, 194);
+		WInventoryListPanel<Configurable> panels = new WInventoryListPanel<>(configurables, (configurable, configPanel) -> configurable.configure(configPanel, this), panel);
 		panels.setListItemHeight(panels.streamChildren().filter(WPlainPanel.class::isInstance).mapToInt(WWidget::getHeight).filter(height -> height >= 0).max().orElse(5));
-
-		this.addCentered(this.createPlayerInventoryPanel(), 184);
+		panels.setHost(this);
+		panels.setSize(240, 100);
+		rootPanel.add(panels, 0, 5, 240, 100);
 		rootPanel.validate(this);
 		this.minecartEntity.get().onScreenOpen();
 	}
