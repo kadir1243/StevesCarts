@@ -188,13 +188,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		addonsSlots.addChangeListener(validator);
 		rootPanel.validate(this);
 		ScreenNetworking.of(this, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> handleAssembleClick((ServerPlayerEntity) playerInventory.player));
-		ScreenNetworking.of(this, NetworkSide.CLIENT).receive(StevesCartsScreenHandlers.PACKET_INVALID_INFO, (buf) -> {
-			int count = buf.readByte();
-			Set<Text> texts = new HashSet<>(count);
-			for (int i = 0; i < count; i++) {
-				texts.add(buf.readText());
-			}
-		});
 	}
 
 	public static void handleAssembleClick(ServerPlayerEntity player) {
