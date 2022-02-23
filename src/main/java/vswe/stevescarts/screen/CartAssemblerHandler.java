@@ -130,46 +130,46 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 					types.add(((ModuleItem) stack2.getItem()).getType());
 				}
 			}
-			if (!types.isEmpty()) {
-				// Disallow duplicates if they should be disallowed
-				// This isn't a constant condition, but idea thinks it is one
-				//noinspection ConstantConditions
-				if (!invalid) {
-					Set<MinecartModuleType<?>> duplicates;
-					Set<MinecartModuleType<?>> uniques = new HashSet<>();
-					duplicates =  types.stream()
-							.filter(ee -> !uniques.add(ee))
-							.collect(Collectors.toSet());
+			if (types.isEmpty()) {
+				return;
+			}
 
-					if (!duplicates.isEmpty()) {
-						for (MinecartModuleType<?> type : duplicates) {
-							if (type.allowsDuplicates()) {
-								continue;
-							}
-							invalid = true;
-							info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
-							break;
-						}
-					}
-				}
+			// Disallow duplicate modules
+			if (!invalid) {
+				Set<MinecartModuleType<?>> duplicates;
+				Set<MinecartModuleType<?>> uniques = new HashSet<>();
+				duplicates =  types.stream()
+						.filter(ee -> !uniques.add(ee))
+						.collect(Collectors.toSet());
 
-				// Disallow modules that share a side
-				if (!invalid) {
-					EnumMap<ModuleSide, List<MinecartModuleType<?>>> sideMap = new EnumMap<>(ModuleSide.class);
-					for (MinecartModuleType<?> type : types) {
-						for (ModuleSide side : type.getSides()) {
-							sideMap.computeIfAbsent(side, (s) -> new ArrayList<>()).add(type);
-						}
-					}
-					for (Map.Entry<ModuleSide, List<MinecartModuleType<?>>> entry : sideMap.entrySet()) {
-						if (!entry.getKey().occupiesSide()) {
+				if (!duplicates.isEmpty()) {
+					for (MinecartModuleType<?> type : duplicates) {
+						if (type.allowsDuplicates()) {
 							continue;
 						}
-						if (entry.getValue().size() > 1) {
-							invalid = true;
-							info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
-							break;
-						}
+						invalid = true;
+						info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
+						break;
+					}
+				}
+			}
+
+			// Disallow modules that share a side
+			if (!invalid) {
+				EnumMap<ModuleSide, List<MinecartModuleType<?>>> sideMap = new EnumMap<>(ModuleSide.class);
+				for (MinecartModuleType<?> type : types) {
+					for (ModuleSide side : type.getSides()) {
+						sideMap.computeIfAbsent(side, (s) -> new ArrayList<>()).add(type);
+					}
+				}
+				for (Map.Entry<ModuleSide, List<MinecartModuleType<?>>> entry : sideMap.entrySet()) {
+					if (!entry.getKey().occupiesSide()) {
+						continue;
+					}
+					if (entry.getValue().size() > 1) {
+						invalid = true;
+						info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
+						break;
 					}
 				}
 			}
