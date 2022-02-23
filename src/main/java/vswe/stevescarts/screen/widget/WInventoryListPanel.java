@@ -35,6 +35,6 @@ public class WInventoryListPanel<D> extends WListPanel<D, WListEntryPanel> {
 	}
 
 	public boolean isVisible(int x, int y) {
-		return this.x >= this.getAbsoluteX() && this.x <= this.getAbsoluteX() + this.getWidth() && this.y >= this.getAbsoluteY() && this.y <= this.getAbsoluteY() + this.getHeight();
+		return x >= this.getAbsoluteX() && x <= this.getAbsoluteX() + this.getWidth() && y >= this.getAbsoluteY() && y <= this.getAbsoluteY() + this.getHeight();
 	}
 }

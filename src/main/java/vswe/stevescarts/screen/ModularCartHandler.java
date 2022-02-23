@@ -32,8 +32,8 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		WInventoryListPanel<Configurable> panels = new WInventoryListPanel<>(configurables, (configurable, configPanel) -> configurable.configure(configPanel, this), panel);
 		panels.setListItemHeight(panels.streamChildren().mapToInt(WWidget::getHeight).filter(height -> height >= 0).max().orElse(90));
 		panels.setHost(this);
-		panels.setSize(240, 100);
-		rootPanel.add(panels, 0, 5, 240, 100);
+		panels.setSize(240, 180);
+		rootPanel.add(panels, 0, 10, 240, 180);
 		rootPanel.validate(this);
 		this.minecartEntity.get().onScreenOpen();
 	}
