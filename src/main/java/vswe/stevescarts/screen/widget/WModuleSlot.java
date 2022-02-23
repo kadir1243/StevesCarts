@@ -87,7 +87,7 @@ public class WModuleSlot extends WItemSlot {
 		if (type != null) {
 			max = this.category.getMax(type) + this.startIndex;
 			for (int i = this.startIndex; i < max; ++i) {
-				peers.get(i).validate();
+				peers.get(i).validate((i - this.startIndex) * 2);
 			}
 		} else {
 			max = this.startIndex;

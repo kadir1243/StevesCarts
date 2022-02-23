@@ -8,6 +8,7 @@ import net.minecraft.inventory.Inventory;
 public class ModuleSlot extends ValidatedSlot implements ChestAnimationProgress {
 	private boolean valid = true;
 	private final ChestLidAnimator animator = new ChestLidAnimator();
+	private int tickOffset;
 
 	public ModuleSlot(Inventory inventory, int index, int x, int y) {
 		super(inventory, index, x, y);
@@ -18,6 +19,11 @@ public class ModuleSlot extends ValidatedSlot implements ChestAnimationProgress 
 		this.animator.setOpen(true);
 	}
 
+	public void validate(int tickOffset) {
+		this.validate();
+		this.tickOffset = tickOffset;
+	}
+
 	public boolean isValid() {
 		return valid;
 	}
@@ -25,6 +31,7 @@ public class ModuleSlot extends ValidatedSlot implements ChestAnimationProgress 
 	public void invalidate() {
 		valid = false;
 		this.animator.setOpen(false);
+		this.tickOffset = 0;
 	}
 
 	@Override
@@ -38,6 +45,10 @@ public class ModuleSlot extends ValidatedSlot implements ChestAnimationProgress 
 	}
 
 	public void step() {
-		this.animator.step();
+		if (tickOffset > 0) {
+			tickOffset--;
+		} else {
+			this.animator.step();
+		}
 	}
 }
