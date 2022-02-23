@@ -1,7 +1,13 @@
 package vswe.stevescarts.screen.widget;
 
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
+import io.github.cottonmc.cotton.gui.GuiDescription;
+import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
+import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
+import io.github.cottonmc.cotton.gui.impl.VisualLogger;
+import io.github.cottonmc.cotton.gui.impl.client.NarrationMessages;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
+import io.github.cottonmc.cotton.gui.widget.data.InputResult;
+import io.github.cottonmc.cotton.gui.widget.icon.Icon;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -15,12 +21,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import io.github.cottonmc.cotton.gui.GuiDescription;
-import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
-import io.github.cottonmc.cotton.gui.impl.VisualLogger;
-import io.github.cottonmc.cotton.gui.impl.client.NarrationMessages;
-import io.github.cottonmc.cotton.gui.widget.data.InputResult;
-import io.github.cottonmc.cotton.gui.widget.icon.Icon;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.mixins.ScreenHandlerAccessor;
 
@@ -31,8 +31,47 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-// modified version of WItemSlot
+// modified version of WMovableSlot
 public class WMovableSlot extends WWidget {
+	public static BackgroundPainter SLOT = (matrices, left, top, panel) -> {
+		if (!(panel instanceof WMovableSlot)) {
+			ScreenDrawing.drawBeveledPanel(matrices, left-1, top-1, panel.getWidth()+2, panel.getHeight()+2, 0xB8000000, 0x4C000000, 0xB8FFFFFF);
+		} else {
+			WMovableSlot slot = (WMovableSlot)panel;
+			for(int x = 0; x < slot.getWidth()/18; ++x) {
+				for(int y = 0; y < slot.getHeight()/18; ++y) {
+					int index = x + y * (slot.getWidth() / 18);
+					int lo = 0xB8000000;
+					int bg = 0x4C000000;
+					//this will cause a slightly discolored bottom border on vanilla backgrounds but it's necessary for color support, it shouldn't be *too* visible unless you're looking for it
+					int hi = 0xB8FFFFFF;
+					if (slot.isBigSlot()) {
+						ScreenDrawing.drawBeveledPanel(matrices, (x * 18) + left - 4, (y * 18) + top - 4, 26, 26,
+								lo, bg, hi);
+						if (slot.getFocusedSlot() == index) {
+							int sx = (x * 18) + left - 4;
+							int sy = (y * 18) + top - 4;
+							ScreenDrawing.coloredRect(matrices, sx,          sy,          26,     1,      0xFF_FFFFA0);
+							ScreenDrawing.coloredRect(matrices, sx,          sy + 1,      1,      26 - 1, 0xFF_FFFFA0);
+							ScreenDrawing.coloredRect(matrices, sx + 26 - 1, sy + 1,      1,      26 - 1, 0xFF_FFFFA0);
+							ScreenDrawing.coloredRect(matrices, sx + 1,      sy + 26 - 1, 26 - 1, 1,      0xFF_FFFFA0);
+						}
+					} else {
+						ScreenDrawing.drawBeveledPanel(matrices, (x * 18) + left, (y * 18) + top, 16+2, 16+2,
+								lo, bg, hi);
+						if (slot.getFocusedSlot() == index) {
+							int sx = (x * 18) + left;
+							int sy = (y * 18) + top;
+							ScreenDrawing.coloredRect(matrices, sx,          sy,          18,     1,      0xFF_FFFFA0);
+							ScreenDrawing.coloredRect(matrices, sx,          sy + 1,      1,      18 - 1, 0xFF_FFFFA0);
+							ScreenDrawing.coloredRect(matrices, sx + 18 - 1, sy + 1,      1,      18 - 1, 0xFF_FFFFA0);
+							ScreenDrawing.coloredRect(matrices, sx + 1,      sy + 18 - 1, 18 - 1, 1,      0xFF_FFFFA0);
+						}
+					}
+				}
+			}
+		}
+	};
 	private static final VisualLogger LOGGER = new VisualLogger(WMovableSlot.class);
 	private final List<MovableSlot> peers = new ArrayList<>();
 	@Nullable
@@ -201,6 +240,7 @@ public class WMovableSlot extends WWidget {
 				slot.setInsertingAllowed(insertingAllowed);
 				slot.setTakingAllowed(takingAllowed);
 				slot.setFilter(filter);
+				slot.setVisible(((WInventoryListPanel<?>) this.parent.getParent()).isVisible(slot.x, slot.y));
 				for (ChangeListener listener : listeners) {
 					slot.addChangeListener(this, listener);
 				}
@@ -320,7 +360,7 @@ public class WMovableSlot extends WWidget {
 	@Environment(EnvType.CLIENT)
 	@Override
 	public void addPainters() {
-		backgroundPainter = BackgroundPainter.SLOT;
+		backgroundPainter = SLOT;
 	}
 
 	@Environment(EnvType.CLIENT)

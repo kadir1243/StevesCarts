@@ -30,7 +30,7 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		WPlayerInvPanel panel = this.createPlayerInventoryPanel();
 		this.addCentered(panel, 194);
 		WInventoryListPanel<Configurable> panels = new WInventoryListPanel<>(configurables, (configurable, configPanel) -> configurable.configure(configPanel, this), panel);
-		panels.setListItemHeight(panels.streamChildren().filter(WPlainPanel.class::isInstance).mapToInt(WWidget::getHeight).filter(height -> height >= 0).max().orElse(5));
+		panels.setListItemHeight(panels.streamChildren().mapToInt(WWidget::getHeight).filter(height -> height >= 0).max().orElse(90));
 		panels.setHost(this);
 		panels.setSize(240, 100);
 		rootPanel.add(panels, 0, 5, 240, 100);

@@ -15,12 +15,17 @@ public class WListEntryPanel extends WPlainPanel {
 			int index = slot.startIndex;
 			for (int y = 0; y < slot.slotsHigh; y++) {
 				for (int x = 0; x < slot.slotsWide; x++) {
-					MovableSlot mSlot = slot.getPeers().stream().filter(s -> s.getIndex() == index).findFirst().orElseThrow();
+					int finalIndex = index;
+					MovableSlot mSlot = slot.getPeers().stream().filter(s -> s.getIndex() == finalIndex).findFirst().orElse(null);
+					if (mSlot == null) {
+						continue;
+					}
 					int xCoord = slot.getAbsoluteX() + (x * 18) + 1;
 					int yCoord = slot.getAbsoluteY() + (y * 18) + 1;
 					((SlotAccessor) mSlot).setX(xCoord);
 					((SlotAccessor) mSlot).setY(yCoord);
 					mSlot.setVisible(((WInventoryListPanel<?>) this.parent).isVisible(xCoord, yCoord));
+					index++;
 				}
 			}
 		}
