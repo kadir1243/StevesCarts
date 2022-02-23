@@ -18,6 +18,7 @@ import vswe.stevescarts.client.modules.model.storage.TopChestModel;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.MechanicalPigRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.FrontTankRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.OpenTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.SideChestsRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.SideTanksRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.TopTankRenderer;
@@ -100,6 +101,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.FRONT_TANK, new FrontTankRenderer(id("textures/modules/storage/front_tank.png")));
 		register(StevesCartsModuleTypes.TOP_TANK, new TopTankRenderer(id("textures/modules/storage/top_tank.png")));
 		register(StevesCartsModuleTypes.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
+		register(StevesCartsModuleTypes.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
 

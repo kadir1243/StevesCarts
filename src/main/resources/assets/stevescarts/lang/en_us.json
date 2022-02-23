@@ -105,6 +105,7 @@
   "module.stevescarts.front_tank": "Front Tank",
   "module.stevescarts.top_tank": "Top Tank",
   "module.stevescarts.side_tanks": "Side Tanks",
+  "module.stevescarts.open_tank": "Open Tank",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",

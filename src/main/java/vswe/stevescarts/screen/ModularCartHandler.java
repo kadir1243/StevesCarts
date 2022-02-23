@@ -23,16 +23,16 @@ public class ModularCartHandler extends SyncedGuiDescription {
 	public ModularCartHandler(int syncId, PlayerInventory playerInventory, ModularMinecartEntity minecartEntity) {
 		super(StevesCartsScreenHandlers.MODULAR_CART, syncId, playerInventory);
 		this.minecartEntity = new WeakReference<>(minecartEntity);
-		WPlainPanel panel = new WFixedPanel();
-		panel.setInsets(new Insets(3, 0, 7, 0));
-		panel.setSize(400, 100);
-		this.setRootPanel(panel);
+		WPlainPanel rootPanel = new WFixedPanel();
+		rootPanel.setInsets(new Insets(3, 0, 7, 0));
+		rootPanel.setSize(400, 100);
+		this.setRootPanel(rootPanel);
 		WBox verticalBox = new WBox(Axis.VERTICAL);
 		WBox box1 = new WBox(Axis.HORIZONTAL);
 		WBox box2 = new WBox(Axis.HORIZONTAL);
 		WBox boxToAdd = box1;
 		boxToAdd.setSpacing(5);
-		panel.add(verticalBox, 20, 30);
+		rootPanel.add(verticalBox, 20, 30);
 		box1.setHorizontalAlignment(HorizontalAlignment.CENTER);
 		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).toList();
 		int totalWidth = 0;
@@ -46,9 +46,9 @@ public class ModularCartHandler extends SyncedGuiDescription {
 			totalWidth += inPanel.getWidth() + 5;
 			boxToAdd.add(inPanel, inPanel.getWidth(), inPanel.getHeight());
 		}
-		panel.layout();
-		panel.add(this.createPlayerInventoryPanel(), 10, panel.getHeight() - 10);
-		panel.validate(this);
+		rootPanel.layout();
+		this.addCentered(this.createPlayerInventoryPanel(), rootPanel.getHeight());
+		rootPanel.validate(this);
 		this.minecartEntity.get().onScreenOpen();
 	}
 
