@@ -117,6 +117,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			boolean invalid = false;
 			List<MinecartModuleType<?>> types = new ArrayList<>();
+
+			// Check for a hull's presence
 			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
 				ItemStack stack2 = this.blockInventory.getStack(i);
 				if (i == CartAssemblerBlockEntity.HULL_SLOT) {
@@ -129,9 +131,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				if (!stack2.isEmpty() && MinecartModuleType.isModule(stack2)) {
 					types.add(((ModuleItem) stack2.getItem()).getType());
 				}
-			}
-			if (types.isEmpty()) {
-				return;
 			}
 
 			// Disallow duplicate modules
@@ -168,7 +167,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 					}
 					if (entry.getValue().size() > 1) {
 						invalid = true;
-						info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText()));
+						info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText(), entry.getKey().asText()));
 						break;
 					}
 				}
@@ -181,6 +180,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			assembleButton.setEnabled(!invalid);
 			cart.markDirty();
 		});
+		hullSlot.addChangeListener(validator);
 		engineSlots.addChangeListener(validator);
 		toolSlot.addChangeListener(validator);
 		attachmentSlots.addChangeListener(validator);
