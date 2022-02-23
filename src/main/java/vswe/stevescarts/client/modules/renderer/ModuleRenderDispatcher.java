@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.client.modules.model.attachment.SeatModel;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
@@ -102,6 +103,8 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.TOP_TANK, new TopTankRenderer(id("textures/modules/storage/top_tank.png")));
 		register(StevesCartsModuleTypes.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
 		register(StevesCartsModuleTypes.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
+
+		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
 

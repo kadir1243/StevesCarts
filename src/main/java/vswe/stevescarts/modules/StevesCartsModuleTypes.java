@@ -1,5 +1,6 @@
 package vswe.stevescarts.modules;
 
+import vswe.stevescarts.modules.attachment.SeatModule;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.modules.storage.chest.FrontChestModule;
 import vswe.stevescarts.modules.storage.chest.SideChestsModule;
@@ -25,6 +26,8 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<TopTankModule> TOP_TANK = MinecartModuleType.<TopTankModule>builder().id("top_tank").category(ModuleCategory.STORAGE).factory(TopTankModule::new).sides(ModuleSide.TOP).hasRenderer().moduleCost(22).buildAndRegister();
 	public static final MinecartModuleType<SideTanksModule> SIDE_TANKS = MinecartModuleType.<SideTanksModule>builder().id("side_tanks").category(ModuleCategory.STORAGE).factory(SideTanksModule::new).sides(ModuleSide.LEFT, ModuleSide.RIGHT).hasRenderer().moduleCost(10).buildAndRegister();
 	public static final MinecartModuleType<OpenTankModule> OPEN_TANK = MinecartModuleType.<OpenTankModule>builder().id("open_tank").category(ModuleCategory.STORAGE).factory(OpenTankModule::new).sides(ModuleSide.TOP).hasRenderer().moduleCost(31).buildAndRegister();
+
+	public static final MinecartModuleType<SeatModule> SEAT = MinecartModuleType.<SeatModule>builder().id("seat").category(ModuleCategory.ATTACHMENT).factory(SeatModule::new).sides(ModuleSide.TOP, ModuleSide.CENTER).hasRenderer().noRenderTop().moduleCost(3).buildAndRegister();
 
 	public static void init() {
 		ModuleTags.init();

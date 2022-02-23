@@ -15,6 +15,7 @@ import net.minecraft.util.collection.DefaultedList;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
+import vswe.stevescarts.screen.ModularCartHandler;
 
 public class ChestModule extends StorageModule implements Inventory {
 	protected final int slotsWidth;
@@ -54,7 +55,7 @@ public class ChestModule extends StorageModule implements Inventory {
 	}
 
 	@Override
-	public void configure(WPlainPanel panel, SyncedGuiDescription description) {
+	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
 		WLabel label = new WLabel(this.label);
 		WItemSlot slots = WItemSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
 		panel.add(label, 0, 0);

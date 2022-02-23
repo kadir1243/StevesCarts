@@ -4,6 +4,7 @@ import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -13,6 +14,7 @@ import reborncore.common.util.Tank;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
+import vswe.stevescarts.screen.ModularCartHandler;
 import vswe.stevescarts.screen.widget.WFluidSlot;
 
 public class TankModule extends StorageModule  {
@@ -39,7 +41,7 @@ public class TankModule extends StorageModule  {
 	}
 
 	@Override
-	public void configure(WPlainPanel panel, SyncedGuiDescription description) {
+	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot filledBucketSlot = WItemSlot.of(this.bucketInventory, 0);

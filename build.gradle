@@ -22,6 +22,9 @@ repositories {
 		name = "BuildCraft"
 		url = "https://mod-buildcraft.com/maven"
 	}
+	maven {
+		url = "https://maven.shedaniel.me"
+	}
 }
 
 sourceSets {
@@ -39,6 +42,7 @@ dependencies {
 	modImplementation "RebornCore:RebornCore-1.18:${project.reborncore_version}"
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
 	modImplementation "alexiil.mc.lib:libblockattributes-all:0.10.1-rc.2"
+	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:7.3.+"
 }
 
 processResources {

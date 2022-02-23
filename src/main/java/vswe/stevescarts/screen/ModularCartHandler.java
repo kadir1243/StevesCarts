@@ -30,6 +30,8 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		WBox verticalBox = new WBox(Axis.VERTICAL);
 		WBox box1 = new WBox(Axis.HORIZONTAL);
 		WBox box2 = new WBox(Axis.HORIZONTAL);
+		verticalBox.add(box1);
+		verticalBox.add(box2);
 		WBox boxToAdd = box1;
 		boxToAdd.setSpacing(5);
 		rootPanel.add(verticalBox, 20, 30);
@@ -38,7 +40,7 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		int totalWidth = 0;
 		for (Configurable configurable : panels) {
 			WPlainPanel inPanel = new WPlainPanel();
-			configurable.configure(inPanel, this);
+			configurable.configure(inPanel, this, playerInventory.player);
 			inPanel.layout();
 			if (inPanel.getWidth() + totalWidth > 400) {
 				boxToAdd = box2;
@@ -56,6 +58,10 @@ public class ModularCartHandler extends SyncedGuiDescription {
 	public void close(PlayerEntity player) {
 		super.close(player);
 		this.minecartEntity.get().onScreenClose();
+	}
+
+	public ModularMinecartEntity getMinecartEntity() {
+		return minecartEntity.get();
 	}
 
 	public void addCentered(WWidget widget, int y, int width, int height) {
