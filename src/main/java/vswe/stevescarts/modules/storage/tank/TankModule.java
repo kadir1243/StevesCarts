@@ -14,7 +14,6 @@ import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.widget.WFluidSlot;
-import vswe.stevescarts.screen.widget.WMovableSlot;
 
 public class TankModule extends StorageModule  {
 	protected final SimpleInventory bucketInventory = new SimpleInventory(2);
@@ -43,8 +42,8 @@ public class TankModule extends StorageModule  {
 	public void configure(WPlainPanel panel, SyncedGuiDescription description) {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
-		WMovableSlot filledBucketSlot = WMovableSlot.of(this.bucketInventory, 0);
-		WMovableSlot emptyBucketSlot = WMovableSlot.of(this.bucketInventory, 1);
+		WItemSlot filledBucketSlot = WItemSlot.of(this.bucketInventory, 0);
+		WItemSlot emptyBucketSlot = WItemSlot.of(this.bucketInventory, 1);
 		WFluidSlot fluidSlot = new WFluidSlot(this.tank);
 		filledBucketSlot.addChangeListener((slot, inventory, index, stack) -> {
 			if (!FluidUtils.drainContainers(this.tank, this.bucketInventory, 0, 1)) {
@@ -55,7 +54,6 @@ public class TankModule extends StorageModule  {
 		panel.add(filledBucketSlot, 0, 15);
 		panel.add(emptyBucketSlot, 0, 48);
 		panel.add(fluidSlot, 20, 15, 36, 51);
-		panel.setSize(80, 64);
 	}
 
 	public Tank getTank() {

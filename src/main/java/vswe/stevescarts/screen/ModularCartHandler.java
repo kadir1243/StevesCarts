@@ -1,9 +1,11 @@
 package vswe.stevescarts.screen;
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
+import io.github.cottonmc.cotton.gui.widget.WBox;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
-import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
+import io.github.cottonmc.cotton.gui.widget.data.Axis;
+import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -11,7 +13,6 @@ import net.minecraft.network.PacketByteBuf;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.screen.widget.WFixedPanel;
-import vswe.stevescarts.screen.widget.WInventoryListPanel;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -22,19 +23,32 @@ public class ModularCartHandler extends SyncedGuiDescription {
 	public ModularCartHandler(int syncId, PlayerInventory playerInventory, ModularMinecartEntity minecartEntity) {
 		super(StevesCartsScreenHandlers.MODULAR_CART, syncId, playerInventory);
 		this.minecartEntity = new WeakReference<>(minecartEntity);
-		WPlainPanel rootPanel = new WFixedPanel();
-		rootPanel.setInsets(new Insets(3, 0, 7, 0));
-		rootPanel.setSize(280, 300);
-		this.setRootPanel(rootPanel);
-		List<Configurable> configurables = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).toList();
-		WPlayerInvPanel panel = this.createPlayerInventoryPanel();
-		this.addCentered(panel, 194);
-		WInventoryListPanel<Configurable> panels = new WInventoryListPanel<>(configurables, (configurable, configPanel) -> configurable.configure(configPanel, this), panel);
-		panels.setListItemHeight(panels.streamChildren().mapToInt(WWidget::getHeight).filter(height -> height >= 0).max().orElse(90));
-		panels.setHost(this);
-		panels.setSize(240, 180);
-		rootPanel.add(panels, 0, 10, 240, 180);
-		rootPanel.validate(this);
+		WPlainPanel panel = new WFixedPanel();
+		panel.setInsets(new Insets(3, 0, 7, 0));
+		panel.setSize(400, 100);
+		this.setRootPanel(panel);
+		WBox verticalBox = new WBox(Axis.VERTICAL);
+		WBox box1 = new WBox(Axis.HORIZONTAL);
+		WBox box2 = new WBox(Axis.HORIZONTAL);
+		WBox boxToAdd = box1;
+		boxToAdd.setSpacing(5);
+		panel.add(verticalBox, 20, 30);
+		box1.setHorizontalAlignment(HorizontalAlignment.CENTER);
+		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).toList();
+		int totalWidth = 0;
+		for (Configurable configurable : panels) {
+			WPlainPanel inPanel = new WPlainPanel();
+			configurable.configure(inPanel, this);
+			inPanel.layout();
+			if (inPanel.getWidth() + totalWidth > 400) {
+				boxToAdd = box2;
+			}
+			totalWidth += inPanel.getWidth() + 5;
+			boxToAdd.add(inPanel, inPanel.getWidth(), inPanel.getHeight());
+		}
+		panel.layout();
+		panel.add(this.createPlayerInventoryPanel(), 10, panel.getHeight() - 10);
+		panel.validate(this);
 		this.minecartEntity.get().onScreenOpen();
 	}
 

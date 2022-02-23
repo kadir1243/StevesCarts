@@ -15,7 +15,6 @@ import net.minecraft.util.collection.DefaultedList;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
-import vswe.stevescarts.screen.widget.WMovableSlot;
 
 public class ChestModule extends StorageModule implements Inventory {
 	protected final int slotsWidth;
@@ -57,10 +56,9 @@ public class ChestModule extends StorageModule implements Inventory {
 	@Override
 	public void configure(WPlainPanel panel, SyncedGuiDescription description) {
 		WLabel label = new WLabel(this.label);
-		WMovableSlot slots = WMovableSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
+		WItemSlot slots = WItemSlot.of(this, 0, this.slotsWidth, this.slotsHeight);
 		panel.add(label, 0, 0);
 		panel.add(slots, 0, 15);
-		panel.setSize(this.slotsWidth * 18 + 4, this.slotsHeight * 18 + 18);
 	}
 
 	@Override
