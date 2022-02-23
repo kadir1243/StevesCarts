@@ -5,5 +5,6 @@
 4. Add the item model and item texture
 5. Add the module's translation key to the language file(s)
 6. Add the module to any module tags if applicable
-7. Create model(s) for the module
-8. Register the module's renderer in `ModuleRenderDispatcher`, either using `GenericRenderer` or a subclass of `ModuleRenderer`
+7. Add a recipe for the module if applicable
+8. Create model(s) for the module
+9. Register the module's renderer in `ModuleRenderDispatcher`, either using `GenericRenderer` or a subclass of `ModuleRenderer`
