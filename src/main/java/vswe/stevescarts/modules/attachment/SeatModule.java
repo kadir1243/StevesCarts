@@ -1,6 +1,5 @@
 package vswe.stevescarts.modules.attachment;
 
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.networking.NetworkSide;
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
@@ -26,7 +25,7 @@ public class SeatModule extends MinecartModule implements Configurable {
 		WSeatButton seatButton = new WSeatButton();
 		seatButton.setCanRide(handler.getMinecartEntity().getFirstPassenger() == null || handler.getMinecartEntity().hasPassenger(player));
 		seatButton.setRiding(handler.getMinecartEntity().hasPassenger(player));
-		panel.add(seatButton, 0, 15);
+		panel.add(seatButton, 0, 15, 24, 12);
 		seatButton.setOnClick(() -> {
 			ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_SEAT_CLICK, buf -> buf.writeBoolean(seatButton.isRiding()));
 		});

@@ -12,6 +12,7 @@ import vswe.stevescarts.modules.storage.tank.TopTankModule;
 import vswe.stevescarts.modules.tags.ModuleTags;
 
 public class StevesCartsModuleTypes {
+	// Hulls
 	public static final MinecartModuleType<HullModule> WOODEN_HULL = MinecartModuleType.<HullModule>builder().hull().id("wooden_hull").factory(HullModule::new).modularCapacity(50).engineMaxCount(1).addonMaxCount(0).complexityMax(15).buildAndRegister();
 	public static final MinecartModuleType<HullModule> STANDARD_HULL = MinecartModuleType.<HullModule>builder().hull().id("standard_hull").factory(HullModule::new).modularCapacity(200).engineMaxCount(3).addonMaxCount(5).complexityMax(50).buildAndRegister();
 	public static final MinecartModuleType<HullModule> REINFORCED_HULL = MinecartModuleType.<HullModule>builder().hull().id("reinforced_hull").factory(HullModule::new).modularCapacity(500).engineMaxCount(5).addonMaxCount(12).complexityMax(150).buildAndRegister();
@@ -19,6 +20,7 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<HullModule> GALGADORIAN_HULL = MinecartModuleType.<HullModule>builder().hull().id("galgadorian_hull").factory(HullModule::new).modularCapacity(1000).engineMaxCount(5).addonMaxCount(12).complexityMax(150).buildAndRegister();
 	public static final MinecartModuleType<HullModule> CREATIVE_HULL = MinecartModuleType.<HullModule>builder().hull().id("creative_hull").factory(HullModule::new).modularCapacity(10000).engineMaxCount(5).addonMaxCount(12).complexityMax(1500).buildAndRegister();
 
+	// Storage
 	public static final MinecartModuleType<FrontChestModule> FRONT_CHEST = MinecartModuleType.<FrontChestModule>builder().id("front_chest").category(ModuleCategory.STORAGE).factory(FrontChestModule::new).sides(ModuleSide.FRONT).hasRenderer().moduleCost(5).buildAndRegister();
 	public static final MinecartModuleType<TopChestModule> TOP_CHEST = MinecartModuleType.<TopChestModule>builder().id("top_chest").category(ModuleCategory.STORAGE).factory(TopChestModule::new).sides(ModuleSide.TOP).hasRenderer().moduleCost(6).buildAndRegister();
 	public static final MinecartModuleType<SideChestsModule> SIDE_CHESTS = MinecartModuleType.<SideChestsModule>builder().id("side_chests").category(ModuleCategory.STORAGE).factory(SideChestsModule::new).sides(ModuleSide.LEFT, ModuleSide.RIGHT).hasRenderer().moduleCost(3).buildAndRegister();
@@ -27,7 +29,14 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<SideTanksModule> SIDE_TANKS = MinecartModuleType.<SideTanksModule>builder().id("side_tanks").category(ModuleCategory.STORAGE).factory(SideTanksModule::new).sides(ModuleSide.LEFT, ModuleSide.RIGHT).hasRenderer().moduleCost(10).buildAndRegister();
 	public static final MinecartModuleType<OpenTankModule> OPEN_TANK = MinecartModuleType.<OpenTankModule>builder().id("open_tank").category(ModuleCategory.STORAGE).factory(OpenTankModule::new).sides(ModuleSide.TOP).hasRenderer().moduleCost(31).buildAndRegister();
 
+	// Attachments
 	public static final MinecartModuleType<SeatModule> SEAT = MinecartModuleType.<SeatModule>builder().id("seat").category(ModuleCategory.ATTACHMENT).factory(SeatModule::new).sides(ModuleSide.TOP, ModuleSide.CENTER).hasRenderer().noRenderTop().moduleCost(3).buildAndRegister();
+
+	// Engines TODO
+
+	// Addons TODO
+
+	// Tools TODO
 
 	public static void init() {
 		ModuleTags.init();

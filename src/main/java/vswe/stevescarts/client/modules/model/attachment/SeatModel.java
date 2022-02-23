@@ -30,6 +30,8 @@ public class SeatModel extends ModuleModel {
 		this.root.yaw = 3.1415926F;
 		if (firstPassenger != null) {
 			this.root.yaw += (float) Math.toRadians(firstPassenger.getYaw(tickDelta));
+		} else {
+			this.root.yaw /= 2.0f;
 		}
 	}
 }

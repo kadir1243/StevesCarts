@@ -97,6 +97,8 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		for (MinecartModule module : modules) {
 			FAKE_ENTITY.addModule(module, false);
 			module.setMinecart(FAKE_ENTITY);
+		}
+		for (MinecartModule module : modules) {
 			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light, false);
 		}
 		matrices.pop();
