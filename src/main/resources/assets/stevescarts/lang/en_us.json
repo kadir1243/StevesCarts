@@ -12,6 +12,7 @@
   "screen.stevescarts.cart_assembler.complexity_cap": "Complexity Cap: %s",
   "screen.stevescarts.cart_assembler.time": "Time: %s",
   "screen.stevescarts.cart_assembler.ready": "Ready to Assemble",
+  "screen.stevescarts.cart.fuel": "Fuel: %s",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",

@@ -29,6 +29,7 @@ import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
 import vswe.stevescarts.modules.ModuleStorage;
+import vswe.stevescarts.modules.engine.EngineModule;
 import vswe.stevescarts.screen.ModularCartHandler;
 
 import java.util.ArrayList;
@@ -97,7 +98,10 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
-		Optional<Map.Entry<Integer, MinecartModule>> first = this.modules.entrySet().stream().filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE)).filter(entry -> entry.getValue().canPropel()).findFirst();
+		Optional<Map.Entry<Integer, MinecartModule>> first = this.modules.entrySet().stream().filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE)).filter(entry -> entry.getValue().canPropel()).map(entry -> {
+			((EngineModule) entry.getValue()).setPropelling(false);
+			return entry;
+		}).findFirst();
 		first.ifPresentOrElse(entry -> this.primaryEngineId = entry.getKey(), () -> this.primaryEngineId = -1);
 		propel();
 	}
@@ -107,6 +111,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			return;
 		}
 		MinecartModule engine = this.modules.get(this.primaryEngineId);
+		((EngineModule) engine).setPropelling(true);
 		engine.onPropel();
 		Vec3d velocity = this.getVelocity();
 		double horizontal = velocity.horizontalLength();

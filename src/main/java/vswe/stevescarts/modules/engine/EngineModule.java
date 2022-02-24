@@ -6,6 +6,8 @@ import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 
 public abstract class EngineModule extends MinecartModule implements Configurable {
+	protected boolean propelling = false;
+
 	protected EngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
 		super(minecart, type);
 	}
@@ -15,4 +17,12 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 
 	@Override
 	public abstract void onPropel();
+
+	public boolean isPropelling() {
+		return propelling;
+	}
+
+	public void setPropelling(boolean propelling) {
+		this.propelling = propelling;
+	}
 }
