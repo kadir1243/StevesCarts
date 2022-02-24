@@ -7,6 +7,11 @@
   "screen.stevescarts.cart_assembler.getting_started": "To start making a cart, please add a Hull of your choice to the Hull Slot",
   "screen.stevescarts.cart_assembler.excess_capacity": "Maximum modular capacity of your %s has been exceeded",
   "screen.stevescarts.cart_assembler.too_complex_module": "%s is too complex for %s",
+  "screen.stevescarts.cart_assembler.total_cost": "Total Cost: %s",
+  "screen.stevescarts.cart_assembler.hull_capacity": "Hull Capacity: %s",
+  "screen.stevescarts.cart_assembler.complexity_cap": "Complexity Cap: %s",
+  "screen.stevescarts.cart_assembler.time": "Time: %s",
+  "screen.stevescarts.cart_assembler.ready": "Ready to Assemble",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",

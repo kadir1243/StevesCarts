@@ -14,7 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
@@ -124,7 +125,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				if (i == CartAssemblerBlockEntity.HULL_SLOT) {
 					if (!MinecartModuleType.isHull(stack2)) {
 						invalid = true;
-						info.setText(new TranslatableText("screen.stevescarts.cart_assembler.getting_started"));
+						info.successStatus();
+						info.setInfoText(new TranslatableText("screen.stevescarts.cart_assembler.getting_started"));
 						break;
 					}
 				}
@@ -135,6 +137,24 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 					}
 				}
 			}
+
+			if (hull == null) {
+				info.setStatusText(LiteralText.EMPTY);
+				cart.markDirty();
+				return;
+			}
+
+			int complexityMax = hull.getHullData().complexityMax();
+			int modCap = hull.getHullData().modularCapacity();
+			int cost = types.stream().mapToInt(MinecartModuleType::getModuleCost).sum();
+
+			MutableText totalText = LiteralText.EMPTY.copy();
+			totalText.append(new TranslatableText("screen.stevescarts.cart_assembler.total_cost", cost)).append("\n");
+			totalText.append(new TranslatableText("screen.stevescarts.cart_assembler.hull_capacity", modCap)).append("\n");
+			totalText.append(new TranslatableText("screen.stevescarts.cart_assembler.complexity_cap", complexityMax)).append("\n");
+			totalText.append(new TranslatableText("screen.stevescarts.cart_assembler.time", "00:00:00"));
+
+			info.setInfoText(totalText);
 
 			// Disallow duplicate modules
 			if (!invalid) {
@@ -150,7 +170,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 							continue;
 						}
 						invalid = true;
-						info.setText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
+						info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
 						break;
 					}
 				}
@@ -178,7 +198,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 
 			// Disallow too complex modules
 			if (!invalid) {
-				int complexityMax = hull.getHullData().complexityMax();
 				for (MinecartModuleType<?> type : types) {
 					if (type.getModuleCost() > complexityMax) {
 						invalid = true;
@@ -190,8 +209,6 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 
 			// Disallow too complex modules 2 electric boogaloo
 			if (!invalid) {
-				int modCap = hull.getHullData().modularCapacity();
-				int cost = types.stream().mapToInt(MinecartModuleType::getModuleCost).sum();
 				if (cost > modCap) {
 					invalid = true;
 					info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.excess_capacity", hull.getTranslationText()));
@@ -199,7 +216,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			}
 
 			if (!invalid) {
-				info.clear();
+				info.successStatus();
 			}
 
 			assembleButton.setEnabled(!invalid);

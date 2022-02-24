@@ -20,6 +20,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.item.ModularMinecartItem;
 import vswe.stevescarts.item.modules.ModuleItem;
 
 import java.util.Arrays;
@@ -148,6 +149,8 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		tooltip.addAll(this.tooltip);
 		if (context.isAdvanced()) {
 			tooltip.addAll(this.advancedTooltip);
+		} else {
+			tooltip.add(ModularMinecartItem.PRESS_SHIFT);
 		}
 	}
 
