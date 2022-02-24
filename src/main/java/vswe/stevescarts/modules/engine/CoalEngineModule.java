@@ -47,7 +47,7 @@ public class CoalEngineModule extends EngineModule {
 	@Override
 	public void tick() {
 		this.fireIndex++;
-		if (this.fireIndex > 4) {
+		if (this.fireIndex >= 4) {
 			this.fireIndex = 0;
 		}
 	}
