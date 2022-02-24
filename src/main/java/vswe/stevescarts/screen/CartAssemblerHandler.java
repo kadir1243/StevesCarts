@@ -116,6 +116,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			boolean invalid = false;
 			List<MinecartModuleType<?>> types = new ArrayList<>();
+			MinecartModuleType<?> hull = null;
 
 			// Check for a hull's presence
 			for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
@@ -129,6 +130,9 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				}
 				if (!stack2.isEmpty() && MinecartModuleType.isModule(stack2)) {
 					types.add(((ModuleItem) stack2.getItem()).getType());
+					if (MinecartModuleType.isHull(stack2)) {
+						hull = ((ModuleItem) stack2.getItem()).getType();
+					}
 				}
 			}
 
@@ -169,6 +173,28 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 						info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText(), entry.getKey().asText()));
 						break;
 					}
+				}
+			}
+
+			// Disallow too complex modules
+			if (!invalid) {
+				int complexityMax = hull.getHullData().complexityMax();
+				for (MinecartModuleType<?> type : types) {
+					if (type.getModuleCost() > complexityMax) {
+						invalid = true;
+						info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.too_complex_module", type.getTranslationText(), hull.getTranslationText()));
+						break;
+					}
+				}
+			}
+
+			// Disallow too complex modules 2 electric boogaloo
+			if (!invalid) {
+				int modCap = hull.getHullData().modularCapacity();
+				int cost = types.stream().mapToInt(MinecartModuleType::getModuleCost).sum();
+				if (cost > modCap) {
+					invalid = true;
+					info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.excess_capacity", hull.getTranslationText()));
 				}
 			}
 
