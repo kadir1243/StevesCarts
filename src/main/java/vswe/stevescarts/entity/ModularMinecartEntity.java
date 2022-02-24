@@ -5,8 +5,6 @@ import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,8 +18,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -29,9 +25,9 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.ModularMinecartItem;
-import vswe.stevescarts.mixins.AbstractMinecartEntityAccessor;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.ModuleCategory;
 import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.screen.ModularCartHandler;
 
@@ -40,11 +36,13 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
+	private int primaryEngineId = -1;
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -99,10 +97,17 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
+		Optional<Map.Entry<Integer, MinecartModule>> first = this.modules.entrySet().stream().filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE)).filter(entry -> entry.getValue().shouldPropel()).findFirst();
+		first.ifPresentOrElse(entry -> this.primaryEngineId = entry.getKey(), () -> this.primaryEngineId = -1);
 		propel();
 	}
 
-	public void propel() {
+	private void propel() {
+		if (this.primaryEngineId < 0) {
+			return;
+		}
+		MinecartModule engine = this.modules.get(this.primaryEngineId);
+		engine.onPropel();
 		Vec3d velocity = this.getVelocity();
 		double horizontal = velocity.horizontalLength();
 		if (horizontal > 0.01) {

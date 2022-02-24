@@ -67,11 +67,16 @@ public abstract class MinecartModule {
 	public void onScreenClose() {
 	}
 
+	/**
+	 * @implNote Should only be implemented by modules that are engines
+	 */
 	public boolean shouldPropel() {
 		return false;
 	}
 
-	public boolean hasPropellant() {
-		return false;
+	/**
+	 * @implNote Should only be implemented by modules that are engines
+	 */
+	public void onPropel() {
 	}
 }
