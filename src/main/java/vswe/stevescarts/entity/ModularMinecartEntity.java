@@ -5,6 +5,8 @@ import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,12 +20,16 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.ModularMinecartItem;
+import vswe.stevescarts.mixins.AbstractMinecartEntityAccessor;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleStorage;
@@ -93,6 +99,15 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
+		propel();
+	}
+
+	public void propel() {
+		Vec3d velocity = this.getVelocity();
+		double horizontal = velocity.horizontalLength();
+		if (horizontal > 0.01) {
+			this.setVelocity(velocity.add(velocity.x / horizontal * 0.06, 0.0, velocity.z / horizontal * 0.06));
+		}
 	}
 
 	public void onScreenOpen() {

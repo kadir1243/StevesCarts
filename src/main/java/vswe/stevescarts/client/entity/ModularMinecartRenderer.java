@@ -15,6 +15,7 @@ import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.mixins.AbstractMinecartEntityAccessor;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.screen.widget.WCart;
@@ -51,7 +52,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		double renderZ = MathHelper.lerp(tickDelta, entity.lastRenderZ, entity.getZ());
 		double offset = 0.3f;
 		Vec3d vec3d = entity.snapPositionToRail(renderX, renderY, renderZ);
-		float o = MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch());
+		float pitch = MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch());
 		if (vec3d != null) {
 			Vec3d vec3d2 = entity.snapPositionToRailWithOffset(renderX, renderY, renderZ, offset);
 			Vec3d vec3d3 = entity.snapPositionToRailWithOffset(renderX, renderY, renderZ, -offset);
@@ -66,12 +67,15 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 			if (vec3d4.length() != 0.0) {
 				vec3d4 = vec3d4.normalize();
 				yaw = (float) (Math.atan2(vec3d4.z, vec3d4.x) * 180.0 / Math.PI);
-				o = (float) (Math.atan(vec3d4.y) * 73.0);
+				pitch = (float) (Math.atan(vec3d4.y) * 73.0);
 			}
 		}
 		matrices.translate(0.0, 0.375, 0.0);
 		matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0f - yaw));
-		matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-o));
+		if (((AbstractMinecartEntityAccessor) entity).isYawFlipped()) {
+			matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0f));
+		}
+		matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-pitch));
 		float damageWobbleTicks = (float) entity.getDamageWobbleTicks() - tickDelta;
 		float damageWobbleStrength = MathHelper.clamp(entity.getDamageWobbleStrength() - tickDelta, 0, Float.MAX_VALUE);
 		if (damageWobbleTicks > 0.0f) {

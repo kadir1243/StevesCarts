@@ -66,4 +66,12 @@ public abstract class MinecartModule {
 
 	public void onScreenClose() {
 	}
+
+	public boolean shouldPropel() {
+		return false;
+	}
+
+	public boolean hasPropellant() {
+		return false;
+	}
 }
