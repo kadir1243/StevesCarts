@@ -1,10 +1,14 @@
 package vswe.stevescarts.entity;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.block.AbstractRailBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,9 +19,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -43,6 +52,12 @@ import java.util.stream.Collectors;
 
 public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
+	private static final ImmutableSet<RailShape> CURVES = Util.make(ImmutableSet.<RailShape>builder(), (builder) -> {
+		builder.add(RailShape.NORTH_EAST);
+		builder.add(RailShape.SOUTH_EAST);
+		builder.add(RailShape.SOUTH_WEST);
+		builder.add(RailShape.NORTH_WEST);
+	}).build();
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -103,6 +118,15 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 				.peek(entry -> ((EngineModule) entry.getValue()).setPropelling(false))
 				.findFirst()
 				.map(Map.Entry::getValue)
+				.filter(t -> {
+					int x = (int) Math.floor(this.getX());
+					int y = (int) Math.floor(this.getY());
+					int z = (int) Math.floor(this.getZ());
+					BlockPos.Mutable pos = new BlockPos.Mutable(x, y, z);
+					if (world.getBlockState(pos.down()).isIn(BlockTags.RAILS)) pos.move(Direction.DOWN);
+					BlockState state = world.getBlockState(pos);
+					return state.isIn(BlockTags.RAILS);
+				})
 				.ifPresent(this::propel);
 	}
 
@@ -112,7 +136,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		Vec3d velocity = this.getVelocity();
 		double horizontal = velocity.horizontalLength();
 		if (horizontal > 1.0E-02) {
-			this.setVelocity(velocity.add(Math.max(velocity.x / horizontal * 0.06, 0.1), 0.0, Math.max(velocity.z / horizontal * 0.06, 0.1)));
+			this.setVelocity(velocity.add(velocity.x / horizontal * 0.06, 0.0, velocity.z / horizontal * 0.06));
 		}
 	}
 
