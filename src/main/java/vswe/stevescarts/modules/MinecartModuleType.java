@@ -2,7 +2,10 @@ package vswe.stevescarts.modules;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Lifecycle;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -38,6 +41,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final int moduleCost;
 	private final EnumSet<ModuleSide> sides;
 	private final List<Text> tooltip;
+	private final List<Text> advancedTooltip;
 	private final Optional<HullData> hullData;
 	private final Optional<ToolData> toolData;
 	private final TranslatableText translationText;
@@ -59,6 +63,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.allowDuplicates = allowDuplicates;
 		this.shouldRenderTop = shouldRenderTop;
 		this.hasRenderer = hasRenderer;
+		this.advancedTooltip = this.generateAdvancedTooltip();
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData) {
@@ -138,8 +143,25 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return hasRenderer;
 	}
 
-	public void appendTooltip(List<Text> tooltip) {
+	@Environment(EnvType.CLIENT)
+	public void appendTooltip(List<Text> tooltip, TooltipContext context) {
 		tooltip.addAll(this.tooltip);
+		if (context.isAdvanced()) {
+			tooltip.addAll(this.advancedTooltip);
+		}
+	}
+
+	private List<Text> generateAdvancedTooltip() {
+		ImmutableList.Builder<Text> builder	= ImmutableList.builder();
+		if (this.sides.isEmpty()) {
+			builder.add(new TranslatableText("tooltip.stevescarts.module.sides.none").formatted(Formatting.BLUE));
+		} else {
+			builder.add(new TranslatableText("tooltip.stevescarts.module.sides.%s".formatted(this.sides.size()), (Object[]) this.sides.stream().map(ModuleSide::asText).toArray(Text[]::new)).formatted(Formatting.BLUE));
+		}
+		if (this.hullData.isEmpty()) {
+			builder.add(new TranslatableText("tooltip.stevescarts.module.cost", this.moduleCost).formatted(Formatting.LIGHT_PURPLE));
+		}
+		return builder.build();
 	}
 
 	public static NbtCompound toNbt(MinecartModule module) {

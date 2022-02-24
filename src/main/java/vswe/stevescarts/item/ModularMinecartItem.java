@@ -63,10 +63,11 @@ public class ModularMinecartItem extends Item {
 	@Environment(EnvType.CLIENT)
 	@Override
 	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-		if (!Screen.hasShiftDown()) {
+		if (!(Screen.hasShiftDown() || context.isAdvanced())) {
 			tooltip.add(PRESS_SHIFT);
+			return;
 		}
-		ModuleStorage.read(stack).forEach(module -> tooltip.add(module.getType().getTranslationText()));
+		ModuleStorage.read(stack).forEach(module -> tooltip.add(module.getType().getTranslationText().formatted(Formatting.GRAY)));
 	}
 
 	public static ItemStack create(Collection<MinecartModule> modules) {
