@@ -43,7 +43,6 @@ import java.util.stream.Collectors;
 
 public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
-	private int primaryEngineId = -1;
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -98,25 +97,22 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
-		Optional<Map.Entry<Integer, MinecartModule>> first = this.modules.entrySet().stream().filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE)).filter(entry -> entry.getValue().canPropel()).map(entry -> {
-			((EngineModule) entry.getValue()).setPropelling(false);
-			return entry;
-		}).findFirst();
-		first.ifPresentOrElse(entry -> this.primaryEngineId = entry.getKey(), () -> this.primaryEngineId = -1);
-		propel();
+		this.modules.entrySet()
+				.stream()
+				.filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE) && entry.getValue().canPropel())
+				.peek(entry -> ((EngineModule) entry.getValue()).setPropelling(false))
+				.findFirst()
+				.map(Map.Entry::getValue)
+				.ifPresent(this::propel);
 	}
 
-	private void propel() {
-		if (this.primaryEngineId < 0) {
-			return;
-		}
-		MinecartModule engine = this.modules.get(this.primaryEngineId);
+	private void propel(MinecartModule engine) {
 		((EngineModule) engine).setPropelling(true);
 		engine.onPropel();
 		Vec3d velocity = this.getVelocity();
 		double horizontal = velocity.horizontalLength();
-		if (horizontal > 0.01) {
-			this.setVelocity(velocity.add(velocity.x / horizontal * 0.06, 0.0, velocity.z / horizontal * 0.06));
+		if (horizontal > 1.0E-02) {
+			this.setVelocity(velocity.add(Math.max(velocity.x / horizontal * 0.06, 0.1), 0.0, Math.max(velocity.z / horizontal * 0.06, 0.1)));
 		}
 	}
 

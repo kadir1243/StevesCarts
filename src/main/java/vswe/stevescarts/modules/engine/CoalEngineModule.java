@@ -64,21 +64,22 @@ public class CoalEngineModule extends EngineModule {
 
 	@Override
 	public boolean canPropel() {
-		return false;
+		return this.fuelAmount > 0;
 	}
 
 	@Override
 	public void onPropel() {
-
+		this.fuelAmount--;
 	}
 
 	// TODO: add priority button
+	// TODO: why property delegate :concern:
 	@Override
 	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot fuel = WItemSlot.of(this.inventory, 0, this.fuelSlots, 1);
-		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0);
+		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0 && stack.getItem().getRecipeRemainder() == null);
 		panel.add(fuel, 0, 15);
 		handler.setPropertyDelegate(this.propertyDelegate); // this is conc
 		handler.addProperties(this.propertyDelegate);
@@ -88,9 +89,28 @@ public class CoalEngineModule extends EngineModule {
 
 	@Override
 	public void tick() {
-		this.fireIndex++;
-		if (this.fireIndex >= 4) {
-			this.fireIndex = 0;
+		if (this.fuelAmount <= 0) {
+			int nextSlot = -1;
+			for (int i = 0; i < this.inventory.size(); i++) {
+				ItemStack stack = this.inventory.getStack(i);
+				if (!stack.isEmpty()) {
+					nextSlot = i;
+					break;
+				}
+			}
+			if (nextSlot != -1) {
+				ItemStack stack = this.inventory.getStack(nextSlot);
+				this.fuelAmount = this.getFuel(stack);
+				stack.decrement(1);
+			}
+		}
+		if (this.fuelAmount > 0) {
+			this.fireIndex++;
+			if (this.fireIndex >= 4) {
+				this.fireIndex = 0;
+			}
+		} else {
+			this.fireIndex = -1;
 		}
 	}
 
