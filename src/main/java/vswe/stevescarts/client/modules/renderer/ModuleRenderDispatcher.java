@@ -14,8 +14,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.modules.model.attachment.SeatModel;
+import vswe.stevescarts.client.modules.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
+import vswe.stevescarts.client.modules.renderer.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.MechanicalPigRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.FrontTankRenderer;
@@ -105,6 +107,10 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
 
 		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
+
+		register(StevesCartsModuleTypes.COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
+		register(StevesCartsModuleTypes.TINY_COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
+
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
 

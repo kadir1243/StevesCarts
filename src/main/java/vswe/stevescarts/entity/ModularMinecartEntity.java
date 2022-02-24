@@ -97,7 +97,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
-		Optional<Map.Entry<Integer, MinecartModule>> first = this.modules.entrySet().stream().filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE)).filter(entry -> entry.getValue().shouldPropel()).findFirst();
+		Optional<Map.Entry<Integer, MinecartModule>> first = this.modules.entrySet().stream().filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE)).filter(entry -> entry.getValue().canPropel()).findFirst();
 		first.ifPresentOrElse(entry -> this.primaryEngineId = entry.getKey(), () -> this.primaryEngineId = -1);
 		propel();
 	}

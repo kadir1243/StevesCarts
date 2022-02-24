@@ -11,8 +11,9 @@ import vswe.stevescarts.screen.ModularCartHandler;
 public class CoalEngineModule extends EngineModule {
 	private final int fuelSlots;
 	private final float fuelMultiplier;
+	private int fireIndex = 0;
 
-	protected CoalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, int fuelSlots, float fuelMultiplier) {
+	public CoalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, int fuelSlots, float fuelMultiplier) {
 		super(minecart, type);
 		this.fuelSlots = fuelSlots;
 		this.fuelMultiplier = fuelMultiplier;
@@ -29,7 +30,7 @@ public class CoalEngineModule extends EngineModule {
 	}
 
 	@Override
-	public boolean shouldPropel() {
+	public boolean canPropel() {
 		return false;
 	}
 
@@ -41,5 +42,17 @@ public class CoalEngineModule extends EngineModule {
 	@Override
 	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
 
+	}
+
+	@Override
+	public void tick() {
+		this.fireIndex++;
+		if (this.fireIndex > 4) {
+			this.fireIndex = 0;
+		}
+	}
+
+	public int getFireIndex() {
+		return this.fireIndex;
 	}
 }

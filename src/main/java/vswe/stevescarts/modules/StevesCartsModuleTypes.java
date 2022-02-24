@@ -1,6 +1,7 @@
 package vswe.stevescarts.modules;
 
 import vswe.stevescarts.modules.attachment.SeatModule;
+import vswe.stevescarts.modules.engine.CoalEngineModule;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.modules.storage.chest.FrontChestModule;
 import vswe.stevescarts.modules.storage.chest.SideChestsModule;
@@ -32,7 +33,9 @@ public class StevesCartsModuleTypes {
 	// Attachments
 	public static final MinecartModuleType<SeatModule> SEAT = MinecartModuleType.<SeatModule>builder().id("seat").category(ModuleCategory.ATTACHMENT).factory(SeatModule::new).sides(ModuleSide.TOP, ModuleSide.CENTER).hasRenderer().noRenderTop().moduleCost(3).buildAndRegister();
 
-	// Engines TODO
+	// Engines
+	public static final MinecartModuleType<CoalEngineModule> COAL_ENGINE = MinecartModuleType.<CoalEngineModule>builder().id("coal_engine").category(ModuleCategory.ATTACHMENT).factory((minecart, type) -> new CoalEngineModule(minecart, type, 3, 2.25f)).hasRenderer().moduleCost(15).buildAndRegister();
+	public static final MinecartModuleType<CoalEngineModule> TINY_COAL_ENGINE = MinecartModuleType.<CoalEngineModule>builder().id("tiny_coal_engine").category(ModuleCategory.ATTACHMENT).factory((minecart, type) -> new CoalEngineModule(minecart, type, 1, 0.5f)).hasRenderer().moduleCost(2).buildAndRegister();
 
 	// Addons TODO
 

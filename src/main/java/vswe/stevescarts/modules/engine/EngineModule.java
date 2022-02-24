@@ -11,7 +11,7 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 	}
 
 	@Override
-	public abstract boolean shouldPropel();
+	public abstract boolean canPropel();
 
 	@Override
 	public abstract void onPropel();

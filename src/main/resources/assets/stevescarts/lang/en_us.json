@@ -114,6 +114,8 @@
   "module.stevescarts.side_tanks": "Side Tanks",
   "module.stevescarts.open_tank": "Open Tank",
   "module.stevescarts.seat": "Seat",
+  "module.stevescarts.tiny_coal_engine": "Tiny Coal Engine",
+  "module.stevescarts.coal_engine": "Coal Engine",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",
