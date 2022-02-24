@@ -14,7 +14,7 @@ import vswe.stevescarts.StevesCarts;
 public class CoalEngineInsideModel extends AbstractCoalEngineModel {
 	public static final Identifier[] FIRE_TEXTURES = Util.make(new Identifier[4], textures -> {
 		for (int i = 0; i < textures.length; i++) {
-			textures[i] = StevesCarts.id("textures/modules/engine/engine_fire" + i + ".png");
+			textures[i] = StevesCarts.id("textures/modules/engine/engine_fire" + (i + 1) + ".png");
 		}
 	});
 	private final Identifier[] textures;
