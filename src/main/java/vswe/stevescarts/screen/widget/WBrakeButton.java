@@ -30,6 +30,12 @@ public class WBrakeButton extends WButton {
 	}
 
 	@Override
+	public void setSize(int x, int y) {
+		this.width = x;
+		this.height = y;
+	}
+
+	@Override
 	public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
 		boolean hovered = mouseX >= 0 && mouseY >= 0 && mouseX < getWidth() && mouseY < getHeight();
 		Texture bg = hovered ? BG_HOVERED : BG_NORMAL;

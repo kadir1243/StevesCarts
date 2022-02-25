@@ -36,7 +36,7 @@ public class BrakeModule extends MinecartModule implements Configurable, Togglea
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WBrakeButton brakeButton = new WBrakeButton(WBrakeButton.FG_STOP, WBrakeButton.FG_CONTINUE, new TranslatableText("screen.stevescarts.cart.brake"));
-		panel.add(brakeButton, 0, 10);
+		panel.add(brakeButton, 0, 10, 24, 12);
 		brakeButton.setOnClick(() -> {
 			brakeButton.changeTexture();
 			ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_BRAKE, buf -> buf.writeBoolean(brakeButton.hasSecondTexture()));
@@ -45,7 +45,7 @@ public class BrakeModule extends MinecartModule implements Configurable, Togglea
 			brakeButton.changeTexture();
 		}
 		WBrakeButton reverseButton = new WBrakeButton(WBrakeButton.FG_REVERSE, new TranslatableText("screen.stevescarts.cart.reverse"));
-		panel.add(reverseButton, 0, 23);
+		panel.add(reverseButton, 0, 23, 24, 12);
 		reverseButton.setOnClick(() -> ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_REVERSE, buf -> {}));
 		panel.setSize(30, 50);
 		ScreenNetworking.of(handler, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_BRAKE, buf -> this.active = buf.readBoolean());

@@ -82,7 +82,6 @@ public class CoalEngineModule extends EngineModule {
 		WItemSlot fuel = WItemSlot.of(this.inventory, 0, this.fuelSlots, 1);
 		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0 && stack.getItem().getRecipeRemainder() == null);
 		panel.add(fuel, 0, 15);
-		handler.setPropertyDelegate(this.propertyDelegate); // this is conc
 		handler.addProperties(this.propertyDelegate);
 		WLabel fuelLabel = new WPropertyLabel("screen.stevescarts.cart.fuel", 0);
 		panel.add(fuelLabel, 0, 35);
