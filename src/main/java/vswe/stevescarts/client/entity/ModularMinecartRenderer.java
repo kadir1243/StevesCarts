@@ -30,6 +30,26 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		super(ctx);
 	}
 
+	public static void renderAsItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+		matrices.push();
+		matrices.scale(-1.0f, -1.0f, 1.0f);
+		if (WCart.renderingCart) {
+			matrices.scale(4, 4, 4);
+		}
+		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion((float) Math.PI));
+		matrices.translate(1.0F, 0.17F, 0.0F);
+		Collection<MinecartModule> modules = ModuleStorage.read(stack);
+		FAKE_ENTITY.modules.clear();
+		for (MinecartModule module : modules) {
+			FAKE_ENTITY.addModule(module, false);
+			module.setMinecart(FAKE_ENTITY);
+		}
+		for (MinecartModule module : modules) {
+			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light, false);
+		}
+		matrices.pop();
+	}
+
 	@Override
 	public Identifier getTexture(ModularMinecartEntity entity) {
 		return null;
@@ -84,26 +104,6 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		for (MinecartModule module : entity.getModuleList()) {
 			StevesCartsClient.getModuleRenderDispatcher().render(module, yaw, tickDelta, matrices, vertexConsumers, light, true);
-		}
-		matrices.pop();
-	}
-
-	public static void renderAsItem(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-		matrices.push();
-		matrices.scale(-1.0f, -1.0f, 1.0f);
-		if (WCart.renderingCart) {
-			matrices.scale(4, 4, 4);
-		}
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion((float) Math.PI));
-		matrices.translate(1.0F, 0.17F, 0.0F);
-		Collection<MinecartModule> modules = ModuleStorage.read(stack);
-		FAKE_ENTITY.modules.clear();
-		for (MinecartModule module : modules) {
-			FAKE_ENTITY.addModule(module, false);
-			module.setMinecart(FAKE_ENTITY);
-		}
-		for (MinecartModule module : modules) {
-			StevesCartsClient.getModuleRenderDispatcher().render(module, 0, 0, matrices, vertexConsumers, light, false);
 		}
 		matrices.pop();
 	}

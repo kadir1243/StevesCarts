@@ -20,7 +20,7 @@ public class WCart extends WWidget {
 	public static boolean renderingCart = false;
 	private final Supplier<List<MinecartModuleType<?>>> modules;
 	private ItemStack stack = ItemStack.EMPTY;
-	private List<MinecartModule> modules2 = new ArrayList<>();
+	private final List<MinecartModule> modules2 = new ArrayList<>();
 
 	public WCart(Supplier<List<MinecartModuleType<?>>> modules, int width, int height) {
 		this.modules = modules;

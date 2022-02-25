@@ -6,7 +6,6 @@ import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.EntityType;
@@ -26,7 +25,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -46,18 +44,17 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ModularMinecartEntity extends AbstractMinecartEntity {
-	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
 	private static final ImmutableSet<RailShape> CURVES = Util.make(ImmutableSet.<RailShape>builder(), (builder) -> {
 		builder.add(RailShape.NORTH_EAST);
 		builder.add(RailShape.SOUTH_EAST);
 		builder.add(RailShape.SOUTH_WEST);
 		builder.add(RailShape.NORTH_WEST);
 	}).build();
+	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -66,6 +63,17 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public ModularMinecartEntity(World world, double x, double y, double z, Collection<MinecartModule> modules) {
 		super(StevesCarts.MODULAR_MINECART_ENTITY, world, x, y, z);
 		modules.forEach(module -> this.addModule(module, false));
+	}
+
+	public static Multimap<MinecartModuleType<?>, NbtCompound> readModuleData(PacketByteBuf buf) {
+		Multimap<MinecartModuleType<?>, NbtCompound> map = ArrayListMultimap.create();
+		int size = buf.readVarInt();
+		for (int i = 0; i < size; i++) {
+			MinecartModuleType<?> type = MinecartModuleType.REGISTRY.get(buf.readVarInt());
+			NbtCompound compound = buf.readNbt();
+			map.put(type, compound);
+		}
+		return map;
 	}
 
 	@Override
@@ -177,17 +185,6 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			modules.add(module);
 		});
 		this.setModules(modules.stream().collect(Collectors.toMap(MinecartModule::getId, Function.identity())), update);
-	}
-
-	public static Multimap<MinecartModuleType<?>, NbtCompound> readModuleData(PacketByteBuf buf) {
-		Multimap<MinecartModuleType<?>, NbtCompound> map = ArrayListMultimap.create();
-		int size = buf.readVarInt();
-		for (int i = 0; i < size; i++) {
-			MinecartModuleType<?> type = MinecartModuleType.REGISTRY.get(buf.readVarInt());
-			NbtCompound compound = buf.readNbt();
-			map.put(type, compound);
-		}
-		return map;
 	}
 
 	private void setModules(Map<Integer, MinecartModule> modules, boolean update) {

@@ -7,7 +7,6 @@ import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
@@ -30,14 +29,6 @@ public class WFluidSlot extends WWidget {
 	public WFluidSlot(Tank tank) {
 		this.tank = tank;
 		this.setSize(36, 51);
-	}
-
-	@Override
-	public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
-		super.paint(matrices, x, y, mouseX, mouseY);
-		/*RenderUtil.*/renderGuiTank(this.tank.getFluidInstance(), this.tank.getFluidValueCapacity(), this.tank.getFluidAmount(), x + 1, y + 1, 100.0, 34, 49);
-
-		ScreenDrawing.texturedRect(matrices, x, y, 36, 51, TEXTURE, 0xFFFFFFFF);
 	}
 
 	// TODO: find out why the one in reborn core isnt working (and possibly fix it there so that this one doesnt need to be here)
@@ -101,6 +92,15 @@ public class WFluidSlot extends WWidget {
 		}
 		RenderLayer.getTranslucent().endDrawing();
 		RenderSystem.disableBlend();
+	}
+
+	@Override
+	public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
+		super.paint(matrices, x, y, mouseX, mouseY);
+		/*RenderUtil.*/
+		renderGuiTank(this.tank.getFluidInstance(), this.tank.getFluidValueCapacity(), this.tank.getFluidAmount(), x + 1, y + 1, 100.0, 34, 49);
+
+		ScreenDrawing.texturedRect(matrices, x, y, 36, 51, TEXTURE, 0xFFFFFFFF);
 	}
 
 	@Override

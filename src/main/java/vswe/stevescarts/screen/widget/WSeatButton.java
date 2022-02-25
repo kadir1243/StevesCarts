@@ -36,11 +36,11 @@ public class WSeatButton extends WButton {
 		this.canRide = canRide;
 	}
 
-	public void setRiding(boolean isRiding) {
-		this.riding = isRiding;
-	}
-
 	public boolean isRiding() {
 		return this.riding;
+	}
+
+	public void setRiding(boolean isRiding) {
+		this.riding = isRiding;
 	}
 }

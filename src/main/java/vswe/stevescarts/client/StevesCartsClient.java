@@ -6,15 +6,10 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.client.entity.ModularMinecartRenderer;
@@ -24,12 +19,13 @@ import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-
 @Environment(EnvType.CLIENT)
 public class StevesCartsClient implements ClientModInitializer {
 	private static ModuleRenderDispatcher moduleRenderDispatcher;
+
+	public static ModuleRenderDispatcher getModuleRenderDispatcher() {
+		return moduleRenderDispatcher;
+	}
 
 	@Override
 	public void onInitializeClient() {
@@ -42,9 +38,5 @@ public class StevesCartsClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.JUNCTION_RAIL, RenderLayer.getCutout());
 		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.MODULAR_CART, ModularMinecartRenderer::renderAsItem);
 		StevesCartsScreenHandlers.initClient();
-	}
-
-	public static ModuleRenderDispatcher getModuleRenderDispatcher() {
-		return moduleRenderDispatcher;
 	}
 }

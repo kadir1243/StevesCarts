@@ -13,13 +13,11 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.item.modules.ModuleItem;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
-import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.screen.slot.ModuleSlot;
 
@@ -35,7 +33,7 @@ public class WModuleSlot extends WItemSlot {
 		ScreenDrawing.texturedRect(matrices, left, top - 10, 79, 11, WAssembleButton.ENABLED, 0xFFFFFFFF);
 		matrices.push();
 		matrices.scale(1F, 0.8F, 1F);
-		matrices.translate(0F, (top - 10)/0.8F - (top - 10) + 1, 0F);
+		matrices.translate(0F, (top - 10) / 0.8F - (top - 10) + 1, 0F);
 		ScreenDrawing.drawString(matrices, slot.category.getTranslation().asOrderedText(), HorizontalAlignment.LEFT, left + 5, top - 8, 0, slot.category.getTextColor());
 		matrices.pop();
 

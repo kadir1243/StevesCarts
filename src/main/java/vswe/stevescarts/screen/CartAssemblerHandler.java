@@ -94,7 +94,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(this.outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.FUEL_SLOT);
 		rootPanel.add(fuelSlot, 384, 182);
-		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {}));
+		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {
+		}));
 		hullSlot.addChangeListener(((slot, inventory, index, stack) -> {
 			MinecartModuleType<? extends HullModule> e = MinecartModuleType.isHull(stack) ? (MinecartModuleType<? extends HullModule>) ((ModuleItem) stack.getItem()).getType() : null;
 			addonsSlots.toggleSlots(e);
@@ -160,7 +161,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			if (!invalid) {
 				Set<MinecartModuleType<?>> duplicates;
 				Set<MinecartModuleType<?>> uniques = new HashSet<>();
-				duplicates =  types.stream()
+				duplicates = types.stream()
 						.filter(ee -> !uniques.add(ee))
 						.collect(Collectors.toSet());
 

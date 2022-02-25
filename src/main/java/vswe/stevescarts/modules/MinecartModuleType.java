@@ -79,94 +79,6 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop, hasRenderer);
 	}
 
-	public T createModule(@Nullable ModularMinecartEntity cart) {
-		return factory.apply(cart, this);
-	}
-
-	public T createModule() {
-		return this.createModule(null);
-	}
-
-	@Override
-	public String toString() {
-		return this.id.toString();
-	}
-
-	public Identifier getId() {
-		return this.id;
-	}
-
-	public Item getItem() {
-		return this.item.get();
-	}
-
-	public ModuleCategory getCategory() {
-		return category;
-	}
-
-	public boolean isOf(ModuleCategory category) {
-		return this.category == category;
-	}
-
-	public EnumSet<ModuleSide> getSides() {
-		return this.sides;
-	}
-
-	public int getModuleCost() {
-		return this.moduleCost;
-	}
-
-	public List<Text> getTooltip() {
-		return this.tooltip;
-	}
-
-	public HullData getHullData() {
-		return hullData.orElseThrow(() -> new IllegalStateException("Not a hull: " + this));
-	}
-
-	public ToolData getToolData() {
-		return toolData.orElseThrow(() -> new IllegalStateException("Not a tool: " + this));
-	}
-
-	public TranslatableText getTranslationText() {
-		return translationText.copy();
-	}
-
-	public boolean allowsDuplicates() {
-		return allowDuplicates;
-	}
-
-	public boolean shouldRenderTop() {
-		return shouldRenderTop;
-	}
-
-	public boolean hasRenderer() {
-		return hasRenderer;
-	}
-
-	@Environment(EnvType.CLIENT)
-	public void appendTooltip(List<Text> tooltip, TooltipContext context) {
-		tooltip.addAll(this.tooltip);
-		if (context.isAdvanced()) {
-			tooltip.addAll(this.advancedTooltip);
-		} else {
-			tooltip.add(ModularMinecartItem.PRESS_SHIFT);
-		}
-	}
-
-	private List<Text> generateAdvancedTooltip() {
-		ImmutableList.Builder<Text> builder	= ImmutableList.builder();
-		if (this.sides.isEmpty()) {
-			builder.add(new TranslatableText("tooltip.stevescarts.module.sides.none").formatted(Formatting.BLUE));
-		} else {
-			builder.add(new TranslatableText("tooltip.stevescarts.module.sides.%s".formatted(this.sides.size()), (Object[]) this.sides.stream().map(ModuleSide::asText).toArray(Text[]::new)).formatted(Formatting.BLUE));
-		}
-		if (this.hullData.isEmpty()) {
-			builder.add(new TranslatableText("tooltip.stevescarts.module.cost", this.moduleCost).formatted(Formatting.LIGHT_PURPLE));
-		}
-		return builder.build();
-	}
-
 	public static NbtCompound toNbt(MinecartModule module) {
 		NbtCompound nbt = new NbtCompound();
 		nbt.putString("type", module.getType().toString());
@@ -244,14 +156,102 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return new Builder<>();
 	}
 
+	public T createModule(@Nullable ModularMinecartEntity cart) {
+		return factory.apply(cart, this);
+	}
+
+	public T createModule() {
+		return this.createModule(null);
+	}
+
+	@Override
+	public String toString() {
+		return this.id.toString();
+	}
+
+	public Identifier getId() {
+		return this.id;
+	}
+
+	public Item getItem() {
+		return this.item.get();
+	}
+
+	public ModuleCategory getCategory() {
+		return category;
+	}
+
+	public boolean isOf(ModuleCategory category) {
+		return this.category == category;
+	}
+
+	public EnumSet<ModuleSide> getSides() {
+		return this.sides;
+	}
+
+	public int getModuleCost() {
+		return this.moduleCost;
+	}
+
+	public List<Text> getTooltip() {
+		return this.tooltip;
+	}
+
+	public HullData getHullData() {
+		return hullData.orElseThrow(() -> new IllegalStateException("Not a hull: " + this));
+	}
+
+	public ToolData getToolData() {
+		return toolData.orElseThrow(() -> new IllegalStateException("Not a tool: " + this));
+	}
+
+	public TranslatableText getTranslationText() {
+		return translationText.copy();
+	}
+
+	public boolean allowsDuplicates() {
+		return allowDuplicates;
+	}
+
+	public boolean shouldRenderTop() {
+		return shouldRenderTop;
+	}
+
+	public boolean hasRenderer() {
+		return hasRenderer;
+	}
+
+	@Environment(EnvType.CLIENT)
+	public void appendTooltip(List<Text> tooltip, TooltipContext context) {
+		tooltip.addAll(this.tooltip);
+		if (context.isAdvanced()) {
+			tooltip.addAll(this.advancedTooltip);
+		} else {
+			tooltip.add(ModularMinecartItem.PRESS_SHIFT);
+		}
+	}
+
+	private List<Text> generateAdvancedTooltip() {
+		ImmutableList.Builder<Text> builder = ImmutableList.builder();
+		if (this.sides.isEmpty()) {
+			builder.add(new TranslatableText("tooltip.stevescarts.module.sides.none").formatted(Formatting.BLUE));
+		} else {
+			builder.add(new TranslatableText("tooltip.stevescarts.module.sides.%s".formatted(this.sides.size()), (Object[]) this.sides.stream().map(ModuleSide::asText).toArray(Text[]::new)).formatted(Formatting.BLUE));
+		}
+		if (this.hullData.isEmpty()) {
+			builder.add(new TranslatableText("tooltip.stevescarts.module.cost", this.moduleCost).formatted(Formatting.LIGHT_PURPLE));
+		}
+		return builder.build();
+	}
+
 	public static sealed class Builder<T extends MinecartModule> permits Hull, Tool {
+		protected final EnumSet<ModuleSide> sides = EnumSet.noneOf(ModuleSide.class);
+		protected final ImmutableList.Builder<Text> tooltip = ImmutableList.builder();
 		protected BiFunction<Item.Settings, MinecartModuleType<T>, ModuleItem> itemFactory = ModuleItem::new;
 		protected ModuleCategory category;
 		protected Identifier id;
 		protected BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory;
-		protected final EnumSet<ModuleSide> sides = EnumSet.noneOf(ModuleSide.class);
 		protected int moduleCost = 0;
-		protected final ImmutableList.Builder<Text> tooltip = ImmutableList.builder();
 		protected Item finalItem = null;
 		protected boolean allowDuplicates = false;
 		protected boolean shouldRenderTop = true;

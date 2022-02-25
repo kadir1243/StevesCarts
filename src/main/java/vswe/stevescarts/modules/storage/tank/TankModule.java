@@ -16,7 +16,7 @@ import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.ModularCartHandler;
 import vswe.stevescarts.screen.widget.WFluidSlot;
 
-public class TankModule extends StorageModule  {
+public class TankModule extends StorageModule {
 	protected final SimpleInventory bucketInventory = new SimpleInventory(2);
 	protected final Tank tank;
 

@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(AbstractMinecartEntity.class)
 public interface AbstractMinecartEntityAccessor {
 	@Accessor
-	void setYawFlipped(boolean yawFlipped);
+	boolean isYawFlipped();
 
 	@Accessor
-	boolean isYawFlipped();
+	void setYawFlipped(boolean yawFlipped);
 }

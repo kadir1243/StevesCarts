@@ -6,8 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 
 public abstract class MinecartModule {
-	protected ModularMinecartEntity minecart;
 	private final MinecartModuleType<?> type;
+	protected ModularMinecartEntity minecart;
 	private int id;
 
 	protected MinecartModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {

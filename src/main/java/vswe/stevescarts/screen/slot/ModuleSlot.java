@@ -6,8 +6,8 @@ import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.inventory.Inventory;
 
 public class ModuleSlot extends ValidatedSlot implements ChestAnimationProgress {
-	private boolean valid = true;
 	private final ChestLidAnimator animator = new ChestLidAnimator();
+	private boolean valid = true;
 	private int tickOffset;
 
 	public ModuleSlot(Inventory inventory, int index, int x, int y) {

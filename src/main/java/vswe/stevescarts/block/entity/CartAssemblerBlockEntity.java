@@ -32,12 +32,12 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 	public static final int ADDON_SLOT_END = 28;
 	public static final int OUTPUT_SLOT = 29;
 	public static final int FUEL_SLOT = 30;
-	private ItemStack hull = ItemStack.EMPTY;
 	private final DefaultedList<ItemStack> engines = DefaultedList.ofSize(5, ItemStack.EMPTY);
-	private ItemStack tool = ItemStack.EMPTY;
 	private final DefaultedList<ItemStack> attachments = DefaultedList.ofSize(6, ItemStack.EMPTY);
 	private final DefaultedList<ItemStack> storage = DefaultedList.ofSize(4, ItemStack.EMPTY);
 	private final DefaultedList<ItemStack> addons = DefaultedList.ofSize(12, ItemStack.EMPTY);
+	private ItemStack hull = ItemStack.EMPTY;
+	private ItemStack tool = ItemStack.EMPTY;
 	private ItemStack output = ItemStack.EMPTY;
 	private ItemStack fuel = ItemStack.EMPTY;
 

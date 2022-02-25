@@ -36,9 +36,9 @@ import static vswe.stevescarts.StevesCarts.id;
 
 @Environment(EnvType.CLIENT)
 public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadListener {
+	public final Map<MinecartModuleType<?>, ModuleRenderer<? extends MinecartModule>> renderers = new HashMap<>();
 	private final TextRenderer textRenderer;
 	private final ItemRenderer itemRenderer;
-	public final Map<MinecartModuleType<?>, ModuleRenderer<? extends MinecartModule>> renderers = new HashMap<>();
 
 	public ModuleRenderDispatcher(TextRenderer textRenderer, ItemRenderer itemRenderer) {
 		this.textRenderer = textRenderer;
@@ -48,14 +48,14 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 	/**
 	 * Renders the specified module.
 	 *
-	 * @param module The module to render.
-	 * @param entityYaw The yaw of the entity.
-	 * @param tickDelta The time delta between ticks.
-	 * @param matrices The matrix stack.
+	 * @param module          The module to render.
+	 * @param entityYaw       The yaw of the entity.
+	 * @param tickDelta       The time delta between ticks.
+	 * @param matrices        The matrix stack.
 	 * @param vertexConsumers The vertex consumer provider.
-	 * @param entityLight The light level of the entity.
-	 * @param profile Whether to profile the rendering.
-	 * @param <T> The module type.
+	 * @param entityLight     The light level of the entity.
+	 * @param profile         Whether to profile the rendering.
+	 * @param <T>             The module type.
 	 */
 	public <T extends MinecartModule> void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight, boolean profile) {
 		if (module.getType().hasRenderer()) {

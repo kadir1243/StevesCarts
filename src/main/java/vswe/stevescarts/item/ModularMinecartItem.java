@@ -33,6 +33,12 @@ public class ModularMinecartItem extends Item {
 		super(settings.maxCount(1));
 	}
 
+	public static ItemStack create(Collection<MinecartModule> modules) {
+		ItemStack stack = StevesCartsItems.MODULAR_CART.getDefaultStack();
+		ModuleStorage.write(stack, modules);
+		return stack;
+	}
+
 	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		BlockPos blockPos;
@@ -68,11 +74,5 @@ public class ModularMinecartItem extends Item {
 			return;
 		}
 		ModuleStorage.read(stack).forEach(module -> tooltip.add(module.getType().getTranslationText().formatted(Formatting.GRAY)));
-	}
-
-	public static ItemStack create(Collection<MinecartModule> modules) {
-		ItemStack stack = StevesCartsItems.MODULAR_CART.getDefaultStack();
-		ModuleStorage.write(stack, modules);
-		return stack;
 	}
 }

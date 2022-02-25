@@ -23,7 +23,7 @@ public class WInformation extends WPlainPanel {
 		ScreenDrawing.texturedRect(matrices, left, top, 100, 9, INFORMATION_BUTTON, 0xFFFFFFFF);
 		matrices.push();
 		matrices.scale(1F, 0.8F, 1F);
-		matrices.translate(0F, (top)/0.8F - (top) + 1, 0F);
+		matrices.translate(0F, (top) / 0.8F - (top) + 1, 0F);
 		ScreenDrawing.drawString(matrices, TEXT.asOrderedText(), HorizontalAlignment.CENTER, left + 12, top + 1, 85, 0xDDDDDD);
 		matrices.pop();
 	};

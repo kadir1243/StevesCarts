@@ -22,8 +22,8 @@ import java.util.Optional;
 public class CoalEngineModule extends EngineModule {
 	private final int fuelSlots;
 	private final float fuelMultiplier;
-	private int fireIndex = 0;
 	private final SimpleInventory inventory;
+	private int fireIndex = 0;
 	private int fuelAmount = 0;
 	private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
 		@Override

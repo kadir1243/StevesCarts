@@ -23,6 +23,10 @@ public class StevesCarts implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger("stevescarts");
 	public static EntityType<ModularMinecartEntity> MODULAR_MINECART_ENTITY;
 
+	public static Identifier id(String s) {
+		return new Identifier("stevescarts", s);
+	}
+
 	@Override
 	public void onInitialize() {
 		StevesCartsItems.init();
@@ -38,9 +42,5 @@ public class StevesCarts implements ModInitializer {
 			}
 		});
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
-	}
-
-	public static Identifier id(String s) {
-		return new Identifier("stevescarts", s);
 	}
 }

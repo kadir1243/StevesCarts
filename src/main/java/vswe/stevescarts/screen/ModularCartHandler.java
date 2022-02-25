@@ -56,6 +56,10 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		this.minecartEntity.get().onScreenOpen();
 	}
 
+	public ModularCartHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
+		this(syncId, playerInventory, (ModularMinecartEntity) playerInventory.player.world.getEntityById(buf.readInt()));
+	}
+
 	@Override
 	public void close(PlayerEntity player) {
 		super.close(player);
@@ -69,10 +73,6 @@ public class ModularCartHandler extends SyncedGuiDescription {
 	public void addCentered(WWidget widget, int y, int width, int height) {
 		WPlainPanel root = (WPlainPanel) this.getRootPanel();
 		root.add(widget, (root.getWidth() - width) / 2 - root.getInsets().left(), y, width, height);
-	}
-
-	public ModularCartHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
-		this(syncId, playerInventory, (ModularMinecartEntity) playerInventory.player.world.getEntityById(buf.readInt()));
 	}
 
 	public void addCentered(WWidget widget, int y) {

@@ -40,7 +40,7 @@ public class WAssembleButton extends WButton {
 		}
 		matrices.push();
 		matrices.scale(1F, 0.8F, 1F);
-		matrices.translate(0F, (y + 1)/0.8F - (y + 1), 0F);
+		matrices.translate(0F, (y + 1) / 0.8F - (y + 1), 0F);
 		ScreenDrawing.drawString(matrices, this.getLabel().asOrderedText(), HorizontalAlignment.CENTER, x, y + 1, this.width, color);
 		matrices.pop();
 	}
