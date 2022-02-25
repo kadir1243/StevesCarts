@@ -7,6 +7,7 @@ import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
@@ -70,22 +71,30 @@ public class WFluidSlot extends WWidget {
 
 				Tessellator tessellator = Tessellator.getInstance();
 				BufferBuilder tes = tessellator.getBuffer();
-				tes.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
+				tes.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL);
 				tes.vertex(drawX, drawY + drawHeight, 0)
 						.color(r, g, b, 1.0F)
 						.texture(minU, minV + (maxV - minV) * drawHeight / 16F)
+						.light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+						.normal(0, 1, 0)
 						.next();
 				tes.vertex(drawX + drawWidth, drawY + drawHeight, 0)
 						.color(r, g, b, 1.0F)
 						.texture(minU + (maxU - minU) * drawWidth / 16F, minV + (maxV - minV) * drawHeight / 16F)
+						.light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+						.normal(0, 1, 0)
 						.next();
 				tes.vertex(drawX + drawWidth, drawY, 0)
 						.color(r, g, b, 1.0F)
 						.texture(minU + (maxU - minU) * drawWidth / 16F, minV)
+						.light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+						.normal(0, 1, 0)
 						.next();
 				tes.vertex(drawX, drawY, 0)
 						.color(r, g, b, 1.0F)
 						.texture(minU, minV)
+						.light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+						.normal(0, 1, 0)
 						.next();
 				tessellator.draw();
 			}
