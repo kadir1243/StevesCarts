@@ -101,7 +101,7 @@
   "item.stevescarts.iron_blade": "Iron Blade",
   "item.stevescarts.blade_arm": "Blade Arm",
 
-  "entity.stevescarts.modular_cart": "Modular Cart",
+  "entity.stevescarts.cart": "Modular Cart",
 
   "module.stevescarts.wooden_hull": "Wooden Hull",
   "module.stevescarts.standard_hull": "Standard Hull",
@@ -170,6 +170,7 @@
   "tooltip.stevescarts.hull.complexity_max": "Max Complexity: %s",
   "tooltip.stevescarts.fluid.max": "Max Fluid: ",
   "tooltip.stevescarts.fluid.current": "Current Fluid: ",
+  "tooltip.stevescarts.fluid.name": "Fluid Name: ",
   "tooltip.stevescarts.press_shift": "Press shift for more information",
   "tooltip.stevescarts.module.sides.none": "Will not occupy any sides",
   "tooltip.stevescarts.module.sides.1": "Will occupy the %s side",
