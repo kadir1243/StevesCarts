@@ -245,6 +245,10 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		return ActionResult.success(player.world.isClient);
 	}
 
+	public void reverse() {
+		this.setVelocity(this.getVelocity().multiply(-1, 0, -1));
+	}
+
 	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {
 		@Override
 		public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
