@@ -45,9 +45,9 @@ public class BrakeModule extends MinecartModule implements Configurable, Togglea
 			brakeButton.changeTexture();
 		}
 		WBrakeButton reverseButton = new WBrakeButton(WBrakeButton.FG_REVERSE, new TranslatableText("screen.stevescarts.cart.reverse"));
-		panel.add(reverseButton, 0, 21);
+		panel.add(reverseButton, 0, 23);
 		reverseButton.setOnClick(() -> ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_REVERSE, buf -> {}));
-		panel.setSize(40, 50);
+		panel.setSize(30, 50);
 		ScreenNetworking.of(handler, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_BRAKE, buf -> this.active = buf.readBoolean());
 		ScreenNetworking.of(handler, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.PACKET_REVERSE, buf -> this.minecart.reverse());
 	}
