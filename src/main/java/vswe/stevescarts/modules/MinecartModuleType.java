@@ -24,6 +24,7 @@ import vswe.stevescarts.item.ModularMinecartItem;
 import vswe.stevescarts.item.modules.ModuleItem;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
@@ -49,8 +50,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final boolean allowDuplicates;
 	private final boolean shouldRenderTop;
 	private final boolean hasRenderer;
+	private final List<Supplier<MinecartModuleType<?>>> explicitRequirements;
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer) {
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer, List<Supplier<MinecartModuleType<?>>> explicitRequirements) {
 		this.factory = factory;
 		this.item = item;
 		this.category = category;
@@ -64,19 +66,20 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.allowDuplicates = allowDuplicates;
 		this.shouldRenderTop = shouldRenderTop;
 		this.hasRenderer = hasRenderer;
+		this.explicitRequirements = explicitRequirements;
 		this.advancedTooltip = this.generateAdvancedTooltip();
 	}
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData), false, true, true);
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData, List<Supplier<MinecartModuleType<?>>> explicitRequirements) {
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData), false, true, true, explicitRequirements);
 	}
 
 	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, HullData hullData) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty(), false, true, true);
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty(), false, true, true, Collections.emptyList());
 	}
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer) {
-		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop, hasRenderer);
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer, List<Supplier<MinecartModuleType<?>>> explicitRequirements) {
+		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop, hasRenderer, explicitRequirements);
 	}
 
 	public static NbtCompound toNbt(MinecartModule module) {
@@ -231,6 +234,17 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 	}
 
+	public MinecartModuleType<?> matchesRequirements(List<MinecartModuleType<?>> types) {
+		for (Supplier<MinecartModuleType<?>> req : this.explicitRequirements) {
+			MinecartModuleType<?> type = req.get();
+			if (!types.contains(type)) {
+				return type;
+			}
+		}
+
+		return null;
+	}
+
 	private List<Text> generateAdvancedTooltip() {
 		ImmutableList.Builder<Text> builder = ImmutableList.builder();
 		if (this.sides.isEmpty()) {
@@ -256,6 +270,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		protected boolean allowDuplicates = false;
 		protected boolean shouldRenderTop = true;
 		protected boolean hasRenderer = false;
+		protected ImmutableList.Builder<Supplier<MinecartModuleType<?>>> explicitRequirements = ImmutableList.builder();
 
 		protected Builder() {
 		}
@@ -321,6 +336,18 @@ public final class MinecartModuleType<T extends MinecartModule> {
 			return this;
 		}
 
+		public Builder<T> require(MinecartModuleType<?>... types) {
+			for (MinecartModuleType<?> type : types) {
+				this.explicitRequirements.add(() -> type);
+			}
+			return this;
+		}
+
+		public Builder<T> require(Supplier<MinecartModuleType<?>> type) {
+			this.explicitRequirements.add(type);
+			return this;
+		}
+
 		public Builder<T> hasRenderer() {
 			this.hasRenderer = true;
 			return this;
@@ -336,7 +363,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 
 		public MinecartModuleType<T> buildAndRegister() {
 			this.validate();
-			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), this.allowDuplicates, this.shouldRenderTop, this.hasRenderer));
+			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), this.allowDuplicates, this.shouldRenderTop, this.hasRenderer, this.explicitRequirements.build()));
 			this.finalItem = Registry.register(Registry.ITEM, type.getId(), this.itemFactory.apply(new Item.Settings(), type));
 			return type;
 		}
@@ -430,6 +457,31 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 
 		@Override
+		public Hull<T> allowDuplicates() {
+			return (Hull<T>) super.allowDuplicates();
+		}
+
+		@Override
+		public Hull<T> noRenderTop() {
+			return (Hull<T>) super.noRenderTop();
+		}
+
+		@Override
+		public Hull<T> require(MinecartModuleType<?>... types) {
+			return (Hull<T>) super.require(types);
+		}
+
+		@Override
+		public Hull<T> require(Supplier<MinecartModuleType<?>> type) {
+			return (Hull<T>) super.require(type);
+		}
+
+		@Override
+		public Hull<T> hasRenderer() {
+			return (Hull<T>) super.hasRenderer();
+		}
+
+		@Override
 		public MinecartModuleType<T> buildAndRegister() {
 			if (this.modularCapacity <= 0) {
 				throw new IllegalArgumentException("Modular capacity must be greater than 0");
@@ -500,6 +552,32 @@ public final class MinecartModuleType<T extends MinecartModule> {
 			return (Tool<T>) super.tooltip(tooltip);
 		}
 
+		@Override
+		public Tool<T> require(MinecartModuleType<?>... types) {
+			return (Tool<T>) super.require(types);
+		}
+
+		@Override
+		public Tool<T> require(Supplier<MinecartModuleType<?>> type) {
+			return (Tool<T>) super.require(type);
+		}
+
+		@Override
+		public Tool<T> hasRenderer() {
+			return (Tool<T>) super.hasRenderer();
+		}
+
+
+		@Override
+		public Tool<T> allowDuplicates() {
+			return (Tool<T>) super.allowDuplicates();
+		}
+
+		@Override
+		public Tool<T> noRenderTop() {
+			return (Tool<T>) super.noRenderTop();
+		}
+
 		public Tool<T> unbreakable() {
 			this.unbreakable = true;
 			return this;
@@ -508,7 +586,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		@Override
 		public MinecartModuleType<T> buildAndRegister() {
 			this.validate();
-			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), new ToolData(this.unbreakable)));
+			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), new ToolData(this.unbreakable), this.explicitRequirements.build()));
 			this.finalItem = Registry.register(Registry.ITEM, this.id, this.itemFactory.apply(new Item.Settings(), type));
 			return type;
 		}
