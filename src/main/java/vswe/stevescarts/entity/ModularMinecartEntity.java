@@ -130,6 +130,17 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 				.ifPresent(this::propel);
 	}
 
+	@Override
+	protected void applySlowdown() {
+		double drag = this.hasPassengers() ? 0.96 : 0.94;
+		Vec3d vec3d = this.getVelocity();
+		vec3d = vec3d.multiply(drag, 0.0, drag);
+		if (this.isTouchingWater()) {
+			vec3d = vec3d.multiply(0.85f);
+		}
+		this.setVelocity(vec3d);
+	}
+
 	private void propel(MinecartModule engine) {
 		((EngineModule) engine).setPropelling(true);
 		engine.onPropel();

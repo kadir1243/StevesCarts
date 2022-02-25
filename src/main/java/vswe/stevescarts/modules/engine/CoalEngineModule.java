@@ -85,7 +85,7 @@ public class CoalEngineModule extends EngineModule {
 		handler.addProperties(this.propertyDelegate);
 		WLabel fuelLabel = new WPropertyLabel("screen.stevescarts.cart.fuel", 0);
 		panel.add(fuelLabel, 0, 35);
-		panel.setSize(60, 50);
+		panel.setSize(72, 50);
 	}
 
 	@Override
