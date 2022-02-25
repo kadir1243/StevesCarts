@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.screen.PropertyDelegate;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.ModularCartHandler;
 import vswe.stevescarts.screen.widget.WPropertyLabel;
 
@@ -76,7 +77,7 @@ public class CoalEngineModule extends EngineModule {
 	// TODO: why property delegate :concern:
 	@Override
 	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
-		WLabel label = new WLabel(this.getType().getTranslationText());
+		WLabel label = new WLabel(StevesCartsModuleTypes.COAL_ENGINE.getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot fuel = WItemSlot.of(this.inventory, 0, this.fuelSlots, 1);
 		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0 && stack.getItem().getRecipeRemainder() == null);
@@ -85,7 +86,7 @@ public class CoalEngineModule extends EngineModule {
 		handler.addProperties(this.propertyDelegate);
 		WLabel fuelLabel = new WPropertyLabel("screen.stevescarts.cart.fuel", 0);
 		panel.add(fuelLabel, 0, 35);
-		panel.setSize(72, 50);
+		panel.setSize(60, 50);
 	}
 
 	@Override
