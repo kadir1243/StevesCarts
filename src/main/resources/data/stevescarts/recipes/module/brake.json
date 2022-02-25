@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  R",
+    "#S ",
+    "X# "
+  ],
+  "key": {
+    "R": {
+      "tag": "c:red_dyes"
+    },
+    "S": {
+      "item": "stevescarts:refined_handle"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    },
+    "X": {
+      "item": "c:redstone_dusts"
+    }
+  },
+  "result": {
+    "item": "stevescarts:brake"
+  }
+}

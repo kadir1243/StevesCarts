@@ -120,22 +120,31 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
-		this.modules.entrySet()
-				.stream()
-				.filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE) && entry.getValue().canPropel())
-				.peek(entry -> ((EngineModule) entry.getValue()).setPropelling(false))
-				.findFirst()
-				.map(Map.Entry::getValue)
-				.filter(t -> {
-					int x = (int) Math.floor(this.getX());
-					int y = (int) Math.floor(this.getY());
-					int z = (int) Math.floor(this.getZ());
-					BlockPos.Mutable pos = new BlockPos.Mutable(x, y, z);
-					if (world.getBlockState(pos.down()).isIn(BlockTags.RAILS)) pos.move(Direction.DOWN);
-					BlockState state = world.getBlockState(pos);
-					return state.isIn(BlockTags.RAILS);
-				})
-				.ifPresent(this::propel);
+		boolean move = true;
+		for (MinecartModule minecartModule : this.modules.values()) {
+			if (!minecartModule.shouldMove()) {
+				move = false;
+				break;
+			}
+		}
+		if (move) {
+			this.modules.entrySet()
+					.stream()
+					.filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE) && entry.getValue().canPropel())
+					.peek(entry -> ((EngineModule) entry.getValue()).setPropelling(false))
+					.findFirst()
+					.map(Map.Entry::getValue)
+					.filter(t -> {
+						int x = (int) Math.floor(this.getX());
+						int y = (int) Math.floor(this.getY());
+						int z = (int) Math.floor(this.getZ());
+						BlockPos.Mutable pos = new BlockPos.Mutable(x, y, z);
+						if (world.getBlockState(pos.down()).isIn(BlockTags.RAILS)) pos.move(Direction.DOWN);
+						BlockState state = world.getBlockState(pos);
+						return state.isIn(BlockTags.RAILS);
+					})
+					.ifPresent(this::propel);
+		}
 	}
 
 	@Override

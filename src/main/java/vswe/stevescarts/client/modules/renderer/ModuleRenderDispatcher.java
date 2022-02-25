@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.profiler.Profiler;
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.client.modules.model.addon.LeverModel;
 import vswe.stevescarts.client.modules.model.attachment.SeatModel;
 import vswe.stevescarts.client.modules.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
@@ -110,6 +111,8 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 
 		register(StevesCartsModuleTypes.COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
 		register(StevesCartsModuleTypes.TINY_COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
+
+		register(StevesCartsModuleTypes.BRAKE, new GenericRenderer(id("textures/modules/addon/red_lever.png"), LeverModel::new));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}

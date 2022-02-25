@@ -67,7 +67,7 @@ public abstract class MinecartModule {
 	public void onScreenClose() {
 	}
 
-	public boolean shouldPropel() {
+	public boolean shouldMove() {
 		return true;
 	}
 

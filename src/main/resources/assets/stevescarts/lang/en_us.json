@@ -117,6 +117,7 @@
   "module.stevescarts.seat": "Seat",
   "module.stevescarts.tiny_coal_engine": "Tiny Coal Engine",
   "module.stevescarts.coal_engine": "Coal Engine",
+  "module.stevescarts.brake": "Brake",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",
