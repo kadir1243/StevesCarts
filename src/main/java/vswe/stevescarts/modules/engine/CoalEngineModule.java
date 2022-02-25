@@ -1,5 +1,7 @@
 package vswe.stevescarts.modules.engine;
 
+import io.github.cottonmc.cotton.gui.networking.NetworkSide;
+import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
@@ -9,11 +11,13 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.screen.Property;
 import net.minecraft.screen.PropertyDelegate;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.ModularCartHandler;
+import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 import vswe.stevescarts.screen.widget.WPropertyLabel;
 
 import java.util.Optional;
@@ -83,9 +87,18 @@ public class CoalEngineModule extends EngineModule {
 		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0 && stack.getItem().getRecipeRemainder() == null);
 		panel.add(fuel, 0, 15);
 		handler.addProperties(this.propertyDelegate);
-		WLabel fuelLabel = new WPropertyLabel("screen.stevescarts.cart.fuel", 0);
+		Property fuelProperty = Property.create();
+		fuelProperty.set(this.fuelAmount);
+		WLabel fuelLabel = new WPropertyLabel("screen.stevescarts.cart.fuel", fuelProperty);
+		handler.addTicker(() -> {
+			fuelProperty.set(this.fuelAmount);
+			if (fuelProperty.hasChanged()) {
+				ScreenNetworking.of(handler, NetworkSide.SERVER).send(StevesCartsScreenHandlers.PACKET_COAL_FUEL_UPDATE, buf -> buf.writeVarInt(fuelProperty.get()));
+			}
+		});
 		panel.add(fuelLabel, 0, 35);
 		panel.setSize(60, 50);
+		ScreenNetworking.of(handler, NetworkSide.CLIENT).receive(StevesCartsScreenHandlers.PACKET_COAL_FUEL_UPDATE, buf -> fuelProperty.set(buf.readVarInt()));
 	}
 
 	@Override

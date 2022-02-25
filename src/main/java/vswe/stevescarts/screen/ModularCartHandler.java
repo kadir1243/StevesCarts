@@ -7,6 +7,7 @@ import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Axis;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
@@ -21,6 +22,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class ModularCartHandler extends SyncedGuiDescription {
+	private final List<Runnable> tickers = new ObjectArrayList<>();
 	private final WeakReference<ModularMinecartEntity> minecartEntity;
 
 	public ModularCartHandler(int syncId, PlayerInventory playerInventory, ModularMinecartEntity minecartEntity) {
@@ -89,5 +91,16 @@ public class ModularCartHandler extends SyncedGuiDescription {
 	@Override
 	public Property addProperty(Property property) {
 		return super.addProperty(property);
+	}
+
+
+	@Override
+	public void sendContentUpdates() {
+		super.sendContentUpdates();
+		this.tickers.forEach(Runnable::run);
+	}
+
+	public void addTicker(Runnable ticker) {
+		this.tickers.add(ticker);
 	}
 }
