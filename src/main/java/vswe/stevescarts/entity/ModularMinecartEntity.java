@@ -55,9 +55,9 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		builder.add(RailShape.NORTH_WEST);
 	}).build();
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
-	private int activatorX;
-	private int activatorY;
-	private int activatorZ;
+	private int railX;
+	private int railY;
+	private int railZ;
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -183,13 +183,20 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	@Override
 	public void onActivatorRail(int x, int y, int z, boolean powered) {
-		if (!powered || this.activatorX == x && this.activatorY == y && this.activatorZ == z) {
+		if (!powered || this.railX == x && this.railY == y && this.railZ == z) {
 			return;
 		}
-		this.activatorX = x;
-		this.activatorY = y;
-		this.activatorZ = z;
+		this.railX = x;
+		this.railY = y;
+		this.railZ = z;
 		this.modules.values().forEach(MinecartModule::onActivate);
+	}
+
+	@Override
+	protected void moveOnRail(BlockPos pos, BlockState state) {
+		this.railX = pos.getX();
+		this.railY = pos.getY();
+		this.railZ = pos.getZ();
 	}
 
 	public void writeModuleData(PacketByteBuf buf) {
