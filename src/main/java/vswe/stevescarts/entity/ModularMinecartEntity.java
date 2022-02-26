@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -194,9 +195,11 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	@Override
 	protected void moveOnRail(BlockPos pos, BlockState state) {
-		this.railX = pos.getX();
-		this.railY = pos.getY();
-		this.railZ = pos.getZ();
+		if (state.isOf(Blocks.ACTIVATOR_RAIL)) {
+			this.railX = pos.getX();
+			this.railY = pos.getY() - 1; // a bit hacky but it works
+			this.railZ = pos.getZ();
+		}
 		super.moveOnRail(pos, state);
 	}
 
