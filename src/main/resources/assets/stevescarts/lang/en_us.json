@@ -125,6 +125,8 @@
   "module.stevescarts.brake": "Brake",
   "module.stevescarts.firework_display": "Firework Display",
   "module.stevescarts.invisibility_core": "Invisibility Core",
+  "module.stevescarts.internal_storage": "Internal Storage",
+  "module.stevescarts.internal_tank": "Internal Tank",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",

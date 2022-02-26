@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.storage.SideTanksModel;
 import vswe.stevescarts.client.modules.renderer.FluidRenderUtil;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
-import vswe.stevescarts.modules.storage.tank.TankModule;
+import vswe.stevescarts.modules.storage.TankModule;
 
 public class SideTanksRenderer extends ModuleRenderer<TankModule> {
 	private final SideTanksModel model;

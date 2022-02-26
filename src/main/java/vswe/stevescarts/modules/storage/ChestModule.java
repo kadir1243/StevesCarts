@@ -1,4 +1,4 @@
-package vswe.stevescarts.modules.storage.chest;
+package vswe.stevescarts.modules.storage;
 
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
@@ -9,12 +9,18 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.ModularCartHandler;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ChestModule extends StorageModule implements Inventory {
 	protected final int slotsWidth;
@@ -24,7 +30,7 @@ public class ChestModule extends StorageModule implements Inventory {
 	protected final DefaultedList<ItemStack> inventory;
 	protected final ChestLidAnimator chestLidAnimator = new ChestLidAnimator();
 
-	protected ChestModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, int slotsWidth, int slotsHeight) {
+	public ChestModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, int slotsWidth, int slotsHeight) {
 		super(minecart, type);
 		this.slotsWidth = slotsWidth;
 		this.slotsHeight = slotsHeight;
@@ -120,23 +126,33 @@ public class ChestModule extends StorageModule implements Inventory {
 
 	@Override
 	public void tick() {
-		if (this.minecart.world.isClient) {
+		if (this.minecart.world.isClient && this.shouldAnimate()) {
 			this.chestLidAnimator.step();
 		}
 	}
 
 	@Override
 	public void onScreenOpen() {
-		if (this.minecart.world.isClient) {
+		if (this.minecart.world.isClient && this.shouldAnimate()) {
 			this.chestLidAnimator.setOpen(true);
+		}
+		if (!this.minecart.world.isClient) {
+			this.minecart.world.playSound(null, this.minecart.getX(), this.minecart.getY(), this.minecart.getZ(), SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5f, ThreadLocalRandom.current().nextFloat() * 0.1f + 0.9f);
 		}
 	}
 
 	@Override
 	public void onScreenClose() {
-		if (this.minecart.world.isClient) {
+		if (this.minecart.world.isClient && this.shouldAnimate()) {
 			this.chestLidAnimator.setOpen(false);
 		}
+		if (!this.minecart.world.isClient) {
+			this.minecart.world.playSound(null, this.minecart.getX(), this.minecart.getY(), this.minecart.getZ(), SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5f, ThreadLocalRandom.current().nextFloat() * 0.1f + 0.9f);
+		}
+	}
+
+	public boolean shouldAnimate() {
+		return true;
 	}
 
 	public float getOpenProgress(float delta) {

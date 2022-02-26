@@ -9,7 +9,7 @@ import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.util.Identifier;
 import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.MinecartModule;
-import vswe.stevescarts.modules.storage.chest.SideChestsModule;
+import vswe.stevescarts.modules.storage.ChestModule;
 
 public class SideChestsModel extends ModuleModel {
 	private final ModelPart lid;
@@ -33,6 +33,6 @@ public class SideChestsModel extends ModuleModel {
 	@Override
 	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
 		super.animateModel(module, limbAngle, limbDistance, tickDelta);
-		this.lid.pitch = this.lock.pitch = ((SideChestsModule) module).getOpenProgress(tickDelta) * 1.5707964f;
+		this.lid.pitch = this.lock.pitch = ((ChestModule) module).getOpenProgress(tickDelta) * 1.5707964f;
 	}
 }

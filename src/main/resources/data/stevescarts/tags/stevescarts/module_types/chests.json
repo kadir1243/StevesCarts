@@ -3,6 +3,7 @@
   "values": [
     "stevescarts:front_chest",
     "stevescarts:top_chest",
-    "stevescarts:side_chests"
+    "stevescarts:side_chests",
+    "stevescarts:internal_storage"
   ]
 }

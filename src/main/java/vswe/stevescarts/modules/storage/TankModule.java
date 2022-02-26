@@ -1,4 +1,4 @@
-package vswe.stevescarts.modules.storage.tank;
+package vswe.stevescarts.modules.storage;
 
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
