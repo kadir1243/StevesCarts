@@ -12,6 +12,8 @@
   "screen.stevescarts.cart_assembler.complexity_cap": "Complexity Cap: %s",
   "screen.stevescarts.cart_assembler.time": "Time: %s",
   "screen.stevescarts.cart_assembler.ready": "Ready to Assemble",
+  "screen.stevescarts.cart_assembler.missing_requirement": "%s requires a %s",
+  "screen.stevescarts.cart_assembler.incompatible": "%s is incompatible with %s",
   "screen.stevescarts.cart.fuel": "Fuel: %s",
   "screen.stevescarts.cart.reverse": "Reverse the cart's direction",
   "screen.stevescarts.cart.brake": "Start/Stop the cart",

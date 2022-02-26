@@ -8,12 +8,14 @@ import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.WPlayerInvPanel;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.tag.Tag;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
@@ -28,6 +30,7 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
 import vswe.stevescarts.modules.ModuleSide;
 import vswe.stevescarts.modules.hull.HullModule;
+import vswe.stevescarts.modules.tags.ModuleTags;
 import vswe.stevescarts.screen.widget.WAssembleButton;
 import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
@@ -213,6 +216,42 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				if (cost > modCap) {
 					invalid = true;
 					info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.excess_capacity", hull.getTranslationText()));
+				}
+			}
+
+			// Disallow missing explicit requirements
+			if (!invalid) {
+				for (MinecartModuleType<?> type : types) {
+					MinecartModuleType<?> req = type.matchesRequirements(types);
+					if (req == null) {
+						continue;
+					}
+					invalid = true;
+					info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.missing_requirement", type.getTranslationText(), req.getTranslationText()));
+				}
+			}
+
+			// Disallow incompatibilities
+			if (!invalid) {
+				for (MinecartModuleType<?> type : types) {
+					MinecartModuleType<?> incompat = type.checkIncompatibilities(types);
+					if (incompat == null) {
+						continue;
+					}
+					invalid = true;
+					info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.incompatible", type.getTranslationText(), incompat.getTranslationText()));
+				}
+			}
+
+			// Disallow missing tag requirements
+			if (!invalid) {
+				for (MinecartModuleType<?> type : types) {
+					var entry = type.matchesTagRequirements(types);
+					if (entry == null) {
+						continue;
+					}
+					invalid = true;
+					info.setErrText(new TranslatableText("screen.stevescarts.cart_assembler.missing_tag_requirement", type.getTranslationText(), entry.getIntValue(), ModuleTags.toText(entry.getKey())));
 				}
 			}
 
