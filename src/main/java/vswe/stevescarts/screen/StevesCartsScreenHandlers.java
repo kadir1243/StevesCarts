@@ -19,6 +19,7 @@ public class StevesCartsScreenHandlers {
 	public static final Identifier PACKET_BRAKE = StevesCarts.id("brake");
 	public static final Identifier PACKET_REVERSE = StevesCarts.id("reverse");
 	public static final Identifier PACKET_COAL_FUEL_UPDATE = StevesCarts.id("coal_fuel_update");
+	public static final Identifier PACKET_TOGGLE_INVISIBILITY = StevesCarts.id("toggle_invisibility");
 
 	public static void init() {
 	}

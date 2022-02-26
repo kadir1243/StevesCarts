@@ -41,7 +41,7 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		boxToAdd.setSpacing(5);
 		rootPanel.add(verticalBox, 20, 30);
 		box1.setHorizontalAlignment(HorizontalAlignment.CENTER);
-		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).toList();
+		List<Configurable> panels = minecartEntity.getModuleList().stream().filter(Configurable.class::isInstance).map(Configurable.class::cast).filter(c -> !c.shouldSkip()).toList();
 		int totalWidth = 0;
 		for (Configurable configurable : panels) {
 			WPlainPanel inPanel = new WPlainPanel();

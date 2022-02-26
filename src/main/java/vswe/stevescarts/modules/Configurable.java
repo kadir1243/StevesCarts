@@ -6,4 +6,8 @@ import vswe.stevescarts.screen.ModularCartHandler;
 
 public interface Configurable {
 	void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player);
+
+	default boolean shouldSkip() {
+		return false;
+	}
 }

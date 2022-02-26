@@ -17,6 +17,7 @@
   "screen.stevescarts.cart.fuel": "Fuel: %s",
   "screen.stevescarts.cart.reverse": "Reverse the cart's direction",
   "screen.stevescarts.cart.brake": "Start/Stop the cart",
+  "screen.stevescarts.cart.invisibility": "Toggle Invisibility",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
@@ -123,6 +124,7 @@
   "module.stevescarts.coal_engine": "Coal Engine",
   "module.stevescarts.brake": "Brake",
   "module.stevescarts.firework_display": "Firework Display",
+  "module.stevescarts.invisibility_core": "Invisibility Core",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",

@@ -68,6 +68,7 @@ public class FireworkDisplayModule extends MinecartModule implements Configurabl
 		WItemSlot slots = WItemSlot.of(this.inventory, 0, 5, 3);
 		slots.setFilter(stack -> stack.isOf(Items.FIREWORK_ROCKET));
 		panel.add(slots, 0, 10);
+		panel.layout();
 	}
 
 	public class FakeBlockPointer implements BlockPointer {
