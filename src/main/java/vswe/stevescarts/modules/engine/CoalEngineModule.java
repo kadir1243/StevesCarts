@@ -11,6 +11,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.PropertyDelegate;
 import vswe.stevescarts.entity.ModularMinecartEntity;
@@ -29,6 +30,7 @@ public class CoalEngineModule extends EngineModule {
 	private final SimpleInventory inventory;
 	private int fireIndex = 0;
 	private int fuelAmount = 0;
+	private int nextPuff = 0;
 	private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
 		@Override
 		public int get(int index) {
@@ -125,6 +127,16 @@ public class CoalEngineModule extends EngineModule {
 			}
 		} else {
 			this.fireIndex = -1;
+		}
+		if (this.isPropelling()) {
+			if (this.nextPuff <= 0) {
+				if (this.minecart.world.isClient()) {
+					this.minecart.world.addParticle(ParticleTypes.SMOKE, this.minecart.getX(), this.minecart.getY() + 0.5, this.minecart.getZ(), 0, 0.05, 0);
+				}
+				this.nextPuff = 20;
+			} else {
+				this.nextPuff--;
+			}
 		}
 	}
 

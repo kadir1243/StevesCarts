@@ -193,16 +193,6 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		this.modules.values().forEach(MinecartModule::onActivate);
 	}
 
-	@Override
-	protected void moveOnRail(BlockPos pos, BlockState state) {
-		if (state.isOf(Blocks.ACTIVATOR_RAIL)) {
-			this.railX = pos.getX();
-			this.railY = pos.getY() - 1; // a bit hacky but it works
-			this.railZ = pos.getZ();
-		}
-		super.moveOnRail(pos, state);
-	}
-
 	public void writeModuleData(PacketByteBuf buf) {
 		buf.writeVarInt(this.modules.size());
 		for (MinecartModule module : this.getModuleList()) {
