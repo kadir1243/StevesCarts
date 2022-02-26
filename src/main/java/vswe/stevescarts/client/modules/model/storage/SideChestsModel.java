@@ -26,7 +26,7 @@ public class SideChestsModel extends ModuleModel {
 		ModelPartData modelPartData = modelData.getRoot();
 		modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 7).cuboid(8.0f, 3.0f, 2.0f, 16, 6, 4), ModelTransform.pivot(-16.0f, -5.5f, -14.0f));
 		modelPartData.addChild("lid", ModelPartBuilder.create().uv(0, 0).cuboid(8.0f, -3.0f, -4.0f, 16, 3, 4), ModelTransform.pivot(-16.0f, -1.5f, -8.0f));
-		modelPartData.addChild("lock", ModelPartBuilder.create().uv(0, 17).cuboid(-15.0f, -1.5f, -7.5f, 2, 3, 1), ModelTransform.pivot(14.0f, -1.5f, -5.5f));
+		modelPartData.addChild("lock", ModelPartBuilder.create().uv(0, 17).cuboid(-15.0f, -1.5f, -7.5f, 2, 3, 1), ModelTransform.pivot(-2.0f, -4.5f, -13.5f));
 		return TexturedModelData.of(modelData, 64, 32);
 	}
 

@@ -107,14 +107,14 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.TOP_TANK, new TopTankRenderer(id("textures/modules/storage/top_tank.png")));
 		register(StevesCartsModuleTypes.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
 		register(StevesCartsModuleTypes.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
-		register(StevesCartsModuleTypes.EXTRACTING_CHESTS, new OpenTankRenderer(id("textures/modules/storage/extracting_chests.png")));
+		register(StevesCartsModuleTypes.EXTRACTING_CHESTS, new GenericRenderer(id("textures/modules/storage/extracting_chests.png"), ExtractingChestsModel::new));
 
 		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
 
 		register(StevesCartsModuleTypes.COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
 		register(StevesCartsModuleTypes.TINY_COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
 
-		register(StevesCartsModuleTypes.BRAKE, new GenericRenderer(id("textures/modules/addon/red_lever.png"), ExtractingChestsModel::new));
+		register(StevesCartsModuleTypes.BRAKE, new GenericRenderer(id("textures/modules/addon/red_lever.png"), LeverModel::new));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
