@@ -197,6 +197,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		this.railX = pos.getX();
 		this.railY = pos.getY();
 		this.railZ = pos.getZ();
+		super.moveOnRail(pos, state);
 	}
 
 	public void writeModuleData(PacketByteBuf buf) {
