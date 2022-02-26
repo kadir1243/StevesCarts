@@ -10,8 +10,8 @@ import net.minecraft.state.property.Property;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 
-public abstract class StevesCartsRailBlock extends AbstractRailBlock {
-	protected StevesCartsRailBlock(Settings settings) {
+public abstract class ImplementedRailBlock extends AbstractRailBlock {
+	protected ImplementedRailBlock(Settings settings) {
 		super(false, settings.nonOpaque());
 		this.setDefaultState(this.stateManager.getDefaultState().with(Properties.RAIL_SHAPE, RailShape.NORTH_SOUTH).with(Properties.WATERLOGGED, false));
 	}

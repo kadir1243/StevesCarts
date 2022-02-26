@@ -49,12 +49,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ModularMinecartEntity extends AbstractMinecartEntity {
-	private static final ImmutableSet<RailShape> CURVES = Util.make(ImmutableSet.<RailShape>builder(), (builder) -> {
-		builder.add(RailShape.NORTH_EAST);
-		builder.add(RailShape.SOUTH_EAST);
-		builder.add(RailShape.SOUTH_WEST);
-		builder.add(RailShape.NORTH_WEST);
-	}).build();
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
 	private int railX;
 	private int railY;

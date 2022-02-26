@@ -8,6 +8,7 @@ import vswe.stevescarts.modules.attachment.SeatModule;
 import vswe.stevescarts.modules.engine.CoalEngineModule;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.modules.storage.ChestModule;
+import vswe.stevescarts.modules.storage.ExtractingChestsModule;
 import vswe.stevescarts.modules.storage.InternalStorageModule;
 import vswe.stevescarts.modules.storage.InternalTankModule;
 import vswe.stevescarts.modules.storage.TankModule;
@@ -32,6 +33,7 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<TankModule> OPEN_TANK = MinecartModuleType.<TankModule>builder().id("open_tank").category(ModuleCategory.STORAGE).factory((entity, type) -> new TankModule(entity, type, FluidValue.BUCKET.multiply(7))).sides(ModuleSide.TOP).hasRenderer().moduleCost(31).buildAndRegister();
 	public static final MinecartModuleType<InternalStorageModule> INTERNAL_STORAGE = MinecartModuleType.<InternalStorageModule>builder().id("internal_storage").category(ModuleCategory.STORAGE).factory(InternalStorageModule::new).allowDuplicates().moduleCost(25).buildAndRegister();
 	public static final MinecartModuleType<InternalTankModule> INTERNAL_TANK = MinecartModuleType.<InternalTankModule>builder().id("internal_tank").category(ModuleCategory.STORAGE).factory(InternalTankModule::new).allowDuplicates().moduleCost(37).buildAndRegister();
+	public static final MinecartModuleType<ExtractingChestsModule> EXTRACTING_CHESTS = MinecartModuleType.<ExtractingChestsModule>builder().id("extracting_chests").category(ModuleCategory.STORAGE).factory(ExtractingChestsModule::new).sides(ModuleSide.LEFT, ModuleSide.RIGHT, ModuleSide.CENTER).hasRenderer().moduleCost(75).buildAndRegister();
 
 	// Attachments
 	public static final MinecartModuleType<SeatModule> SEAT = MinecartModuleType.<SeatModule>builder().id("seat").category(ModuleCategory.ATTACHMENT).factory(SeatModule::new).sides(ModuleSide.TOP, ModuleSide.CENTER).hasRenderer().noRenderTop().moduleCost(3).buildAndRegister();
