@@ -1,11 +1,11 @@
 - Modules
-    - [ ] Coal Engine
+    - [x] Coal Engine
     - [ ] Solar Engine
     - [x] Side Chests
     - [x] Top Chest
     - [x] Front Chest
-    - [ ] Internal Storage
-    - [ ] Extracting Chests
+    - [x] Internal Storage
+    - [x] Extracting Chests
     - [ ] Torch Placer
     - [ ] Basic Drill
     - [ ] Galgadorian Drill
@@ -25,7 +25,7 @@
     - [ ] Seat
     - [ ] Entity Detector: Monster
     - [ ] Advanced Control System
-    - [ ] Brake Handle
+    - [x] Brake Handle
     - [ ] Advanced Shooter
     - [ ] Shooter
     - [ ] Dynamite Carrier
@@ -35,14 +35,14 @@
     - [ ] Melter
     - [x] Standard Hull
     - [x] Reinforced Hull
-    - [ ] Invisibility Core
+    - [x] Invisibility Core
     - [x] Wooden Hull
     - [ ] Iron Drill
     - [ ] Hardened Drill
     - [ ] Note Sequencer
     - [ ] Colorizer
     - [ ] Pumpkin chariot
-    - [ ] Tiny Coal Engine
+    - [x] Tiny Coal Engine
     - [ ] Basic Solar Engine
     - [ ] Projectile: Potion
     - [ ] Gift Storage
@@ -72,7 +72,7 @@
     - [ ] Steve's Arcade
     - [ ] Hardened Wood Cutter
     - [ ] Creative Tank
-    - [ ] Open Tank
+    - [x] Open Tank
     - [ ] Egg Basket
     - [ ] Drill Intelligence
     - [ ] Lawn Mower

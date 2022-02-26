@@ -18,15 +18,16 @@ import vswe.stevescarts.client.modules.model.attachment.SeatModel;
 import vswe.stevescarts.client.modules.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.modules.model.storage.ExtractingChestsModel;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
+import vswe.stevescarts.client.modules.model.storage.SideChestsModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
 import vswe.stevescarts.client.modules.renderer.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.MechanicalPigRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.FrontTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.OpenTankRenderer;
-import vswe.stevescarts.client.modules.renderer.storage.SideChestsRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.SideTanksRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.TopTankRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.TwoSidedRenderer;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
@@ -102,12 +103,12 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 
 		register(StevesCartsModuleTypes.FRONT_CHEST, new GenericRenderer(id("textures/modules/storage/front_chest.png"), FrontChestModel::new));
 		register(StevesCartsModuleTypes.TOP_CHEST, new GenericRenderer(id("textures/modules/storage/top_chest.png"), TopChestModel::new));
-		register(StevesCartsModuleTypes.SIDE_CHESTS, new SideChestsRenderer(id("textures/modules/storage/side_chests.png")));
+		register(StevesCartsModuleTypes.SIDE_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/side_chests.png"), SideChestsModel::new));
 		register(StevesCartsModuleTypes.FRONT_TANK, new FrontTankRenderer(id("textures/modules/storage/front_tank.png")));
 		register(StevesCartsModuleTypes.TOP_TANK, new TopTankRenderer(id("textures/modules/storage/top_tank.png")));
 		register(StevesCartsModuleTypes.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
 		register(StevesCartsModuleTypes.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
-		register(StevesCartsModuleTypes.EXTRACTING_CHESTS, new GenericRenderer(id("textures/modules/storage/extracting_chests.png"), ExtractingChestsModel::new));
+		register(StevesCartsModuleTypes.EXTRACTING_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/extracting_chests.png"), ExtractingChestsModel::new));
 
 		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
 
