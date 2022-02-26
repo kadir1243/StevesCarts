@@ -2,6 +2,7 @@ package vswe.stevescarts.modules;
 
 import reborncore.common.fluid.FluidValue;
 import vswe.stevescarts.modules.addon.BrakeModule;
+import vswe.stevescarts.modules.attachment.FireworkDisplayModule;
 import vswe.stevescarts.modules.attachment.SeatModule;
 import vswe.stevescarts.modules.engine.CoalEngineModule;
 import vswe.stevescarts.modules.hull.HullModule;
@@ -31,6 +32,7 @@ public class StevesCartsModuleTypes {
 
 	// Attachments
 	public static final MinecartModuleType<SeatModule> SEAT = MinecartModuleType.<SeatModule>builder().id("seat").category(ModuleCategory.ATTACHMENT).factory(SeatModule::new).sides(ModuleSide.TOP, ModuleSide.CENTER).hasRenderer().noRenderTop().moduleCost(3).buildAndRegister();
+	public static final MinecartModuleType<FireworkDisplayModule> FIREWORK_DISPLAY = MinecartModuleType.<FireworkDisplayModule>builder().id("firework_display").category(ModuleCategory.ATTACHMENT).factory(FireworkDisplayModule::new).moduleCost(45).buildAndRegister();
 
 	// Engines
 	public static final MinecartModuleType<CoalEngineModule> COAL_ENGINE = MinecartModuleType.<CoalEngineModule>builder().id("coal_engine").category(ModuleCategory.ENGINE).factory((minecart, type) -> new CoalEngineModule(minecart, type, 3, 2.25f)).hasRenderer().incompatible(ModuleTags.INCOMPATIBLE_WITH_COAL_ENGINE).moduleCost(15).buildAndRegister();

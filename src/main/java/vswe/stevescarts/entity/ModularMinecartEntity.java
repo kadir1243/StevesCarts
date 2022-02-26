@@ -178,6 +178,13 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		this.modules.values().forEach(MinecartModule::onScreenClose);
 	}
 
+	@Override
+	public void onActivatorRail(int x, int y, int z, boolean powered) {
+		if (powered) {
+			this.modules.values().forEach(MinecartModule::onActivate);
+		}
+	}
+
 	public void writeModuleData(PacketByteBuf buf) {
 		buf.writeVarInt(this.modules.size());
 		for (MinecartModule module : this.getModuleList()) {

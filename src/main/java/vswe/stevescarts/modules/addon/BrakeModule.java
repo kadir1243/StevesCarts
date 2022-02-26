@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.TranslatableText;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
@@ -19,6 +20,18 @@ public class BrakeModule extends MinecartModule implements Configurable, Togglea
 
 	public BrakeModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
 		super(minecart, type);
+	}
+
+	@Override
+	public NbtCompound writeNbt(NbtCompound nbt) {
+		nbt.putBoolean("active", this.active);
+		return super.writeNbt(nbt);
+	}
+
+	@Override
+	public void readNbt(NbtCompound nbt) {
+		this.active = nbt.getBoolean("active");
+		super.readNbt(nbt);
 	}
 
 	@Override

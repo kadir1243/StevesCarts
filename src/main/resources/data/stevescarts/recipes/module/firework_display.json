@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#D#",
+    "CFC",
+    "XSX"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:simple_pcb"
+    },
+    "F": {
+      "item": "stevescarts:fuse"
+    },
+    "#": {
+      "tag": "minecraft:wooden_fences"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    },
+    "S": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "C": {
+      "tag": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "stevescarts:cartmodule",
+    "data": 59
+  }
+}

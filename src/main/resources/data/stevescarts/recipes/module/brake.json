@@ -16,7 +16,7 @@
       "tag": "c:iron_ingots"
     },
     "X": {
-      "item": "c:redstone_dusts"
+      "tag": "c:redstone_dusts"
     }
   },
   "result": {
