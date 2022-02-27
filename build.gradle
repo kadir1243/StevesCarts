@@ -40,6 +40,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "RebornCore:RebornCore-1.18:${project.reborncore_version}"
+	modImplementation "TechReborn:TechReborn-1.18:${project.reborncore_version}"
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
 	modImplementation "alexiil.mc.lib:libblockattributes-all:0.10.1-rc.2"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:7.3.+"

@@ -302,14 +302,26 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	}
 
 	public class FluidStorage implements Storage<FluidVariant> {
+		private final Long zero = 0L;
+
 		@Override
 		public long insert(FluidVariant resource, long maxAmount, TransactionContext transaction) {
-			return 0; // TODO
+			return ModularMinecartEntity.this
+					.getTanks()
+					.filter(tank -> tank.getTank().simulateInsert(resource, maxAmount, transaction) > 0)
+					.findFirst()
+					.map(tank -> tank.getTank().insert(resource, maxAmount, transaction))
+					.orElse(zero);
 		}
 
 		@Override
 		public long extract(FluidVariant resource, long maxAmount, TransactionContext transaction) {
-			return 0; // TODO
+			return ModularMinecartEntity.this
+					.getTanks()
+					.filter(tank -> tank.getTank().simulateExtract(resource, maxAmount, transaction) > 0)
+					.findFirst()
+					.map(tank -> tank.getTank().extract(resource, maxAmount, transaction))
+					.orElse(zero);
 		}
 
 		@Override
