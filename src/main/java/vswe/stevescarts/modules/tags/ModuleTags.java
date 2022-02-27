@@ -15,6 +15,7 @@ public class ModuleTags {
 	public static final Tag.Identified<MinecartModuleType<?>> TANKS = MODULE_TYPE.create(StevesCarts.id("tanks"));
 	public static final Tag.Identified<MinecartModuleType<?>> INCOMPATIBLE_WITH_COAL_ENGINE = MODULE_TYPE.create(StevesCarts.id("incompatible_with_coal_engine"));
 	public static final Tag.Identified<MinecartModuleType<?>> INCOMPATIBLE_WITH_TINY_COAL_ENGINE = MODULE_TYPE.create(StevesCarts.id("incompatible_with_tiny_coal_engine"));
+	public static final Tag.Identified<MinecartModuleType<?>> INCOMPATIBLE_WITH_THERMAL_ENGINE = MODULE_TYPE.create(StevesCarts.id("incompatible_with_thermal_engine"));
 
 	public static void init() {
 	}
