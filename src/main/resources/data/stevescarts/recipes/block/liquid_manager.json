@@ -7,14 +7,13 @@
   ],
   "key": {
     "X": {
-      "item": "stevescarts:cartmodule",
-      "data": 66
+      "item": "stevescarts:advanced_tank"
     },
     "#": {
       "item": "minecraft:iron_ingot"
     }
   },
   "result": {
-    "item": "stevescarts:blockliquidmanager"
+    "item": "stevescarts:fluid_manager"
   }
 }

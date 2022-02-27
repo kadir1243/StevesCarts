@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:huge_tank_pane"
+    },
+    "#": {
+      "item": "stevescarts:tank_valve"
+    }
+  },
+  "result": {
+    "item": "stevescarts:advanced_tank"
+  }
+}

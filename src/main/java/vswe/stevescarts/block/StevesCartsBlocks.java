@@ -33,7 +33,7 @@ public class StevesCartsBlocks {
 
 	public static final Block CART_ASSEMBLER = registerBlockAndItem("cart_assembler", new CartAssemblerBlock(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block CARGO_MANAGER = registerBlockAndItem("cargo_manager", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
-	public static final Block LIQUID_MANAGER = registerBlockAndItem("liquid_manager", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
+	public static final Block FLUID_MANAGER = registerBlockAndItem("fluid_manager", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block EXTERNAL_DISTRIBUTOR = registerBlockAndItem("external_distributor", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block MODULE_TOGGLER = registerBlockAndItem("module_toggler", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block DETECTOR_MANAGER = registerBlockAndItem("detector_manager", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
