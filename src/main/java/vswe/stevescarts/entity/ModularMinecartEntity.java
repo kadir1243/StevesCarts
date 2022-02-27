@@ -162,7 +162,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		Vec3d velocity = this.getVelocity();
 		double horizontal = velocity.horizontalLength();
 		if (horizontal > 0.01) {
-			this.setVelocity(velocity.add(velocity.x / horizontal * 0.01, 0.0, velocity.z / horizontal * 0.03));
+			this.setVelocity(velocity.add(velocity.x / horizontal * 0.01, 0.0, velocity.z / horizontal * 0.01));
 		} else {
 			this.setVelocity(0.01, 0.0, 0.01);
 		}
