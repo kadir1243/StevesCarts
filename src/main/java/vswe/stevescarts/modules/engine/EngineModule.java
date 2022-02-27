@@ -3,9 +3,8 @@ package vswe.stevescarts.modules.engine;
 import io.github.cottonmc.cotton.gui.networking.NetworkSide;
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.Property;
 import org.jetbrains.annotations.NotNull;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
@@ -20,7 +19,7 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 	public static final byte MEDIUM_PRIORITY = 1;
 	public static final byte LOW_PRIORITY = 2;
 	public static final byte DISABLED = 3;
-	private final TrackedData<Byte> priority = createTrackedByte();
+	protected final Property priority = Property.create();
 	protected boolean propelling = false;
 
 	protected EngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
@@ -29,7 +28,7 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 
 	@Override
 	public NbtCompound writeNbt(NbtCompound nbt) {
-		nbt.putByte("Priority", this.getPriority());
+		nbt.putInt("Priority", this.getPriority());
 		return super.writeNbt(nbt);
 	}
 
@@ -53,21 +52,16 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 		this.propelling = propelling;
 	}
 
-	@Override
-	public void initDataTracker(DataTracker dataTracker) {
-		dataTracker.startTracking(this.priority, (byte) 4);
+	public int getPriority() {
+		return this.priority.get();
 	}
 
-	public byte getPriority() {
-		return this.getMinecart().getDataTracker().get(this.priority);
-	}
-
-	public void setPriority(byte priority) {
-		this.getMinecart().getDataTracker().set(this.priority, priority);
+	public void setPriority(int priority) {
+		this.priority.set(priority);
 	}
 
 	protected void cyclePriority() {
-		byte priority = this.getPriority();
+		int priority = this.getPriority();
 		if (priority == DISABLED) {
 			this.setPriority(HIGH_PRIORITY);
 		} else {
@@ -87,6 +81,6 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 
 	@Override
 	public int compareTo(@NotNull EngineModule o) {
-		return Byte.compare(o.getPriority(), this.getPriority());
+		return Integer.compare(o.getPriority(), this.getPriority());
 	}
 }

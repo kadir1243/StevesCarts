@@ -67,7 +67,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public ModularMinecartEntity(World world, double x, double y, double z, Collection<MinecartModule> modules) {
 		super(StevesCartsEntities.MODULAR_MINECART_ENTITY, world, x, y, z);
-		modules.forEach(module -> this.addModule(module, false));
+		modules.forEach(module -> this.addModule(module, false, true));
 	}
 
 	public static Multimap<MinecartModuleType<?>, NbtCompound> readModuleData(PacketByteBuf buf) {
@@ -117,11 +117,6 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 						.collect(Collectors.toMap(MinecartModule::getId, Function.identity())),
 				false
 		);
-	}
-
-	@Override
-	protected void initDataTracker() {
-		this.getModuleList().forEach(module -> module.initDataTracker(this.dataTracker));
 	}
 
 	@Override
@@ -223,7 +218,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			module.readNbt(nbt);
 			modules.add(module);
 		});
-		this.setModules(modules.stream().collect(Collectors.toMap(MinecartModule::getId, Function.identity())), update);
+		this.setModules(modules.stream().peek(m -> m.initDataTracker(this.getDataTracker())).collect(Collectors.toMap(MinecartModule::getId, Function.identity())), update);
 	}
 
 	private void setModules(Map<Integer, MinecartModule> modules, boolean update) {
@@ -233,17 +228,20 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		}
 	}
 
-	public void addModule(int id, MinecartModule module, boolean update) {
+	public void addModule(int id, MinecartModule module, boolean update, boolean track) {
 		this.modules.put(id, module);
 		module.setId(id);
 		module.setMinecart(this);
+		if (track) {
+			module.initDataTracker(this.getDataTracker());
+		}
 		if (update) {
 			UpdatePacket.sendToTrackers(this);
 		}
 	}
 
-	public void addModule(MinecartModule module, boolean update) {
-		addModule(nextId(), module, update);
+	public void addModule(MinecartModule module, boolean update, boolean track) {
+		addModule(nextId(), module, update, track);
 	}
 
 	@Environment(EnvType.CLIENT)

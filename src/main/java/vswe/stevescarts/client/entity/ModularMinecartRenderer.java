@@ -41,7 +41,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		Collection<MinecartModule> modules = ModuleStorage.read(stack);
 		FAKE_ENTITY.modules.clear();
 		for (MinecartModule module : modules) {
-			FAKE_ENTITY.addModule(module, false);
+			FAKE_ENTITY.addModule(module, false, false);
 			module.setMinecart(FAKE_ENTITY);
 		}
 		for (MinecartModule module : modules) {
