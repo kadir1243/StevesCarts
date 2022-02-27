@@ -1,5 +1,9 @@
 package vswe.stevescarts.modules;
 
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandler;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +40,7 @@ public abstract class MinecartModule {
 		this.setId(nbt.getInt("id"));
 	}
 
-	public void init() {
+	public void initDataTracker(DataTracker dataTracker) {
 	}
 
 	public void preInit() {
@@ -86,5 +90,13 @@ public abstract class MinecartModule {
 	 * @implNote Should only be implemented by modules that are engines
 	 */
 	public void onPropel() {
+	}
+
+	public static <T> TrackedData<T> registerData(TrackedDataHandler<T> dataHandler) {
+		return DataTracker.registerData(ModularMinecartEntity.class, dataHandler);
+	}
+
+	public static TrackedData<Byte> createTrackedByte() {
+		return registerData(TrackedDataHandlerRegistry.BYTE);
 	}
 }

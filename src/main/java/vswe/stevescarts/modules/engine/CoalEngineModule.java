@@ -99,7 +99,8 @@ public class CoalEngineModule extends EngineModule {
 			}
 		});
 		panel.add(fuelLabel, 0, 35);
-		panel.setSize(60, 50);
+		panel.setSize(72, 50);
+		super.addPriorityButton(handler, panel, 56, 15);
 		ScreenNetworking.of(handler, NetworkSide.CLIENT).receive(StevesCartsScreenHandlers.PACKET_COAL_FUEL_UPDATE, buf -> fuelProperty.set(buf.readVarInt()));
 	}
 
@@ -146,5 +147,10 @@ public class CoalEngineModule extends EngineModule {
 
 	public int getFuel(ItemStack stack) {
 		return (int) (FuelRegistry.INSTANCE.get(stack.getItem()) * this.fuelMultiplier);
+	}
+
+	@Override
+	public String getDiscriminator() {
+		return "coal";
 	}
 }

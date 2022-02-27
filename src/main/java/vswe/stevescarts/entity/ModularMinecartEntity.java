@@ -1,14 +1,11 @@
 package vswe.stevescarts.entity;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -23,7 +20,6 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -109,6 +105,11 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	}
 
 	@Override
+	protected void initDataTracker() {
+		this.getModuleList().forEach(module -> module.initDataTracker(this.dataTracker));
+	}
+
+	@Override
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		ModuleStorage.write(nbt, this.getModuleList());
@@ -128,10 +129,11 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		if (move) {
 			this.modules.entrySet()
 					.stream()
-					.filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE) && entry.getValue().canPropel())
+					.filter(entry -> entry.getValue().getType().isOf(ModuleCategory.ENGINE) && entry.getValue().canPropel() && ((EngineModule) entry.getValue()).getPriority() != EngineModule.DISABLED)
 					.peek(entry -> ((EngineModule) entry.getValue()).setPropelling(false))
-					.findFirst()
 					.map(Map.Entry::getValue)
+					.sorted()
+					.findFirst()
 					.filter(t -> {
 						int x = (int) Math.floor(this.getX());
 						int y = (int) Math.floor(this.getY());

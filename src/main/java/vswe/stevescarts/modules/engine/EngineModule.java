@@ -1,15 +1,42 @@
 package vswe.stevescarts.modules.engine;
 
+import io.github.cottonmc.cotton.gui.networking.NetworkSide;
+import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
+import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.nbt.NbtCompound;
+import org.jetbrains.annotations.NotNull;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.screen.ModularCartHandler;
+import vswe.stevescarts.screen.StevesCartsScreenHandlers;
+import vswe.stevescarts.screen.widget.WPriorityButton;
 
-public abstract class EngineModule extends MinecartModule implements Configurable {
+public abstract class EngineModule extends MinecartModule implements Configurable, Comparable<EngineModule> {
+	public static final byte HIGH_PRIORITY = 0;
+	public static final byte MEDIUM_PRIORITY = 1;
+	public static final byte LOW_PRIORITY = 2;
+	public static final byte DISABLED = 3;
+	private final TrackedData<Byte> priority = createTrackedByte();
 	protected boolean propelling = false;
 
 	protected EngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
 		super(minecart, type);
+	}
+
+	@Override
+	public NbtCompound writeNbt(NbtCompound nbt) {
+		nbt.putByte("Priority", this.getPriority());
+		return super.writeNbt(nbt);
+	}
+
+	@Override
+	public void readNbt(NbtCompound nbt) {
+		this.setPriority(nbt.getByte("Priority"));
+		super.readNbt(nbt);
 	}
 
 	@Override
@@ -24,5 +51,42 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 
 	public void setPropelling(boolean propelling) {
 		this.propelling = propelling;
+	}
+
+	@Override
+	public void initDataTracker(DataTracker dataTracker) {
+		dataTracker.startTracking(this.priority, (byte) 4);
+	}
+
+	public byte getPriority() {
+		return this.getMinecart().getDataTracker().get(this.priority);
+	}
+
+	public void setPriority(byte priority) {
+		this.getMinecart().getDataTracker().set(this.priority, priority);
+	}
+
+	protected void cyclePriority() {
+		byte priority = this.getPriority();
+		if (priority == DISABLED) {
+			this.setPriority(HIGH_PRIORITY);
+		} else {
+			this.setPriority((byte) (priority + 1));
+		}
+	}
+
+	public void addPriorityButton(ModularCartHandler handler, WPlainPanel panel, int x, int y) {
+		WPriorityButton priorityButton = new WPriorityButton(this::getPriority);
+		panel.add(priorityButton, x, y, 16, 16);
+		priorityButton.setOnClick(() -> ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.priorityPacketId(this.getDiscriminator()), buf -> {}));
+		ScreenNetworking.of(handler, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.priorityPacketId(this.getDiscriminator()), buf -> this.cyclePriority());
+	}
+
+	// Used to disambiguate priority packets
+	protected abstract String getDiscriminator();
+
+	@Override
+	public int compareTo(@NotNull EngineModule o) {
+		return Byte.compare(o.getPriority(), this.getPriority());
 	}
 }

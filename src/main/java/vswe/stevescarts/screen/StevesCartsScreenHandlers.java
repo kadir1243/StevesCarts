@@ -26,6 +26,10 @@ public class StevesCartsScreenHandlers {
 	public static void init() {
 	}
 
+	public static Identifier priorityPacketId(String discriminator) {
+		return StevesCarts.id("priority_" + discriminator);
+	}
+
 	@Environment(EnvType.CLIENT)
 	public static void initClient() {
 		ScreenRegistry.register(StevesCartsScreenHandlers.CART_ASSEMBLER, CartAssemblerScreen::new);
