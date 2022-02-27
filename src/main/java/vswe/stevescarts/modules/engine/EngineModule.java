@@ -15,10 +15,10 @@ import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 import vswe.stevescarts.screen.widget.WPriorityButton;
 
 public abstract class EngineModule extends MinecartModule implements Configurable, Comparable<EngineModule> {
-	public static final byte HIGH_PRIORITY = 0;
-	public static final byte MEDIUM_PRIORITY = 1;
-	public static final byte LOW_PRIORITY = 2;
-	public static final byte DISABLED = 3;
+	public static final int HIGH_PRIORITY = 0;
+	public static final int MEDIUM_PRIORITY = 1;
+	public static final int LOW_PRIORITY = 2;
+	public static final int DISABLED = 3;
 	protected final Property priority = Property.create();
 	protected boolean propelling = false;
 
@@ -84,6 +84,6 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 
 	@Override
 	public int compareTo(@NotNull EngineModule o) {
-		return Integer.compare(o.getPriority(), this.getPriority());
+		return -Integer.compare(o.getPriority(), this.getPriority());
 	}
 }
