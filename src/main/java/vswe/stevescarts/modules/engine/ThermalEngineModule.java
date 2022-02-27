@@ -13,12 +13,9 @@ import vswe.stevescarts.screen.ModularCartHandler;
 
 public class ThermalEngineModule extends EngineModule {
 	public static final FluidVariant LAVA = FluidVariant.of(Fluids.LAVA);
-	public static final FluidVariant WATER = FluidVariant.of(Fluids.WATER);
-	protected final boolean requiresCoolant;
 
-	public ThermalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, boolean requiresCoolant) {
+	public ThermalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
 		super(minecart, type);
-		this.requiresCoolant = requiresCoolant;
 	}
 
 	@Override
@@ -31,13 +28,21 @@ public class ThermalEngineModule extends EngineModule {
 
 	@Override
 	public boolean canPropel() {
-		return this.minecart.getFluidStorage().simulateExtract(LAVA, 15, null) == 15;
+		return checkSimulate(LAVA, 15);
 	}
 
 	@Override
 	public void onPropel() {
+		consume(LAVA, 15);
+	}
+
+	protected boolean checkSimulate(FluidVariant variant, long amount) {
+		return this.minecart.getFluidStorage().simulateExtract(variant, amount, null) == amount;
+	}
+
+	protected void consume(FluidVariant variant, long amount) {
 		Transaction transaction = Transaction.openOuter();
-		this.minecart.getFluidStorage().extract(LAVA, 15, transaction);
+		this.minecart.getFluidStorage().extract(variant, amount, transaction);
 		transaction.commit();
 	}
 

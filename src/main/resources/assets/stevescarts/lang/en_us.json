@@ -130,6 +130,7 @@
   "module.stevescarts.internal_tank": "Internal Tank",
   "module.stevescarts.extracting_chests": "Extracting Chests",
   "module.stevescarts.thermal_engine": "Thermal Engine",
+  "module.stevescarts.advanced_thermal_engine": "Advanced Thermal Engine",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",
