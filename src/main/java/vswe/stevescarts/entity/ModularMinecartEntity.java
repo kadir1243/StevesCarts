@@ -5,6 +5,10 @@ import com.google.common.collect.Multimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +29,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.ModularMinecartItem;
@@ -34,28 +37,36 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
 import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.modules.engine.EngineModule;
+import vswe.stevescarts.modules.storage.TankModule;
+import vswe.stevescarts.modules.tags.ModuleTags;
 import vswe.stevescarts.screen.ModularCartHandler;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class ModularMinecartEntity extends AbstractMinecartEntity {
 	public Map<Integer, MinecartModule> modules = new LinkedHashMap<>();
 	private int railX;
 	private int railY;
 	private int railZ;
+	private final FluidStorage fluidStorage = this.new FluidStorage();
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
 	}
 
 	public ModularMinecartEntity(World world, double x, double y, double z, Collection<MinecartModule> modules) {
-		super(StevesCarts.MODULAR_MINECART_ENTITY, world, x, y, z);
+		super(StevesCartsEntities.MODULAR_MINECART_ENTITY, world, x, y, z);
 		modules.forEach(module -> this.addModule(module, false));
 	}
 
@@ -91,6 +102,10 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public Collection<MinecartModule> getModuleList() {
 		return this.modules.values();
+	}
+
+	public int getFuelConsumption() {
+		return 1; // TODO: Implement extra fuel consumption with advanced control system
 	}
 
 	@Override
@@ -156,6 +171,10 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			vec3d = vec3d.multiply(0.85f);
 		}
 		this.setVelocity(vec3d);
+	}
+
+	public FluidStorage getFluidStorage() {
+		return fluidStorage;
 	}
 
 	private void propel(MinecartModule engine) {
@@ -260,6 +279,10 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		this.setVelocity(this.getVelocity().multiply(-1, 0, -1));
 	}
 
+	public Stream<TankModule> getTanks() {
+		return this.getModuleList().stream().filter(m -> m.getType().isOf(ModuleCategory.STORAGE) && ModuleTags.TANKS.contains(m.getType())).map(TankModule.class::cast);
+	}
+
 	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {
 		@Override
 		public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
@@ -275,6 +298,27 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		@Override
 		public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
 			return new ModularCartHandler(syncId, inv, ModularMinecartEntity.this);
+		}
+	}
+
+	public class FluidStorage implements Storage<FluidVariant> {
+		@Override
+		public long insert(FluidVariant resource, long maxAmount, TransactionContext transaction) {
+			return 0; // TODO
+		}
+
+		@Override
+		public long extract(FluidVariant resource, long maxAmount, TransactionContext transaction) {
+			return 0; // TODO
+		}
+
+		@Override
+		public Iterator<StorageView<FluidVariant>> iterator(TransactionContext transaction) {
+			return ModularMinecartEntity.this
+					.getTanks()
+					.map(tank -> tank.getTank().iterator(transaction))
+					.flatMap(it -> StreamSupport.stream(Spliterators.spliteratorUnknownSize(it, Spliterator.ORDERED), false))
+					.iterator();
 		}
 	}
 }

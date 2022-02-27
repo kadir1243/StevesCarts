@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.modules.MinecartModuleType;
 
 import java.util.UUID;
@@ -38,7 +39,7 @@ public class SpawnPacket {
 			Multimap<MinecartModuleType<?>, NbtCompound> moduleData = ModularMinecartEntity.readModuleData(buf);
 			client.execute(() -> {
 				ClientWorld world = MinecraftClient.getInstance().world;
-				ModularMinecartEntity entity = StevesCarts.MODULAR_MINECART_ENTITY.create(world);
+				ModularMinecartEntity entity = StevesCartsEntities.MODULAR_MINECART_ENTITY.create(world);
 				if (entity != null && world != null) {
 					entity.updatePosition(x, y, z);
 					entity.updateTrackedPosition(x, y, z);

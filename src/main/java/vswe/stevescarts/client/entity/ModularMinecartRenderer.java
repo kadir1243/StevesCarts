@@ -12,9 +12,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.profiler.Profiler;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.entity.ModularMinecartEntity;
+import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.mixins.AbstractMinecartEntityAccessor;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.ModuleStorage;
@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntity> {
-	public static final ModularMinecartEntity FAKE_ENTITY = Objects.requireNonNull(StevesCarts.MODULAR_MINECART_ENTITY.create(null));
+	public static final ModularMinecartEntity FAKE_ENTITY = Objects.requireNonNull(StevesCartsEntities.MODULAR_MINECART_ENTITY.create(null));
 
 	public ModularMinecartRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx);

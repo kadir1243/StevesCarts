@@ -30,6 +30,10 @@ public class StevesCartsScreenHandlers {
 		return StevesCarts.id("priority_" + discriminator);
 	}
 
+	public static Identifier tankUpdatePacketId(String discriminator) {
+		return StevesCarts.id("tank_update_" + discriminator);
+	}
+
 	@Environment(EnvType.CLIENT)
 	public static void initClient() {
 		ScreenRegistry.register(StevesCartsScreenHandlers.CART_ASSEMBLER, CartAssemblerScreen::new);

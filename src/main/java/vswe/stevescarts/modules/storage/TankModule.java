@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.util.Identifier;
 import reborncore.common.fluid.FluidUtils;
 import reborncore.common.fluid.FluidValue;
 import reborncore.common.util.Tank;
@@ -22,10 +23,12 @@ import vswe.stevescarts.screen.widget.WFluidSlot;
 public class TankModule extends StorageModule {
 	protected final SimpleInventory bucketInventory = new SimpleInventory(2);
 	protected final Tank tank;
+	private final Identifier packetId;
 
 	public TankModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, FluidValue capacity) {
 		super(minecart, type);
 		this.tank = new Tank("Tank", capacity, null);
+		this.packetId = StevesCartsScreenHandlers.tankUpdatePacketId(type.getId().getPath());
 	}
 
 	@Override
@@ -53,7 +56,7 @@ public class TankModule extends StorageModule {
 			if (handler.getNetworkSide() == NetworkSide.SERVER) {
 				if (!FluidUtils.drainContainers(this.tank, this.bucketInventory, 0, 1)) {
 					FluidUtils.fillContainers(this.tank, this.bucketInventory, 0, 1);
-					ScreenNetworking.of(handler, NetworkSide.SERVER).send(StevesCartsScreenHandlers.PACKET_TANK_UPDATE, buf -> buf.writeNbt(this.tank.write(new NbtCompound())));
+					ScreenNetworking.of(handler, NetworkSide.SERVER).send(this.packetId, buf -> buf.writeNbt(this.tank.write(new NbtCompound())));
 				}
 			}
 		});
@@ -61,7 +64,7 @@ public class TankModule extends StorageModule {
 		panel.add(filledBucketSlot, 0, 15);
 		panel.add(emptyBucketSlot, 0, 48);
 		panel.add(fluidSlot, 20, 15, 36, 51);
-		ScreenNetworking.of(handler, NetworkSide.CLIENT).receive(StevesCartsScreenHandlers.PACKET_TANK_UPDATE, buf -> this.tank.read(buf.readNbt()));
+		ScreenNetworking.of(handler, NetworkSide.CLIENT).receive(this.packetId, buf -> this.tank.read(buf.readNbt()));
 	}
 
 	public Tank getTank() {

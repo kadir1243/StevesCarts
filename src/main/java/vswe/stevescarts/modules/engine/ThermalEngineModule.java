@@ -7,8 +7,11 @@ import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.screen.ModularCartHandler;
 
 public class ThermalEngineModule extends EngineModule {
-	public ThermalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
+	protected final boolean requiresCoolant;
+
+	public ThermalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, boolean requiresCoolant) {
 		super(minecart, type);
+		this.requiresCoolant = requiresCoolant;
 	}
 
 	@Override

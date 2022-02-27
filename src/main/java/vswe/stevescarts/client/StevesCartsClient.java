@@ -10,10 +10,10 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.resource.ResourceType;
-import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.client.entity.ModularMinecartRenderer;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderDispatcher;
+import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.entity.network.SpawnPacket;
 import vswe.stevescarts.entity.network.UpdatePacket;
 import vswe.stevescarts.item.StevesCartsItems;
@@ -31,7 +31,7 @@ public class StevesCartsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		moduleRenderDispatcher = new ModuleRenderDispatcher(MinecraftClient.getInstance().textRenderer, MinecraftClient.getInstance().getItemRenderer());
 		ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(moduleRenderDispatcher);
-		EntityRendererRegistry.register(StevesCarts.MODULAR_MINECART_ENTITY, ModularMinecartRenderer::new);
+		EntityRendererRegistry.register(StevesCartsEntities.MODULAR_MINECART_ENTITY, ModularMinecartRenderer::new);
 		SpawnPacket.init();
 		UpdatePacket.init();
 		BlockRenderLayerMap.INSTANCE.putBlock(StevesCartsBlocks.ADVANCED_DETECTOR_RAIL, RenderLayer.getCutout());
