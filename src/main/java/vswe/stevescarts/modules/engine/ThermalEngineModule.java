@@ -1,5 +1,6 @@
 package vswe.stevescarts.modules.engine;
 
+import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
@@ -7,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
+import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.ModularCartHandler;
 
 public class ThermalEngineModule extends EngineModule {
@@ -20,7 +22,11 @@ public class ThermalEngineModule extends EngineModule {
 	}
 
 	@Override
-	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
+	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) { // TODO
+		WLabel label = new WLabel(StevesCartsModuleTypes.THERMAL_ENGINE.getTranslationText());
+		panel.add(label, 0, 0);
+		super.addPriorityButton(handler, panel, 0, 11);
+		panel.setSize(72, 30);
 	}
 
 	@Override
