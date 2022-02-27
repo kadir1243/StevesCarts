@@ -2,6 +2,7 @@ package vswe.stevescarts.modules.engine;
 
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import vswe.stevescarts.entity.ModularMinecartEntity;
@@ -24,12 +25,14 @@ public class ThermalEngineModule extends EngineModule {
 
 	@Override
 	public boolean canPropel() {
-		return this.minecart.getFluidStorage().simulateExtract(LAVA, 15, null) > 0;
+		return this.minecart.getFluidStorage().simulateExtract(LAVA, 15, null) == 15;
 	}
 
 	@Override
 	public void onPropel() {
-		this.minecart.getFluidStorage().extract(LAVA, 15, null);
+		Transaction transaction = Transaction.openOuter();
+		this.minecart.getFluidStorage().extract(LAVA, 15, transaction);
+		transaction.commit();
 	}
 
 	@Override
