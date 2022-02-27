@@ -3,7 +3,7 @@
   "values": [
     "stevescarts:cart_assembler",
     "stevescarts:cargo_manager",
-    "stevescarts:liquid_manager",
+    "stevescarts:fluid_manager",
     "stevescarts:external_distributor",
     "stevescarts:module_toggler",
     "stevescarts:detector_manager",

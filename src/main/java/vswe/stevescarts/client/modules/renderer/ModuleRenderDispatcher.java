@@ -23,6 +23,7 @@ import vswe.stevescarts.client.modules.model.storage.TopChestModel;
 import vswe.stevescarts.client.modules.renderer.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.MechanicalPigRenderer;
+import vswe.stevescarts.client.modules.renderer.storage.AdvancedTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.FrontTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.OpenTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.SideTanksRenderer;
@@ -109,6 +110,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
 		register(StevesCartsModuleTypes.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
 		register(StevesCartsModuleTypes.EXTRACTING_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/extracting_chests.png"), ExtractingChestsModel::new));
+		register(StevesCartsModuleTypes.ADVANCED_TANK, new AdvancedTankRenderer(id("textures/modules/storage/advanced_tank.png")));
 
 		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
 

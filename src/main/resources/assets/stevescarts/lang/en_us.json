@@ -162,7 +162,7 @@
   "block.stevescarts.solar_panel_upgrade": "Upgrade: Solar Panel",
   "block.stevescarts.cart_assembler": "Cart Assembler",
   "block.stevescarts.cargo_manager": "Cargo Manager",
-  "block.stevescarts.liquid_manager": "Liquid Manager",
+  "block.stevescarts.fluid_manager": "Fluid Manager",
   "block.stevescarts.external_distributor": "External Distributor",
   "block.stevescarts.module_toggler": "Module Toggler",
   "block.stevescarts.detector_manager": "Detector Manager",

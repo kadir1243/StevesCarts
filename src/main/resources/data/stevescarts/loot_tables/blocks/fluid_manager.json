@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "stevescarts:liquid_manager"
+          "name": "stevescarts:fluid_manager"
         }
       ],
       "conditions": [
