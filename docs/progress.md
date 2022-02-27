@@ -22,7 +22,7 @@
     - [ ] Liquid Sensors
     - [ ] Entity Detector: Villager
     - [ ] Entity Detector: Player
-    - [ ] Seat
+    - [x] Seat
     - [ ] Entity Detector: Monster
     - [ ] Advanced Control System
     - [x] Brake Handle
@@ -56,16 +56,16 @@
     - [ ] Crop: Nether Wart
     - [ ] Cage
     - [ ] Compact Solar Engine
-    - [ ] Internal Tank
+    - [x] Internal Tank
     - [x] Mechanical Pig
     - [ ] Creative Engine
     - [ ] Incinerator
-    - [ ] Thermal Engine
-    - [ ] Advanced Thermal Engine
+    - [x] Thermal Engine
+    - [x] Advanced Thermal Engine
     - [ ] Liquid Cleaner
     - [x] Side Tanks
     - [x] Top Tank
-    - [ ] Advanced Tank
+    - [x] Advanced Tank
     - [x] Front Tank
     - [x] Creative Hull
     - [ ] Power Observer
