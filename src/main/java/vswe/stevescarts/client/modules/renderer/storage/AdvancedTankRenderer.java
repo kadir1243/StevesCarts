@@ -23,6 +23,6 @@ public class AdvancedTankRenderer extends ModuleRenderer<TankModule> {
 		matrices.scale(1.001F, 1.0011F, 1.001F);
 		this.model.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 		matrices.pop();
-		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), 0.0f, -4.5f, 0.0f, 14.0f, 13.0f, 10.0f);
+		FluidRenderUtil.renderFluidCuboid(matrices, module.getTank(), -7.0f, -4.5f, -5.0f, 14.0f, 13.0f, 10.0f);
 	}
 }
