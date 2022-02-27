@@ -72,7 +72,10 @@ public abstract class EngineModule extends MinecartModule implements Configurabl
 	public void addPriorityButton(ModularCartHandler handler, WPlainPanel panel, int x, int y) {
 		WPriorityButton priorityButton = new WPriorityButton(this::getPriority);
 		panel.add(priorityButton, x, y, 16, 16);
-		priorityButton.setOnClick(() -> ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.priorityPacketId(this.getDiscriminator()), buf -> {}));
+		priorityButton.setOnClick(() -> {
+			ScreenNetworking.of(handler, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.priorityPacketId(this.getDiscriminator()), buf -> {});
+			this.cyclePriority();
+		});
 		ScreenNetworking.of(handler, NetworkSide.SERVER).receive(StevesCartsScreenHandlers.priorityPacketId(this.getDiscriminator()), buf -> this.cyclePriority());
 	}
 
