@@ -56,7 +56,6 @@ public class TankModule extends StorageModule {
 			if (handler.getNetworkSide() == NetworkSide.SERVER) {
 				if (!FluidUtils.drainContainers(this.tank, this.bucketInventory, 0, 1)) {
 					FluidUtils.fillContainers(this.tank, this.bucketInventory, 0, 1);
-					ScreenNetworking.of(handler, NetworkSide.SERVER).send(this.packetId, buf -> buf.writeNbt(this.tank.write(new NbtCompound())));
 				}
 			}
 		});
@@ -65,6 +64,7 @@ public class TankModule extends StorageModule {
 		panel.add(emptyBucketSlot, 0, 48);
 		panel.add(fluidSlot, 20, 15, 36, 51);
 		ScreenNetworking.of(handler, NetworkSide.CLIENT).receive(this.packetId, buf -> this.tank.read(buf.readNbt()));
+		handler.addTicker(() -> ScreenNetworking.of(handler, NetworkSide.SERVER).send(this.packetId, buf -> buf.writeNbt(this.tank.write(new NbtCompound()))));
 	}
 
 	public Tank getTank() {

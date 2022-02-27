@@ -93,7 +93,6 @@ public class ModularCartHandler extends SyncedGuiDescription {
 		return super.addProperty(property);
 	}
 
-
 	@Override
 	public void sendContentUpdates() {
 		super.sendContentUpdates();
