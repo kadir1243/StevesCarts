@@ -203,5 +203,7 @@
 
   "itemGroup.stevescarts.components_group": "Steves Carts Components",
   "itemGroup.stevescarts.blocks_group": "Steves Carts Blocks",
-  "itemGroup.stevescarts.modules_group": "Steves Carts Modules"
+  "itemGroup.stevescarts.modules_group": "Steves Carts Modules",
+
+  "tag.stevescarts.tanks": "Tank(s)"
 }
