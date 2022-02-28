@@ -7,6 +7,7 @@ import vswe.stevescarts.modules.attachment.FireworkDisplayModule;
 import vswe.stevescarts.modules.attachment.SeatModule;
 import vswe.stevescarts.modules.engine.AdvancedThermalEngineModule;
 import vswe.stevescarts.modules.engine.CoalEngineModule;
+import vswe.stevescarts.modules.engine.SolarEngineModule;
 import vswe.stevescarts.modules.engine.ThermalEngineModule;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.modules.storage.ChestModule;
@@ -47,6 +48,7 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<CoalEngineModule> TINY_COAL_ENGINE = MinecartModuleType.<CoalEngineModule>builder().id("tiny_coal_engine").category(ModuleCategory.ENGINE).factory((minecart, type) -> new CoalEngineModule(minecart, type, 1, 0.5f)).hasRenderer().incompatible(ModuleTags.INCOMPATIBLE_WITH_TINY_COAL_ENGINE).moduleCost(2).buildAndRegister();
 	public static final MinecartModuleType<ThermalEngineModule> THERMAL_ENGINE = MinecartModuleType.<ThermalEngineModule>builder().id("thermal_engine").category(ModuleCategory.ENGINE).factory(ThermalEngineModule::new).incompatible(ModuleTags.INCOMPATIBLE_WITH_THERMAL_ENGINE).require(ModuleTags.TANKS).moduleCost(28).buildAndRegister();
 	public static final MinecartModuleType<AdvancedThermalEngineModule> ADVANCED_THERMAL_ENGINE = MinecartModuleType.<AdvancedThermalEngineModule>builder().id("advanced_thermal_engine").category(ModuleCategory.ENGINE).factory(AdvancedThermalEngineModule::new).incompatible(ModuleTags.INCOMPATIBLE_WITH_ADVANCED_THERMAL_ENGINE).require(ModuleTags.TANKS, 2).moduleCost(58).buildAndRegister();
+	public static final MinecartModuleType<SolarEngineModule> SOLAR_ENGINE = MinecartModuleType.<SolarEngineModule>builder().id("solar_engine").category(ModuleCategory.ENGINE).factory(SolarEngineModule::new).sides(ModuleSide.CENTER, ModuleSide.TOP).hasRenderer().noRenderTop().moduleCost(20).buildAndRegister();
 
 	// Addons
 	public static final MinecartModuleType<BrakeModule> BRAKE = MinecartModuleType.<BrakeModule>builder().id("brake").category(ModuleCategory.ADDON).factory(BrakeModule::new).sides(ModuleSide.RIGHT).require(StevesCartsModuleTypes.SEAT).hasRenderer().noRenderTop().moduleCost(12).buildAndRegister();

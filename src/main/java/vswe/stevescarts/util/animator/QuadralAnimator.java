@@ -1,10 +1,10 @@
-package vswe.stevescarts.util;
+package vswe.stevescarts.util.animator;
 
 import net.minecraft.block.entity.ChestLidAnimator;
 
-public class DualAnimator {
+public class QuadralAnimator {
 	private final ChestLidAnimator first = new ChestLidAnimator();
-	private final ChestLidAnimator next = new ChestLidAnimator();
+	private final TrialAnimator next = new TrialAnimator();
 	private boolean open = false;
 
 	public void setOpen(boolean open) {
@@ -21,7 +21,7 @@ public class DualAnimator {
 			}
 		} else {
 			this.next.step();
-			if (this.next.getProgress(1.0F) <= 0.0F) {
+			if (this.next.getFirstProgress(1.0F) <= 0.0F) {
 				this.first.step();
 			}
 		}
@@ -31,7 +31,15 @@ public class DualAnimator {
 		return this.first.getProgress(tickDelta);
 	}
 
-	public float getNextProgress(float tickDelta) {
-		return this.next.getProgress(tickDelta);
+	public float getSecondProgress(float tickDelta) {
+		return this.next.getFirstProgress(tickDelta);
+	}
+
+	public float getThirdProgress(float tickDelta) {
+		return this.next.getSecondProgress(tickDelta);
+	}
+
+	public float getFourthProgress(float tickDelta) {
+		return this.next.getThirdProgress(tickDelta);
 	}
 }

@@ -14,6 +14,7 @@ import vswe.stevescarts.client.screen.ModularCartScreen;
 public class StevesCartsScreenHandlers {
 	public static final ScreenHandlerType<CartAssemblerHandler> CART_ASSEMBLER = ScreenHandlerRegistry.registerSimple(StevesCarts.id("cart_assembler"), (syncId, playerInventory) -> new CartAssemblerHandler(syncId, playerInventory, ScreenHandlerContext.EMPTY));
 	public static final ScreenHandlerType<ModularCartHandler> MODULAR_CART = ScreenHandlerRegistry.registerExtended(StevesCarts.id("modular_cart"), ModularCartHandler::new);
+
 	public static final Identifier PACKET_ASSEMBLE_CLICK = StevesCarts.id("assemble_click");
 	public static final Identifier PACKET_SEAT_CLICK = StevesCarts.id("seat_click");
 	public static final Identifier PACKET_SEAT_UPDATE = StevesCarts.id("seat_update");
@@ -21,7 +22,7 @@ public class StevesCartsScreenHandlers {
 	public static final Identifier PACKET_REVERSE = StevesCarts.id("reverse");
 	public static final Identifier PACKET_COAL_FUEL_UPDATE = StevesCarts.id("coal_fuel_update");
 	public static final Identifier PACKET_TOGGLE_INVISIBILITY = StevesCarts.id("toggle_invisibility");
-	public static final Identifier PACKET_TANK_UPDATE = StevesCarts.id("tank_update");
+	public static final Identifier PACKET_SOLAR_POWER_UPDATE = StevesCarts.id("solar_power_update");
 
 	public static void init() {
 	}

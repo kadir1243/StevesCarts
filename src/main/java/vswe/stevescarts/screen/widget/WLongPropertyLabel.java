@@ -5,12 +5,13 @@ import io.github.cottonmc.cotton.gui.widget.WLabel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.Property;
 import net.minecraft.text.TranslatableText;
+import vswe.stevescarts.util.LongProperty;
 
-public class WPropertyLabel extends WLabel {
+public class WLongPropertyLabel extends WLabel {
 	private final String translation;
-	private final Property property;
+	private final LongProperty property;
 
-	public WPropertyLabel(String translation, Property property) {
+	public WLongPropertyLabel(String translation, LongProperty property) {
 		super(new TranslatableText(translation, 0));
 		this.translation = translation;
 		this.property = property;
