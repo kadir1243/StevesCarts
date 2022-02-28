@@ -1,6 +1,6 @@
 - Modules
     - [x] Coal Engine
-    - [ ] Solar Engine
+    - [x] Solar Engine
     - [x] Side Chests
     - [x] Top Chest
     - [x] Front Chest
@@ -43,7 +43,7 @@
     - [ ] Colorizer
     - [ ] Pumpkin chariot
     - [x] Tiny Coal Engine
-    - [ ] Basic Solar Engine
+    - [x] Basic Solar Engine
     - [ ] Projectile: Potion
     - [ ] Gift Storage
     - [ ] Chunk Loader
