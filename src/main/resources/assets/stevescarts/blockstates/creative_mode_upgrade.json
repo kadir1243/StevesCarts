@@ -16,7 +16,7 @@
       "y": 270,
       "model": "stevescarts:block/creative_mode_upgrade_upgrade"
     },
-    "facing=done,connected=true": {
+    "facing=down,connected=true": {
       "model": "stevescarts:block/creative_mode_upgrade_upgrade_horizontal_down"
     },
     "facing=up,connected=true": {
