@@ -25,7 +25,31 @@
     "facing=west,connected=true": {
       "y": 180,
       "model": "stevescarts:block/redstone_control_upgrade_upgrade"
+    },
+    "facing=south,connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:block/redstone_control_upgrade_upgrade_idle"
+    },
+    "facing=east,connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:block/redstone_control_upgrade_upgrade_idle"
+    },
+    "facing=north,connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:block/redstone_control_upgrade_upgrade_idle"
+    },
+    "facing=down,connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:block/redstone_control_upgrade_upgrade_idle"
+    },
+    "facing=west,connected=false": {
+      "y": 0,
+      "z": 0,
+      "model": "stevescarts:block/redstone_control_upgrade_upgrade_idle"
     }
   }
 }
-

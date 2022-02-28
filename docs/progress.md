@@ -19,7 +19,7 @@
     - [ ] Height Controller
     - [ ] Fertilizer
     - [ ] Entity Detector: Animal
-    - [ ] Liquid Sensors
+    - [ ] Fluid Sensors
     - [ ] Entity Detector: Villager
     - [ ] Entity Detector: Player
     - [x] Seat
@@ -103,11 +103,11 @@
         - [x] GUI
             - [x] Slots and buttons
             - [ ] Cart Rendering
-            - [ ] Information
+            - [x] Information
         - [ ] Upgrades
         - [ ] Fuel
     - [ ] Cargo Manager
-    - [ ] Liquid Manager
+    - [ ] Fluid Manager
     - [ ] External Distributor
     - [ ] Module Toggler
     - [ ] Detector Manager

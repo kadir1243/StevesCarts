@@ -23,6 +23,21 @@
     "facing=west,connected=true": {
       "y": 180,
       "model": "stevescarts:block/batteries_upgrade_upgrade"
+    },
+    "facing=south,connected=false": {
+      "model": "stevescarts:block/batteries_upgrade_upgrade_idle"
+    },
+    "facing=east,connected=false": {
+      "model": "stevescarts:block/batteries_upgrade_upgrade_idle"
+    },
+    "facing=north,connected=false": {
+      "model": "stevescarts:block/batteries_upgrade_upgrade_idle"
+    },
+    "facing=down,connected=false": {
+      "model": "stevescarts:block/batteries_upgrade_upgrade_idle"
+    },
+    "facing=west,connected=false": {
+      "model": "stevescarts:block/batteries_upgrade_upgrade_idle"
     }
   }
 }
