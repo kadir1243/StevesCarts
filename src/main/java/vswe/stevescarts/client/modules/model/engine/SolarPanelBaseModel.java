@@ -32,7 +32,7 @@ public class SolarPanelBaseModel extends ModuleModel {
 
 	@Override
 	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
-		this.moving.pivotY = ((SolarEngineModule) module).getLiftProgress(tickDelta);
+		this.moving.pivotY = ((SolarEngineModule) module).getTranslation(tickDelta);
 		this.top.pivotY = this.moving.pivotY - 5.0F;
 	}
 }

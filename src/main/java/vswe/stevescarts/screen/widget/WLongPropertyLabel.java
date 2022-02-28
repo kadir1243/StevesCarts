@@ -24,7 +24,7 @@ public class WLongPropertyLabel extends WLabel {
 
 	@Override
 	public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
-		this.text = new TranslatableText(this.translation, this.property.get());
+		this.text = new TranslatableText(this.translation, this.property.getAsLong());
 		super.paint(matrices, x, y, mouseX, mouseY);
 	}
 }

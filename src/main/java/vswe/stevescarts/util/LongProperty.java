@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.0.9 (FabricMC cc05e23f).
- */
 package vswe.stevescarts.util;
 
 import java.util.function.LongConsumer;

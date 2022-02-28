@@ -1,11 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "conditions": [
-    {
-      "type": "stevescarts:module_enabled",
-      "id": 1
-    }
-  ],
   "pattern": [
     "I#I",
     "#X#",
@@ -13,22 +7,19 @@
   ],
   "key": {
     "X": {
-      "item": "stevescarts:modulecomponents",
-      "data": 16
+      "item": "stevescarts:advanced_pcb"
     },
     "#": {
-      "item": "stevescarts:modulecomponents",
-      "data": 44
+      "item": "stevescarts:solar_panel"
     },
     "P": {
       "item": "minecraft:piston"
     },
     "I": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     }
   },
   "result": {
-    "item": "stevescarts:cartmodule",
-    "data": 1
+    "item": "stevescarts:advanced_solar_engine"
   }
 }

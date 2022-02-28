@@ -6,9 +6,9 @@ import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.LightType;
+import net.minecraft.world.World;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
@@ -21,9 +21,11 @@ import vswe.stevescarts.util.animator.TrialAnimator;
 public class SolarEngineModule extends EngineModule {
 	private final TrialAnimator animator = new TrialAnimator();
 	private final LongProperty power = LongProperty.create();
+	private final long maxPower;
 
-	public SolarEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type) {
+	public SolarEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, long maxPower) {
 		super(minecart, type);
+		this.maxPower = maxPower;
 		power.accept(0L);
 	}
 
@@ -62,11 +64,14 @@ public class SolarEngineModule extends EngineModule {
 
 	@Override
 	public void tick() {
-		int skyLight = this.minecart.world.getLightLevel(LightType.SKY, this.minecart.getBlockPos());
+		int skyLight = this.getSkyLight();
 		this.animator.setOpen(skyLight > 5);
 		this.animator.step();
 		if (skyLight > 5 && this.animator.getThirdProgress(1.0F) == 1.0F) {
-			this.power.inc((long) (((skyLight - 5) / 10.0) * 10));
+			this.power.inc((long) (((skyLight - 5) / 5.0) * 10));
+			if (this.power.getAsLong() > this.maxPower) {
+				this.power.accept(this.maxPower);
+			}
 		}
 	}
 
@@ -80,7 +85,27 @@ public class SolarEngineModule extends EngineModule {
 		return "solar";
 	}
 
-	public float getLiftProgress(float tickDelta) {
+	public float getTranslation(float tickDelta) {
 		return MathHelper.lerp(this.animator.getFirstProgress(tickDelta) - this.animator.getThirdProgress(tickDelta), -4.0F, -13.0F);
+	}
+
+	public float getRotation(float tickDelta) {
+		return MathHelper.lerp(this.animator.getSecondProgress(tickDelta), 0.0F, 1.5707964f);
+	}
+
+	public int getSkyLight() {
+		World world = this.minecart.world;
+		if (world == null) {
+			return 0;
+		}
+		return MathHelper.clamp(
+				Math.round((world.getLightLevel(LightType.SKY, this.minecart.getBlockPos()) - world.getAmbientDarkness()) * MathHelper.cos(world.getSkyAngleRadians(1.0f))),
+				0,
+				15
+		);
+	}
+
+	public boolean shouldShowActive() {
+		return this.animator.getThirdProgress(1.0F) == 1.0F;
 	}
 }

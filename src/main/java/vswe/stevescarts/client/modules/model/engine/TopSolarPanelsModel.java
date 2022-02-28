@@ -11,28 +11,52 @@ import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.engine.SolarEngineModule;
 
-public class SolarPanelBaseModel extends ModuleModel {
-	private final ModelPart moving;
-	private final ModelPart top;
+public class TopSolarPanelsModel extends ModuleModel {
+	private final ModelPart[] panels;
 
-	public SolarPanelBaseModel(Identifier texture) {
-		super(getTexturedModelData().createModel(), texture);
-		this.moving = this.getRoot().getChild("moving");
-		this.top = this.getRoot().getChild("top");
+	public TopSolarPanelsModel(Identifier texture, int count) {
+		super(getTexturedModelData(count).createModel(), texture);
+		this.panels = new ModelPart[count];
+		for (int i = 0; i < count; i++) {
+			this.panels[i] = this.getRoot().getChild("panel" + i);
+		}
 	}
 
-	public static TexturedModelData getTexturedModelData() {
+	public static TexturedModelData getTexturedModelData(int count) {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		modelPartData.addChild("base", ModelPartBuilder.create().uv(0, 0).cuboid(-1.0f, -5.0f, -1.0f, 2, 10, 2), ModelTransform.pivot(0.0f, -4.5f, 0.0f));
-		modelPartData.addChild("moving", ModelPartBuilder.create().uv(8, 0).cuboid(-2.0f, -3.5f, -2.0f, 4, 7, 4), ModelTransform.pivot(0.0f, 0.0f, 0.0f));
-		modelPartData.addChild("top", ModelPartBuilder.create().uv(0, 12).cuboid(-6.0f, -1.5f, -2.0f, 12, 3, 4), ModelTransform.pivot(0.0f, -5.0f, 0.0f));
-		return TexturedModelData.of(modelData, 32, 32);
+		for (int i = 0; i < count; i++) {
+			float rotation;
+			float f;
+			switch (i) {
+				case 0 -> {
+					rotation = 0.0f;
+					f = -1.5f;
+				}
+				case 1 -> {
+					rotation = 3.1415927f;
+					f = -1.5f;
+				}
+				case 2 -> {
+					rotation = 4.712389f;
+					f = -6.0f;
+				}
+				case 3 -> {
+					rotation = 1.5707964f;
+					f = -6.0f;
+				}
+				default -> throw new IllegalArgumentException("Invalid index: " + i);
+			}
+			modelPartData.addChild("panel" + i, ModelPartBuilder.create().uv(0, 0).cuboid(-6.0f, 0.0f, -2.0f, 12, 13, 2), ModelTransform.of((float) (Math.sin(rotation) * f), -5.0f, (float) (Math.cos(rotation) * f), 0.0f, rotation, 0.0f));
+		}
+		return TexturedModelData.of(modelData, 32, 16);
 	}
 
 	@Override
 	public void animateModel(MinecartModule module, float limbAngle, float limbDistance, float tickDelta) {
-		this.moving.pivotY = ((SolarEngineModule) module).getLiftProgress(tickDelta);
-		this.top.pivotY = this.moving.pivotY - 5.0F;
+		this.root.pivotY = ((SolarEngineModule) module).getTranslation(tickDelta);
+		for (ModelPart panel : panels) {
+			panel.pitch = -((SolarEngineModule) module).getRotation(tickDelta);
+		}
 	}
 }
