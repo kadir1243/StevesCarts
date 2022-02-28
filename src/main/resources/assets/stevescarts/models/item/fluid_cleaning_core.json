@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "stevescarts:items/liquid_cleaning_core"
+    "layer0": "stevescarts:items/fluid_cleaning_core"
   }
 }

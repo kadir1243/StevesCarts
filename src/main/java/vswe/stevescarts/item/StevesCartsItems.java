@@ -71,8 +71,8 @@ public class StevesCartsItems {
 	public static final CartComponentItem TANK_PANE = registerSimpleComponent("tank_pane");
 	public static final CartComponentItem LARGE_TANK_PANE = registerSimpleComponent("large_tank_pane");
 	public static final CartComponentItem HUGE_TANK_PANE = registerSimpleComponent("huge_tank_pane");
-	public static final CartComponentItem LIQUID_CLEANING_CORE = registerSimpleComponent("liquid_cleaning_core");
-	public static final CartComponentItem LIQUID_CLEANING_TUBE = registerSimpleComponent("liquid_cleaning_tube");
+	public static final CartComponentItem FLUID_CLEANING_CORE = registerSimpleComponent("fluid_cleaning_core");
+	public static final CartComponentItem FLUID_CLEANING_TUBE = registerSimpleComponent("fluid_cleaning_tube");
 	public static final CartComponentItem EXPLOSIVE_EASTER_EGG = registerSimpleComponent("explosive_easter_egg");
 	public static final CartComponentItem BURNING_EASTER_EGG = registerSimpleComponent("burning_easter_egg");
 	public static final CartComponentItem GLISTERING_EASTER_EGG = registerSimpleComponent("glistering_easter_egg");

@@ -10,13 +10,13 @@
       "item": "stevescarts:cleaning_fan"
     },
     "X": {
-      "item": "stevescarts:liquid_cleaning_tube"
+      "item": "stevescarts:fluid_cleaning_tube"
     },
     "#": {
       "tag": "c:iron_ingots"
     }
   },
   "result": {
-    "item": "stevescarts:liquid_cleaning_core"
+    "item": "stevescarts:fluid_cleaning_core"
   }
 }
