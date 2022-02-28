@@ -121,7 +121,6 @@
     - [ ] Easter eggs
     - [ ] Custom Item functionalities
     - [x] Component recipes
-    - [ ] Recipe conditions
 - Other
     - [x] Cart screen
     - [x] Loot tables
