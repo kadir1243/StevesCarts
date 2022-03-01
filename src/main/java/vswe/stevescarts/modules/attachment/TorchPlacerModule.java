@@ -13,6 +13,7 @@ import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.screen.ModularCartHandler;
+import vswe.stevescarts.screen.widget.WLightThreshold;
 
 public class TorchPlacerModule extends MinecartModule implements Configurable {
 	private final SimpleInventory torchInventory;
@@ -40,9 +41,10 @@ public class TorchPlacerModule extends MinecartModule implements Configurable {
 		panel.add(label, 0, 0);
 		WItemSlot slots = WItemSlot.of(this.torchInventory, 0, 3, 1);
 		slots.setFilter(stack -> stack.isOf(Items.TORCH));
-		panel.add(slots, 0, 10);
-		panel.setSize(60, 30);
-		// TODO: add threshold
+		panel.add(slots, 0, 15);
+		WLightThreshold threshold = new WLightThreshold(() -> this.minecart.world.getLightLevel(this.minecart.getBlockPos()));
+		panel.add(threshold, 0, 35, 46, 9);
+		panel.setSize(60, 45);
 	}
 
 	public boolean hasTorch(int index) {
