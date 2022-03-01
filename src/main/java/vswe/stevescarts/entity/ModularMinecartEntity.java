@@ -190,7 +190,9 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public void onScreenClose() {
 		this.modules.values().forEach(MinecartModule::onScreenClose);
-		UpdatePacket.sendToTrackers(this);
+		if (!this.world.isClient) {
+			UpdatePacket.sendToTrackers(this);
+		}
 	}
 
 	@Override
