@@ -26,6 +26,7 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<HullModule> MECHANICAL_PIG = MinecartModuleType.<HullModule>builder().hull().id("mechanical_pig").factory(HullModule::new).sides(ModuleSide.FRONT, ModuleSide.BACK).modularCapacity(150).engineMaxCount(2).addonMaxCount(4).complexityMax(150).buildAndRegister();
 	public static final MinecartModuleType<HullModule> GALGADORIAN_HULL = MinecartModuleType.<HullModule>builder().hull().id("galgadorian_hull").factory(HullModule::new).modularCapacity(1000).engineMaxCount(5).addonMaxCount(12).complexityMax(150).buildAndRegister();
 	public static final MinecartModuleType<HullModule> CREATIVE_HULL = MinecartModuleType.<HullModule>builder().hull().id("creative_hull").factory(HullModule::new).modularCapacity(10000).engineMaxCount(5).addonMaxCount(12).complexityMax(1500).buildAndRegister();
+	public static final MinecartModuleType<HullModule> PUMPKIN_CHARIOT = MinecartModuleType.<HullModule>builder().hull().id("pumpkin_chariot").factory(HullModule::new).modularCapacity(40).engineMaxCount(1).addonMaxCount(0).complexityMax(15).buildAndRegister();
 
 	// Storage
 	public static final MinecartModuleType<ChestModule> FRONT_CHEST = MinecartModuleType.<ChestModule>builder().id("front_chest").category(ModuleCategory.STORAGE).factory((minecart, type) -> new ChestModule(minecart, type, 4, 3)).sides(ModuleSide.FRONT).hasRenderer().moduleCost(5).buildAndRegister();

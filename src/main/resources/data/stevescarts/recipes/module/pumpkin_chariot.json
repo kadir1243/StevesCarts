@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "fabric:load_conditions": [
+    {
+      "condition": "stevescarts:date",
+      "month": "10",
+      "day": "31"
+    }
+  ],
+  "pattern": [
+    "# #",
+    "#P#",
+    "X X"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "X": {
+      "item": "stevescarts:wooden_wheels"
+    },
+    "P": {
+      "item": "minecraft:pumpkin"
+    }
+  },
+  "result": {
+    "item": "stevescarts:pumpkin_chariot"
+  }
+}
