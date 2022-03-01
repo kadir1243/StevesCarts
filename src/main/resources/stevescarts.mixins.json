@@ -10,7 +10,10 @@
     "SlotAccessor",
     "StatsAccessor"
   ],
-  "client": [],
+  "client": [
+    "client.ClientPlayerInteractionManagerMixin",
+    "client.ClientPlayerEntityMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

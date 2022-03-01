@@ -270,10 +270,14 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 			return ActionResult.PASS;
 		}
 		if (!player.world.isClient && !player.isSpectator()) {
-			player.openHandledScreen(this.new CartScreenHandlerFactory());
-			this.onScreenOpen();
+			this.openScreen(player);
 		}
 		return ActionResult.success(player.world.isClient);
+	}
+
+	public void openScreen(PlayerEntity player) {
+		player.openHandledScreen(this.new CartScreenHandlerFactory());
+		this.onScreenOpen();
 	}
 
 	public void reverse() {
