@@ -47,7 +47,6 @@ import java.util.stream.Collectors;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private final ScreenHandlerContext context;
-	private final WItemSlot outputSlot;
 
 	public CartAssemblerHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
 		super(StevesCartsScreenHandlers.CART_ASSEMBLER, syncId, playerInventory, getBlockInventory(context, CartAssemblerBlockEntity.SIZE), getBlockPropertyDelegate(context));
@@ -79,8 +78,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		WModuleSlot addonsSlots = new WModuleSlot(this.blockInventory, CartAssemblerBlockEntity.ADDON_SLOT_START, 6, 2, ModuleCategory.ADDON);
 		rootPanel.add(addonsSlots, 7, 179);
 		addonsSlots.setFilter(MinecartModuleType::isAddon);
-		this.outputSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.OUTPUT_SLOT);
-		this.outputSlot.setFilter((stack) -> stack.isOf(StevesCartsItems.MODULAR_CART));
+		WItemSlot outputSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.OUTPUT_SLOT);
+		outputSlot.setFilter((stack) -> stack.isOf(StevesCartsItems.MODULAR_CART));
 		WCart cart = new WCart(() -> {
 			List<MinecartModuleType<?>> types = new ArrayList<>();
 			if (assembleButton.isEnabled()) {
@@ -94,7 +93,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			return types;
 		}, 187, 120);
 		this.addCentered(cart, 4);
-		rootPanel.add(this.outputSlot, 330, 182);
+		rootPanel.add(outputSlot, 330, 182);
 		WItemSlot fuelSlot = WItemSlot.outputOf(this.blockInventory, CartAssemblerBlockEntity.FUEL_SLOT);
 		rootPanel.add(fuelSlot, 384, 182);
 		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(StevesCartsScreenHandlers.PACKET_ASSEMBLE_CLICK, (buf) -> {
@@ -117,7 +116,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		attachmentSlots.addChangeListener(moduleListener);
 		toolSlot.addChangeListener(moduleListener);
 		engineSlots.addChangeListener(moduleListener);
-		this.outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
+		outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.markDirty());
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			boolean invalid = false;
 			List<MinecartModuleType<?>> types = new ArrayList<>();

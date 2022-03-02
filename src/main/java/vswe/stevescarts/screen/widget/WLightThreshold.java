@@ -8,6 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import vswe.stevescarts.StevesCarts;
 
+import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
 public class WLightThreshold extends WWidget {
@@ -16,9 +17,13 @@ public class WLightThreshold extends WWidget {
 	public static final Texture FG = new Texture(StevesCarts.id("textures/gui/light_threshold.png"), 0.0F, 0.28125F, 0.34375F, 0.5F);
 	public static final Texture BAR = new Texture(StevesCarts.id("textures/gui/light_threshold.png"), 0.0F, 0.5F, 0.0078125F, 0.1953125F);
 	private final IntSupplier lightSupplier;
+	private final int current;
+	private final IntConsumer setter;
 
-	public WLightThreshold(IntSupplier lightSupplier) {
+	public WLightThreshold(IntSupplier lightSupplier, int current, IntConsumer setter) {
 		this.lightSupplier = lightSupplier;
+		this.current = current;
+		this.setter = setter;
 	}
 
 	@Override

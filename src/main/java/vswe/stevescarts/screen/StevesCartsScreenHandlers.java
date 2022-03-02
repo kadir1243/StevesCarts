@@ -23,6 +23,7 @@ public class StevesCartsScreenHandlers {
 	public static final Identifier PACKET_COAL_FUEL_UPDATE = StevesCarts.id("coal_fuel_update");
 	public static final Identifier PACKET_TOGGLE_INVISIBILITY = StevesCarts.id("toggle_invisibility");
 	public static final Identifier PACKET_SOLAR_POWER_UPDATE = StevesCarts.id("solar_power_update");
+	public static final Identifier PACKET_THRESHOLD_UPDATE = StevesCarts.id("threshold_update");
 
 	public static void init() {
 	}
