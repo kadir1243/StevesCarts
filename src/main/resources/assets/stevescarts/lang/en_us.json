@@ -21,6 +21,7 @@
   "screen.stevescarts.cart.invisibility": "Toggle Invisibility",
   "screen.stevescarts.cart.power": "Power: %s",
   "screen.stevescarts.cart.threshold": "Threshold: %s",
+  "screen.stevescarts.cart.current": "Current: %s",
 
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",

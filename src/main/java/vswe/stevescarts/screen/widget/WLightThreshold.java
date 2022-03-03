@@ -48,6 +48,7 @@ public class WLightThreshold extends WWidget {
 	@Override
 	public void addTooltip(TooltipBuilder tooltip) {
 		tooltip.add(new TranslatableText("screen.stevescarts.cart.threshold", this.current));
+		tooltip.add(new TranslatableText("screen.stevescarts.cart.current", this.lightSupplier.getAsInt()));
 	}
 
 	@Override
