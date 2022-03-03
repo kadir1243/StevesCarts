@@ -10,6 +10,7 @@ import net.fabricmc.api.ModInitializer;
 import vswe.stevescarts.advancement.StevesCartsStats;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
+import vswe.stevescarts.data.StevesCartsConditions;
 import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
@@ -31,6 +32,7 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsStats.init();
 		StevesCartsScreenHandlers.init();
 		StevesCartsEntities.init();
+		StevesCartsConditions.init();
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 	}
 }

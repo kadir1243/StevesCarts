@@ -20,17 +20,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.SimpleRegistry;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
+import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.ModularMinecartEntity;
@@ -40,7 +43,7 @@ import vswe.stevescarts.item.modules.ModuleItem;
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public final class MinecartModuleType<T extends MinecartModule> {
 	public static final Registry<MinecartModuleType<? extends MinecartModule>> REGISTRY = FabricRegistryBuilder.<MinecartModuleType<? extends MinecartModule>, SimpleRegistry<MinecartModuleType<? extends MinecartModule>>>
-			from(new SimpleRegistry<>(RegistryKey.ofRegistry(StevesCarts.id("module_type")), Lifecycle.stable())).buildAndRegister();
+			from(new SimpleRegistry<>(RegistryKey.ofRegistry(StevesCarts.id("cart_module_type")), Lifecycle.stable(), MinecartModuleType::getRegistryEntry)).buildAndRegister();
 	public static final RegistryKey<Registry<MinecartModuleType<? extends MinecartModule>>> REGISTRY_KEY = RegistryKey.ofRegistry(StevesCarts.id("module_type"));
 	private final BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory;
 	private final Supplier<Item> item;
@@ -57,10 +60,11 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	private final boolean shouldRenderTop;
 	private final boolean hasRenderer;
 	private final List<Supplier<MinecartModuleType<?>>> explicitRequirements;
-	private final Object2IntMap<Tag.Identified<MinecartModuleType<?>>> tagRequirements;
-	private final List<Tag.Identified<MinecartModuleType<?>>> incompatibilities;
+	private final Object2IntMap<TagKey<MinecartModuleType<?>>> tagRequirements;
+	private final List<TagKey<MinecartModuleType<?>>> incompatibilities;
+	private final RegistryEntry.Reference<MinecartModuleType<? extends MinecartModule>> registryEntry = REGISTRY.createEntry(this);;
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer, List<Supplier<MinecartModuleType<?>>> explicitRequirements, Object2IntMap<Tag.Identified<MinecartModuleType<?>>> tagRequirements, List<Tag.Identified<MinecartModuleType<?>>> incompatibilities) {
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, Optional<HullData> hullData, Optional<ToolData> toolData, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer, List<Supplier<MinecartModuleType<?>>> explicitRequirements, Object2IntMap<TagKey<MinecartModuleType<?>>> tagRequirements, List<TagKey<MinecartModuleType<?>>> incompatibilities) {
 		this.factory = factory;
 		this.item = item;
 		this.category = category;
@@ -80,7 +84,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this.advancedTooltip = this.generateAdvancedTooltip();
 	}
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData, List<Supplier<MinecartModuleType<?>>> explicitRequirements, Object2IntMap<Tag.Identified<MinecartModuleType<?>>> tagRequirements, List<Tag.Identified<MinecartModuleType<?>>> incompatibilities) {
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, ToolData toolData, List<Supplier<MinecartModuleType<?>>> explicitRequirements, Object2IntMap<TagKey<MinecartModuleType<?>>> tagRequirements, List<TagKey<MinecartModuleType<?>>> incompatibilities) {
 		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.of(toolData), false, true, true, explicitRequirements, tagRequirements, incompatibilities);
 	}
 
@@ -88,7 +92,7 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.of(hullData), Optional.empty(), false, true, true, Collections.emptyList(), new Object2IntOpenHashMap<>(), Collections.emptyList());
 	}
 
-	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer, List<Supplier<MinecartModuleType<?>>> explicitRequirements, Object2IntMap<Tag.Identified<MinecartModuleType<?>>> tagRequirements, List<Tag.Identified<MinecartModuleType<?>>> incompatibilities) {
+	private MinecartModuleType(BiFunction<ModularMinecartEntity, MinecartModuleType<T>, T> factory, Supplier<Item> item, ModuleCategory category, Identifier id, int moduleCost, EnumSet<ModuleSide> sides, List<Text> tooltip, boolean allowDuplicates, boolean shouldRenderTop, boolean hasRenderer, List<Supplier<MinecartModuleType<?>>> explicitRequirements, Object2IntMap<TagKey<MinecartModuleType<?>>> tagRequirements, List<TagKey<MinecartModuleType<?>>> incompatibilities) {
 		this(factory, item, category, id, moduleCost, sides, tooltip, Optional.empty(), Optional.empty(), allowDuplicates, shouldRenderTop, hasRenderer, explicitRequirements, tagRequirements, incompatibilities);
 	}
 
@@ -234,6 +238,14 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return hasRenderer;
 	}
 
+	public boolean isIn(TagKey<MinecartModuleType<? extends MinecartModule>> key) {
+		return this.getRegistryEntry().isIn(key);
+	}
+
+	public RegistryEntry.Reference<MinecartModuleType<? extends MinecartModule>> getRegistryEntry() {
+		return this.registryEntry;
+	}
+
 	@Environment(EnvType.CLIENT)
 	public void appendTooltip(List<Text> tooltip, TooltipContext context) {
 		tooltip.addAll(this.tooltip);
@@ -256,9 +268,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 	}
 
 	public MinecartModuleType<?> checkIncompatibilities(List<MinecartModuleType<?>> types) {
-		for (Tag.Identified<MinecartModuleType<?>> incompatibility : this.incompatibilities) {
+		for (TagKey<MinecartModuleType<?>> incompatibility : this.incompatibilities) {
 			for (MinecartModuleType<?> type : types) {
-				if (incompatibility.contains(type)) {
+				if (type.isIn(incompatibility)) {
 					return type;
 				}
 			}
@@ -267,9 +279,9 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return null;
 	}
 
-	public Object2IntMap.Entry<Tag.Identified<MinecartModuleType<?>>> matchesTagRequirements(List<MinecartModuleType<?>> types) {
-		for (Object2IntMap.Entry<Tag.Identified<MinecartModuleType<?>>> req : this.tagRequirements.object2IntEntrySet()) {
-			if (types.stream().filter(type -> req.getKey().contains(type)).count() < req.getIntValue()) {
+	public Object2IntMap.Entry<TagKey<MinecartModuleType<?>>> matchesTagRequirements(List<MinecartModuleType<?>> types) {
+		for (Object2IntMap.Entry<TagKey<MinecartModuleType<?>>> req : this.tagRequirements.object2IntEntrySet()) {
+			if (types.stream().filter(type -> type.isIn(req.getKey())).count() < req.getIntValue()) {
 				return req;
 			}
 		}
@@ -303,8 +315,8 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		protected boolean shouldRenderTop = true;
 		protected boolean hasRenderer = false;
 		protected ImmutableList.Builder<Supplier<MinecartModuleType<?>>> explicitRequirements = ImmutableList.builder();
-		protected Object2IntMap<Tag.Identified<MinecartModuleType<?>>> tagRequirements = new Object2IntOpenHashMap<>();
-		protected ImmutableList.Builder<Tag.Identified<MinecartModuleType<?>>> incompatibilities = ImmutableList.builder();
+		protected Object2IntMap<TagKey<MinecartModuleType<?>>> tagRequirements = new Object2IntOpenHashMap<>();
+		protected ImmutableList.Builder<TagKey<MinecartModuleType<?>>> incompatibilities = ImmutableList.builder();
 
 		protected Builder() {
 		}
@@ -382,17 +394,17 @@ public final class MinecartModuleType<T extends MinecartModule> {
 			return this;
 		}
 
-		public Builder<T> require(Tag.Identified<MinecartModuleType<?>> tag, int count) {
+		public Builder<T> require(TagKey<MinecartModuleType<?>> tag, int count) {
 			this.tagRequirements.put(tag, count);
 			return this;
 		}
 
-		public Builder<T> require(Tag.Identified<MinecartModuleType<?>> tag) {
+		public Builder<T> require(TagKey<MinecartModuleType<?>> tag) {
 			this.tagRequirements.put(tag, 1);
 			return this;
 		}
 
-		public Builder<T> incompatible(Tag.Identified<MinecartModuleType<?>> tag) {
+		public Builder<T> incompatible(TagKey<MinecartModuleType<?>> tag) {
 			this.incompatibilities.add(tag);
 			return this;
 		}
@@ -526,17 +538,17 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 
 		@Override
-		public Hull<T> require(Tag.Identified<MinecartModuleType<?>> tag, int count) {
+		public Hull<T> require(TagKey<MinecartModuleType<?>> tag, int count) {
 			return (Hull<T>) super.require(tag, count);
 		}
 
 		@Override
-		public Hull<T> require(Tag.Identified<MinecartModuleType<?>> tag) {
+		public Hull<T> require(TagKey<MinecartModuleType<?>> tag) {
 			return (Hull<T>) super.require(tag);
 		}
 
 		@Override
-		public Hull<T> incompatible(Tag.Identified<MinecartModuleType<?>> tag) {
+		public Hull<T> incompatible(TagKey<MinecartModuleType<?>> tag) {
 			return (Hull<T>) super.incompatible(tag);
 		}
 
@@ -563,7 +575,8 @@ public final class MinecartModuleType<T extends MinecartModule> {
 				this.tooltip(new TranslatableText("tooltip.stevescarts.hull.addon_max_count", this.addonMaxCount).formatted(Formatting.GREEN));
 			}
 			this.validate();
-			MinecartModuleType<T> type = Registry.register(REGISTRY, this.id, new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), new HullData(this.modularCapacity, this.engineMaxCount, this.addonMaxCount, this.complexityMax)));
+			MinecartModuleType<T> type = new MinecartModuleType<>(this.factory, () -> this.finalItem, this.category, this.id, this.moduleCost, this.sides, this.tooltip.build(), new HullData(this.modularCapacity, this.engineMaxCount, this.addonMaxCount, this.complexityMax));
+			Registry.register(REGISTRY, this.id, type);
 			this.finalItem = Registry.register(Registry.ITEM, type.getId(), this.itemFactory.apply(new Item.Settings(), type));
 			return type;
 		}
@@ -632,17 +645,17 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 
 		@Override
-		public Tool<T> require(Tag.Identified<MinecartModuleType<?>> tag, int count) {
+		public Tool<T> require(TagKey<MinecartModuleType<?>> tag, int count) {
 			return (Tool<T>) super.require(tag, count);
 		}
 
 		@Override
-		public Tool<T> require(Tag.Identified<MinecartModuleType<?>> tag) {
+		public Tool<T> require(TagKey<MinecartModuleType<?>> tag) {
 			return (Tool<T>) super.require(tag);
 		}
 
 		@Override
-		public Tool<T> incompatible(Tag.Identified<MinecartModuleType<?>> tag) {
+		public Tool<T> incompatible(TagKey<MinecartModuleType<?>> tag) {
 			return (Tool<T>) super.incompatible(tag);
 		}
 

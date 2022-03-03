@@ -288,7 +288,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	}
 
 	public Stream<TankModule> getTanks() {
-		return this.getModuleList().stream().filter(m -> m.getType().isOf(ModuleCategory.STORAGE) && ModuleTags.TANKS.contains(m.getType())).map(TankModule.class::cast);
+		return this.getModuleList().stream().filter(m -> m.getType().isOf(ModuleCategory.STORAGE) && m.getType().isIn(ModuleTags.TANKS)).map(TankModule.class::cast);
 	}
 
 	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {
