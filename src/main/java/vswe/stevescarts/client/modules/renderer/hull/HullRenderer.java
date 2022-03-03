@@ -17,8 +17,8 @@ import vswe.stevescarts.modules.hull.HullModule;
 
 @Environment(EnvType.CLIENT)
 public class HullRenderer<T extends HullModule> extends ModuleRenderer<T> {
-	private final HullModel model;
-	private final HullTopModel topModel;
+	protected final HullModel model;
+	protected final HullTopModel topModel;
 
 	public HullRenderer(Identifier texture, Identifier topTexture) {
 		this.model = new HullModel(texture);

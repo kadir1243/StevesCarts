@@ -60,7 +60,7 @@ public class WLightThreshold extends WWidget {
 		int lightWidth = (int) (44 * lightFraction);
 		float lightU = 0.34375F * lightFraction;
 		ScreenDrawing.texturedRect(matrices, x + 1, y + 1, lightWidth, 7, FG.withUv(FG.u1(), FG.v1(), lightU, FG.v2()), 0xFFFFFFFF);
-		int barX = (int) ((this.current / 15.0) * 44);
+		int barX = (int) ((this.current / 15.0) * 44) + 1;
 		ScreenDrawing.texturedRect(matrices, x + barX, y + 1, 1, 7, BAR, 0xFFFFFFFF);
 	}
 }

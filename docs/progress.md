@@ -6,7 +6,7 @@
     - [x] Front Chest
     - [x] Internal Storage
     - [x] Extracting Chests
-    - [ ] Torch Placer
+    - [x] Torch Placer
     - [ ] Basic Drill
     - [ ] Galgadorian Drill
     - [ ] Railer
@@ -41,7 +41,7 @@
     - [ ] Hardened Drill
     - [ ] Note Sequencer
     - [ ] Colorizer
-    - [ ] Pumpkin chariot
+    - [x] Pumpkin chariot
     - [x] Tiny Coal Engine
     - [x] Basic Solar Engine
     - [ ] Projectile: Potion

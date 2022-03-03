@@ -30,6 +30,7 @@ import vswe.stevescarts.client.modules.renderer.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.engine.SolarEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.MechanicalPigRenderer;
+import vswe.stevescarts.client.modules.renderer.hull.PumpkinChariotRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.AdvancedTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.FrontTankRenderer;
 import vswe.stevescarts.client.modules.renderer.storage.OpenTankRenderer;
@@ -105,7 +106,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.MECHANICAL_PIG, new MechanicalPigRenderer(id("textures/modules/hull/mechanical_pig.png"), id("textures/modules/hull/mechanical_pig_top.png"), new Identifier("textures/entity/pig/pig.png"), id("textures/modules/hull/pig_tail.png")));
 		register(StevesCartsModuleTypes.GALGADORIAN_HULL, new HullRenderer<>(id("textures/modules/hull/galgadorian_hull.png"), id("textures/modules/hull/galgadorian_hull_top.png")));
 		register(StevesCartsModuleTypes.CREATIVE_HULL, new HullRenderer<>(id("textures/modules/hull/creative_hull.png"), id("textures/modules/hull/creative_hull_top.png")));
-		register(StevesCartsModuleTypes.PUMPKIN_CHARIOT, new HullRenderer<>(id("textures/modules/hull/pumpkin_chariot.png"), id("textures/modules/hull/pumpkin_chariot_top.png")));
+		register(StevesCartsModuleTypes.PUMPKIN_CHARIOT, new PumpkinChariotRenderer(id("textures/modules/hull/pumpkin_chariot.png"), id("textures/modules/hull/pumpkin_chariot_top.png"), id("textures/modules/hull/wooden_hull_top.png")));
 
 		register(StevesCartsModuleTypes.FRONT_CHEST, new GenericRenderer(id("textures/modules/storage/front_chest.png"), FrontChestModel::new));
 		register(StevesCartsModuleTypes.TOP_CHEST, new GenericRenderer(id("textures/modules/storage/top_chest.png"), TopChestModel::new));
