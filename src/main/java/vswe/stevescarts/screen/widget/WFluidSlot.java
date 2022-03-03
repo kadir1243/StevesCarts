@@ -4,12 +4,14 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import reborncore.client.RenderUtil;
 import reborncore.common.fluid.FluidUtils;
 import reborncore.common.util.Tank;
+
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
+
 import vswe.stevescarts.StevesCarts;
 
 public class WFluidSlot extends WWidget {

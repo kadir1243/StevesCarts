@@ -8,18 +8,19 @@ import io.github.cottonmc.cotton.gui.widget.data.Axis;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandlerListener;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.screen.widget.WFixedPanel;
-
-import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class ModularCartHandler extends SyncedGuiDescription {
 	private final List<Runnable> tickers = new ObjectArrayList<>();

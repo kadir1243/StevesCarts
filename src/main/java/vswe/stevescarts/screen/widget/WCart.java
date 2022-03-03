@@ -2,19 +2,22 @@ package vswe.stevescarts.screen.widget;
 
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import vswe.stevescarts.item.ModularMinecartItem;
-import vswe.stevescarts.modules.MinecartModule;
-import vswe.stevescarts.modules.MinecartModuleType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import vswe.stevescarts.item.ModularMinecartItem;
+import vswe.stevescarts.modules.MinecartModule;
+import vswe.stevescarts.modules.MinecartModuleType;
 
 public class WCart extends WWidget {
 	public static boolean renderingCart = false;

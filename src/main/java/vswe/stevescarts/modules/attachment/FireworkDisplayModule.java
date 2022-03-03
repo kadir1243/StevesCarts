@@ -3,6 +3,7 @@ package vswe.stevescarts.modules.attachment;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
@@ -18,6 +19,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.mixins.DispenserBlockAccessor;
 import vswe.stevescarts.modules.Configurable;

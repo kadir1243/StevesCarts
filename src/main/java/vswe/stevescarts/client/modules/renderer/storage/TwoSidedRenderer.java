@@ -1,14 +1,15 @@
 package vswe.stevescarts.client.modules.renderer.storage;
 
+import java.util.function.Function;
+
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+
 import vswe.stevescarts.client.modules.model.ModuleModel;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
 import vswe.stevescarts.modules.MinecartModule;
-
-import java.util.function.Function;
 
 public class TwoSidedRenderer<T extends MinecartModule> extends ModuleRenderer<T> {
 	private final ModuleModel side;

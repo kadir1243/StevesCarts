@@ -8,21 +8,24 @@ import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.item.modules.ModuleItem;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.ModuleCategory;
 import vswe.stevescarts.modules.hull.HullModule;
 import vswe.stevescarts.screen.slot.ModuleSlot;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class WModuleSlot extends WItemSlot {
 	@Environment(EnvType.CLIENT)

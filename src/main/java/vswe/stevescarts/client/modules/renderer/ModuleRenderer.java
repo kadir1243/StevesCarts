@@ -1,11 +1,13 @@
 package vswe.stevescarts.client.modules.renderer;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.modules.MinecartModule;
 

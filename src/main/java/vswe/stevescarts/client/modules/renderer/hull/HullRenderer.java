@@ -1,17 +1,19 @@
 package vswe.stevescarts.client.modules.renderer.hull;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import java.util.Objects;
+
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 import vswe.stevescarts.client.modules.model.hull.HullModel;
 import vswe.stevescarts.client.modules.model.hull.HullTopModel;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
 import vswe.stevescarts.modules.hull.HullModule;
-
-import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public class HullRenderer<T extends HullModule> extends ModuleRenderer<T> {

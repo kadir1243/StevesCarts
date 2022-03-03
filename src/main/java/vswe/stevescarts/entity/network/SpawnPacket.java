@@ -1,11 +1,9 @@
 package vswe.stevescarts.entity.network;
 
 import com.google.common.collect.Multimap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+
+import java.util.UUID;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.nbt.NbtCompound;
@@ -13,12 +11,17 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.modules.MinecartModuleType;
-
-import java.util.UUID;
 
 public class SpawnPacket {
 	public static final Identifier ID = StevesCarts.id("spawn_minecart");

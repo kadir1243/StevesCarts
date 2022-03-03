@@ -2,6 +2,7 @@ package vswe.stevescarts.advancement;
 
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.util.Identifier;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.mixins.StatsAccessor;
 

@@ -1,5 +1,8 @@
 package vswe.stevescarts.client.entity;
 
+import java.util.Collection;
+import java.util.Objects;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -12,6 +15,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.profiler.Profiler;
+
 import vswe.stevescarts.client.StevesCartsClient;
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.entity.StevesCartsEntities;
@@ -19,9 +23,6 @@ import vswe.stevescarts.mixins.AbstractMinecartEntityAccessor;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.ModuleStorage;
 import vswe.stevescarts.screen.widget.WCart;
-
-import java.util.Collection;
-import java.util.Objects;
 
 public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntity> {
 	public static final ModularMinecartEntity FAKE_ENTITY = Objects.requireNonNull(StevesCartsEntities.MODULAR_MINECART_ENTITY.create(null));

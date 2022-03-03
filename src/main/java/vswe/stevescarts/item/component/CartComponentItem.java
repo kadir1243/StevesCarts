@@ -1,6 +1,7 @@
 package vswe.stevescarts.item.component;
 
 import net.minecraft.item.Item;
+
 import vswe.stevescarts.item.StevesCartsItemGroups;
 
 public class CartComponentItem extends Item {

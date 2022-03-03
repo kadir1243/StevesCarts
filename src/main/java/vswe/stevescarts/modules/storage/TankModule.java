@@ -5,17 +5,18 @@ import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import reborncore.common.fluid.FluidUtils;
+import reborncore.common.fluid.FluidValue;
+import reborncore.common.util.Tank;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.Identifier;
-import reborncore.common.fluid.FluidUtils;
-import reborncore.common.fluid.FluidValue;
-import reborncore.common.util.Tank;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
-import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.ModularCartHandler;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 import vswe.stevescarts.screen.widget.WFluidSlot;

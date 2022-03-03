@@ -1,6 +1,7 @@
 package vswe.stevescarts.screen.slot;
 
 import io.github.cottonmc.cotton.gui.ValidatedSlot;
+
 import net.minecraft.block.entity.ChestLidAnimator;
 import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.inventory.Inventory;

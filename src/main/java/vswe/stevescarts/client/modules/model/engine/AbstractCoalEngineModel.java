@@ -2,6 +2,7 @@ package vswe.stevescarts.client.modules.model.engine;
 
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.util.Identifier;
+
 import vswe.stevescarts.client.modules.model.ModuleModel;
 
 public abstract class AbstractCoalEngineModel extends ModuleModel {

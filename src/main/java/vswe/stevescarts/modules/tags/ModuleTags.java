@@ -1,9 +1,11 @@
 package vswe.stevescarts.modules.tags;
 
-import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.tag.Tag;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+
+import net.fabricmc.fabric.api.tag.TagFactory;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.modules.MinecartModuleType;
 

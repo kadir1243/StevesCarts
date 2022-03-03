@@ -1,15 +1,17 @@
 package vswe.stevescarts.modules;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
 import org.jetbrains.annotations.Nullable;
-import vswe.stevescarts.entity.ModularMinecartEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
+
+import vswe.stevescarts.entity.ModularMinecartEntity;
 
 public class ModuleStorage {
 	public static NbtList getList(ItemStack stack) {

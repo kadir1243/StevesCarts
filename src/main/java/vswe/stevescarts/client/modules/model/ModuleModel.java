@@ -1,7 +1,7 @@
 package vswe.stevescarts.client.modules.model;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import java.util.function.Function;
+
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
@@ -9,9 +9,11 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import vswe.stevescarts.modules.MinecartModule;
 
-import java.util.function.Function;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import vswe.stevescarts.modules.MinecartModule;
 
 @Environment(EnvType.CLIENT)
 public abstract class ModuleModel extends Model {

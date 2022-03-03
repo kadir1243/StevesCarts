@@ -1,6 +1,7 @@
 package vswe.stevescarts.modules.storage;
 
 import net.minecraft.util.math.MathHelper;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.util.animator.DualAnimator;

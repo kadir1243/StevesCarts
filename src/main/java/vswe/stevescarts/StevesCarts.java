@@ -1,9 +1,12 @@
 package vswe.stevescarts;
 
-import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import net.minecraft.util.Identifier;
+
+import net.fabricmc.api.ModInitializer;
+
 import vswe.stevescarts.advancement.StevesCartsStats;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;

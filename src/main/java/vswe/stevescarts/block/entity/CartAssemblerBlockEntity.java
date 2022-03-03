@@ -1,5 +1,9 @@
 package vswe.stevescarts.block.entity;
 
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collections;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,10 +17,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-import vswe.stevescarts.StevesCarts;
 
-import java.util.Collections;
+import vswe.stevescarts.StevesCarts;
 
 public class CartAssemblerBlockEntity extends BlockEntity implements SidedInventory {
 	public static final int SIZE;

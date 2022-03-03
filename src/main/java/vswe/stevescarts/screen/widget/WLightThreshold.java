@@ -4,12 +4,14 @@ import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.InputResult;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
-import vswe.stevescarts.StevesCarts;
 
 import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
+
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
+
+import vswe.stevescarts.StevesCarts;
 
 public class WLightThreshold extends WWidget {
 	public static final Texture BG_NORMAL = new Texture(StevesCarts.id("textures/gui/light_threshold.png"), 0.0F, 0.0F, 0.359375F, 0.28125F);

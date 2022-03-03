@@ -2,6 +2,7 @@ package vswe.stevescarts.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.item.component.CartComponentItem;
 

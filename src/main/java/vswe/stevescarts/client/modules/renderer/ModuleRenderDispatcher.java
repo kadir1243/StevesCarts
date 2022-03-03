@@ -1,8 +1,8 @@
 package vswe.stevescarts.client.modules.renderer;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -12,6 +12,11 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.profiler.Profiler;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.modules.model.addon.LeverModel;
 import vswe.stevescarts.client.modules.model.attachment.SeatModel;
@@ -34,10 +39,6 @@ import vswe.stevescarts.client.modules.renderer.storage.TwoSidedRenderer;
 import vswe.stevescarts.modules.MinecartModule;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
-import vswe.stevescarts.modules.attachment.TorchPlacerModule;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static vswe.stevescarts.StevesCarts.id;
 

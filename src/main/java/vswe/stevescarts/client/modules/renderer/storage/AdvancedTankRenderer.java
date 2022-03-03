@@ -4,8 +4,8 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+
 import vswe.stevescarts.client.modules.model.storage.AdvancedTankModel;
-import vswe.stevescarts.client.modules.model.storage.OpenTankModel;
 import vswe.stevescarts.client.modules.renderer.FluidRenderUtil;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderer;
 import vswe.stevescarts.modules.storage.TankModule;

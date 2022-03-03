@@ -3,11 +3,13 @@ package vswe.stevescarts.screen.widget;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Util;
-import vswe.stevescarts.StevesCarts;
 
 import java.util.function.IntSupplier;
+
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Util;
+
+import vswe.stevescarts.StevesCarts;
 
 public class WPriorityButton extends WButton {
 	public static final Texture[] NORMAL_TEXTURES = Util.make(new Texture[4], arr -> {

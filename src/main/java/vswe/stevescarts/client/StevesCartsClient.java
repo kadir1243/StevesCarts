@@ -1,5 +1,9 @@
 package vswe.stevescarts.client;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.resource.ResourceType;
+
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -7,9 +11,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.resource.ResourceType;
+
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.client.entity.ModularMinecartRenderer;
 import vswe.stevescarts.client.modules.renderer.ModuleRenderDispatcher;

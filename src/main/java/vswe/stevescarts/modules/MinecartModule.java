@@ -1,12 +1,14 @@
 package vswe.stevescarts.modules;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 
 public abstract class MinecartModule {

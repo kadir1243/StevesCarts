@@ -2,6 +2,7 @@ package vswe.stevescarts.modules;
 
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+
 import vswe.stevescarts.modules.hull.HullModule;
 
 public enum ModuleCategory {

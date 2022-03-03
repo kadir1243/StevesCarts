@@ -1,12 +1,14 @@
 package vswe.stevescarts.screen;
 
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.util.Identifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.util.Identifier;
+
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.screen.CartAssemblerScreen;
 import vswe.stevescarts.client.screen.ModularCartScreen;

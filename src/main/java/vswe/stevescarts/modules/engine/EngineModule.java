@@ -3,9 +3,11 @@ package vswe.stevescarts.modules.engine;
 import io.github.cottonmc.cotton.gui.networking.NetworkSide;
 import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.Property;
-import org.jetbrains.annotations.NotNull;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
 import vswe.stevescarts.modules.MinecartModule;

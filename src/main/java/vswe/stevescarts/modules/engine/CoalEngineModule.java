@@ -5,7 +5,9 @@ import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+
+import java.util.Optional;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -14,14 +16,15 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.PropertyDelegate;
+
+import net.fabricmc.fabric.api.registry.FuelRegistry;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
 import vswe.stevescarts.modules.StevesCartsModuleTypes;
 import vswe.stevescarts.screen.ModularCartHandler;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 import vswe.stevescarts.screen.widget.WPropertyLabel;
-
-import java.util.Optional;
 
 // TODO
 public class CoalEngineModule extends EngineModule {

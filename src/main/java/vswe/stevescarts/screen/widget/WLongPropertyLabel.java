@@ -2,9 +2,10 @@ package vswe.stevescarts.screen.widget;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
+
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.screen.Property;
 import net.minecraft.text.TranslatableText;
+
 import vswe.stevescarts.util.LongProperty;
 
 public class WLongPropertyLabel extends WLabel {

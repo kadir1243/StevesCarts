@@ -3,24 +3,23 @@ package vswe.stevescarts.modules.storage;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+
+import java.util.concurrent.ThreadLocalRandom;
+
 import net.minecraft.block.entity.ChestLidAnimator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
+
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.MinecartModuleType;
-import vswe.stevescarts.modules.storage.StorageModule;
 import vswe.stevescarts.screen.ModularCartHandler;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ChestModule extends StorageModule implements Inventory {
 	protected final int slotsWidth;
