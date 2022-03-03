@@ -1,6 +1,7 @@
 package vswe.stevescarts.screen.widget;
 
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
+import io.github.cottonmc.cotton.gui.widget.TooltipBuilder;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
 import io.github.cottonmc.cotton.gui.widget.data.InputResult;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
@@ -9,6 +10,7 @@ import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 
 import vswe.stevescarts.StevesCarts;
@@ -41,6 +43,11 @@ public class WLightThreshold extends WWidget {
 			this.setter.accept(light);
 		}
 		return super.onClick(x, y, button);
+	}
+
+	@Override
+	public void addTooltip(TooltipBuilder tooltip) {
+		tooltip.add(new TranslatableText("screen.stevescarts.cart.threshold", this.current));
 	}
 
 	@Override
