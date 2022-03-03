@@ -29,6 +29,11 @@ public class WLightThreshold extends WWidget {
 	}
 
 	@Override
+	public boolean canResize() {
+		return true;
+	}
+
+	@Override
 	public InputResult onClick(int x, int y, int button) {
 		if (this.isWithinBounds(x, y)) {
 			int light = (int) (((float) x / this.width) * 15);
