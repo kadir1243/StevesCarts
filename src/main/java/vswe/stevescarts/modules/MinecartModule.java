@@ -94,11 +94,7 @@ public abstract class MinecartModule {
 	public void onPropel() {
 	}
 
-	public static <T> TrackedData<T> registerData(TrackedDataHandler<T> dataHandler) {
-		return DataTracker.registerData(ModularMinecartEntity.class, dataHandler);
-	}
-
-	public static TrackedData<Byte> createTrackedByte() {
-		return registerData(TrackedDataHandlerRegistry.BYTE);
+	protected boolean checkMovement() {
+		return this.minecart.getVelocity().horizontalLengthSquared() > 0.0001D;
 	}
 }

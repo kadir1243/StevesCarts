@@ -37,7 +37,7 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 		if (WCart.renderingCart) {
 			matrices.scale(4, 4, 4);
 		}
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion((float) Math.PI));
+		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(3.1415927f));
 		matrices.translate(1.0F, 0.17F, 0.0F);
 		Collection<MinecartModule> modules = ModuleStorage.read(stack);
 		FAKE_ENTITY.modules.clear();
@@ -58,6 +58,9 @@ public class ModularMinecartRenderer extends EntityRenderer<ModularMinecartEntit
 
 	@Override
 	public void render(ModularMinecartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+		if (entity.isInvisible()) {
+			return;
+		}
 		Profiler profiler = MinecraftClient.getInstance().getProfiler();
 		profiler.push("stevescarts:modular_cart");
 		super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);

@@ -26,6 +26,7 @@ import vswe.stevescarts.client.modules.model.storage.ExtractingChestsModel;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
 import vswe.stevescarts.client.modules.model.storage.SideChestsModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
+import vswe.stevescarts.client.modules.renderer.attachment.RailerRenderer;
 import vswe.stevescarts.client.modules.renderer.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.engine.SolarEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
@@ -120,6 +121,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 
 		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
 		register(StevesCartsModuleTypes.TORCH_PLACER, new TwoSidedRenderer<>(id("textures/modules/attachment/torch_placer.png"), TorchPlacerModel::new));
+		register(StevesCartsModuleTypes.RAILER, new RailerRenderer());
 
 		register(StevesCartsModuleTypes.COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
 		register(StevesCartsModuleTypes.TINY_COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));

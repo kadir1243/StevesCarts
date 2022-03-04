@@ -9,7 +9,7 @@
     - [x] Torch Placer
     - [ ] Basic Drill
     - [ ] Galgadorian Drill
-    - [ ] Railer
+    - [x] Railer
     - [ ] Large Railer
     - [ ] Bridge Builder
     - [ ] Track Remover

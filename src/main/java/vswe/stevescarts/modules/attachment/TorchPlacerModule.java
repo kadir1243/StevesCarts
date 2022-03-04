@@ -60,6 +60,12 @@ public class TorchPlacerModule extends MinecartModule implements Configurable {
 	@Override
 	public void tick() {
 		super.tick();
+		if (this.checkMovement()) { // only run when its moving
+			this.placeTorches();
+		}
+	}
+
+	private void placeTorches() {
 		if (!this.minecart.world.isClient) {
 			int x = (int) Math.floor(this.minecart.getX());
 			int y = (int) Math.floor(this.minecart.getY());

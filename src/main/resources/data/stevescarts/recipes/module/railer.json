@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "XRX",
+    "###"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:rail"
+    },
+    "X": {
+      "tag": "c:iron_ingots"
+    },
+    "#": {
+      "tag": "c:cobblestone"
+    }
+  },
+  "result": {
+    "item": "stevescarts:railer"
+  }
+}

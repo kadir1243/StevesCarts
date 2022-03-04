@@ -5,6 +5,7 @@ import reborncore.common.fluid.FluidValue;
 import vswe.stevescarts.modules.addon.BrakeModule;
 import vswe.stevescarts.modules.addon.InvisibilityModule;
 import vswe.stevescarts.modules.attachment.FireworkDisplayModule;
+import vswe.stevescarts.modules.attachment.RailerModule;
 import vswe.stevescarts.modules.attachment.SeatModule;
 import vswe.stevescarts.modules.attachment.TorchPlacerModule;
 import vswe.stevescarts.modules.engine.AdvancedThermalEngineModule;
@@ -46,6 +47,7 @@ public class StevesCartsModuleTypes {
 	public static final MinecartModuleType<SeatModule> SEAT = MinecartModuleType.<SeatModule>builder().id("seat").category(ModuleCategory.ATTACHMENT).factory(SeatModule::new).sides(ModuleSide.TOP, ModuleSide.CENTER).hasRenderer().noRenderTop().moduleCost(3).buildAndRegister();
 	public static final MinecartModuleType<FireworkDisplayModule> FIREWORK_DISPLAY = MinecartModuleType.<FireworkDisplayModule>builder().id("firework_display").category(ModuleCategory.ATTACHMENT).factory(FireworkDisplayModule::new).moduleCost(45).buildAndRegister();
 	public static final MinecartModuleType<TorchPlacerModule> TORCH_PLACER = MinecartModuleType.<TorchPlacerModule>builder().id("torch_placer").category(ModuleCategory.ATTACHMENT).factory(TorchPlacerModule::new).moduleCost(14).hasRenderer().sides(ModuleSide.RIGHT, ModuleSide.LEFT).buildAndRegister();
+	public static final MinecartModuleType<RailerModule> RAILER = MinecartModuleType.<RailerModule>builder().id("railer").category(ModuleCategory.ATTACHMENT).factory(RailerModule::new).moduleCost(3).hasRenderer().buildAndRegister();
 
 	// Engines
 	public static final MinecartModuleType<CoalEngineModule> COAL_ENGINE = MinecartModuleType.<CoalEngineModule>builder().id("coal_engine").category(ModuleCategory.ENGINE).factory((minecart, type) -> new CoalEngineModule(minecart, type, 3, 2.25f)).hasRenderer().incompatible(ModuleTags.INCOMPATIBLE_WITH_COAL_ENGINE).moduleCost(15).buildAndRegister();

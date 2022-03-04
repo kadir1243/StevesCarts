@@ -62,6 +62,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	private int railX;
 	private int railY;
 	private int railZ;
+	private int stopTicks;
 	private final FluidStorage fluidStorage = this.new FluidStorage();
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
@@ -120,20 +121,31 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 						.collect(Collectors.toMap(MinecartModule::getId, Function.identity())),
 				false
 		);
+		this.stopTicks = nbt.getInt("stopTicks");
 	}
 
 	@Override
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		ModuleStorage.write(nbt, this.getModuleList());
+		nbt.putInt("stopTicks", this.stopTicks);
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
+		this.handlePropulsion();
+	}
+
+	private void handlePropulsion() {
 		boolean move = true;
-		for (MinecartModule minecartModule : this.modules.values()) {
+		if (this.stopTicks > 0) {
+			this.stopTicks--;
+			move = false;
+		}
+		for (Iterator<MinecartModule> iterator = this.modules.values().iterator(); iterator.hasNext() && move; ) {
+			MinecartModule minecartModule = iterator.next();
 			if (!minecartModule.shouldMove()) {
 				move = false;
 				break;
