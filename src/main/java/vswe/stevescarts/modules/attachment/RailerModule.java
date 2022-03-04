@@ -4,12 +4,19 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.AutomaticItemPlacementContext;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.tag.ItemTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 
 import vswe.stevescarts.entity.ModularMinecartEntity;
 import vswe.stevescarts.modules.Configurable;
@@ -34,6 +41,31 @@ public class RailerModule extends MinecartModule implements Configurable {
 	public void readNbt(NbtCompound nbt) {
 		this.railInventory.readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
 		super.readNbt(nbt);
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (this.checkMovement() && this.minecart.world.isClient) {
+			this.tryPlaceRail();
+		}
+	}
+
+	private void tryPlaceRail() {
+		ItemStack first = this.getFirst();
+		BlockPos railPos = this.getRailPos();
+		Vec3d velocityVector = this.getMinecart().getVelocity().normalize();
+		Direction moveDirection = Direction.fromVector((int) velocityVector.x, (int) velocityVector.y, (int) velocityVector.z);
+		if (moveDirection != null) {
+			BlockPos newRailPos = railPos.offset(moveDirection);
+			if (this.minecart.getWorld().getBlockState(newRailPos).isAir()) {
+				AutomaticItemPlacementContext ctx = new AutomaticItemPlacementContext(this.minecart.getWorld(), newRailPos, moveDirection, first, moveDirection);
+				BlockState placementState = ((BlockItem) first.getItem()).getBlock().getPlacementState(ctx);
+				this.minecart.getWorld().setBlockState(newRailPos, placementState, Block.NOTIFY_ALL);
+				this.minecart.stopFor(10);
+				first.decrement(1);
+			}
+		}
 	}
 
 	@Override

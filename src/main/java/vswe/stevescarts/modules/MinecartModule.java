@@ -7,6 +7,9 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 import vswe.stevescarts.entity.ModularMinecartEntity;
@@ -94,7 +97,16 @@ public abstract class MinecartModule {
 	public void onPropel() {
 	}
 
+	protected BlockPos getRailPos() {
+		int x = (int) Math.floor(this.minecart.getX());
+		int y = (int) Math.floor(this.minecart.getY());
+		int z = (int) Math.floor(this.minecart.getZ());
+		BlockPos railPos = new BlockPos(x, y, z);
+		BlockPos downPos = railPos.down();
+		return this.minecart.world.getBlockState(downPos).isIn(BlockTags.RAILS) ? downPos : railPos;
+	}
+
 	protected boolean checkMovement() {
-		return this.minecart.getVelocity().horizontalLengthSquared() > 0.0001D;
+		return this.minecart.getVelocity().horizontalLengthSquared() > 0.0001D && !this.minecart.isStopped();
 	}
 }

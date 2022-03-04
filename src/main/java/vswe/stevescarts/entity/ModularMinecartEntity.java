@@ -132,6 +132,15 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	}
 
 	@Override
+	protected void moveOnRail(BlockPos pos, BlockState state) {
+		if (this.stopTicks > 0) {
+			this.stopTicks--;
+			return;
+		}
+		super.moveOnRail(pos, state);
+	}
+
+	@Override
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(MinecartModule::tick);
@@ -139,11 +148,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	}
 
 	private void handlePropulsion() {
-		boolean move = true;
-		if (this.stopTicks > 0) {
-			this.stopTicks--;
-			move = false;
-		}
+		boolean move = this.stopTicks <= 0;
 		for (Iterator<MinecartModule> iterator = this.modules.values().iterator(); iterator.hasNext() && move; ) {
 			MinecartModule minecartModule = iterator.next();
 			if (!minecartModule.shouldMove()) {
@@ -193,7 +198,7 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		Vec3d velocity = this.getVelocity();
 		double horizontal = velocity.horizontalLength();
 		if (horizontal > 0.01) {
-			this.setVelocity(velocity.add(velocity.x / horizontal * 0.01, 0.0, velocity.z / horizontal * 0.01));
+			this.setVelocity(velocity.add(velocity.x / horizontal * 0.02, 0.0, velocity.z / horizontal * 0.02));
 		} else {
 			this.setVelocity(0.01, 0.0, 0.01);
 		}
@@ -301,6 +306,14 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public Stream<TankModule> getTanks() {
 		return this.getModuleList().stream().filter(m -> m.getType().isOf(ModuleCategory.STORAGE) && m.getType().isIn(ModuleTags.TANKS)).map(TankModule.class::cast);
+	}
+
+	public void stopFor(int ticks) {
+		this.stopTicks = ticks;
+	}
+
+	public boolean isStopped() {
+		return this.stopTicks > 0;
 	}
 
 	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {

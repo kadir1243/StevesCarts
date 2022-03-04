@@ -67,14 +67,7 @@ public class TorchPlacerModule extends MinecartModule implements Configurable {
 
 	private void placeTorches() {
 		if (!this.minecart.world.isClient) {
-			int x = (int) Math.floor(this.minecart.getX());
-			int y = (int) Math.floor(this.minecart.getY());
-			int z = (int) Math.floor(this.minecart.getZ());
-			BlockPos.Mutable railPos = new BlockPos.Mutable(x, y, z);
-
-			if (this.minecart.world.getBlockState(railPos.down()).isIn(BlockTags.RAILS)) {
-				railPos.move(Direction.DOWN);
-			}
+			BlockPos railPos = this.getRailPos();
 
 			InventoryStorage storage = InventoryStorage.of(this.torchInventory, null);
 
