@@ -11,6 +11,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 
 import vswe.stevescarts.entity.ModularMinecartEntity;
 
@@ -63,8 +64,8 @@ public abstract class MinecartModule {
 	 * @return The offset of the module from the posiiton of the minecart.
 	 * @implNote Used in rendering the module
 	 */
-	public Vec3d getPositionOffset() {
-		return Vec3d.ZERO;
+	public Vec3f getPositionOffset() {
+		return Vec3f.ZERO;
 	}
 
 	public void tick() {

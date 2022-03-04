@@ -11,6 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.profiler.Profiler;
 
 import net.fabricmc.api.EnvType;
@@ -77,9 +78,9 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 			if (renderer == null) {
 				throw new NullPointerException("No renderer for module " + module.getType().toString());
 			}
-			Vec3d offset = module.getPositionOffset();
+			Vec3f offset = module.getPositionOffset();
 			matrices.push();
-			matrices.translate(offset.x, offset.y, offset.z);
+			matrices.translate(offset.getX(), offset.getY(), offset.getZ());
 			renderer.render(module, entityYaw, tickDelta, matrices, vertexConsumers, entityLight);
 			matrices.pop();
 

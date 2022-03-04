@@ -73,8 +73,7 @@ public class FireworkDisplayModule extends MinecartModule implements Configurabl
 		panel.layout();
 	}
 
-	public class FakeBlockPointer implements BlockPointer {
-
+	private class FakeBlockPointer implements BlockPointer {
 		@Override
 		public double getX() {
 			return FireworkDisplayModule.this.getMinecart().getX();
