@@ -62,7 +62,7 @@ public class RailerModule extends MinecartModule implements Configurable {
 				AutomaticItemPlacementContext ctx = new AutomaticItemPlacementContext(this.minecart.getWorld(), newRailPos, moveDirection, first, moveDirection);
 				BlockState placementState = ((BlockItem) first.getItem()).getBlock().getPlacementState(ctx);
 				this.minecart.getWorld().setBlockState(newRailPos, placementState, Block.NOTIFY_ALL);
-				this.minecart.stopFor(10);
+				this.minecart.stopFor(20);
 				first.decrement(1);
 			}
 		}

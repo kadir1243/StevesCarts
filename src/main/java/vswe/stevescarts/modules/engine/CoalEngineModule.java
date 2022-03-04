@@ -34,22 +34,6 @@ public class CoalEngineModule extends EngineModule {
 	private int fireIndex = 0;
 	private int fuelAmount = 0;
 	private int nextPuff = 0;
-	private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
-		@Override
-		public int get(int index) {
-			return index == 0 ? fuelAmount : 0;
-		}
-
-		@Override
-		public void set(int index, int value) {
-			fuelAmount = index == 0 ? value : fuelAmount;
-		}
-
-		@Override
-		public int size() {
-			return 1;
-		}
-	};
 
 	public CoalEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, int fuelSlots, float fuelMultiplier) {
 		super(minecart, type);
@@ -91,7 +75,6 @@ public class CoalEngineModule extends EngineModule {
 		WItemSlot fuel = WItemSlot.of(this.inventory, 0, this.fuelSlots, 1);
 		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0 && stack.getItem().getRecipeRemainder() == null);
 		panel.add(fuel, 0, 15);
-		handler.addProperties(this.propertyDelegate);
 		Property fuelProperty = Property.create();
 		fuelProperty.set(this.fuelAmount);
 		WLabel fuelLabel = new WPropertyLabel("screen.stevescarts.cart.fuel", fuelProperty);
