@@ -46,7 +46,7 @@ public class RailerModule extends MinecartModule implements Configurable {
 	@Override
 	public void tick() {
 		super.tick();
-		if (this.checkMovement() && this.minecart.world.isClient) {
+		if (this.checkMovement() && !this.minecart.world.isClient) {
 			this.tryPlaceRail();
 		}
 	}
@@ -62,7 +62,7 @@ public class RailerModule extends MinecartModule implements Configurable {
 				AutomaticItemPlacementContext ctx = new AutomaticItemPlacementContext(this.minecart.getWorld(), newRailPos, moveDirection, first, moveDirection);
 				BlockState placementState = ((BlockItem) first.getItem()).getBlock().getPlacementState(ctx);
 				this.minecart.getWorld().setBlockState(newRailPos, placementState, Block.NOTIFY_ALL);
-//				this.minecart.stopFor(10);
+				this.minecart.stopFor(10);
 				first.decrement(1);
 			}
 		}

@@ -64,7 +64,6 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 	private int railZ;
 	private int stopTicks;
 	private final FluidStorage fluidStorage = this.new FluidStorage();
-	private Vec3d stopVelocity = Vec3d.ZERO;
 
 	public ModularMinecartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -123,11 +122,6 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 				false
 		);
 		this.stopTicks = nbt.getInt("stopTicks");
-		this.stopVelocity = new Vec3d(
-				nbt.getDouble("stopVelocityX"),
-				nbt.getDouble("stopVelocityY"),
-				nbt.getDouble("stopVelocityZ")
-		);
 	}
 
 	@Override
@@ -135,18 +129,12 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 		super.writeCustomDataToNbt(nbt);
 		ModuleStorage.write(nbt, this.getModuleList());
 		nbt.putInt("stopTicks", this.stopTicks);
-		nbt.putDouble("stopVelocityX", this.stopVelocity.x);
-		nbt.putDouble("stopVelocityY", this.stopVelocity.y);
-		nbt.putDouble("stopVelocityZ", this.stopVelocity.z);
 	}
 
 	@Override
 	protected void moveOnRail(BlockPos pos, BlockState state) {
 		if (this.stopTicks > 0) {
 			this.stopTicks--;
-			if (this.stopTicks == 0) {
-				this.setVelocity(this.stopVelocity);
-			}
 			return;
 		}
 		super.moveOnRail(pos, state);
@@ -322,8 +310,6 @@ public class ModularMinecartEntity extends AbstractMinecartEntity {
 
 	public void stopFor(int ticks) {
 		this.stopTicks = ticks;
-		this.stopVelocity = this.getVelocity();
-		this.setVelocity(this.getVelocity().multiply(0.0, 1.0, 0.0));
 	}
 
 	public boolean isStopped() {
