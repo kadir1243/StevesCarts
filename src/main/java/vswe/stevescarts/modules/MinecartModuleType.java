@@ -256,13 +256,14 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		}
 	}
 
+	// TODO
 	public MinecartModuleType<?> matchesRequirements(List<MinecartModuleType<?>> types) {
-		for (Supplier<MinecartModuleType<?>> req : this.explicitRequirements) {
-			MinecartModuleType<?> type = req.get();
-			if (!types.contains(type)) {
-				return type;
-			}
-		}
+//		for (Supplier<MinecartModuleType<?>> req : this.explicitRequirements) {
+//			MinecartModuleType<?> type = req.get();
+//			if (!types.contains(type)) {
+//				return type;
+//			}
+//		}
 
 		return null;
 	}
@@ -279,12 +280,13 @@ public final class MinecartModuleType<T extends MinecartModule> {
 		return null;
 	}
 
+	// TODO
 	public Object2IntMap.Entry<TagKey<MinecartModuleType<?>>> matchesTagRequirements(List<MinecartModuleType<?>> types) {
-		for (Object2IntMap.Entry<TagKey<MinecartModuleType<?>>> req : this.tagRequirements.object2IntEntrySet()) {
-			if (types.stream().filter(type -> type.isIn(req.getKey())).count() < req.getIntValue()) {
-				return req;
-			}
-		}
+//		for (Object2IntMap.Entry<TagKey<MinecartModuleType<?>>> req : this.tagRequirements.object2IntEntrySet()) {
+//			if (types.stream().filter(type -> type.isIn(req.getKey())).count() < req.getIntValue()) {
+//				return req;
+//			}
+//		}
 
 		return null;
 	}
