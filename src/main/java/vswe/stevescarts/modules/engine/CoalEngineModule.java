@@ -66,8 +66,6 @@ public class CoalEngineModule extends EngineModule {
 		this.fuelAmount--;
 	}
 
-	// TODO: add priority button
-	// TODO: why property delegate :concern:
 	@Override
 	public void configure(WPlainPanel panel, ModularCartHandler handler, PlayerEntity player) {
 		WLabel label = new WLabel(StevesCartsModuleTypes.COAL_ENGINE.getTranslationText());
