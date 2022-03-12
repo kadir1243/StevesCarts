@@ -12,6 +12,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -99,7 +100,7 @@ public class TorchPlacerModule extends MinecartModule implements Configurable {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot slots = WItemSlot.of(this.torchInventory, 0, 3, 1);
-		slots.setFilter(stack -> stack.isOf(Items.TORCH));
+		slots.setFilter(stack -> stack.isOf(Items.TORCH) || stack.isOf(Items.REDSTONE_TORCH));
 		panel.add(slots, 0, 15);
 		WLightThreshold threshold = new WLightThreshold(() -> this.minecart.world.getLightLevel(this.minecart.getBlockPos()), this.threshold, (i) -> {
 			this.threshold = i;
@@ -112,5 +113,9 @@ public class TorchPlacerModule extends MinecartModule implements Configurable {
 
 	public boolean hasTorch(int index) {
 		return this.torchInventory.getStack(index).isOf(Items.TORCH);
+	}
+
+	public ItemStack getItem(int index) {
+		return this.torchInventory.getStack(index);
 	}
 }

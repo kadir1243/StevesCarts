@@ -1,6 +1,5 @@
 package vswe.stevescarts.client;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.resource.ResourceType;
 
@@ -31,7 +30,7 @@ public class StevesCartsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		moduleRenderDispatcher = new ModuleRenderDispatcher(MinecraftClient.getInstance().textRenderer, MinecraftClient.getInstance().getItemRenderer());
+		moduleRenderDispatcher = new ModuleRenderDispatcher();
 		ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(moduleRenderDispatcher);
 		EntityRendererRegistry.register(StevesCartsEntities.MODULAR_MINECART_ENTITY, ModularMinecartRenderer::new);
 		SpawnPacket.init();

@@ -10,7 +10,6 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.profiler.Profiler;
 
@@ -21,13 +20,13 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.modules.model.addon.LeverModel;
 import vswe.stevescarts.client.modules.model.attachment.SeatModel;
-import vswe.stevescarts.client.modules.model.attachment.TorchPlacerModel;
 import vswe.stevescarts.client.modules.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.modules.model.storage.ExtractingChestsModel;
 import vswe.stevescarts.client.modules.model.storage.FrontChestModel;
 import vswe.stevescarts.client.modules.model.storage.SideChestsModel;
 import vswe.stevescarts.client.modules.model.storage.TopChestModel;
 import vswe.stevescarts.client.modules.renderer.attachment.RailerRenderer;
+import vswe.stevescarts.client.modules.renderer.attachment.TorchPlacerRenderer;
 import vswe.stevescarts.client.modules.renderer.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.engine.SolarEngineRenderer;
 import vswe.stevescarts.client.modules.renderer.hull.HullRenderer;
@@ -48,13 +47,6 @@ import static vswe.stevescarts.StevesCarts.id;
 @Environment(EnvType.CLIENT)
 public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadListener {
 	public final Map<MinecartModuleType<?>, ModuleRenderer<? extends MinecartModule>> renderers = new HashMap<>();
-	private final TextRenderer textRenderer;
-	private final ItemRenderer itemRenderer;
-
-	public ModuleRenderDispatcher(TextRenderer textRenderer, ItemRenderer itemRenderer) {
-		this.textRenderer = textRenderer;
-		this.itemRenderer = itemRenderer;
-	}
 
 	/**
 	 * Renders the specified module.
@@ -89,11 +81,11 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 	}
 
 	public ItemRenderer getItemRenderer() {
-		return itemRenderer;
+		return MinecraftClient.getInstance().getItemRenderer();
 	}
 
 	public TextRenderer getTextRenderer() {
-		return textRenderer;
+		return MinecraftClient.getInstance().textRenderer;
 	}
 
 	public void register(MinecartModuleType<?> type, ModuleRenderer<? extends MinecartModule> renderer) {
@@ -121,7 +113,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModuleTypes.ADVANCED_TANK, new AdvancedTankRenderer(id("textures/modules/storage/advanced_tank.png")));
 
 		register(StevesCartsModuleTypes.SEAT, new GenericRenderer(id("textures/modules/attachment/seat.png"), SeatModel::new));
-		register(StevesCartsModuleTypes.TORCH_PLACER, new TwoSidedRenderer<>(id("textures/modules/attachment/torch_placer.png"), TorchPlacerModel::new));
+		register(StevesCartsModuleTypes.TORCH_PLACER, new TorchPlacerRenderer(id("textures/modules/attachment/torch_placer.png")));
 		register(StevesCartsModuleTypes.RAILER, new RailerRenderer());
 
 		register(StevesCartsModuleTypes.COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
