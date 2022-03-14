@@ -37,6 +37,7 @@ public class TorchPlacerRenderer extends ModuleRenderer<TorchPlacerModule> {
 			}
 			matrices.push();
 			matrices.translate(i * 0.25f, -0.125f, -0.75f);
+			matrices.scale(0, -1, 0);
 			if (opposite) {
 				matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(3.14159267f));
 			}
