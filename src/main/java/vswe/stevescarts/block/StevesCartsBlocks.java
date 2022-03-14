@@ -43,8 +43,8 @@ public class StevesCartsBlocks {
 	public static final Block DETECTOR_STATION = registerBlockAndItem("detector_station", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block DETECTOR_JUNCTION = registerBlockAndItem("detector_junction", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
 	public static final Block DETECTOR_REDSTONE_UNIT = registerBlockAndItem("detector_redstone_unit", new Block(FabricBlockSettings.of(Material.STONE).strength(1.5F)));
-	public static final Block JUNCTION_RAIL = registerBlockAndItem("junction_rail", new JunctionRailBlock(FabricBlockSettings.of(Material.METAL).strength(1.5F)));
-	public static final Block ADVANCED_DETECTOR_RAIL = registerBlockAndItem("advanced_detector_rail", new AdvancedDetectorRailBlock(FabricBlockSettings.of(Material.METAL).strength(1.5F)));
+	public static final Block JUNCTION_RAIL = registerBlockAndItem("junction_rail", new JunctionRailBlock(FabricBlockSettings.of(Material.METAL).noCollision().strength(1.5F)));
+	public static final Block ADVANCED_DETECTOR_RAIL = registerBlockAndItem("advanced_detector_rail", new AdvancedDetectorRailBlock(FabricBlockSettings.of(Material.METAL).noCollision().strength(1.5F)));
 	public static final Block REINFORCED_METAL_BLOCK = registerBlockAndItem("reinforced_metal_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(1.5F)));
 	public static final Block GALGADORIAN_BLOCK = registerBlockAndItem("galgadorian_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(1.5F)));
 	public static final Block ENHANCED_GALGADORIAN_BLOCK = registerBlockAndItem("enhanced_galgadorian_block", new Block(FabricBlockSettings.of(Material.METAL).requiresTool().strength(1.5F)));
