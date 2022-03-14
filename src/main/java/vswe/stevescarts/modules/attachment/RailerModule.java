@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -60,10 +61,13 @@ public class RailerModule extends MinecartModule implements Configurable {
 			BlockPos newRailPos = railPos.offset(moveDirection);
 			if (this.minecart.getWorld().getBlockState(newRailPos).isAir()) {
 				AutomaticItemPlacementContext ctx = new AutomaticItemPlacementContext(this.minecart.getWorld(), newRailPos, moveDirection, first, moveDirection);
-				BlockState placementState = ((BlockItem) first.getItem()).getBlock().getPlacementState(ctx);
-				this.minecart.getWorld().setBlockState(newRailPos, placementState, Block.NOTIFY_ALL);
-				this.minecart.stopFor(20);
-				first.decrement(1);
+				Item firstItem = first.getItem();
+				if (firstItem instanceof BlockItem) {
+					BlockState placementState = ((BlockItem) first.getItem()).getBlock().getPlacementState(ctx);
+					this.minecart.getWorld().setBlockState(newRailPos, placementState, Block.NOTIFY_ALL);
+					this.minecart.stopFor(20);
+					first.decrement(1);
+				}
 			}
 		}
 	}

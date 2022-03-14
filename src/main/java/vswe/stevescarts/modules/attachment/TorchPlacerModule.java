@@ -100,7 +100,9 @@ public class TorchPlacerModule extends MinecartModule implements Configurable {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot slots = WItemSlot.of(this.torchInventory, 0, 3, 1);
-		slots.setFilter(stack -> stack.isOf(Items.TORCH) || stack.isOf(Items.REDSTONE_TORCH));
+		slots.setFilter(stack -> stack.isOf(Items.TORCH)
+				|| stack.isOf(Items.REDSTONE_TORCH)
+				|| stack.isOf(Items.SOUL_TORCH));
 		panel.add(slots, 0, 15);
 		WLightThreshold threshold = new WLightThreshold(() -> this.minecart.world.getLightLevel(this.minecart.getBlockPos()), this.threshold, (i) -> {
 			this.threshold = i;
