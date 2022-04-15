@@ -28,7 +28,7 @@ public class SolarEngineModule extends EngineModule {
 	public SolarEngineModule(ModularMinecartEntity minecart, MinecartModuleType<?> type, long maxPower) {
 		super(minecart, type);
 		this.maxPower = maxPower;
-		power.accept(0L);
+		this.power.accept(0L);
 	}
 
 	@Override

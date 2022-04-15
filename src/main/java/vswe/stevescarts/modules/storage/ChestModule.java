@@ -125,7 +125,7 @@ public class ChestModule extends StorageModule implements Inventory {
 
 	@Override
 	public void tick() {
-		if (this.minecart.world.isClient && this.shouldAnimate()) {
+		if (/*this.minecart.world.isClient && */this.shouldAnimate()) {
 			this.chestLidAnimator.step();
 		}
 	}

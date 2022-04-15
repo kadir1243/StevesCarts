@@ -22,8 +22,9 @@ public class ExtractingChestsModule extends ChestModule {
 
 	@Override
 	public void tick() {
+		this.animator.step();
 		if (this.minecart.world.isClient) {
-			this.animator.step();
+
 		}
 	}
 
