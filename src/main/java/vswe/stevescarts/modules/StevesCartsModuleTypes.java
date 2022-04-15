@@ -2,6 +2,7 @@ package vswe.stevescarts.modules;
 
 import reborncore.common.fluid.FluidValue;
 
+import vswe.stevescarts.modules.addon.ArcadeModule;
 import vswe.stevescarts.modules.addon.BrakeModule;
 import vswe.stevescarts.modules.addon.InvisibilityModule;
 import vswe.stevescarts.modules.attachment.FireworkDisplayModule;
@@ -60,6 +61,7 @@ public class StevesCartsModuleTypes {
 	// Addons
 	public static final MinecartModuleType<BrakeModule> BRAKE = MinecartModuleType.<BrakeModule>builder().id("brake").category(ModuleCategory.ADDON).factory(BrakeModule::new).sides(ModuleSide.RIGHT).require(StevesCartsModuleTypes.SEAT).hasRenderer().noRenderTop().moduleCost(12).buildAndRegister();
 	public static final MinecartModuleType<InvisibilityModule> INVISIBILITY_CORE = MinecartModuleType.<InvisibilityModule>builder().id("invisibility_core").category(ModuleCategory.ADDON).factory(InvisibilityModule::new).moduleCost(21).buildAndRegister();
+	public static final MinecartModuleType<ArcadeModule> ARCADE = MinecartModuleType.<ArcadeModule>builder().id("arcade").category(ModuleCategory.ADDON).factory(ArcadeModule::new).require(StevesCartsModuleTypes.SEAT).noRenderTop().moduleCost(10).buildAndRegister();
 
 	// Tools TODO
 

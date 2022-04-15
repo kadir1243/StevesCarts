@@ -140,6 +140,7 @@
   "module.stevescarts.torch_placer": "Torch Placer",
   "module.stevescarts.pumpkin_chariot": "Pumpkin Chariot",
   "module.stevescarts.railer": "Railer",
+  "module.stevescarts.steves_arcade": "Steve's Arcade",
 
   "module.stevescarts.category.hull.title": "HULL",
   "module.stevescarts.category.engines.title": "ENGINES",
