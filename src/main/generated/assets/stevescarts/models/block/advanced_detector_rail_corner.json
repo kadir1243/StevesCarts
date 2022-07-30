@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/rail_curved",
+  "textures": {
+    "rail": "stevescarts:block/advanced_detector_rail_corner"
+  }
+}

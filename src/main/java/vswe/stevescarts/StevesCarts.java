@@ -3,6 +3,7 @@ package vswe.stevescarts;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.item.StevesCartsItems;
 
 import net.minecraft.util.Identifier;
@@ -18,6 +19,7 @@ public class StevesCarts implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		StevesCartsItems.init();
+		StevesCartsBlocks.init();
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 	}
 }

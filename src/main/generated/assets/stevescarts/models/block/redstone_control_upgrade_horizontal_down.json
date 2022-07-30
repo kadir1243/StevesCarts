@@ -1,0 +1,7 @@
+{
+  "parent": "stevescarts:item/upgrade_horizontal_down",
+  "textures": {
+    "front": "stevescarts:block/upgrade_side_0",
+    "layer0": "stevescarts:block/redstone_control_upgrade_icon"
+  }
+}

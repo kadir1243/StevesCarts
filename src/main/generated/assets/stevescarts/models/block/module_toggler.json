@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "stevescarts:block/module_toggler_bot",
+    "east": "stevescarts:block/module_toggler_side",
+    "north": "stevescarts:block/module_toggler_side",
+    "particle": "stevescarts:block/module_toggler_top",
+    "south": "stevescarts:block/module_toggler_side",
+    "up": "stevescarts:block/module_toggler_top",
+    "west": "stevescarts:block/module_toggler_side"
+  }
+}

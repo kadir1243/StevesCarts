@@ -5,11 +5,13 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.block.StevesCartsBlocks;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 
 public class StevesCartsItems {
 	public static final ItemGroup COMPONENTS = FabricItemGroupBuilder.build(StevesCarts.id("components"), () -> StevesCartsItems.WOODEN_WHEELS.getDefaultStack());
+	public static final ItemGroup BLOCKS = FabricItemGroupBuilder.build(StevesCarts.id("blocks"), () -> StevesCartsBlocks.CART_ASSEMBLER.asItem().getDefaultStack());
 	// Components
 	public static final CartComponentItem WOODEN_WHEELS = registerSimpleComponent("wooden_wheels");
 	public static final CartComponentItem IRON_WHEELS = registerSimpleComponent("iron_wheels");

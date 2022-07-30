@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "stevescarts:block/detector_manager_bot",
+    "east": "stevescarts:block/detector_junction_red",
+    "north": "stevescarts:block/detector_junction_yellow",
+    "particle": "stevescarts:block/detector_junction_top",
+    "south": "stevescarts:block/detector_junction_blue",
+    "up": "stevescarts:block/detector_junction_top",
+    "west": "stevescarts:block/detector_junction_green"
+  }
+}
