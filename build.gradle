@@ -35,6 +35,30 @@ dependencies {
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 
+sourceSets {
+	main {
+		resources {
+			srcDirs += ["src/main/generated"]
+		}
+	}
+}
+
+loom {
+	runs {
+		datagenClient {
+			client()
+			name "Data Generation"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+			vmArg "-Dfabric-api.datagen.strict-validation"
+
+			ideConfigGenerated = true
+			runDir "build/datagen"
+			source sourceSets.main
+		}
+	}
+}
+
 processResources {
 	inputs.property "version", project.version
 

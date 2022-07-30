@@ -23,6 +23,9 @@
   "entrypoints": {
     "main": [
       "vswe.stevescarts.StevesCarts"
+    ],
+    "fabric-datagen": [
+      "vswe.stevescarts.data.StevesCartsDatagen"
     ]
   },
   "mixins": [
