@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#D#",
+    "X#X",
+    "RXR"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:eye_of_galgador"
+    },
+    "#": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "R": {
+      "item": "stevescarts:stabilized_metal"
+    }
+  },
+  "result": {
+    "count": 2,
+    "item": "stevescarts:lump_of_galgador"
+  }
+}

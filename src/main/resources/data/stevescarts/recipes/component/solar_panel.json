@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#R",
+    "X#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "X": {
+      "tag": "c:iron_ingots"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    }
+  },
+  "result": {
+    "item": "stevescarts:solar_panel"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "X"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:iron_ingots"
+    },
+    "X": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "result": {
+    "count": 8,
+    "item": "stevescarts:chest_lock"
+  }
+}

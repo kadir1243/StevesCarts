@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "XRX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:glass_panes"
+    },
+    "#": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    }
+  },
+  "result": {
+    "item": "stevescarts:glass_o_magic"
+  }
+}

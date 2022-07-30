@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##X"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:reinforced_metal"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "item": "stevescarts:hardened_saw_blade"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##X"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:diamonds"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "item": "stevescarts:saw_blade"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "stevescarts:is_event",
+      "event": "easter"
+    }
+  ],
+  "pattern": [
+    "XXX",
+    "X X",
+    "###"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:wood_sticks"
+    },
+    "#": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "item": "stevescarts:basket"
+  }
+}

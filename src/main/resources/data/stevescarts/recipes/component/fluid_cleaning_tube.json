@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#X#",
+    "#X#",
+    "#X#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:green_dyes"
+    },
+    "X": {
+      "tag": "c:iron_ingots"
+    }
+  },
+  "result": {
+    "count": 2,
+    "item": "stevescarts:fluid_cleaning_tube"
+  }
+}

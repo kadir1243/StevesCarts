@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "X#X",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:glass_panes"
+    },
+    "X": {
+      "tag": "c:glass_blocks"
+    }
+  },
+  "result": {
+    "count": 32,
+    "item": "stevescarts:tank_pane"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "stevescarts:is_event",
+      "event": "easter"
+    }
+  ],
+  "pattern": [
+    "###",
+    "#X#",
+    "#G#"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:eggs"
+    },
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "G": {
+      "tag": "c:green_dyes"
+    }
+  },
+  "result": {
+    "item": "stevescarts:explosive_easter_egg"
+  }
+}

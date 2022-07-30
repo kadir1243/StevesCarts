@@ -1,29 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "stevescarts",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Steves Carts 3",
+  "description": "A carttastic mod adding a near infinite number of carts possible to the game, through the creation of  modular carts.",
   "authors": [
-    "Me!"
+    "modmuss50",
+    "Gory_Moon",
+    "Vswe"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/TechReborn/StevesCarts",
+    "sources": "https://github.com/TechReborn/StevesCarts",
+    "issues": "https://github.com/TechReborn/StevesCarts/issues"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/stevescarts/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "vswe.stevescarts.StevesCarts"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "stevescarts.mixins.json"
   ],
 
   "depends": {
@@ -33,6 +36,6 @@
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
+    "flamingo": "*"
   }
 }

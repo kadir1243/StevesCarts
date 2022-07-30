@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#G#",
+    "X#X"
+  ],
+  "key": {
+    "X": {
+      "tag": "c:iron_ingots"
+    },
+    "G": {
+      "tag": "c:gold_ingots"
+    },
+    "#": {
+      "tag": "c:redstone_dusts"
+    }
+  },
+  "result": {
+    "item": "stevescarts:simple_pcb"
+  }
+}

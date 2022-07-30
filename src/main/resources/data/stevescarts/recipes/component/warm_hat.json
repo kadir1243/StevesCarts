@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "conditions": [
+    {
+      "type": "stevescarts:is_event",
+      "event": "christmas"
+    }
+  ],
+  "pattern": [
+    " #X",
+    "#D#",
+    "###"
+  ],
+  "key": {
+    "D": {
+      "tag": "c:diamonds"
+    },
+    "X": {
+      "item": "minecraft:white_wool"
+    },
+    "#": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "result": {
+    "item": "stevescarts:warm_hat"
+  }
+}

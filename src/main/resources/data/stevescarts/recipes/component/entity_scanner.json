@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GXG",
+    "#L#",
+    "# #"
+  ],
+  "key": {
+    "X": {
+      "item": "stevescarts:simple_pcb"
+    },
+    "#": {
+      "tag": "c:redstone_dusts"
+    },
+    "G": {
+      "tag": "c:gold_ingots"
+    },
+    "L": {
+      "item": "stevescarts:advanced_pcb"
+    }
+  },
+  "result": {
+    "item": "stevescarts:entity_scanner"
+  }
+}
