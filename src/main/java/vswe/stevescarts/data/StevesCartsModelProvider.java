@@ -7,6 +7,7 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.UpgradeBlock;
 import vswe.stevescarts.item.CartComponentItem;
+import vswe.stevescarts.item.StevesCartsItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;

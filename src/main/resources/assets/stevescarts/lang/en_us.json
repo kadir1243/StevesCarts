@@ -90,6 +90,8 @@
   "itemGroup.stevescarts.blocks": "Steves Carts Blocks",
   "itemGroup.stevescarts.modules": "Steves Carts Modules",
 
+  "tooltip.stevescarts.press_shift": "Press Shift to see more information",
+
   "block.stevescarts.batteries_upgrade": "Upgrade: Batteries",
   "block.stevescarts.power_crystal_upgrade": "Upgrade: Power Crystal",
   "block.stevescarts.module_knowledge_upgrade": "Upgrade: Module Knowledge",

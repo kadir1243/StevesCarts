@@ -96,6 +96,7 @@ public class StevesCartsItems {
 	public static final CartComponentItem GALGADORIAN_WHEELS = registerSimpleComponent("galgadorian_wheels");
 	public static final CartComponentItem IRON_BLADE = registerSimpleComponent("iron_blade");
 	public static final CartComponentItem BLADE_ARM = registerSimpleComponent("blade_arm");
+	public static final CartItem CART = register("cart", new CartItem(new Item.Settings().maxCount(1)));
 
 	private static <T extends Item> T register(String name, T item) {
 		return Registry.register(Registry.ITEM, StevesCarts.id(name), item);
