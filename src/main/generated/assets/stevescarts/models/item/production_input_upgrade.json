@@ -1,3 +1,6 @@
 {
-  "parent": "stevescarts:block/production_input_upgrade_horizontal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stevescarts:block/production_input_upgrade_icon"
+  }
 }

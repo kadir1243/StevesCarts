@@ -1,3 +1,6 @@
 {
-  "parent": "stevescarts:block/cart_crane_upgrade_horizontal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stevescarts:block/cart_crane_upgrade_icon"
+  }
 }

@@ -1,3 +1,6 @@
 {
-  "parent": "stevescarts:block/entropy_upgrade_horizontal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stevescarts:block/entropy_upgrade_icon"
+  }
 }

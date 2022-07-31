@@ -1,3 +1,6 @@
 {
-  "parent": "stevescarts:block/experienced_assembler_upgrade_horizontal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stevescarts:block/experienced_assembler_upgrade_icon"
+  }
 }

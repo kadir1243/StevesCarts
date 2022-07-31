@@ -1,5 +1,5 @@
 {
-  "parent": "stevescarts:item/upgrade_idle",
+  "parent": "stevescarts:block/upgrade_idle",
   "textures": {
     "front": "stevescarts:block/upgrade_side_0",
     "layer0": "stevescarts:block/production_input_upgrade_icon"

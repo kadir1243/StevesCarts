@@ -1,3 +1,6 @@
 {
-  "parent": "stevescarts:block/quick_demolisher_upgrade_horizontal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stevescarts:block/quick_demolisher_upgrade_icon"
+  }
 }

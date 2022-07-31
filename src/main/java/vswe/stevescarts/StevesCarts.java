@@ -9,8 +9,8 @@ import vswe.stevescarts.item.StevesCartsItems;
 import net.minecraft.util.Identifier;
 
 public class StevesCarts implements ModInitializer {
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
 	public static final String MODID = "stevescarts";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
 	public static Identifier id(String s) {
 		return new Identifier(MODID, s);

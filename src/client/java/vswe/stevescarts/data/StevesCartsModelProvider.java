@@ -33,10 +33,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 
 @Environment(EnvType.CLIENT)
 public class StevesCartsModelProvider extends FabricModelProvider {
-	public static final Model UPGRADE = new Model(Optional.of(StevesCarts.id("item/upgrade")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
-	public static final Model UPGRADE_HORIZONTAL = new Model(Optional.of(StevesCarts.id("item/upgrade_horizontal")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
-	public static final Model UPGRADE_HORIZONTAL_DOWN = new Model(Optional.of(StevesCarts.id("item/upgrade_horizontal_down")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
-	public static final Model UPGRADE_IDLE = new Model(Optional.of(StevesCarts.id("item/upgrade_idle")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
+	public static final Model UPGRADE = new Model(Optional.of(StevesCarts.id("block/upgrade")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
+	public static final Model UPGRADE_HORIZONTAL = new Model(Optional.of(StevesCarts.id("block/upgrade_horizontal")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
+	public static final Model UPGRADE_HORIZONTAL_DOWN = new Model(Optional.of(StevesCarts.id("block/upgrade_horizontal_down")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
+	public static final Model UPGRADE_IDLE = new Model(Optional.of(StevesCarts.id("block/upgrade_idle")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
 
 	public StevesCartsModelProvider(FabricDataGenerator dataGenerator) {
 		super(dataGenerator);
@@ -75,7 +75,7 @@ public class StevesCartsModelProvider extends FabricModelProvider {
 				Identifier upgradeIdle = UPGRADE_IDLE.upload(upgradeBlock, "_idle", textures, blockStateModelGenerator.modelCollector);
 				BlockStateSupplier supplier = createUpgradeBlockState(upgradeBlock, upgrade, upgradeHorizontal, upgradeHorizontalDown, upgradeIdle);
 				blockStateModelGenerator.blockStateCollector.accept(supplier);
-				blockStateModelGenerator.registerParentedItemModel(upgradeBlock, upgradeHorizontal);
+				Models.GENERATED.upload(ModelIds.getItemModelId(upgradeBlock.asItem()), getUpgradeItemTextureMap(upgradeBlock), blockStateModelGenerator.modelCollector);
 			}
 		});
 	}
@@ -141,5 +141,10 @@ public class StevesCartsModelProvider extends FabricModelProvider {
 						.put(VariantSettings.Y, VariantSettings.Rotation.R180)
 						.put(VariantSettings.MODEL, upgrade)
 				));
+	}
+
+	public static TextureMap getUpgradeItemTextureMap(UpgradeBlock block) {
+		Identifier blockId = Registry.BLOCK.getId(block);
+		return TextureMap.layer0(StevesCarts.id("block/" + blockId.getPath() + "_icon"));
 	}
 }

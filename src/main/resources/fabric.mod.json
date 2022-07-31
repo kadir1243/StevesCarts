@@ -26,6 +26,9 @@
     ],
     "fabric-datagen": [
       "vswe.stevescarts.data.StevesCartsDatagen"
+    ],
+    "client": [
+      "vswe.stevescarts.client.StevesCartsClient"
     ]
   },
   "mixins": [

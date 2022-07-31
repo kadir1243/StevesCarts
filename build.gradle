@@ -44,6 +44,8 @@ sourceSets {
 }
 
 loom {
+	splitEnvironmentSourceSets()
+
 	runs {
 		datagenClient {
 			client()
@@ -54,7 +56,7 @@ loom {
 
 			ideConfigGenerated = true
 			runDir "build/datagen"
-			source sourceSets.main
+			source sourceSets.client
 		}
 	}
 }

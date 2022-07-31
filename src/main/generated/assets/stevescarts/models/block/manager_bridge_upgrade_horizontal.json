@@ -1,5 +1,5 @@
 {
-  "parent": "stevescarts:item/upgrade_horizontal",
+  "parent": "stevescarts:block/upgrade_horizontal",
   "textures": {
     "front": "stevescarts:block/upgrade_side_0",
     "layer0": "stevescarts:block/manager_bridge_upgrade_icon"

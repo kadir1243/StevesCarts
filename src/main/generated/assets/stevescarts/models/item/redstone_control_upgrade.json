@@ -1,3 +1,6 @@
 {
-  "parent": "stevescarts:block/redstone_control_upgrade_horizontal"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stevescarts:block/redstone_control_upgrade_icon"
+  }
 }
