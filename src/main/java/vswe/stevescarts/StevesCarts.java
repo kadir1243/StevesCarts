@@ -4,7 +4,9 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vswe.stevescarts.block.StevesCartsBlocks;
+import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
 import vswe.stevescarts.item.StevesCartsItems;
+import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
 import net.minecraft.util.Identifier;
 
@@ -20,6 +22,8 @@ public class StevesCarts implements ModInitializer {
 	public void onInitialize() {
 		StevesCartsItems.init();
 		StevesCartsBlocks.init();
+		StevesCartsBlockEntities.init();
+		StevesCartsScreenHandlers.init();
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 	}
 }
