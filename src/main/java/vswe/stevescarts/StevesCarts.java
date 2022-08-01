@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
+import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
@@ -24,6 +25,7 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsBlocks.init();
 		StevesCartsBlockEntities.init();
 		StevesCartsScreenHandlers.init();
+		StevesCartsEntities.init();
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 	}
 }

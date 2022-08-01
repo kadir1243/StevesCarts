@@ -34,6 +34,7 @@
   "mixins": [
     "stevescarts.mixins.json"
   ],
+  "accessWidener": "stevescarts.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.14.6",

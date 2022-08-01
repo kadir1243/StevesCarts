@@ -8,7 +8,7 @@ public class HullModuleType<T extends CartModule> extends ModuleType<T> {
 	private final HullData hullData;
 
 	public HullModuleType(Identifier id, int moduleCost, EnumSet<ModuleSide> sides, ModuleGroup group, boolean hasRenderer, boolean duplicates, boolean noHullTop, HullData hullData) {
-		super(id, moduleCost, sides, group, hasRenderer, duplicates, noHullTop);
+		super(factory, id, moduleCost, sides, group, hasRenderer, duplicates, noHullTop);
 		this.hullData = hullData;
 	}
 

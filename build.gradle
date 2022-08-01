@@ -60,6 +60,8 @@ loom {
 			source sourceSets.main
 		}
 	}
+
+	accessWidenerPath = file("src/main/resources/stevescarts.accesswidener")
 }
 
 processResources {

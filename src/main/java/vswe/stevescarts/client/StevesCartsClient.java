@@ -2,6 +2,8 @@ package vswe.stevescarts.client;
 
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen;
 import vswe.stevescarts.block.StevesCartsBlocks;
+import vswe.stevescarts.client.render.entity.CartEntityRenderer;
+import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.screen.CartAssemblerHandler;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
@@ -12,6 +14,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 public class StevesCartsClient implements ClientModInitializer {
 	@Override
@@ -23,5 +26,6 @@ public class StevesCartsClient implements ClientModInitializer {
 		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.CART, ((stack, mode, matrices, vertexConsumers, light, overlay) -> {
 			// TODO
 		}));
+		EntityRendererRegistry.register(StevesCartsEntities.CART, CartEntityRenderer::new);
 	}
 }
