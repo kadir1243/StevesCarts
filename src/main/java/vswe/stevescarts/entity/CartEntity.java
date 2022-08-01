@@ -2,6 +2,7 @@ package vswe.stevescarts.entity;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleType;
 
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -32,6 +34,10 @@ public class CartEntity extends MinecartEntity {
 		super.readCustomDataFromNbt(nbt);
 		modules.clear();
 		NbtCompound moduleNbts = nbt.getCompound("modules");
+		readModuleData(moduleNbts);
+	}
+
+	public void readModuleData(NbtCompound moduleNbts) {
 		for (String key : moduleNbts.getKeys()) {
 			int id = Integer.parseInt(key);
 			CartModule module = ModuleType.fromNbt(moduleNbts.getCompound(key), this);
@@ -44,12 +50,20 @@ public class CartEntity extends MinecartEntity {
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		NbtCompound moduleNbts = new NbtCompound();
+		writeModuleData(moduleNbts);
+		nbt.put("modules", moduleNbts);
+	}
+
+	public void writeModuleData(NbtCompound moduleNbts) {
 		this.modules.forEach((id, module) -> {
-			NbtCompound moduleNbt = new NbtCompound();
-			module.writeToNbt(moduleNbt);
+			NbtCompound moduleNbt = ModuleType.toNbt(module);
 			moduleNbts.put(String.valueOf(id), moduleNbt);
 		});
-		nbt.put("modules", moduleNbts);
+	}
+
+	@Override
+	public Packet<?> createSpawnPacket() {
+		return CartSpawnS2CPacket.create(this);
 	}
 
 	@Override
