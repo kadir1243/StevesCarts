@@ -2,7 +2,6 @@ package vswe.stevescarts.module;
 
 import java.util.EnumSet;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
@@ -21,7 +20,8 @@ import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 public class ModuleType<T extends CartModule> {
 	public static final Registry<ModuleType<?>> REGISTRY = (Registry<ModuleType<?>>) (Object) FabricRegistryBuilder.createSimple(ModuleType.class, StevesCarts.id("module_type")).buildAndRegister();
 
-	private final RegistryEntry.Reference<ModuleType<?>> registryEntry = REGISTRY.createEntry(this);
+	// TODO
+	private final RegistryEntry.Reference<ModuleType<?>> registryEntry = null;
 	private final BiFunction<CartEntity, ModuleType<T>, T> factory;
 	private final Identifier id;
 	private final ModuleItem item;
