@@ -6,10 +6,12 @@ import vswe.stevescarts.entity.CartEntity;
 import net.minecraft.nbt.NbtCompound;
 
 public abstract class CartModule {
+	private final ModuleType<?> type;
 	private CartEntity entity;
 	private int id = -1;
 
-	public CartModule(@Nullable CartEntity entity) {
+	public CartModule(@Nullable CartEntity entity, ModuleType<?> type) {
+		this.type = type;
 		this.entity = entity;
 	}
 
@@ -31,7 +33,9 @@ public abstract class CartModule {
 		return id != -1;
 	}
 
-	public abstract ModuleType<?> getType();
+	public final ModuleType<?> getType() {
+		return type;
+	}
 
 	public void setEntity(CartEntity entity) {
 		this.entity = entity;

@@ -87,4 +87,13 @@ public class CartEntity extends MinecartEntity {
 		this.kill();
 		// TODO
 	}
+
+	public boolean shouldRenderTop() {
+		for (CartModule module : this.modules.values()) {
+			if (module.getType().shouldRemoveTop()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

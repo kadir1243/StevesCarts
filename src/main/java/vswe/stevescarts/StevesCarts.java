@@ -7,6 +7,7 @@ import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.entity.StevesCartsBlockEntities;
 import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.item.StevesCartsItems;
+import vswe.stevescarts.module.StevesCartsModules;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
 import net.minecraft.util.Identifier;
@@ -26,6 +27,7 @@ public class StevesCarts implements ModInitializer {
 		StevesCartsBlockEntities.init();
 		StevesCartsScreenHandlers.init();
 		StevesCartsEntities.init();
+		StevesCartsModules.init();
 		LOGGER.info("Steves Carts is done for now, now to let other mods have their turn..."); // easter egg :>
 	}
 }

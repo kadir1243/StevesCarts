@@ -1,4 +1,11 @@
 {
+  "module.stevescarts.wooden_hull": "Wooden Hull",
+  "module.stevescarts.standard_hull": "Standard Hull",
+  "module.stevescarts.reinforced_hull": "Reinforced Hull",
+  "module.stevescarts.mechanical_pig": "Mechanical Pig",
+  "module.stevescarts.galgadorian_hull": "Galgadorian Hull",
+  "module.stevescarts.creative_hull": "Creative Hull",
+
   "item.stevescarts.modular_cart": "Modular Cart",
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

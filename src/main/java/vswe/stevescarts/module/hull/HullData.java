@@ -1,4 +1,4 @@
-package vswe.stevescarts.module;
+package vswe.stevescarts.module.hull;
 
 /**
  * @param modularCapacity maximum total complexity of all modules

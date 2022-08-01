@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.client.render.module.hull.HullRenderer;
+import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleType;
+import vswe.stevescarts.module.StevesCartsModules;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -19,6 +22,8 @@ import net.minecraft.util.profiler.Profiler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+
+import static vswe.stevescarts.StevesCarts.id;
 
 @Environment(EnvType.CLIENT)
 public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadListener {
@@ -65,14 +70,19 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 	public void reload() {
 		this.renderers.clear();
 
-		// TODO
+		register(StevesCartsModules.WOODEN_HULL, new HullRenderer<>(id("textures/modules/hull/wooden_hull.png"), id("textures/modules/hull/wooden_hull_top.png")));
+		register(StevesCartsModules.STANDARD_HULL, new HullRenderer<>(id("textures/modules/hull/standard_hull.png"), id("textures/modules/hull/standard_hull_top.png")));
+		register(StevesCartsModules.REINFORCED_HULL, new HullRenderer<>(id("textures/modules/hull/reinforced_hull.png"), id("textures/modules/hull/reinforced_hull_top.png")));
+		register(StevesCartsModules.MECHANICAL_PIG, new MechanicalPigRenderer(id("textures/modules/hull/mechanical_pig.png"), id("textures/modules/hull/mechanical_pig_top.png"), new Identifier("textures/entity/pig/pig.png"), id("textures/modules/hull/pig_tail.png")));
+		register(StevesCartsModules.GALGADORIAN_HULL, new HullRenderer<>(id("textures/modules/hull/galgadorian_hull.png"), id("textures/modules/hull/galgadorian_hull_top.png")));
+		register(StevesCartsModules.CREATIVE_HULL, new HullRenderer<>(id("textures/modules/hull/creative_hull.png"), id("textures/modules/hull/creative_hull_top.png")));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}
 
 	@Override
 	public Identifier getFabricId() {
-		return StevesCarts.id("module_renderers");
+		return id("module_renderers");
 	}
 
 	@Override

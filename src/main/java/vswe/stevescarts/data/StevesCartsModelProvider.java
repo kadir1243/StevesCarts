@@ -8,6 +8,7 @@ import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.UpgradeBlock;
 import vswe.stevescarts.item.CartComponentItem;
 import vswe.stevescarts.item.StevesCartsItems;
+import vswe.stevescarts.module.ModuleType;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -85,6 +86,9 @@ public class StevesCartsModelProvider extends FabricModelProvider {
 	public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 		Registry.ITEM.stream().filter(CartComponentItem.class::isInstance).forEach(item -> {
 			itemModelGenerator.register(item, Models.GENERATED);
+		});
+		ModuleType.REGISTRY.forEach(type -> {
+			itemModelGenerator.register(type.getItem(), Models.GENERATED);
 		});
 	}
 
