@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.module.hull.HullModuleType;
 
 import net.minecraft.item.Item;
@@ -46,7 +47,7 @@ public class ModuleType<T extends CartModule> {
 		this.duplicates = duplicates;
 		this.noHullTop = noHullTop;
 		this.translationKeyText = Text.translatable(this.translationKey);
-		this.item = new ModuleItem(new Item.Settings(), this);
+		this.item = new ModuleItem(new Item.Settings().group(StevesCartsItems.MODULES), this);
 		Registry.register(Registry.ITEM, id, this.item);
 	}
 
