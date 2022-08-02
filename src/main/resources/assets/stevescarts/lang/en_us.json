@@ -99,6 +99,16 @@
 
   "tooltip.stevescarts.press_shift": "Press Shift to see more information",
 
+  "module.stevescarts.category.hull.title": "HULL",
+  "module.stevescarts.category.engines.title": "ENGINES",
+  "module.stevescarts.category.tool.title": "TOOL",
+  "module.stevescarts.category.attachments.title": "ATTACHMENTS",
+  "module.stevescarts.category.storage.title": "STORAGE",
+  "module.stevescarts.category.addons.title": "ADDONS",
+
+  "screen.stevescarts.cart_assembler.assemble": "ASSEMBLE",
+  "screen.stevescarts.cart_assembler": "Cart Assembler",
+
   "block.stevescarts.batteries_upgrade": "Upgrade: Batteries",
   "block.stevescarts.power_crystal_upgrade": "Upgrade: Power Crystal",
   "block.stevescarts.module_knowledge_upgrade": "Upgrade: Module Knowledge",
