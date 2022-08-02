@@ -1,5 +1,7 @@
 package vswe.stevescarts.entity;
 
+import java.util.List;
+
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
@@ -95,5 +97,19 @@ public class CartEntity extends MinecartEntity {
 			}
 		}
 		return true;
+	}
+
+	public void createModuleData(List<CartModule> read) {
+		for (CartModule module : read) {
+			modules.put(nextId(), module);
+		}
+	}
+
+	public int nextId() {
+		for (int i = 0;; i++) {
+			if (!modules.containsKey(i)) {
+				return i;
+			}
+		}
 	}
 }

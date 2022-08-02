@@ -9,6 +9,7 @@ import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.hull.HullModuleType;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -125,5 +126,17 @@ public class ModuleType<T extends CartModule> {
 		CartModule module = type.create(entity);
 		module.readFromNbt(compound);
 		return module;
+	}
+
+	public static boolean isModule(ItemStack stack) {
+		return isModule(stack.getItem());
+	}
+
+	public static boolean checkGroup(ItemStack stack, ModuleGroup group) {
+		return isModule(stack) && ((ModuleItem) stack.getItem()).getType().getGroup() == group;
+	}
+
+	public static boolean isModule(Item item) {
+		return item instanceof ModuleItem;
 	}
 }

@@ -23,7 +23,7 @@ public class ModuleItem extends Item {
 		// TODO
 	}
 
-	public ModuleType<?> getModuleType() {
+	public ModuleType<?> getType() {
 		return this.moduleType;
 	}
 
