@@ -5,6 +5,7 @@ import java.util.Collections;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
@@ -18,8 +19,9 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
-public class CartAssemblerBlockEntity extends BlockEntity implements SidedInventory {
+public class CartAssemblerBlockEntity extends BlockEntity implements SidedInventory, InventoryProvider {
 	public static final Text NAME = Text.translatable("screen.stevescarts.cart_assembler");
 	public static final int SIZE;
 	public static final int HULL_SLOT = 0;
@@ -206,6 +208,11 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 
 	public void scatter(World world, BlockPos pos) {
 		ItemScatterer.spawn(world, pos, this);
+	}
+
+	@Override
+	public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
+		return this;
 	}
 
 	static {
