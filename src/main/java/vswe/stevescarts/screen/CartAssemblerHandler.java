@@ -36,12 +36,10 @@ import net.minecraft.util.Identifier;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private static final Identifier PACKET_ASSEMBLE_CLICK = StevesCarts.id("assemble_click");
-	private final ScreenHandlerContext context;
 
 	// TODO
 	public CartAssemblerHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
 		super(StevesCartsScreenHandlers.CART_ASSEMBLER, syncId, playerInventory, getBlockInventory(context, CartAssemblerBlockEntity.SIZE), getBlockPropertyDelegate(context));
-		this.context = context;
 		WFixedPanel rootPanel = new WFixedPanel();
 		rootPanel.setSize(436, 220);
 		rootPanel.setInsets(Insets.ROOT_PANEL);
@@ -94,6 +92,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		attachmentSlots.addChangeListener(moduleListener);
 		toolSlot.addChangeListener(moduleListener);
 		engineSlots.addChangeListener(moduleListener);
+		rootPanel.validate(this);
 	}
 
 	public static void handleAssembleClick(ServerPlayerEntity player) {
