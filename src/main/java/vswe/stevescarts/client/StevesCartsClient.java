@@ -14,6 +14,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.util.math.Vec3f;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -38,9 +39,7 @@ public class StevesCartsClient implements ClientModInitializer {
 		//noinspection RedundantTypeArguments
 		HandledScreens.<CartAssemblerHandler, CottonInventoryScreen<CartAssemblerHandler>>register(StevesCartsScreenHandlers.CART_ASSEMBLER, CottonInventoryScreen::new);
 
-		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.CART, ((stack, mode, matrices, vertexConsumers, light, overlay) -> {
-			// TODO
-		}));
+		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.CART, (stack, mode, matrices, vertexConsumerProvider, light, overlay) -> StevesCartsClient.getModuleRenderDispatcher().renderItem(stack, matrices, vertexConsumerProvider, light));
 
 		EntityRendererRegistry.register(StevesCartsEntities.CART, CartEntityRenderer::new);
 

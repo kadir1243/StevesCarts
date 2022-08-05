@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleType;
@@ -46,6 +47,10 @@ public class CartEntity extends MinecartEntity {
 			modules.put(id, module);
 			module.setId(id);
 		}
+	}
+
+	public ObjectCollection<CartModule> getModules() {
+		return this.modules.values();
 	}
 
 	@Override

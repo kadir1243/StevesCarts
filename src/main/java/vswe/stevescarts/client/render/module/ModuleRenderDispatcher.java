@@ -7,6 +7,7 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.render.module.hull.HullRenderer;
 import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
 import vswe.stevescarts.module.CartModule;
+import vswe.stevescarts.module.ModuleStorage;
 import vswe.stevescarts.module.ModuleType;
 import vswe.stevescarts.module.StevesCartsModules;
 
@@ -15,6 +16,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
@@ -36,10 +38,19 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		this.itemRenderer = itemRenderer;
 	}
 
+	public void renderItem(ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+		for (CartModule module : ModuleStorage.read(stack)) {
+			ModuleRenderer<CartModule> renderer = (ModuleRenderer<CartModule>) renderers.get(module.getType());
+			if (renderer != null) {
+				renderer.render(module, 0, MinecraftClient.getInstance().getTickDelta(), matrices, vertexConsumers, light);
+			}
+		}
+	}
+
 	public <T extends CartModule> void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		if (module.getType().hasRenderer()) {
 			Profiler profiler = MinecraftClient.getInstance().getProfiler();
-			profiler.push("module." + module.getType().toString());
+			profiler.push("module." + module.getType());
 
 			//noinspection unchecked
 			ModuleRenderer<T> renderer = (ModuleRenderer<T>) renderers.get(module.getType());

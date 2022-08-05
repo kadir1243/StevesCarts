@@ -78,4 +78,9 @@ public class CartItem extends Item {
 		}
 		// TODO
 	}
+
+	@Override
+	protected String getOrCreateTranslationKey() {
+		return StevesCartsEntities.CART.getTranslationKey();
+	}
 }
