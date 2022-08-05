@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:porkchop"
+    },
+    "X": {
+      "item": "stevescarts:iron_wheels"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###",
+    "X X"
+  ],
+  "result": {
+    "item": "stevescarts:mechanical_pig"
+  }
+}

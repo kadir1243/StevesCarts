@@ -7,5 +7,7 @@ public class StevesCartsDatagen implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
 		dataGenerator.addProvider(new StevesCartsModelProvider(dataGenerator));
+		dataGenerator.addProvider(new StevesCartsRecipeProvider(dataGenerator));
+		dataGenerator.addProvider(new StevesCartsLootTableProvider(dataGenerator));
 	}
 }

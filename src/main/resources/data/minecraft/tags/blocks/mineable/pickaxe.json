@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "stevescarts:cart_assembler",
+    "stevescarts:cargo_manager",
+    "stevescarts:fluid_manager",
+    "stevescarts:external_distributor",
+    "stevescarts:module_toggler",
+    "stevescarts:detector_manager",
+    "stevescarts:detector_unit",
+    "stevescarts:detector_station",
+    "stevescarts:detector_junction",
+    "stevescarts:detector_redstone_unit",
+    "stevescarts:junction_rail",
+    "stevescarts:advanced_detector_rail",
+    "stevescarts:reinforced_metal_block",
+    "stevescarts:galgadorian_block",
+    "stevescarts:enhanced_galgadorian_block"
+  ]
+}

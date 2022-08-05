@@ -10,6 +10,7 @@ import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.module.hull.HullModuleType;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
@@ -19,7 +20,7 @@ import net.minecraft.util.registry.RegistryEntry;
 
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 
-public class ModuleType<T extends CartModule> {
+public class ModuleType<T extends CartModule> implements ItemConvertible {
 	public static final Registry<ModuleType<?>> REGISTRY = (Registry<ModuleType<?>>) (Object) FabricRegistryBuilder.createSimple(ModuleType.class, StevesCarts.id("module_type")).buildAndRegister();
 
 	// TODO
@@ -139,5 +140,10 @@ public class ModuleType<T extends CartModule> {
 
 	public static boolean isModule(Item item) {
 		return item instanceof ModuleItem;
+	}
+
+	@Override
+	public Item asItem() {
+		return this.item;
 	}
 }

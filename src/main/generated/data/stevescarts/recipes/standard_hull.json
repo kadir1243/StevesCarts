@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:iron_ingots"
+    },
+    "X": {
+      "item": "stevescarts:iron_wheels"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###",
+    "X X"
+  ],
+  "result": {
+    "item": "stevescarts:standard_hull"
+  }
+}
