@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "stevescarts:huge_chest_pane"
+    },
+    "C": {
+      "item": "stevescarts:chest_lock"
+    },
+    "L": {
+      "item": "stevescarts:large_chest_pane"
+    },
+    "X": {
+      "item": "stevescarts:chest_pane"
+    }
+  },
+  "pattern": [
+    "#X#",
+    "LCL",
+    "#X#"
+  ],
+  "result": {
+    "item": "stevescarts:side_chests"
+  }
+}

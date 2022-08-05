@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "stevescarts:large_chest_pane"
+    },
+    "C": {
+      "item": "stevescarts:chest_lock"
+    },
+    "X": {
+      "item": "stevescarts:chest_pane"
+    }
+  },
+  "pattern": [
+    "###",
+    "XCX",
+    "###"
+  ],
+  "result": {
+    "item": "stevescarts:top_chest"
+  }
+}

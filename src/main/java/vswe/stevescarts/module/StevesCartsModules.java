@@ -8,6 +8,8 @@ import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.hull.HullData;
 import vswe.stevescarts.module.hull.HullModule;
 import vswe.stevescarts.module.hull.HullModuleType;
+import vswe.stevescarts.module.storage.ChestModule;
+import vswe.stevescarts.module.storage.ExtractingChestsModule;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -20,6 +22,11 @@ public class StevesCartsModules {
 	public static final HullModuleType<HullModule> CREATIVE_HULL = registerHull("creative_hull", HullModule::new, new HullData(10000, 5, 12, 150));
 	public static final HullModuleType<HullModule> GALGADORIAN_HULL = registerHull("galgadorian_hull", HullModule::new, new HullData(1000, 5, 12, 150));
 
+	public static final ModuleType<ChestModule> FRONT_CHEST = registerRegularChest("front_chest", (entity, type) -> new ChestModule(entity, type, 4, 3), EnumSet.of(ModuleSide.FRONT), 5);
+	public static final ModuleType<ChestModule> TOP_CHEST = registerRegularChest("top_chest", (entity, type) -> new ChestModule(entity, type, 6, 3), EnumSet.of(ModuleSide.TOP), 5);
+	public static final ModuleType<ChestModule> SIDE_CHESTS = registerRegularChest("side_chests", (entity, type) -> new ChestModule(entity, type, 5, 3), EnumSet.of(ModuleSide.LEFT, ModuleSide.RIGHT), 3);
+	public static final ModuleType<ChestModule> EXTRACTING_CHESTS = registerRegularChest("extracting_chests", ExtractingChestsModule::new, EnumSet.of(ModuleSide.LEFT, ModuleSide.RIGHT), 75);
+
 	public static void init() {
 	}
 
@@ -30,5 +37,10 @@ public class StevesCartsModules {
 
 	private static <T extends HullModule> HullModuleType<T> registerHull(String name, BiFunction<CartEntity, ModuleType<T>, T> factory, HullData hullData) {
 		return registerHull(name, factory, EnumSet.noneOf(ModuleSide.class), hullData);
+	}
+
+	private static <T extends ChestModule> ModuleType<T> registerRegularChest(String name, BiFunction<CartEntity, ModuleType<T>, T> factory, EnumSet<ModuleSide> sides, int cost) {
+		Identifier id = StevesCarts.id(name);
+		return Registry.register(ModuleType.REGISTRY, id, new ModuleType<>(factory, id, cost, sides, ModuleGroup.STORAGE, true, false, false));
 	}
 }

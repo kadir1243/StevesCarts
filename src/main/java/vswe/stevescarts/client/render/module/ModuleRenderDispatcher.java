@@ -6,6 +6,10 @@ import java.util.Map;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.client.render.module.hull.HullRenderer;
 import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
+import vswe.stevescarts.client.render.module.model.storage.ExtractingChestsModel;
+import vswe.stevescarts.client.render.module.model.storage.FrontChestModel;
+import vswe.stevescarts.client.render.module.model.storage.SideChestsModel;
+import vswe.stevescarts.client.render.module.model.storage.TopChestModel;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleStorage;
 import vswe.stevescarts.module.ModuleType;
@@ -87,6 +91,11 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModules.MECHANICAL_PIG, new MechanicalPigRenderer(id("textures/modules/hull/mechanical_pig.png"), id("textures/modules/hull/mechanical_pig_top.png"), new Identifier("textures/entity/pig/pig.png"), id("textures/modules/hull/pig_tail.png")));
 		register(StevesCartsModules.GALGADORIAN_HULL, new HullRenderer<>(id("textures/modules/hull/galgadorian_hull.png"), id("textures/modules/hull/galgadorian_hull_top.png")));
 		register(StevesCartsModules.CREATIVE_HULL, new HullRenderer<>(id("textures/modules/hull/creative_hull.png"), id("textures/modules/hull/creative_hull_top.png")));
+
+		register(StevesCartsModules.FRONT_CHEST, new SingleModelRenderer(new FrontChestModel(id("textures/modules/storage/front_chest.png"))));
+		register(StevesCartsModules.TOP_CHEST, new SingleModelRenderer(new TopChestModel(id("textures/modules/storage/top_chest.png"))));
+		register(StevesCartsModules.SIDE_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/side_chests.png"), SideChestsModel::new));
+		register(StevesCartsModules.EXTRACTING_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/extracting_chests.png"), ExtractingChestsModel::new));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}

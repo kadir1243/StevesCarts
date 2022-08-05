@@ -5,6 +5,10 @@
   "module.stevescarts.mechanical_pig": "Mechanical Pig",
   "module.stevescarts.galgadorian_hull": "Galgadorian Hull",
   "module.stevescarts.creative_hull": "Creative Hull",
+  "module.stevescarts.front_chest": "Front Chest",
+  "module.stevescarts.top_chest": "Top Chest",
+  "module.stevescarts.side_chests": "Side Chests",
+  "module.stevescarts.extracting_chests": "Extracting Chests",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

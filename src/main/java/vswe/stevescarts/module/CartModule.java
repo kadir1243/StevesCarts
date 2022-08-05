@@ -44,4 +44,16 @@ public abstract class CartModule {
 	public CartEntity getEntity() {
 		return entity;
 	}
+
+	public void onScreenClose() {
+
+	}
+
+	public void onScreenOpen() {
+
+	}
+
+	public void tick() {
+
+	}
 }

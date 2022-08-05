@@ -6,8 +6,10 @@ import vswe.stevescarts.client.render.entity.CartEntityRenderer;
 import vswe.stevescarts.client.render.module.ModuleRenderDispatcher;
 import vswe.stevescarts.entity.StevesCartsEntities;
 import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
+import vswe.stevescarts.entity.network.CartUpdateS2CPacket;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.screen.CartAssemblerHandler;
+import vswe.stevescarts.screen.CartHandler;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
 import net.minecraft.client.MinecraftClient;
@@ -38,11 +40,13 @@ public class StevesCartsClient implements ClientModInitializer {
 
 		//noinspection RedundantTypeArguments
 		HandledScreens.<CartAssemblerHandler, CottonInventoryScreen<CartAssemblerHandler>>register(StevesCartsScreenHandlers.CART_ASSEMBLER, CottonInventoryScreen::new);
+		HandledScreens.<CartHandler, CottonInventoryScreen<CartHandler>>register(StevesCartsScreenHandlers.CART, CottonInventoryScreen::new);
 
 		BuiltinItemRendererRegistry.INSTANCE.register(StevesCartsItems.CART, (stack, mode, matrices, vertexConsumerProvider, light, overlay) -> StevesCartsClient.getModuleRenderDispatcher().renderItem(stack, matrices, vertexConsumerProvider, light));
 
 		EntityRendererRegistry.register(StevesCartsEntities.CART, CartEntityRenderer::new);
 
 		CartSpawnS2CPacket.init();
+		CartUpdateS2CPacket.init();
 	}
 }

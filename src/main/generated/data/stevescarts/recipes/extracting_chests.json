@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "stevescarts:huge_iron_pane"
+    },
+    "C": {
+      "item": "stevescarts:chest_lock"
+    },
+    "D": {
+      "item": "stevescarts:large_dynamic_pane"
+    },
+    "L": {
+      "item": "stevescarts:large_iron_pane"
+    },
+    "X": {
+      "item": "stevescarts:huge_dynamic_pane"
+    }
+  },
+  "pattern": [
+    "###",
+    "LCL",
+    "XDX"
+  ],
+  "result": {
+    "item": "stevescarts:extracting_chests"
+  }
+}
