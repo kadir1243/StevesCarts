@@ -10,6 +10,11 @@ import vswe.stevescarts.client.render.module.model.storage.ExtractingChestsModel
 import vswe.stevescarts.client.render.module.model.storage.FrontChestModel;
 import vswe.stevescarts.client.render.module.model.storage.SideChestsModel;
 import vswe.stevescarts.client.render.module.model.storage.TopChestModel;
+import vswe.stevescarts.client.render.module.storage.AdvancedTankRenderer;
+import vswe.stevescarts.client.render.module.storage.FrontTankRenderer;
+import vswe.stevescarts.client.render.module.storage.OpenTankRenderer;
+import vswe.stevescarts.client.render.module.storage.SideTanksRenderer;
+import vswe.stevescarts.client.render.module.storage.TopTankRenderer;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleStorage;
 import vswe.stevescarts.module.ModuleType;
@@ -96,6 +101,11 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModules.TOP_CHEST, new SingleModelRenderer(new TopChestModel(id("textures/modules/storage/top_chest.png"))));
 		register(StevesCartsModules.SIDE_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/side_chests.png"), SideChestsModel::new));
 		register(StevesCartsModules.EXTRACTING_CHESTS, new TwoSidedRenderer<>(id("textures/modules/storage/extracting_chests.png"), ExtractingChestsModel::new));
+		register(StevesCartsModules.FRONT_TANK, new FrontTankRenderer(id("textures/modules/storage/front_tank.png")));
+		register(StevesCartsModules.TOP_TANK, new TopTankRenderer(id("textures/modules/storage/top_tank.png")));
+		register(StevesCartsModules.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
+		register(StevesCartsModules.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
+		register(StevesCartsModules.ADVANCED_TANK, new AdvancedTankRenderer(id("textures/modules/storage/advanced_tank.png")));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}

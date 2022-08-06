@@ -3,6 +3,7 @@ package vswe.stevescarts.module;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
+import reborncore.common.fluid.FluidValue;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.hull.HullData;
@@ -10,6 +11,7 @@ import vswe.stevescarts.module.hull.HullModule;
 import vswe.stevescarts.module.hull.HullModuleType;
 import vswe.stevescarts.module.storage.ChestModule;
 import vswe.stevescarts.module.storage.ExtractingChestsModule;
+import vswe.stevescarts.module.storage.TankModule;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -26,6 +28,11 @@ public class StevesCartsModules {
 	public static final ModuleType<ChestModule> TOP_CHEST = registerRegularChest("top_chest", (entity, type) -> new ChestModule(entity, type, 6, 3), EnumSet.of(ModuleSide.TOP), 5);
 	public static final ModuleType<ChestModule> SIDE_CHESTS = registerRegularChest("side_chests", (entity, type) -> new ChestModule(entity, type, 5, 3), EnumSet.of(ModuleSide.LEFT, ModuleSide.RIGHT), 3);
 	public static final ModuleType<ChestModule> EXTRACTING_CHESTS = registerRegularChest("extracting_chests", ExtractingChestsModule::new, EnumSet.of(ModuleSide.LEFT, ModuleSide.RIGHT), 75);
+	public static final ModuleType<TankModule> TOP_TANK = registerRegularTank("top_tank", 14, EnumSet.of(ModuleSide.TOP), 22, false);
+	public static final ModuleType<TankModule> FRONT_TANK = registerRegularTank("front_tank", 8, EnumSet.of(ModuleSide.FRONT), 15, false);
+	public static final ModuleType<TankModule> SIDE_TANKS = registerRegularTank("side_tanks", 8, EnumSet.of(ModuleSide.LEFT, ModuleSide.RIGHT), 10, false);
+	public static final ModuleType<TankModule> OPEN_TANK = registerRegularTank("open_tank", 14, EnumSet.of(ModuleSide.TOP), 22, false);
+	public static final ModuleType<TankModule> ADVANCED_TANK = registerRegularTank("advanced_tank", 32, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), 54, true);
 
 	public static void init() {
 	}
@@ -42,5 +49,10 @@ public class StevesCartsModules {
 	private static <T extends ChestModule> ModuleType<T> registerRegularChest(String name, BiFunction<CartEntity, ModuleType<T>, T> factory, EnumSet<ModuleSide> sides, int cost) {
 		Identifier id = StevesCarts.id(name);
 		return Registry.register(ModuleType.REGISTRY, id, new ModuleType<>(factory, id, cost, sides, ModuleGroup.STORAGE, true, false, false));
+	}
+
+	private static ModuleType<TankModule> registerRegularTank(String name, int buckets, EnumSet<ModuleSide> sides, int moduleCost, boolean noHullTop) {
+		Identifier id = StevesCarts.id(name);
+		return Registry.register(ModuleType.REGISTRY, id, new ModuleType<>((entity, type) -> new TankModule(entity, type, FluidValue.BUCKET.multiply(buckets)), id, moduleCost, sides, ModuleGroup.STORAGE, true, false, noHullTop));
 	}
 }

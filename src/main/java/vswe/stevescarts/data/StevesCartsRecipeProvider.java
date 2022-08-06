@@ -24,20 +24,29 @@ import static vswe.stevescarts.item.StevesCartsItems.GALGADORIAN_WHEELS;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_DYNAMIC_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_IRON_PANE;
+import static vswe.stevescarts.item.StevesCartsItems.HUGE_TANK_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.IRON_WHEELS;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_DYNAMIC_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_IRON_PANE;
+import static vswe.stevescarts.item.StevesCartsItems.LARGE_TANK_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.REINFORCED_WHEELS;
+import static vswe.stevescarts.item.StevesCartsItems.TANK_PANE;
+import static vswe.stevescarts.item.StevesCartsItems.TANK_VALVE;
 import static vswe.stevescarts.item.StevesCartsItems.WOODEN_WHEELS;
+import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.EXTRACTING_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
+import static vswe.stevescarts.module.StevesCartsModules.FRONT_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.MECHANICAL_PIG;
+import static vswe.stevescarts.module.StevesCartsModules.OPEN_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.REINFORCED_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.SIDE_CHESTS;
+import static vswe.stevescarts.module.StevesCartsModules.SIDE_TANKS;
 import static vswe.stevescarts.module.StevesCartsModules.STANDARD_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_CHEST;
+import static vswe.stevescarts.module.StevesCartsModules.TOP_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.WOODEN_HULL;
 
 public class StevesCartsRecipeProvider extends FabricRecipeProvider {
@@ -56,6 +65,11 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(TOP_CHEST).pattern("###").pattern("XCX").pattern("###").input('X', CHEST_PANE).input('#', LARGE_CHEST_PANE).input('C', CHEST_LOCK).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.CHEST)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(SIDE_CHESTS).pattern("#X#").pattern("LCL").pattern("#X#").input('X', CHEST_PANE).input('L', LARGE_CHEST_PANE).input('#', HUGE_CHEST_PANE).input('C', CHEST_LOCK).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.CHEST)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(EXTRACTING_CHESTS).pattern("###").pattern("LCL").pattern("XDX").input('X', HUGE_DYNAMIC_PANE).input('D', LARGE_DYNAMIC_PANE).input('L', LARGE_IRON_PANE).input('#', HUGE_IRON_PANE).input('C', CHEST_LOCK).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.CHEST)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(TOP_TANK).pattern("###").pattern("XCX").pattern("###").input('X', TANK_PANE).input('#', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(FRONT_TANK).pattern("X#X").pattern("XCX").pattern("###").input('X', TANK_PANE).input('#', LARGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(SIDE_TANKS).pattern("#X#").pattern("LCL").pattern("#X#").input('X', TANK_PANE).input('L', LARGE_TANK_PANE).input('#', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(OPEN_TANK).pattern("X X").pattern("XCX").pattern("###").input('X', TANK_PANE).input('#', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(ADVANCED_TANK).pattern("XXX").pattern("XCX").pattern("XXX").input('X', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {
