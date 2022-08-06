@@ -48,7 +48,7 @@ public class ModuleType<T extends CartModule> implements ItemConvertible {
 		this.duplicates = duplicates;
 		this.noHullTop = noHullTop;
 		this.translationKeyText = Text.translatable(this.translationKey);
-		this.item = new ModuleItem(new Item.Settings().group(StevesCartsItems.MODULES), this);
+		this.item = new ModuleItem(new Item.Settings().group(StevesCartsItems.MODULES).maxCount(1), this);
 		Registry.register(Registry.ITEM, id, this.item);
 	}
 
@@ -134,7 +134,7 @@ public class ModuleType<T extends CartModule> implements ItemConvertible {
 		return isModule(stack.getItem());
 	}
 
-	public static boolean checkGroup(ItemStack stack, ModuleGroup group) {
+	public static boolean belongsToGroup(ItemStack stack, ModuleGroup group) {
 		return isModule(stack) && ((ModuleItem) stack.getItem()).getType().getGroup() == group;
 	}
 

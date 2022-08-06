@@ -112,8 +112,22 @@
   "module.stevescarts.category.storage.title": "STORAGE",
   "module.stevescarts.category.addons.title": "ADDONS",
 
-  "screen.stevescarts.cart_assembler.assemble": "ASSEMBLE",
   "screen.stevescarts.cart_assembler": "Cart Assembler",
+  "screen.stevescarts.cart_assembler.assemble": "ASSEMBLE",
+  "screen.stevescarts.cart_assembler.information": "INFORMATION",
+  "screen.stevescarts.cart_assembler.duplicate_module": "%s does not support duplicates",
+  "screen.stevescarts.cart_assembler.duplicate_side": "%s and %s occupy the same side (%s)",
+  "screen.stevescarts.cart_assembler.getting_started": "To start making a cart, please add a Hull of your choice to the Hull Slot",
+  "screen.stevescarts.cart_assembler.excess_capacity": "Maximum modular capacity of your %s has been exceeded",
+  "screen.stevescarts.cart_assembler.too_complex_module": "%s is too complex for %s",
+  "screen.stevescarts.cart_assembler.total_cost": "Total Cost: %s",
+  "screen.stevescarts.cart_assembler.hull_capacity": "Hull Capacity: %s",
+  "screen.stevescarts.cart_assembler.complexity_cap": "Complexity Cap: %s",
+  "screen.stevescarts.cart_assembler.time": "Time: %s",
+  "screen.stevescarts.cart_assembler.ready": "Ready to Assemble",
+  "screen.stevescarts.cart_assembler.missing_requirement": "%s requires a %s",
+  "screen.stevescarts.cart_assembler.incompatible": "%s is incompatible with %s",
+  "screen.stevescarts.cart_assembler.missing_tag_requirement": "%s requires %s %s",
 
   "block.stevescarts.batteries_upgrade": "Upgrade: Batteries",
   "block.stevescarts.power_crystal_upgrade": "Upgrade: Power Crystal",
@@ -166,5 +180,13 @@
   "tooltip.stevescarts.module.sides.4": "Will occupy the %s, %s, %s and %s sides",
   "tooltip.stevescarts.module.sides.5": "Will occupy the %s, %s, %s, %s and %s sides",
   "tooltip.stevescarts.module.sides.6": "Will occupy the %s, %s, %s, %s, %s and %s sides",
-  "tooltip.stevescarts.module.cost": "Module Cost: %s"
+  "tooltip.stevescarts.module.cost": "Module Cost: %s",
+
+  "module.side.stevescarts.left": "Left",
+  "module.side.stevescarts.right": "Right",
+  "module.side.stevescarts.top": "Top",
+  "module.side.stevescarts.bottom": "Bottom",
+  "module.side.stevescarts.front": "Front",
+  "module.side.stevescarts.back": "Back",
+  "module.side.stevescarts.center": "Center"
 }

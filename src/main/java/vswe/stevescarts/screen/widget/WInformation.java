@@ -8,19 +8,16 @@ import io.github.cottonmc.cotton.gui.widget.WText;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
 import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import io.github.cottonmc.cotton.gui.widget.data.VerticalAlignment;
+import vswe.stevescarts.StevesCarts;
 
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
-
-import vswe.stevescarts.StevesCarts;
 
 public class WInformation extends WPlainPanel {
 	public static final Texture INFORMATION_BUTTON = new Texture(StevesCarts.id("textures/gui/information.png"), 0, 0, 1, 1);
-	public static final TranslatableText TEXT = new TranslatableText("screen.stevescarts.cart_assembler.information");
-	public static final TranslatableText READY = (TranslatableText) new TranslatableText("screen.stevescarts.cart_assembler.ready").formatted(Formatting.DARK_GREEN);
+	public static final Text TEXT = Text.translatable("screen.stevescarts.cart_assembler.information");
+	public static final Text READY = Text.translatable("screen.stevescarts.cart_assembler.ready").formatted(Formatting.DARK_GREEN);
 	public static final BackgroundPainter PAINTER = (matrices, left, top, panel) -> {
 		ScreenDrawing.texturedRect(matrices, left, top, 100, 9, INFORMATION_BUTTON, 0xFFFFFFFF);
 		matrices.push();
@@ -30,8 +27,8 @@ public class WInformation extends WPlainPanel {
 		matrices.pop();
 	};
 
-	private final WText infoText = new WText(LiteralText.EMPTY);
-	private final WText statusText = new WText(LiteralText.EMPTY);
+	private final WText infoText = new WText(Text.empty());
+	private final WText statusText = new WText(Text.empty());
 
 	public WInformation() {
 		this.statusText.setVerticalAlignment(VerticalAlignment.TOP);
