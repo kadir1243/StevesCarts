@@ -16,8 +16,6 @@ public class AdvancedTankRenderer extends ModuleRenderer<TankModule> {
 		this.model = new AdvancedTankModel(texture);
 	}
 
-
-
 	@Override
 	public void render(TankModule module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
 		matrices.push();

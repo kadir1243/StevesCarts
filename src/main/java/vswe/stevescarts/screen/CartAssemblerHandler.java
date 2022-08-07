@@ -27,6 +27,7 @@ import vswe.stevescarts.module.ModuleType;
 import vswe.stevescarts.module.hull.HullModule;
 import vswe.stevescarts.module.hull.HullModuleType;
 import vswe.stevescarts.screen.widget.WAssembleButton;
+import vswe.stevescarts.screen.widget.WCart;
 import vswe.stevescarts.screen.widget.WFixedPanel;
 import vswe.stevescarts.screen.widget.WInformation;
 import vswe.stevescarts.screen.widget.WModuleSlot;
@@ -43,10 +44,12 @@ import net.minecraft.util.Identifier;
 
 public class CartAssemblerHandler extends SyncedGuiDescription {
 	private static final Identifier PACKET_ASSEMBLE_CLICK = StevesCarts.id("assemble_click");
+	private final CartAssemblerBlockEntity blockEntity;
 
 	// TODO
-	public CartAssemblerHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+	public CartAssemblerHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, CartAssemblerBlockEntity blockEntity) {
 		super(StevesCartsScreenHandlers.CART_ASSEMBLER, syncId, playerInventory, getBlockInventory(context, CartAssemblerBlockEntity.SIZE), getBlockPropertyDelegate(context));
+		this.blockEntity = blockEntity;
 		WFixedPanel rootPanel = new WFixedPanel();
 		rootPanel.setSize(436, 220);
 		rootPanel.setInsets(Insets.ROOT_PANEL);
@@ -80,6 +83,19 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		rootPanel.add(fuelSlot, 384, 182);
 		WInformation info = new WInformation();
 		rootPanel.add(info, 315, 17);
+		WCart cart = new WCart(() -> {
+			List<ModuleType<?>> types = new ArrayList<>();
+			if (assembleButton.isEnabled()) {
+				for (int i = 0; i <= CartAssemblerBlockEntity.ADDON_SLOT_END; i++) {
+					ItemStack stack = this.blockInventory.getStack(i);
+					if (!stack.isEmpty() && ModuleType.isModule(stack)) {
+						types.add(((ModuleItem) stack.getItem()).getType());
+					}
+				}
+			}
+			return types;
+		}, 187, 120, (e) -> blockEntity.getRoll(), (e) -> blockEntity.getYaw(), this.blockEntity::getWorld);
+		this.addCentered(cart, 4);
 
 		assembleButton.setOnClick(() -> ScreenNetworking.of(this, NetworkSide.CLIENT).send(PACKET_ASSEMBLE_CLICK, (buf) -> {
 		}));
@@ -101,6 +117,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		attachmentSlots.addChangeListener(moduleListener);
 		toolSlot.addChangeListener(moduleListener);
 		engineSlots.addChangeListener(moduleListener);
+		outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.refresh());
 
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			boolean invalid = false;
@@ -128,7 +145,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 
 			if (hull == null) {
 				info.setStatusText(Text.empty());
-//				cart.markDirty();
+				cart.refresh();
 				return;
 			}
 
@@ -205,7 +222,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			}
 
 			assembleButton.setEnabled(!invalid);
-//			cart.markDirty();
+			cart.refresh();
 		});
 		hullSlot.addChangeListener(validator);
 		engineSlots.addChangeListener(validator);

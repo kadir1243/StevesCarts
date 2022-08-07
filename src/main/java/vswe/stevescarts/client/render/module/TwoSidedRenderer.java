@@ -22,10 +22,8 @@ public class TwoSidedRenderer<T extends CartModule> extends ModuleRenderer<T> {
 
 	@Override
 	public void render(T module, float entityYaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int entityLight) {
-		if (module.getEntity() != null) {
-			this.side.animateModel(module, 0, 0, tickDelta);
-			this.oppositeSide.animateModel(module, 0, 0, tickDelta);
-		}
+		this.side.animateModel(module, 0, 0, tickDelta);
+		this.oppositeSide.animateModel(module, 0, 0, tickDelta);
 		this.side.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 		this.oppositeSide.render(matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 	}

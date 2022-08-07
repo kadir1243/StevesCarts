@@ -21,6 +21,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
 public class CartAssemblerBlockEntity extends BlockEntity implements SidedInventory, InventoryProvider {
 	public static final Text NAME = Text.translatable("screen.stevescarts.cart_assembler");
 	public static final int SIZE;
@@ -44,9 +47,17 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 	private ItemStack tool = ItemStack.EMPTY;
 	private ItemStack output = ItemStack.EMPTY;
 	private ItemStack fuel = ItemStack.EMPTY;
+	private float yaw;
+	private float roll;
+	private boolean rolldown;
+	private boolean shouldSpin;
 
 	public CartAssemblerBlockEntity(BlockPos pos, BlockState state) {
 		super(StevesCartsBlockEntities.CART_ASSEMBLER, pos, state);
+		this.yaw = 0.0f;
+		this.roll = 0.0f;
+		this.rolldown = false;
+		this.shouldSpin = true;
 	}
 
 	@Override
@@ -213,6 +224,61 @@ public class CartAssemblerBlockEntity extends BlockEntity implements SidedInvent
 	@Override
 	public SidedInventory getInventory(BlockState state, WorldAccess world, BlockPos pos) {
 		return this;
+	}
+
+	public float getYaw() {
+		return yaw;
+	}
+
+	public void setYaw(float yaw) {
+		this.yaw = yaw;
+	}
+
+	public float getRoll() {
+		return roll;
+	}
+
+	public void setRoll(float roll) {
+		this.roll = roll;
+	}
+
+	public void setShouldSpin(boolean shouldSpin) {
+		this.shouldSpin = shouldSpin;
+	}
+
+	public void updateTransform() {
+		if (this.world.isClient) {
+			final int minRoll = -5;
+			final int maxRoll = 25;
+			if (shouldSpin) {
+				yaw += 2.0f;
+				roll %= 360.0f;
+				if (!rolldown) {
+					if (roll < minRoll - 3) {
+						roll += 5.0f;
+					} else {
+						roll += 0.2f;
+					}
+					if (roll > maxRoll) {
+						rolldown = true;
+					}
+				} else {
+					if (roll > maxRoll + 3) {
+						roll -= 5.0f;
+					} else {
+						roll -= 0.2f;
+					}
+					if (roll < minRoll) {
+						rolldown = false;
+					}
+				}
+			}
+		}
+	}
+
+	@Environment(EnvType.CLIENT)
+	public static void clientTick(World world, BlockPos pos, BlockState state, CartAssemblerBlockEntity blockEntity) {
+		blockEntity.updateTransform();
 	}
 
 	static {

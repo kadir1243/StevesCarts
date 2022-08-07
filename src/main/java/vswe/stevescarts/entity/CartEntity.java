@@ -11,6 +11,7 @@ import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleType;
 import vswe.stevescarts.screen.CartHandler;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,6 +28,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 
 public class CartEntity extends MinecartEntity {
@@ -34,6 +37,13 @@ public class CartEntity extends MinecartEntity {
 
 	public CartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
+	}
+
+	public CartEntity(World world, List<ModuleType<?>> types) {
+		super(StevesCartsEntities.CART, world);
+		for (int i = 0; i < types.size(); i++) {
+			modules.put(i, types.get(i).create(this));
+		}
 	}
 
 	@Override
