@@ -34,7 +34,7 @@ public class CartUpdateS2CPacket {
 					return;
 				}
 				CartEntity cart = (CartEntity) entity;
-				cart.readModuleData(moduleData);
+				cart.updateModuleData(moduleData);
 			});
 		});
 	}

@@ -163,6 +163,14 @@ public class CartEntity extends MinecartEntity {
 		}
 	}
 
+	public void updateModuleData(NbtCompound nbt) {
+		for (String key : nbt.getKeys()) {
+			int id = Integer.parseInt(key);
+			CartModule module = modules.get(id);
+			module.readFromNbt(nbt.getCompound(key));
+		}
+	}
+
 	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {
 		@Override
 		public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
