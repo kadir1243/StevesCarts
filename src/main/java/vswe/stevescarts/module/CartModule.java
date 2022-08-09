@@ -46,14 +46,22 @@ public abstract class CartModule {
 	}
 
 	public void onScreenClose() {
-
 	}
 
 	public void onScreenOpen() {
-
 	}
 
 	public void tick() {
+	}
 
+	public boolean canPropel() {
+		return false;
+	}
+
+	public void onPropel() {
+	}
+
+	public boolean shouldMove() {
+		return true;
 	}
 }

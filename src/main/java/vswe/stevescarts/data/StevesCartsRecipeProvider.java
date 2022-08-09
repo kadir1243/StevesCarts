@@ -10,6 +10,7 @@ import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.predicate.NumberRange;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -35,6 +36,7 @@ import static vswe.stevescarts.item.StevesCartsItems.TANK_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.TANK_VALVE;
 import static vswe.stevescarts.item.StevesCartsItems.WOODEN_WHEELS;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_TANK;
+import static vswe.stevescarts.module.StevesCartsModules.COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.EXTRACTING_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_TANK;
@@ -42,9 +44,11 @@ import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.MECHANICAL_PIG;
 import static vswe.stevescarts.module.StevesCartsModules.OPEN_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.REINFORCED_HULL;
+import static vswe.stevescarts.module.StevesCartsModules.SEAT;
 import static vswe.stevescarts.module.StevesCartsModules.SIDE_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.SIDE_TANKS;
 import static vswe.stevescarts.module.StevesCartsModules.STANDARD_HULL;
+import static vswe.stevescarts.module.StevesCartsModules.TINY_COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.WOODEN_HULL;
@@ -70,6 +74,9 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(SIDE_TANKS).pattern("#X#").pattern("LCL").pattern("#X#").input('X', TANK_PANE).input('L', LARGE_TANK_PANE).input('#', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(OPEN_TANK).pattern("X X").pattern("XCX").pattern("###").input('X', TANK_PANE).input('#', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(ADVANCED_TANK).pattern("XXX").pattern("XCX").pattern("XXX").input('X', HUGE_TANK_PANE).input('C', TANK_VALVE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(SEAT).pattern(" #").pattern(" #").pattern("X#").input('X', ItemTags.WOODEN_SLABS).input('#', ItemTags.PLANKS).criterion("has_base_item", RecipeProvider.conditionsFromTag(ItemTags.WOODEN_SLABS)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(TINY_COAL_ENGINE).pattern("#X#").pattern(" P ").input('#', Tags.IRON_INGOTS).input('P', Items.PISTON).input('X', Items.FURNACE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.FURNACE)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(COAL_ENGINE).pattern("###").pattern("#X#").pattern(" P ").input('#', Tags.IRON_INGOTS).input('P', Items.PISTON).input('X', Items.FURNACE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.FURNACE)).offerTo(exporter);
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {

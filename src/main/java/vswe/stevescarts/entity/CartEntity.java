@@ -1,6 +1,7 @@
 package vswe.stevescarts.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -8,10 +9,12 @@ import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
 import vswe.stevescarts.entity.network.CartUpdateS2CPacket;
 import vswe.stevescarts.module.CartModule;
+import vswe.stevescarts.module.ModuleGroup;
 import vswe.stevescarts.module.ModuleType;
+import vswe.stevescarts.module.engine.EngineModule;
 import vswe.stevescarts.screen.CartHandler;
 
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,13 +26,15 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 
 public class CartEntity extends MinecartEntity {
@@ -150,6 +155,56 @@ public class CartEntity extends MinecartEntity {
 			cartModule.setEntity(this);
 			cartModule.tick();
 		});
+		boolean move = true;
+		for (CartModule minecartModule : this.modules.values()) {
+			if (!minecartModule.shouldMove()) {
+				move = false;
+				break;
+			}
+		}
+
+		if (move) {
+			this.modules.int2ObjectEntrySet()
+					.stream()
+					.filter(entry -> entry.getValue().getType().getGroup() == ModuleGroup.ENGINE && entry.getValue().canPropel() && ((EngineModule) entry.getValue()).getPriority() != EngineModule.DISABLED)
+					.peek(entry -> ((EngineModule) entry.getValue()).setPropelling(false))
+					.map(Map.Entry::getValue)
+					.sorted()
+					.findFirst()
+					.filter(t -> {
+						int x = (int) Math.floor(this.getX());
+						int y = (int) Math.floor(this.getY());
+						int z = (int) Math.floor(this.getZ());
+						BlockPos.Mutable pos = new BlockPos.Mutable(x, y, z);
+						if (world.getBlockState(pos.down()).isIn(BlockTags.RAILS)) pos.move(Direction.DOWN);
+						BlockState state = world.getBlockState(pos);
+						return state.isIn(BlockTags.RAILS);
+					})
+					.ifPresent(this::propel);
+		}
+	}
+
+	private void propel(CartModule engine) {
+		((EngineModule) engine).setPropelling(true);
+		engine.onPropel();
+		Vec3d velocity = this.getVelocity();
+		double horizontal = velocity.horizontalLength();
+		if (horizontal > 0.01) {
+			this.setVelocity(velocity.add(velocity.x / horizontal * 0.01, 0.0, velocity.z / horizontal * 0.01));
+		} else {
+			this.setVelocity(0.01, 0.0, 0.01);
+		}
+	}
+
+	@Override
+	protected void applySlowdown() {
+		double drag = this.hasPassengers() ? 0.96 : 0.94;
+		Vec3d vec3d = this.getVelocity();
+		vec3d = vec3d.multiply(drag, 0.0, drag);
+		if (this.isTouchingWater()) {
+			vec3d = vec3d.multiply(0.85f);
+		}
+		this.setVelocity(vec3d);
 	}
 
 	public void onScreenOpen() {

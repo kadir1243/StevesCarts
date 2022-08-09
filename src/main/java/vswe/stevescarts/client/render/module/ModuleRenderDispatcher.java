@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.client.render.module.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.render.module.hull.HullRenderer;
 import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
+import vswe.stevescarts.client.render.module.model.attachment.SeatModel;
+import vswe.stevescarts.client.render.module.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.render.module.model.storage.ExtractingChestsModel;
 import vswe.stevescarts.client.render.module.model.storage.FrontChestModel;
 import vswe.stevescarts.client.render.module.model.storage.SideChestsModel;
@@ -106,6 +109,11 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModules.SIDE_TANKS, new SideTanksRenderer(id("textures/modules/storage/side_tanks.png")));
 		register(StevesCartsModules.OPEN_TANK, new OpenTankRenderer(id("textures/modules/storage/top_tank.png")));
 		register(StevesCartsModules.ADVANCED_TANK, new AdvancedTankRenderer(id("textures/modules/storage/advanced_tank.png")));
+
+		register(StevesCartsModules.COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
+		register(StevesCartsModules.TINY_COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
+
+		register(StevesCartsModules.SEAT, new SingleModelRenderer(new SeatModel(id("textures/modules/attachment/seat.png"))));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}

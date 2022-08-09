@@ -14,6 +14,9 @@
   "module.stevescarts.side_tanks": "Side Tanks",
   "module.stevescarts.open_tank": "Open Tank",
   "module.stevescarts.advanced_tank": "Advanced Tank",
+  "module.stevescarts.seat": "Seat",
+  "module.stevescarts.coal_engine": "Coal Engine",
+  "module.stevescarts.tiny_coal_engine": "Tiny Coal Engine",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",
@@ -128,6 +131,11 @@
   "screen.stevescarts.cart_assembler.missing_requirement": "%s requires a %s",
   "screen.stevescarts.cart_assembler.incompatible": "%s is incompatible with %s",
   "screen.stevescarts.cart_assembler.missing_tag_requirement": "%s requires %s %s",
+  "screen.stevescarts.cart.fuel": "Fuel: %s",
+  "screen.stevescarts.cart.reverse": "Reverse the cart's direction",
+  "screen.stevescarts.cart.brake": "Start/Stop the cart",
+  "screen.stevescarts.cart.invisibility": "Toggle Invisibility",
+  "screen.stevescarts.cart.power": "Power: %s",
 
   "block.stevescarts.batteries_upgrade": "Upgrade: Batteries",
   "block.stevescarts.power_crystal_upgrade": "Upgrade: Power Crystal",
