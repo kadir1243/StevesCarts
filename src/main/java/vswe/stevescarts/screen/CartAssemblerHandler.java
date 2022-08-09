@@ -175,7 +175,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 							continue;
 						}
 						invalid = true;
-						info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationKeyText()));
+						info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.duplicate_module", type.getTranslationText()));
 						break;
 					}
 				}
@@ -192,7 +192,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				for (Map.Entry<ModuleSide, List<ModuleType<?>>> entry : sideMap.entrySet()) {
 					if (entry.getValue().size() > 1) {
 						invalid = true;
-						info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationKeyText(), entry.getValue().get(1).getTranslationKeyText(), entry.getKey().asText()));
+						info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.duplicate_side", entry.getValue().get(0).getTranslationText(), entry.getValue().get(1).getTranslationText(), entry.getKey().asText()));
 						break;
 					}
 				}
@@ -203,7 +203,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				for (ModuleType<?> type : types) {
 					if (type.getModuleCost() > complexityMax) {
 						invalid = true;
-						info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.too_complex_module", type.getTranslationKeyText(), hull.getTranslationKeyText()));
+						info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.too_complex_module", type.getTranslationText(), hull.getTranslationText()));
 						break;
 					}
 				}
@@ -213,7 +213,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			if (!invalid) {
 				if (cost > modCap) {
 					invalid = true;
-					info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.excess_capacity", hull.getTranslationKeyText()));
+					info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.excess_capacity", hull.getTranslationText()));
 				}
 			}
 

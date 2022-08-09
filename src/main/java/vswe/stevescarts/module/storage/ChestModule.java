@@ -32,7 +32,7 @@ public class ChestModule extends StorageModule implements Inventory {
 		super(minecart, type);
 		this.slotsWidth = slotsWidth;
 		this.slotsHeight = slotsHeight;
-		this.label = type.getTranslationKeyText();
+		this.label = type.getTranslationText();
 		this.size = slotsWidth * slotsHeight;
 		this.inventory = DefaultedList.ofSize(this.size, ItemStack.EMPTY);
 	}

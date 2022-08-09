@@ -17,6 +17,8 @@
   "module.stevescarts.seat": "Seat",
   "module.stevescarts.coal_engine": "Coal Engine",
   "module.stevescarts.tiny_coal_engine": "Tiny Coal Engine",
+  "module.stevescarts.solar_engine": "Solar Engine",
+  "module.stevescarts.advanced_solar_engine": "Advanced Solar Engine",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

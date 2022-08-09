@@ -8,6 +8,7 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.attachment.SeatModule;
 import vswe.stevescarts.module.engine.CoalEngineModule;
+import vswe.stevescarts.module.engine.SolarEngineModule;
 import vswe.stevescarts.module.hull.HullData;
 import vswe.stevescarts.module.hull.HullModule;
 import vswe.stevescarts.module.hull.HullModuleType;
@@ -38,6 +39,8 @@ public class StevesCartsModules {
 
 	public static final ModuleType<CoalEngineModule> TINY_COAL_ENGINE = registerCoalEngine("tiny_coal_engine", 1, 0.5f, 2);
 	public static final ModuleType<CoalEngineModule> COAL_ENGINE = registerCoalEngine("coal_engine", 3, 2.25f, 15);
+	public static final ModuleType<SolarEngineModule> SOLAR_ENGINE = registerSolarEngine("solar_engine", 12, 100000L);
+	public static final ModuleType<SolarEngineModule> ADVANCED_SOLAR_ENGINE = registerSolarEngine("advanced_solar_engine", 20, 200000L);
 
 	public static final ModuleType<SeatModule> SEAT = register("seat", new ModuleType<>(SeatModule::new, StevesCarts.id("seat"), 3, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), ModuleGroup.STORAGE, true, false, true));
 
@@ -52,6 +55,11 @@ public class StevesCartsModules {
 	private static ModuleType<CoalEngineModule> registerCoalEngine(String name, int fuelSlots, float multiplier, int cost) {
 		Identifier id = StevesCarts.id(name);
 		return Registry.register(ModuleType.REGISTRY, id, new ModuleType<>(((cartEntity, moduleType) -> new CoalEngineModule(cartEntity, moduleType, fuelSlots, multiplier)), id, cost, EnumSet.of(ModuleSide.BACK), ModuleGroup.ENGINE, true, false, false));
+	}
+
+	private static ModuleType<SolarEngineModule> registerSolarEngine(String name, int cost, long maxPower) {
+		Identifier id = StevesCarts.id(name);
+		return Registry.register(ModuleType.REGISTRY, id, new ModuleType<>(((cartEntity, moduleType) -> new SolarEngineModule(cartEntity, moduleType, maxPower)), id, cost, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), ModuleGroup.ENGINE, true, false, true));
 	}
 
 	private static <T extends HullModule> HullModuleType<T> registerHull(String name, BiFunction<CartEntity, ModuleType<T>, T> factory, EnumSet<ModuleSide> sides, HullData hullData) {

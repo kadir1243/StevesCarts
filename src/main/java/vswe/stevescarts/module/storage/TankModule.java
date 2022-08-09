@@ -47,7 +47,7 @@ public class TankModule extends StorageModule {
 
 	@Override
 	public void configure(WPlainPanel panel, CartHandler handler, PlayerEntity player) {
-		WLabel label = new WLabel(this.getType().getTranslationKeyText());
+		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot filledBucketSlot = WItemSlot.of(this.bucketInventory, 0);
 		WItemSlot emptyBucketSlot = WItemSlot.of(this.bucketInventory, 1);

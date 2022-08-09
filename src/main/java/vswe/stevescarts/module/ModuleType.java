@@ -76,7 +76,7 @@ public class ModuleType<T extends CartModule> implements ItemConvertible {
 		return translationKey;
 	}
 
-	public Text getTranslationKeyText() {
+	public Text getTranslationText() {
 		return translationKeyText;
 	}
 

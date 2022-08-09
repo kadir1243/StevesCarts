@@ -25,7 +25,7 @@ public class SeatModule extends CartModule implements Configurable {
 
 	@Override
 	public void configure(WPlainPanel panel, CartHandler handler, PlayerEntity player) {
-		WLabel label = new WLabel(this.getType().getTranslationKeyText());
+		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
 		WSeatButton seatButton = new WSeatButton();
 		seatButton.setCanRide(handler.getMinecartEntity().getFirstPassenger() == null || handler.getMinecartEntity().hasPassenger(player));

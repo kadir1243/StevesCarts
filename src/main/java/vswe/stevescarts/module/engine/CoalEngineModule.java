@@ -84,7 +84,7 @@ public class CoalEngineModule extends EngineModule {
 
 	@Override
 	public void configure(WPlainPanel panel, CartHandler handler, PlayerEntity player) {
-		WLabel label = new WLabel(StevesCartsModules.COAL_ENGINE.getTranslationKeyText());
+		WLabel label = new WLabel(StevesCartsModules.COAL_ENGINE.getTranslationText());
 		panel.add(label, 0, 0);
 		WItemSlot fuel = WItemSlot.of(this.inventory, 0, this.fuelSlots, 1);
 		fuel.setFilter(stack -> Optional.of(FuelRegistry.INSTANCE.get(stack.getItem())).orElse(0) > 0 && stack.getItem().getRecipeRemainder() == null);

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "stevescarts:advanced_solar_panel"
+    },
+    "I": {
+      "tag": "c:iron_ingots"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "X": {
+      "item": "stevescarts:advanced_pcb"
+    }
+  },
+  "pattern": [
+    "I#I",
+    "#X#",
+    "P#P"
+  ],
+  "result": {
+    "item": "stevescarts:advanced_solar_engine"
+  }
+}
