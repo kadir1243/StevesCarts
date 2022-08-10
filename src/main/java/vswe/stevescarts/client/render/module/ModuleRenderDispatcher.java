@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.client.render.module.attachment.RailerRenderer;
 import vswe.stevescarts.client.render.module.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.render.module.engine.SolarEngineRenderer;
 import vswe.stevescarts.client.render.module.hull.HullRenderer;
@@ -121,6 +122,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 
 		register(StevesCartsModules.SEAT, new SingleModelRenderer(new SeatModel(id("textures/modules/attachment/seat.png"))));
 		register(StevesCartsModules.TORCH_PLACER, new TwoSidedRenderer<>(id("textures/modules/attachment/torch_placer.png"), TorchPlacerModel::new));
+		register(StevesCartsModules.RAILER, new RailerRenderer());
 
 		register(StevesCartsModules.BRAKE, new SingleModelRenderer(new LeverModel(id("textures/modules/addon/red_lever.png"))));
 

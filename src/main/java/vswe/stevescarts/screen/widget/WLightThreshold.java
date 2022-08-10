@@ -1,17 +1,18 @@
 package vswe.stevescarts.screen.widget;
 
-import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
-import io.github.cottonmc.cotton.gui.widget.WWidget;
-import io.github.cottonmc.cotton.gui.widget.data.InputResult;
-import io.github.cottonmc.cotton.gui.widget.data.Texture;
-
 import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
 
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
-
+import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
+import io.github.cottonmc.cotton.gui.widget.TooltipBuilder;
+import io.github.cottonmc.cotton.gui.widget.WWidget;
+import io.github.cottonmc.cotton.gui.widget.data.InputResult;
+import io.github.cottonmc.cotton.gui.widget.data.Texture;
 import vswe.stevescarts.StevesCarts;
+
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.MathHelper;
 
 public class WLightThreshold extends WWidget {
 	public static final Texture BG_NORMAL = new Texture(StevesCarts.id("textures/gui/light_threshold.png"), 0.0F, 0.0F, 0.359375F, 0.28125F);
@@ -19,7 +20,7 @@ public class WLightThreshold extends WWidget {
 	public static final Texture FG = new Texture(StevesCarts.id("textures/gui/light_threshold.png"), 0.0F, 0.28125F, 0.34375F, 0.5F);
 	public static final Texture BAR = new Texture(StevesCarts.id("textures/gui/light_threshold.png"), 0.0F, 0.5F, 0.0078125F, 0.1953125F);
 	private final IntSupplier lightSupplier;
-	private final int current;
+	private int current;
 	private final IntConsumer setter;
 
 	public WLightThreshold(IntSupplier lightSupplier, int current, IntConsumer setter) {
@@ -29,8 +30,25 @@ public class WLightThreshold extends WWidget {
 	}
 
 	@Override
+	public boolean canResize() {
+		return true;
+	}
+
+	@Override
 	public InputResult onClick(int x, int y, int button) {
-		return super.onClick(x, y, button); // TODO
+		if (this.isWithinBounds(x, y)) {
+			int light = (int) (((float) x / this.width) * 15);
+			this.current = light;
+			this.setter.accept(light);
+			return InputResult.PROCESSED;
+		}
+		return super.onClick(x, y, button);
+	}
+
+	@Override
+	public void addTooltip(TooltipBuilder tooltip) {
+		tooltip.add(Text.translatable("screen.stevescarts.cart.threshold", this.current));
+		tooltip.add(Text.translatable("screen.stevescarts.cart.current", this.lightSupplier.getAsInt()));
 	}
 
 	@Override
@@ -43,5 +61,7 @@ public class WLightThreshold extends WWidget {
 		int lightWidth = (int) (44 * lightFraction);
 		float lightU = 0.34375F * lightFraction;
 		ScreenDrawing.texturedRect(matrices, x + 1, y + 1, lightWidth, 7, FG.withUv(FG.u1(), FG.v1(), lightU, FG.v2()), 0xFFFFFFFF);
+		int barX = (int) ((this.current / 15.0) * 44) + 1;
+		ScreenDrawing.texturedRect(matrices, x + barX, y + 1, 1, 7, BAR, 0xFFFFFFFF);
 	}
 }

@@ -12,6 +12,7 @@ import java.util.stream.StreamSupport;
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
 import vswe.stevescarts.entity.network.CartUpdateS2CPacket;
 import vswe.stevescarts.module.CartModule;
@@ -51,6 +52,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 public class CartEntity extends MinecartEntity {
 	private final Int2ObjectMap<CartModule> modules = new Int2ObjectLinkedOpenHashMap<>();
 	private final FluidStorage fluidStorage = this.new FluidStorage();
+	private int stopTicks = 0;
 
 	public CartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -174,7 +176,12 @@ public class CartEntity extends MinecartEntity {
 			cartModule.tick();
 		});
 		boolean move = true;
-		for (CartModule minecartModule : this.modules.values()) {
+		if (this.stopTicks > 0) {
+			this.stopTicks--;
+			move = false;
+		}
+		for (ObjectIterator<CartModule> iterator = this.modules.values().iterator(); iterator.hasNext() && move; ) {
+			CartModule minecartModule = iterator.next();
 			if (!minecartModule.shouldMove()) {
 				move = false;
 				break;
@@ -245,7 +252,15 @@ public class CartEntity extends MinecartEntity {
 	}
 
 	public void reverse() {
-		this.setVelocity(this.getVelocity().multiply(-1));
+		this.setVelocity(this.getVelocity().multiply(-1, 0, -1));
+	}
+
+	public void stopFor(int ticks) {
+		this.stopTicks = ticks;
+	}
+
+	public boolean isStopped() {
+		return this.stopTicks > 0;
 	}
 
 	@SuppressWarnings("UnstableApiUsage")

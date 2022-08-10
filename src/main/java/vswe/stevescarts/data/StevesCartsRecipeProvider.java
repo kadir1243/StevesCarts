@@ -56,6 +56,7 @@ import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.INVISIBILITY_CORE;
 import static vswe.stevescarts.module.StevesCartsModules.MECHANICAL_PIG;
 import static vswe.stevescarts.module.StevesCartsModules.OPEN_TANK;
+import static vswe.stevescarts.module.StevesCartsModules.RAILER;
 import static vswe.stevescarts.module.StevesCartsModules.REINFORCED_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.SEAT;
 import static vswe.stevescarts.module.StevesCartsModules.SIDE_CHESTS;
@@ -101,6 +102,7 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(INVISIBILITY_CORE).pattern(" X ").pattern("XEX").pattern(" # ").input('E', Items.ENDER_EYE).input('#', Items.GOLDEN_CARROT).input('X', GLASS_O_MAGIC).criterion("has_base_item", RecipeProvider.conditionsFromItem(REFINED_HANDLE));
 		ShapedRecipeJsonBuilder.create(FIREWORK_DISPLAY).pattern("#D#").pattern("CFC").pattern("XSX").input('X', SIMPLE_PCB).input('F', FUSE).input('#', ItemTags.WOODEN_FENCES).input('D', Items.DISPENSER).input('S', Items.FLINT_AND_STEEL).input('C', Items.CRAFTING_TABLE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.FIREWORK_ROCKET));
 		ShapedRecipeJsonBuilder.create(TORCH_PLACER).pattern("X X").pattern("# #").pattern("###").input('X', TRI_TORCH).input('#', Tags.IRON_INGOTS).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.TORCH));
+		ShapedRecipeJsonBuilder.create(RAILER).pattern("###").pattern("XRX").pattern("###").input('X', Tags.IRON_INGOTS).input('#', Tags.COBBLESTONE).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.RAIL));
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {
@@ -129,6 +131,7 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		public static final TagKey<Item> IRON_INGOTS = c("iron_ingots");
 		public static final TagKey<Item> REDSTONE_DUSTS = c("redstone_dusts");
 		public static final TagKey<Item> RED_DYES = c("red_dyes");
+		public static final TagKey<Item> COBBLESTONE = c("cobblestone");
 
 		private static TagKey<Item> c(String name) {
 			return TagKey.of(Registry.ITEM_KEY, new Identifier("c", name));

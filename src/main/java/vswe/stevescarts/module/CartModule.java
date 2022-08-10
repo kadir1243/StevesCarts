@@ -4,6 +4,8 @@ import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.entity.CartEntity;
 
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.math.BlockPos;
 
 public abstract class CartModule {
 	private final ModuleType<?> type;
@@ -66,5 +68,18 @@ public abstract class CartModule {
 	}
 
 	public void onActivate() {
+	}
+
+	protected BlockPos getRailPos() {
+		int x = (int) Math.floor(this.getEntity().getX());
+		int y = (int) Math.floor(this.getEntity().getY());
+		int z = (int) Math.floor(this.getEntity().getZ());
+		BlockPos railPos = new BlockPos(x, y, z);
+		BlockPos downPos = railPos.down();
+		return this.getEntity().world.getBlockState(downPos).isIn(BlockTags.RAILS) ? downPos : railPos;
+	}
+
+	protected boolean checkMovement() {
+		return this.getEntity().getVelocity().horizontalLengthSquared() > 0.0001D && !this.getEntity().isStopped();
 	}
 }
