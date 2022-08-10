@@ -4,6 +4,7 @@
   "package": "vswe.stevescarts.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "DispenserBlockAccessor",
     "TagManagerLoaderAccessor"
   ],
   "client": [

@@ -22,6 +22,7 @@ import static vswe.stevescarts.item.StevesCartsItems.ADVANCED_PCB;
 import static vswe.stevescarts.item.StevesCartsItems.ADVANCED_SOLAR_PANEL;
 import static vswe.stevescarts.item.StevesCartsItems.CHEST_LOCK;
 import static vswe.stevescarts.item.StevesCartsItems.CHEST_PANE;
+import static vswe.stevescarts.item.StevesCartsItems.FUSE;
 import static vswe.stevescarts.item.StevesCartsItems.GALGADORIAN_WHEELS;
 import static vswe.stevescarts.item.StevesCartsItems.GLASS_O_MAGIC;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_CHEST_PANE;
@@ -40,6 +41,7 @@ import static vswe.stevescarts.item.StevesCartsItems.SIMPLE_PCB;
 import static vswe.stevescarts.item.StevesCartsItems.SOLAR_PANEL;
 import static vswe.stevescarts.item.StevesCartsItems.TANK_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.TANK_VALVE;
+import static vswe.stevescarts.item.StevesCartsItems.TRI_TORCH;
 import static vswe.stevescarts.item.StevesCartsItems.WOODEN_WHEELS;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_SOLAR_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_TANK;
@@ -47,6 +49,7 @@ import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_THERMAL_ENGINE
 import static vswe.stevescarts.module.StevesCartsModules.BRAKE;
 import static vswe.stevescarts.module.StevesCartsModules.COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.EXTRACTING_CHESTS;
+import static vswe.stevescarts.module.StevesCartsModules.FIREWORK_DISPLAY;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
@@ -63,6 +66,7 @@ import static vswe.stevescarts.module.StevesCartsModules.THERMAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.TINY_COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_TANK;
+import static vswe.stevescarts.module.StevesCartsModules.TORCH_PLACER;
 import static vswe.stevescarts.module.StevesCartsModules.WOODEN_HULL;
 
 public class StevesCartsRecipeProvider extends FabricRecipeProvider {
@@ -95,6 +99,8 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(ADVANCED_THERMAL_ENGINE).pattern("OOO").pattern("#X#").pattern("P P").input('O', Items.NETHER_BRICK).input('#', REINFORCED_METAL).input('X', THERMAL_ENGINE).input('P', Items.PISTON).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.OBSIDIAN)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(BRAKE).pattern("  R").pattern("#S ").pattern("X# ").input('R', Tags.RED_DYES).input('S', REFINED_HANDLE).input('#', Tags.IRON_INGOTS).input('X', Tags.REDSTONE_DUSTS).criterion("has_base_item", RecipeProvider.conditionsFromItem(REFINED_HANDLE));
 		ShapedRecipeJsonBuilder.create(INVISIBILITY_CORE).pattern(" X ").pattern("XEX").pattern(" # ").input('E', Items.ENDER_EYE).input('#', Items.GOLDEN_CARROT).input('X', GLASS_O_MAGIC).criterion("has_base_item", RecipeProvider.conditionsFromItem(REFINED_HANDLE));
+		ShapedRecipeJsonBuilder.create(FIREWORK_DISPLAY).pattern("#D#").pattern("CFC").pattern("XSX").input('X', SIMPLE_PCB).input('F', FUSE).input('#', ItemTags.WOODEN_FENCES).input('D', Items.DISPENSER).input('S', Items.FLINT_AND_STEEL).input('C', Items.CRAFTING_TABLE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.FIREWORK_ROCKET));
+		ShapedRecipeJsonBuilder.create(TORCH_PLACER).pattern("X X").pattern("# #").pattern("###").input('X', TRI_TORCH).input('#', Tags.IRON_INGOTS).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.TORCH));
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {

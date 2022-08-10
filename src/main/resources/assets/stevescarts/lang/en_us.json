@@ -23,6 +23,8 @@
   "module.stevescarts.advanced_thermal_engine": "Advanced Thermal Engine",
   "module.stevescarts.brake": "Brake Handle",
   "module.stevescarts.invisibility_core": "Invisibility Core",
+  "module.stevescarts.firework_display": "Firework Display",
+  "module.stevescarts.torch_placer": "Torch Placer",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

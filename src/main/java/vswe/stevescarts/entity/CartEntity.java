@@ -115,7 +115,9 @@ public class CartEntity extends MinecartEntity {
 
 	@Override
 	public void onActivatorRail(int x, int y, int z, boolean powered) {
-		// TODO
+		for (CartModule minecartModule : this.modules.values()) {
+			minecartModule.onActivate();
+		}
 	}
 
 	@Override

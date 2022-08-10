@@ -64,4 +64,7 @@ public abstract class CartModule {
 	public boolean shouldMove() {
 		return true;
 	}
+
+	public void onActivate() {
+	}
 }

@@ -10,7 +10,9 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.addon.BrakeModule;
 import vswe.stevescarts.module.addon.InvisibilityModule;
+import vswe.stevescarts.module.attachment.FireworkDisplayModule;
 import vswe.stevescarts.module.attachment.SeatModule;
+import vswe.stevescarts.module.attachment.TorchPlacerModule;
 import vswe.stevescarts.module.engine.AdvancedThermalEngineModule;
 import vswe.stevescarts.module.engine.CoalEngineModule;
 import vswe.stevescarts.module.engine.SolarEngineModule;
@@ -51,7 +53,9 @@ public class StevesCartsModules {
 	public static final ModuleType<ThermalEngineModule> THERMAL_ENGINE = registerThermalEngine("thermal_engine", ThermalEngineModule::new, 28, 1, ModuleTags.INCOMPATIBLE_WITH_THERMAL_ENGINE);
 	public static final ModuleType<ThermalEngineModule> ADVANCED_THERMAL_ENGINE = registerThermalEngine("advanced_thermal_engine", AdvancedThermalEngineModule::new, 58, 2, ModuleTags.INCOMPATIBLE_WITH_ADVANCED_THERMAL_ENGINE);
 
-	public static final ModuleType<SeatModule> SEAT = register("seat", new ModuleType<>(SeatModule::new, StevesCarts.id("seat"), 3, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), ModuleGroup.STORAGE, true, false, true, null, null));
+	public static final ModuleType<SeatModule> SEAT = register("seat", new ModuleType<>(SeatModule::new, StevesCarts.id("seat"), 3, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), ModuleGroup.ATTACHMENT, true, false, true, null, null));
+	public static final ModuleType<FireworkDisplayModule> FIREWORK_DISPLAY = register("firework_display", new ModuleType<>(FireworkDisplayModule::new, StevesCarts.id("firework_display"), 45, EnumSet.noneOf(ModuleSide.class), ModuleGroup.ATTACHMENT, false, false, true, null, null));
+	public static final ModuleType<TorchPlacerModule> TORCH_PLACER = register("torch_placer", new ModuleType<>(TorchPlacerModule::new, StevesCarts.id("torch_placer"), 14, EnumSet.of(ModuleSide.LEFT, ModuleSide.RIGHT), ModuleGroup.ATTACHMENT, true, false, true, null, null));
 
 	public static final ModuleType<BrakeModule> BRAKE = register("brake", new ModuleType<>(BrakeModule::new, StevesCarts.id("brake"), 12, EnumSet.of(ModuleSide.RIGHT), ModuleGroup.ADDON, true, false, false, null, null));
 	public static final ModuleType<InvisibilityModule> INVISIBILITY_CORE = register("invisibility_core", new ModuleType<>(InvisibilityModule::new, StevesCarts.id("invisibility_core"), 21, EnumSet.noneOf(ModuleSide.class), ModuleGroup.ADDON, false, false, false, null, null));

@@ -10,6 +10,7 @@ import vswe.stevescarts.client.render.module.hull.HullRenderer;
 import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
 import vswe.stevescarts.client.render.module.model.addon.LeverModel;
 import vswe.stevescarts.client.render.module.model.attachment.SeatModel;
+import vswe.stevescarts.client.render.module.model.attachment.TorchPlacerModel;
 import vswe.stevescarts.client.render.module.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.render.module.model.storage.ExtractingChestsModel;
 import vswe.stevescarts.client.render.module.model.storage.FrontChestModel;
@@ -92,7 +93,8 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		renderers.put(type, renderer);
 	}
 
-	public void reload() {
+	@Override
+	public void reload(ResourceManager manager) {
 		this.renderers.clear();
 
 		register(StevesCartsModules.WOODEN_HULL, new HullRenderer<>(id("textures/modules/hull/wooden_hull.png"), id("textures/modules/hull/wooden_hull_top.png")));
@@ -118,6 +120,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModules.ADVANCED_SOLAR_ENGINE, new SolarEngineRenderer(id("textures/modules/engine/solar_engine_base.png"), id("textures/modules/engine/idle_solar_panel.png"), id("textures/modules/engine/active_solar_panel.png"), 4));
 
 		register(StevesCartsModules.SEAT, new SingleModelRenderer(new SeatModel(id("textures/modules/attachment/seat.png"))));
+		register(StevesCartsModules.TORCH_PLACER, new TwoSidedRenderer<>(id("textures/modules/attachment/torch_placer.png"), TorchPlacerModel::new));
 
 		register(StevesCartsModules.BRAKE, new SingleModelRenderer(new LeverModel(id("textures/modules/addon/red_lever.png"))));
 
@@ -127,10 +130,5 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 	@Override
 	public Identifier getFabricId() {
 		return id("module_renderers");
-	}
-
-	@Override
-	public void reload(ResourceManager manager) {
-		this.reload();
 	}
 }
