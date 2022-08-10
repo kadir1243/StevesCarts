@@ -21,6 +21,8 @@
   "module.stevescarts.advanced_solar_engine": "Advanced Solar Engine",
   "module.stevescarts.thermal_engine": "Thermal Engine",
   "module.stevescarts.advanced_thermal_engine": "Advanced Thermal Engine",
+  "module.stevescarts.brake": "Brake Handle",
+  "module.stevescarts.invisibility_core": "Invisibility Core",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

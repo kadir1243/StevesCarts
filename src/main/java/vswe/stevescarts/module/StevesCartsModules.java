@@ -8,6 +8,8 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import reborncore.common.fluid.FluidValue;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.module.addon.BrakeModule;
+import vswe.stevescarts.module.addon.InvisibilityModule;
 import vswe.stevescarts.module.attachment.SeatModule;
 import vswe.stevescarts.module.engine.AdvancedThermalEngineModule;
 import vswe.stevescarts.module.engine.CoalEngineModule;
@@ -42,14 +44,17 @@ public class StevesCartsModules {
 	public static final ModuleType<TankModule> OPEN_TANK = registerRegularTank("open_tank", 14, EnumSet.of(ModuleSide.TOP), 22, false);
 	public static final ModuleType<TankModule> ADVANCED_TANK = registerRegularTank("advanced_tank", 32, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), 54, true);
 
-	public static final ModuleType<CoalEngineModule> TINY_COAL_ENGINE = registerCoalEngine("tiny_coal_engine", 1, 0.5f, 2, ModuleTags.INCOMPATIBLE_WITH_COAL_ENGINE);
-	public static final ModuleType<CoalEngineModule> COAL_ENGINE = registerCoalEngine("coal_engine", 3, 2.25f, 15, ModuleTags.INCOMPATIBLE_WITH_TINY_COAL_ENGINE);
+	public static final ModuleType<CoalEngineModule> TINY_COAL_ENGINE = registerCoalEngine("tiny_coal_engine", 1, 0.5f, 2, ModuleTags.INCOMPATIBLE_WITH_TINY_COAL_ENGINE);
+	public static final ModuleType<CoalEngineModule> COAL_ENGINE = registerCoalEngine("coal_engine", 3, 2.25f, 15, ModuleTags.INCOMPATIBLE_WITH_COAL_ENGINE);
 	public static final ModuleType<SolarEngineModule> SOLAR_ENGINE = registerSolarEngine("solar_engine", 12, 100000L);
 	public static final ModuleType<SolarEngineModule> ADVANCED_SOLAR_ENGINE = registerSolarEngine("advanced_solar_engine", 20, 200000L);
 	public static final ModuleType<ThermalEngineModule> THERMAL_ENGINE = registerThermalEngine("thermal_engine", ThermalEngineModule::new, 28, 1, ModuleTags.INCOMPATIBLE_WITH_THERMAL_ENGINE);
 	public static final ModuleType<ThermalEngineModule> ADVANCED_THERMAL_ENGINE = registerThermalEngine("advanced_thermal_engine", AdvancedThermalEngineModule::new, 58, 2, ModuleTags.INCOMPATIBLE_WITH_ADVANCED_THERMAL_ENGINE);
 
 	public static final ModuleType<SeatModule> SEAT = register("seat", new ModuleType<>(SeatModule::new, StevesCarts.id("seat"), 3, EnumSet.of(ModuleSide.CENTER, ModuleSide.TOP), ModuleGroup.STORAGE, true, false, true, null, null));
+
+	public static final ModuleType<BrakeModule> BRAKE = register("brake", new ModuleType<>(BrakeModule::new, StevesCarts.id("brake"), 12, EnumSet.of(ModuleSide.RIGHT), ModuleGroup.ADDON, true, false, false, null, null));
+	public static final ModuleType<InvisibilityModule> INVISIBILITY_CORE = register("invisibility_core", new ModuleType<>(InvisibilityModule::new, StevesCarts.id("invisibility_core"), 21, EnumSet.noneOf(ModuleSide.class), ModuleGroup.ADDON, false, false, false, null, null));
 
 	public static void init() {
 		ModuleTags.init();

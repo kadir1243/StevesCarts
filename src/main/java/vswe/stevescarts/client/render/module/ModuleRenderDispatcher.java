@@ -8,6 +8,7 @@ import vswe.stevescarts.client.render.module.engine.CoalEngineRenderer;
 import vswe.stevescarts.client.render.module.engine.SolarEngineRenderer;
 import vswe.stevescarts.client.render.module.hull.HullRenderer;
 import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
+import vswe.stevescarts.client.render.module.model.addon.LeverModel;
 import vswe.stevescarts.client.render.module.model.attachment.SeatModel;
 import vswe.stevescarts.client.render.module.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.render.module.model.storage.ExtractingChestsModel;
@@ -115,7 +116,10 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModules.TINY_COAL_ENGINE, new CoalEngineRenderer(id("textures/modules/engine/engine_frame.png"), CoalEngineInsideModel.FIRE_TEXTURES, id("textures/modules/engine/engine_back.png")));
 		register(StevesCartsModules.SOLAR_ENGINE, new SolarEngineRenderer(id("textures/modules/engine/solar_engine_base.png"), id("textures/modules/engine/idle_solar_panel.png"), id("textures/modules/engine/active_solar_panel.png"), 2));
 		register(StevesCartsModules.ADVANCED_SOLAR_ENGINE, new SolarEngineRenderer(id("textures/modules/engine/solar_engine_base.png"), id("textures/modules/engine/idle_solar_panel.png"), id("textures/modules/engine/active_solar_panel.png"), 4));
+
 		register(StevesCartsModules.SEAT, new SingleModelRenderer(new SeatModel(id("textures/modules/attachment/seat.png"))));
+
+		register(StevesCartsModules.BRAKE, new SingleModelRenderer(new LeverModel(id("textures/modules/addon/red_lever.png"))));
 
 		StevesCarts.LOGGER.info("Registered " + renderers.size() + " module renderers");
 	}

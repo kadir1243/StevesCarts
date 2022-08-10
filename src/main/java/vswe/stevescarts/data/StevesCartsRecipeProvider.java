@@ -23,6 +23,7 @@ import static vswe.stevescarts.item.StevesCartsItems.ADVANCED_SOLAR_PANEL;
 import static vswe.stevescarts.item.StevesCartsItems.CHEST_LOCK;
 import static vswe.stevescarts.item.StevesCartsItems.CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.GALGADORIAN_WHEELS;
+import static vswe.stevescarts.item.StevesCartsItems.GLASS_O_MAGIC;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_DYNAMIC_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_IRON_PANE;
@@ -32,6 +33,7 @@ import static vswe.stevescarts.item.StevesCartsItems.LARGE_CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_DYNAMIC_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_IRON_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_TANK_PANE;
+import static vswe.stevescarts.item.StevesCartsItems.REFINED_HANDLE;
 import static vswe.stevescarts.item.StevesCartsItems.REINFORCED_METAL;
 import static vswe.stevescarts.item.StevesCartsItems.REINFORCED_WHEELS;
 import static vswe.stevescarts.item.StevesCartsItems.SIMPLE_PCB;
@@ -42,11 +44,13 @@ import static vswe.stevescarts.item.StevesCartsItems.WOODEN_WHEELS;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_SOLAR_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_THERMAL_ENGINE;
+import static vswe.stevescarts.module.StevesCartsModules.BRAKE;
 import static vswe.stevescarts.module.StevesCartsModules.COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.EXTRACTING_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
+import static vswe.stevescarts.module.StevesCartsModules.INVISIBILITY_CORE;
 import static vswe.stevescarts.module.StevesCartsModules.MECHANICAL_PIG;
 import static vswe.stevescarts.module.StevesCartsModules.OPEN_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.REINFORCED_HULL;
@@ -89,6 +93,8 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(ADVANCED_SOLAR_ENGINE).pattern("I#I").pattern("#X#").pattern("P#P").input('I', Tags.IRON_INGOTS).input('#', ADVANCED_SOLAR_PANEL).input('P', Items.PISTON).input('X', ADVANCED_PCB).criterion("has_base_item", RecipeProvider.conditionsFromItem(ADVANCED_SOLAR_PANEL)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(THERMAL_ENGINE).pattern("OOO").pattern("#X#").pattern("P P").input('O', Items.NETHER_BRICK).input('#', Items.OBSIDIAN).input('X', Items.FURNACE).input('P', Items.PISTON).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.OBSIDIAN)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(ADVANCED_THERMAL_ENGINE).pattern("OOO").pattern("#X#").pattern("P P").input('O', Items.NETHER_BRICK).input('#', REINFORCED_METAL).input('X', THERMAL_ENGINE).input('P', Items.PISTON).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.OBSIDIAN)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(BRAKE).pattern("  R").pattern("#S ").pattern("X# ").input('R', Tags.RED_DYES).input('S', REFINED_HANDLE).input('#', Tags.IRON_INGOTS).input('X', Tags.REDSTONE_DUSTS).criterion("has_base_item", RecipeProvider.conditionsFromItem(REFINED_HANDLE));
+		ShapedRecipeJsonBuilder.create(INVISIBILITY_CORE).pattern(" X ").pattern("XEX").pattern(" # ").input('E', Items.ENDER_EYE).input('#', Items.GOLDEN_CARROT).input('X', GLASS_O_MAGIC).criterion("has_base_item", RecipeProvider.conditionsFromItem(REFINED_HANDLE));
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {
@@ -115,6 +121,8 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 
 	public static class Tags {
 		public static final TagKey<Item> IRON_INGOTS = c("iron_ingots");
+		public static final TagKey<Item> REDSTONE_DUSTS = c("redstone_dusts");
+		public static final TagKey<Item> RED_DYES = c("red_dyes");
 
 		private static TagKey<Item> c(String name) {
 			return TagKey.of(Registry.ITEM_KEY, new Identifier("c", name));

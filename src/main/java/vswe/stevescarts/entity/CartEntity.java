@@ -242,6 +242,10 @@ public class CartEntity extends MinecartEntity {
 		}
 	}
 
+	public void reverse() {
+		this.setVelocity(this.getVelocity().multiply(-1));
+	}
+
 	@SuppressWarnings("UnstableApiUsage")
 	public class FluidStorage implements Storage<FluidVariant> {
 		private final Long zero = 0L;

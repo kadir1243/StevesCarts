@@ -28,6 +28,9 @@ public class CartEntityRenderer extends EntityRenderer<CartEntity> {
 	@Override
 	public void render(CartEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int light) {
 		super.render(entity, yaw, tickDelta, matrices, vertexConsumerProvider, light);
+		if (entity.isInvisible()) {
+			return;
+		}
 		matrices.push();
 		long l = (long) entity.getId() * 493286711L;
 		l = l * l * 4392167121L + l * 98761L;
