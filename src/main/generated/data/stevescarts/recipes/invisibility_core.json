@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:golden_carrot"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "X": {
+      "item": "stevescarts:glass_o_magic"
+    }
+  },
+  "pattern": [
+    " X ",
+    "XEX",
+    " # "
+  ],
+  "result": {
+    "item": "stevescarts:invisibility_core"
+  }
+}

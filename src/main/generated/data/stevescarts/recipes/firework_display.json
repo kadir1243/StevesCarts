@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "minecraft:wooden_fences"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    },
+    "F": {
+      "item": "stevescarts:fuse"
+    },
+    "S": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "X": {
+      "item": "stevescarts:simple_pcb"
+    }
+  },
+  "pattern": [
+    "#D#",
+    "CFC",
+    "XSX"
+  ],
+  "result": {
+    "item": "stevescarts:firework_display"
+  }
+}

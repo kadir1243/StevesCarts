@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:iron_ingots"
+    },
+    "X": {
+      "item": "stevescarts:tri_torch"
+    }
+  },
+  "pattern": [
+    "X X",
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "stevescarts:torch_placer"
+  }
+}
