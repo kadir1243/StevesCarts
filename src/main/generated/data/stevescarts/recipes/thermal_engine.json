@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "O": {
+      "item": "minecraft:nether_brick"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "X": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "#X#",
+    "P P"
+  ],
+  "result": {
+    "item": "stevescarts:thermal_engine"
+  }
+}

@@ -41,11 +41,6 @@ public class AnimatableSlot extends ValidatedSlot implements LidOpenable {
 	}
 
 	@Override
-	public boolean isInsertingAllowed() {
-		return super.isInsertingAllowed() && this.valid;
-	}
-
-	@Override
 	public float getAnimationProgress(float tickDelta) {
 		return this.animator.getProgress(tickDelta);
 	}

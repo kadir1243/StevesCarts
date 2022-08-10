@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "stevescarts:front_chest",
+    "stevescarts:top_chest",
+    "stevescarts:side_chests",
+    "stevescarts:extracting_chests"
+  ]
+}

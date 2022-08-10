@@ -73,7 +73,6 @@ public class WModuleSlot extends WItemSlot {
 		this.slotsWide = slotsWide;
 		this.slotsHigh = slotsHigh;
 		this.peers = new Int2ObjectLinkedOpenHashMap<>(slotsWide * slotsHigh);
-		this.setInsertingAllowed(false);
 	}
 
 	@Override
@@ -100,7 +99,6 @@ public class WModuleSlot extends WItemSlot {
 				peer.invalidate();
 			}
 		}
-		this.setInsertingAllowed(!this.isInsertingAllowed());
 	}
 
 	@Environment(EnvType.CLIENT)

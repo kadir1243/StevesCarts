@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "stevescarts:reinforced_metal"
+    },
+    "O": {
+      "item": "minecraft:nether_brick"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "X": {
+      "item": "stevescarts:thermal_engine"
+    }
+  },
+  "pattern": [
+    "OOO",
+    "#X#",
+    "P P"
+  ],
+  "result": {
+    "item": "stevescarts:advanced_thermal_engine"
+  }
+}

@@ -32,6 +32,7 @@ import static vswe.stevescarts.item.StevesCartsItems.LARGE_CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_DYNAMIC_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_IRON_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.LARGE_TANK_PANE;
+import static vswe.stevescarts.item.StevesCartsItems.REINFORCED_METAL;
 import static vswe.stevescarts.item.StevesCartsItems.REINFORCED_WHEELS;
 import static vswe.stevescarts.item.StevesCartsItems.SIMPLE_PCB;
 import static vswe.stevescarts.item.StevesCartsItems.SOLAR_PANEL;
@@ -40,6 +41,7 @@ import static vswe.stevescarts.item.StevesCartsItems.TANK_VALVE;
 import static vswe.stevescarts.item.StevesCartsItems.WOODEN_WHEELS;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_SOLAR_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_TANK;
+import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_THERMAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.EXTRACTING_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
@@ -53,6 +55,7 @@ import static vswe.stevescarts.module.StevesCartsModules.SIDE_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.SIDE_TANKS;
 import static vswe.stevescarts.module.StevesCartsModules.SOLAR_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.STANDARD_HULL;
+import static vswe.stevescarts.module.StevesCartsModules.THERMAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.TINY_COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.TOP_TANK;
@@ -84,6 +87,8 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(COAL_ENGINE).pattern("###").pattern("#X#").pattern(" P ").input('#', Tags.IRON_INGOTS).input('P', Items.PISTON).input('X', Items.FURNACE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.FURNACE)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(SOLAR_ENGINE).pattern("#I#").pattern("IXI").pattern(" P ").input('I', Tags.IRON_INGOTS).input('#', SOLAR_PANEL).input('P', Items.PISTON).input('X', SIMPLE_PCB).criterion("has_base_item", RecipeProvider.conditionsFromItem(SOLAR_PANEL)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(ADVANCED_SOLAR_ENGINE).pattern("I#I").pattern("#X#").pattern("P#P").input('I', Tags.IRON_INGOTS).input('#', ADVANCED_SOLAR_PANEL).input('P', Items.PISTON).input('X', ADVANCED_PCB).criterion("has_base_item", RecipeProvider.conditionsFromItem(ADVANCED_SOLAR_PANEL)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(THERMAL_ENGINE).pattern("OOO").pattern("#X#").pattern("P P").input('O', Items.NETHER_BRICK).input('#', Items.OBSIDIAN).input('X', Items.FURNACE).input('P', Items.PISTON).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.OBSIDIAN)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(ADVANCED_THERMAL_ENGINE).pattern("OOO").pattern("#X#").pattern("P P").input('O', Items.NETHER_BRICK).input('#', REINFORCED_METAL).input('X', THERMAL_ENGINE).input('P', Items.PISTON).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.OBSIDIAN)).offerTo(exporter);
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {

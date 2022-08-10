@@ -1,7 +1,13 @@
 package vswe.stevescarts.entity;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -12,6 +18,7 @@ import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleGroup;
 import vswe.stevescarts.module.ModuleType;
 import vswe.stevescarts.module.engine.EngineModule;
+import vswe.stevescarts.module.storage.TankModule;
 import vswe.stevescarts.screen.CartHandler;
 
 import net.minecraft.block.BlockState;
@@ -36,9 +43,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 
 public class CartEntity extends MinecartEntity {
 	private final Int2ObjectMap<CartModule> modules = new Int2ObjectLinkedOpenHashMap<>();
+	private final FluidStorage fluidStorage = this.new FluidStorage();
 
 	public CartEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -54,6 +66,10 @@ public class CartEntity extends MinecartEntity {
 	@Override
 	public Type getMinecartType() {
 		return null;
+	}
+
+	public FluidStorage getFluidStorage() {
+		return fluidStorage;
 	}
 
 	@Override
@@ -224,6 +240,44 @@ public class CartEntity extends MinecartEntity {
 			CartModule module = modules.get(id);
 			module.readFromNbt(nbt.getCompound(key));
 		}
+	}
+
+	@SuppressWarnings("UnstableApiUsage")
+	public class FluidStorage implements Storage<FluidVariant> {
+		private final Long zero = 0L;
+
+		@Override
+		public long insert(FluidVariant resource, long maxAmount, TransactionContext transaction) {
+			return CartEntity.this
+					.getTanks()
+					.filter(tank -> tank.getTank().simulateInsert(resource, maxAmount, transaction) > 0)
+					.findFirst()
+					.map(tank -> tank.getTank().insert(resource, maxAmount, transaction))
+					.orElse(zero);
+		}
+
+		@Override
+		public long extract(FluidVariant resource, long maxAmount, TransactionContext transaction) {
+			return CartEntity.this
+					.getTanks()
+					.filter(tank -> tank.getTank().simulateExtract(resource, maxAmount, transaction) > 0)
+					.findFirst()
+					.map(tank -> tank.getTank().extract(resource, maxAmount, transaction))
+					.orElse(zero);
+		}
+
+		@Override
+		public Iterator<StorageView<FluidVariant>> iterator() {
+			return CartEntity.this
+					.getTanks()
+					.map(tank -> tank.getTank().iterator())
+					.flatMap(it -> StreamSupport.stream(Spliterators.spliteratorUnknownSize(it, Spliterator.ORDERED), false))
+					.iterator();
+		}
+	}
+
+	private Stream<TankModule> getTanks() {
+		return this.modules.values().stream().filter(module -> module instanceof TankModule).map(module -> (TankModule) module);
 	}
 
 	private class CartScreenHandlerFactory implements ExtendedScreenHandlerFactory {

@@ -1,6 +1,5 @@
 package vswe.stevescarts;
 
-import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vswe.stevescarts.block.StevesCartsBlocks;
@@ -11,6 +10,8 @@ import vswe.stevescarts.module.StevesCartsModules;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
 
 import net.minecraft.util.Identifier;
+
+import net.fabricmc.api.ModInitializer;
 
 public class StevesCarts implements ModInitializer {
 	public static final String MODID = "stevescarts";

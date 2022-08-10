@@ -1,5 +1,6 @@
 package vswe.stevescarts.module.hull;
 
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.function.BiFunction;
 
@@ -15,7 +16,7 @@ public class HullModuleType<T extends CartModule> extends ModuleType<T> {
 	private final HullData hullData;
 
 	public HullModuleType(BiFunction<CartEntity, ModuleType<T>, T> factory, Identifier id, EnumSet<ModuleSide> sides, HullData hullData) {
-		super(factory, id, 0, sides, ModuleGroup.HULL, true, false, false);
+		super(factory, id, 0, sides, ModuleGroup.HULL, true, false, false, null, null);
 		this.hullData = hullData;
 	}
 

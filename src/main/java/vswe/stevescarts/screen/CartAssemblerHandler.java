@@ -23,6 +23,7 @@ import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleGroup;
 import vswe.stevescarts.module.ModuleItem;
 import vswe.stevescarts.module.ModuleSide;
+import vswe.stevescarts.module.ModuleTags;
 import vswe.stevescarts.module.ModuleType;
 import vswe.stevescarts.module.hull.HullModule;
 import vswe.stevescarts.module.hull.HullModuleType;
@@ -118,6 +119,8 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 		toolSlot.addChangeListener(moduleListener);
 		engineSlots.addChangeListener(moduleListener);
 		outputSlot.addChangeListener((slot, inventory, index, stack) -> cart.refresh());
+		fuelSlot.setInsertingAllowed(false); // TODO
+		outputSlot.setInsertingAllowed(false);
 
 		WItemSlot.ChangeListener validator = ((slot, inventory, index, stack) -> {
 			boolean invalid = false;
@@ -214,6 +217,30 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 				if (cost > modCap) {
 					invalid = true;
 					info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.excess_capacity", hull.getTranslationText()));
+				}
+			}
+
+			// Disallow incompatibilities
+			if (!invalid) {
+				for (ModuleType<?> type : types) {
+					ModuleType<?> incompat = type.isIncompatible(types);
+					if (incompat == null) {
+						continue;
+					}
+					invalid = true;
+					info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.incompatible", type.getTranslationText(), incompat.getTranslationText()));
+				}
+			}
+
+			// Disallow missing tag requirements
+			if (!invalid) {
+				for (ModuleType<?> type : types) {
+					var entry = type.matchesTagRequirements(types);
+					if (entry == null) {
+						continue;
+					}
+					invalid = true;
+					info.setErrText(Text.translatable("screen.stevescarts.cart_assembler.missing_tag_requirement", type.getTranslationText(), entry.getIntValue(), ModuleTags.toText(entry.getKey())));
 				}
 			}
 

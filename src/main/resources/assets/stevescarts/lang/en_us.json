@@ -19,6 +19,8 @@
   "module.stevescarts.tiny_coal_engine": "Tiny Coal Engine",
   "module.stevescarts.solar_engine": "Solar Engine",
   "module.stevescarts.advanced_solar_engine": "Advanced Solar Engine",
+  "module.stevescarts.thermal_engine": "Thermal Engine",
+  "module.stevescarts.advanced_thermal_engine": "Advanced Thermal Engine",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",
@@ -198,5 +200,8 @@
   "module.side.stevescarts.bottom": "Bottom",
   "module.side.stevescarts.front": "Front",
   "module.side.stevescarts.back": "Back",
-  "module.side.stevescarts.center": "Center"
+  "module.side.stevescarts.center": "Center",
+
+  "tag.stevescarts.tanks": "Tank(s)",
+  "tag.stevescarts.chests": "Chest(s)"
 }

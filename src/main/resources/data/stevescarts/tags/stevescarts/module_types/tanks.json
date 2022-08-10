@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "stevescarts:front_tank",
+    "stevescarts:top_tank",
+    "stevescarts:side_tanks",
+    "stevescarts:open_tank",
+    "stevescarts:advanced_tank"
+  ]
+}
