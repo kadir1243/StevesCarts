@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:iron_ingots"
+    },
+    "R": {
+      "item": "minecraft:rail"
+    },
+    "X": {
+      "item": "stevescarts:railer"
+    }
+  },
+  "pattern": [
+    "###",
+    "XRX",
+    "###"
+  ],
+  "result": {
+    "item": "stevescarts:large_railer"
+  }
+}

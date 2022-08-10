@@ -25,10 +25,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class RailerModule extends CartModule implements Configurable {
-	private final SimpleInventory railInventory = new SimpleInventory(1);
+	private final SimpleInventory railInventory;
 
-	public RailerModule(CartEntity minecart, ModuleType<?> type) {
+	public RailerModule(CartEntity minecart, ModuleType<?> type, int size) {
 		super(minecart, type);
+		this.railInventory = new SimpleInventory(size);
 	}
 
 	@Override
@@ -81,6 +82,10 @@ public class RailerModule extends CartModule implements Configurable {
 	}
 
 	public ItemStack getFirst() {
-		return this.railInventory.getStack(0);
+		ItemStack stack = this.railInventory.getStack(0);
+		for (int i = 1; i < this.railInventory.size() && stack.isEmpty(); i++) {
+			stack = this.railInventory.getStack(i);
+		}
+		return stack;
 	}
 }

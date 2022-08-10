@@ -25,6 +25,7 @@ import static vswe.stevescarts.item.StevesCartsItems.CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.FUSE;
 import static vswe.stevescarts.item.StevesCartsItems.GALGADORIAN_WHEELS;
 import static vswe.stevescarts.item.StevesCartsItems.GLASS_O_MAGIC;
+import static vswe.stevescarts.item.StevesCartsItems.GRAPHICAL_INTERFACE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_CHEST_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_DYNAMIC_PANE;
 import static vswe.stevescarts.item.StevesCartsItems.HUGE_IRON_PANE;
@@ -54,6 +55,7 @@ import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
 import static vswe.stevescarts.module.StevesCartsModules.INVISIBILITY_CORE;
+import static vswe.stevescarts.module.StevesCartsModules.LARGE_RAILER;
 import static vswe.stevescarts.module.StevesCartsModules.MECHANICAL_PIG;
 import static vswe.stevescarts.module.StevesCartsModules.OPEN_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.RAILER;
@@ -103,6 +105,7 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(FIREWORK_DISPLAY).pattern("#D#").pattern("CFC").pattern("XSX").input('X', SIMPLE_PCB).input('F', FUSE).input('#', ItemTags.WOODEN_FENCES).input('D', Items.DISPENSER).input('S', Items.FLINT_AND_STEEL).input('C', Items.CRAFTING_TABLE).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.FIREWORK_ROCKET)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(TORCH_PLACER).pattern("X X").pattern("# #").pattern("###").input('X', TRI_TORCH).input('#', Tags.IRON_INGOTS).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.TORCH)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(RAILER).pattern("###").pattern("XRX").pattern("###").input('X', Tags.IRON_INGOTS).input('#', Tags.COBBLESTONE).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.RAIL)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(LARGE_RAILER).pattern("###").pattern("XRX").pattern("###").input('#', Tags.IRON_INGOTS).input('X', RAILER).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(RAILER)).offerTo(exporter);
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {
