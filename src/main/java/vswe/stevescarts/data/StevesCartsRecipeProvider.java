@@ -48,6 +48,7 @@ import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_SOLAR_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.ADVANCED_THERMAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.BRAKE;
+import static vswe.stevescarts.module.StevesCartsModules.BRIDGE_BUILDER;
 import static vswe.stevescarts.module.StevesCartsModules.COAL_ENGINE;
 import static vswe.stevescarts.module.StevesCartsModules.EXTRACTING_CHESTS;
 import static vswe.stevescarts.module.StevesCartsModules.FIREWORK_DISPLAY;
@@ -106,6 +107,7 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(TORCH_PLACER).pattern("X X").pattern("# #").pattern("###").input('X', TRI_TORCH).input('#', Tags.IRON_INGOTS).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.TORCH)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(RAILER).pattern("###").pattern("XRX").pattern("###").input('X', Tags.IRON_INGOTS).input('#', Tags.COBBLESTONE).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.RAIL)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(LARGE_RAILER).pattern("###").pattern("XRX").pattern("###").input('#', Tags.IRON_INGOTS).input('X', RAILER).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(RAILER)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(BRIDGE_BUILDER).pattern(" R ").pattern("X#X").pattern(" P ").input('R', Tags.REDSTONE_DUSTS).input('X', Items.BRICKS).input('P', Items.PISTON).input('#', SIMPLE_PCB).criterion("has_base_item", RecipeProvider.conditionsFromItem(RAILER)).offerTo(exporter);
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {

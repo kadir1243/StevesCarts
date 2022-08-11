@@ -10,6 +10,7 @@ import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.Configurable;
 import vswe.stevescarts.module.ModuleType;
+import vswe.stevescarts.module.Worker;
 import vswe.stevescarts.screen.CartHandler;
 import vswe.stevescarts.screen.widget.WLightThreshold;
 
@@ -31,7 +32,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 
-public class TorchPlacerModule extends CartModule implements Configurable {
+public class TorchPlacerModule extends CartModule implements Configurable, Worker {
 	private static final BlockState TORCH_STATE = Blocks.TORCH.getDefaultState();
 	private static final ItemVariant TORCH_ITEM = ItemVariant.of(Items.TORCH);
 	private final SimpleInventory torchInventory;
@@ -57,8 +58,7 @@ public class TorchPlacerModule extends CartModule implements Configurable {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
+	public void work() {
 		if (!this.getEntity().world.isClient) {
 			int x = (int) Math.floor(this.getEntity().getX());
 			int y = (int) Math.floor(this.getEntity().getY());

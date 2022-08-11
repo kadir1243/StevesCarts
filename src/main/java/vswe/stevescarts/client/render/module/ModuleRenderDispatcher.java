@@ -11,6 +11,7 @@ import vswe.stevescarts.client.render.module.hull.HullRenderer;
 import vswe.stevescarts.client.render.module.hull.MechanicalPigRenderer;
 import vswe.stevescarts.client.render.module.model.addon.LeverModel;
 import vswe.stevescarts.client.render.module.model.attachment.SeatModel;
+import vswe.stevescarts.client.render.module.model.attachment.ToolPlateModel;
 import vswe.stevescarts.client.render.module.model.attachment.TorchPlacerModel;
 import vswe.stevescarts.client.render.module.model.engine.CoalEngineInsideModel;
 import vswe.stevescarts.client.render.module.model.storage.ExtractingChestsModel;
@@ -124,6 +125,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 		register(StevesCartsModules.TORCH_PLACER, new TwoSidedRenderer<>(id("textures/modules/attachment/torch_placer.png"), TorchPlacerModel::new));
 		register(StevesCartsModules.RAILER, new RailerRenderer());
 		register(StevesCartsModules.LARGE_RAILER, new RailerRenderer());
+		register(StevesCartsModules.BRIDGE_BUILDER, new SingleModelRenderer(new ToolPlateModel(id("textures/modules/attachment/tool_plate.png"))));
 
 		register(StevesCartsModules.BRAKE, new SingleModelRenderer(new LeverModel(id("textures/modules/addon/red_lever.png"))));
 

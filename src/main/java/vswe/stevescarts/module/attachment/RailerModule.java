@@ -7,6 +7,7 @@ import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.Configurable;
 import vswe.stevescarts.module.ModuleType;
+import vswe.stevescarts.module.Worker;
 import vswe.stevescarts.screen.CartHandler;
 
 import net.minecraft.block.Block;
@@ -24,12 +25,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
-public class RailerModule extends CartModule implements Configurable {
+public class RailerModule extends CartModule implements Configurable, Worker {
 	private final SimpleInventory railInventory;
+	private final int height;
 
-	public RailerModule(CartEntity minecart, ModuleType<?> type, int size) {
+	public RailerModule(CartEntity minecart, ModuleType<?> type, int height) {
 		super(minecart, type);
-		this.railInventory = new SimpleInventory(size);
+		this.railInventory = new SimpleInventory(height * 3);
+		this.height = height;
 	}
 
 	@Override
@@ -45,8 +48,7 @@ public class RailerModule extends CartModule implements Configurable {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
+	public void work() {
 		if (this.checkMovement() && !this.getEntity().world.isClient) {
 			this.tryPlaceRail();
 		}
@@ -76,7 +78,7 @@ public class RailerModule extends CartModule implements Configurable {
 	public void configure(WPlainPanel panel, CartHandler handler, PlayerEntity player) {
 		WLabel label = new WLabel(this.getType().getTranslationText());
 		panel.add(label, 0, 0);
-		WItemSlot slots = WItemSlot.of(this.railInventory, 0, 1, 1);
+		WItemSlot slots = WItemSlot.of(this.railInventory, 0, 3, this.height);
 		slots.setFilter(stack -> stack.isIn(ItemTags.RAILS));
 		panel.add(slots, 0, 15);
 	}

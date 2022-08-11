@@ -27,6 +27,7 @@
   "module.stevescarts.torch_placer": "Torch Placer",
   "module.stevescarts.railer": "Railer",
   "module.stevescarts.large_railer": "Large Railer",
+  "module.stevescarts.bridge_builder": "Bridge Builder",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

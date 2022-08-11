@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "stevescarts:simple_pcb"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    },
+    "X": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "pattern": [
+    " R ",
+    "X#X",
+    " P "
+  ],
+  "result": {
+    "item": "stevescarts:bridge_builder"
+  }
+}

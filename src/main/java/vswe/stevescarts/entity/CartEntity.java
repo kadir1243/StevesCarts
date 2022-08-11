@@ -18,6 +18,7 @@ import vswe.stevescarts.entity.network.CartUpdateS2CPacket;
 import vswe.stevescarts.module.CartModule;
 import vswe.stevescarts.module.ModuleGroup;
 import vswe.stevescarts.module.ModuleType;
+import vswe.stevescarts.module.Worker;
 import vswe.stevescarts.module.engine.EngineModule;
 import vswe.stevescarts.module.storage.TankModule;
 import vswe.stevescarts.screen.CartHandler;
@@ -169,12 +170,21 @@ public class CartEntity extends MinecartEntity {
 	}
 
 	@Override
+	protected void moveOnRail(BlockPos pos, BlockState state) {
+		if (this.stopTicks > 0) {
+			return;
+		}
+		super.moveOnRail(pos, state);
+	}
+
+	@Override
 	public void tick() {
 		super.tick();
 		this.modules.values().forEach(cartModule -> {
 			cartModule.setEntity(this);
 			cartModule.tick();
 		});
+		this.modules.values().stream().filter(Worker.class::isInstance).map(Worker.class::cast).sorted().forEach(Worker::work);
 		boolean move = true;
 		if (this.stopTicks > 0) {
 			this.stopTicks--;
