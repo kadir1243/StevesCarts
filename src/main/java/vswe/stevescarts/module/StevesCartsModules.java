@@ -12,6 +12,7 @@ import vswe.stevescarts.module.addon.BrakeModule;
 import vswe.stevescarts.module.addon.InvisibilityModule;
 import vswe.stevescarts.module.attachment.BridgeBuilderModule;
 import vswe.stevescarts.module.attachment.FireworkDisplayModule;
+import vswe.stevescarts.module.attachment.HydratorModule;
 import vswe.stevescarts.module.attachment.RailerModule;
 import vswe.stevescarts.module.attachment.SeatModule;
 import vswe.stevescarts.module.attachment.TorchPlacerModule;
@@ -28,6 +29,7 @@ import vswe.stevescarts.module.storage.TankModule;
 
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 
 public class StevesCartsModules {
@@ -61,6 +63,7 @@ public class StevesCartsModules {
 	public static final ModuleType<RailerModule> RAILER = register("railer", new ModuleType<>((minecart, type) -> new RailerModule(minecart, type, 1), StevesCarts.id("railer"), 3, EnumSet.of(ModuleSide.TOP), ModuleGroup.ATTACHMENT, true, false, false, null, null));
 	public static final ModuleType<RailerModule> LARGE_RAILER = register("large_railer", new ModuleType<>((minecart, type) -> new RailerModule(minecart, type, 2), StevesCarts.id("large_railer"), 9, EnumSet.of(ModuleSide.TOP), ModuleGroup.ATTACHMENT, true, false, false, null, null));
 	public static final ModuleType<BridgeBuilderModule> BRIDGE_BUILDER = register("bridge_builder", new ModuleType<>(BridgeBuilderModule::new, StevesCarts.id("bridge_builder"), 12, EnumSet.of(ModuleSide.FRONT), ModuleGroup.ATTACHMENT, true, false, false, null, null));
+	public static final ModuleType<HydratorModule> HYDRATOR = register("hydrator", new ModuleType<>(HydratorModule::new, StevesCarts.id("hydrator"), 6, EnumSet.noneOf(ModuleSide.class), ModuleGroup.ATTACHMENT, false, false, false, null, Util.make(new Object2IntOpenHashMap<>(), m -> m.put(ModuleTags.TANKS, 1))));
 
 	public static final ModuleType<BrakeModule> BRAKE = register("brake", new ModuleType<>(BrakeModule::new, StevesCarts.id("brake"), 12, EnumSet.of(ModuleSide.RIGHT), ModuleGroup.ADDON, true, false, false, null, null));
 	public static final ModuleType<InvisibilityModule> INVISIBILITY_CORE = register("invisibility_core", new ModuleType<>(InvisibilityModule::new, StevesCarts.id("invisibility_core"), 21, EnumSet.noneOf(ModuleSide.class), ModuleGroup.ADDON, false, false, false, null, null));

@@ -28,6 +28,7 @@
   "module.stevescarts.railer": "Railer",
   "module.stevescarts.large_railer": "Large Railer",
   "module.stevescarts.bridge_builder": "Bridge Builder",
+  "module.stevescarts.hydrator": "Hydrator",
 
   "item.stevescarts.wooden_wheels": "Wooden Wheels",
   "item.stevescarts.iron_wheels": "Iron Wheels",

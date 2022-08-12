@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:glass_bottle"
+    },
+    "I": {
+      "tag": "c:iron_ingots"
+    },
+    "X": {
+      "tag": "minecraft:wooden_fences"
+    }
+  },
+  "pattern": [
+    "I#I",
+    " X "
+  ],
+  "result": {
+    "item": "stevescarts:hydrator"
+  }
+}

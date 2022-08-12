@@ -55,6 +55,7 @@ import static vswe.stevescarts.module.StevesCartsModules.FIREWORK_DISPLAY;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_CHEST;
 import static vswe.stevescarts.module.StevesCartsModules.FRONT_TANK;
 import static vswe.stevescarts.module.StevesCartsModules.GALGADORIAN_HULL;
+import static vswe.stevescarts.module.StevesCartsModules.HYDRATOR;
 import static vswe.stevescarts.module.StevesCartsModules.INVISIBILITY_CORE;
 import static vswe.stevescarts.module.StevesCartsModules.LARGE_RAILER;
 import static vswe.stevescarts.module.StevesCartsModules.MECHANICAL_PIG;
@@ -108,6 +109,7 @@ public class StevesCartsRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonBuilder.create(RAILER).pattern("###").pattern("XRX").pattern("###").input('X', Tags.IRON_INGOTS).input('#', Tags.COBBLESTONE).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.RAIL)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(LARGE_RAILER).pattern("###").pattern("XRX").pattern("###").input('#', Tags.IRON_INGOTS).input('X', RAILER).input('R', Items.RAIL).criterion("has_base_item", RecipeProvider.conditionsFromItem(RAILER)).offerTo(exporter);
 		ShapedRecipeJsonBuilder.create(BRIDGE_BUILDER).pattern(" R ").pattern("X#X").pattern(" P ").input('R', Tags.REDSTONE_DUSTS).input('X', Items.BRICKS).input('P', Items.PISTON).input('#', SIMPLE_PCB).criterion("has_base_item", RecipeProvider.conditionsFromItem(RAILER)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(HYDRATOR).pattern("I#I").pattern(" X ").input('I', Tags.IRON_INGOTS).input('#', Items.GLASS_BOTTLE).input('X', ItemTags.WOODEN_FENCES).criterion("has_base_item", RecipeProvider.conditionsFromItem(Items.GLASS_BOTTLE)).offerTo(exporter);
 	}
 
 	public void createHull(Consumer<RecipeJsonProvider> exporter, ModuleType<?> output, TagKey<Item> body, Item wheels) {

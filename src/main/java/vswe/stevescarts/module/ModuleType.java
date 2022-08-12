@@ -10,6 +10,7 @@ import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.module.hull.HullModuleType;
+import vswe.stevescarts.module.tool.ToolModuleType;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -151,8 +152,16 @@ public class ModuleType<T extends CartModule> implements ItemConvertible {
 		return this.group == ModuleGroup.HULL;
 	}
 
-	public HullModuleType<T> asHull() {
+	public boolean isTool() {
+		return this.group == ModuleGroup.TOOL;
+	}
+
+	public HullModuleType<T> asHull() throws ClassCastException  {
 		return (HullModuleType<T>) this;
+	}
+
+	public ToolModuleType<T> asTool() throws ClassCastException {
+		return (ToolModuleType<T>) this;
 	}
 
 	public static NbtCompound toNbt(CartModule module) {
