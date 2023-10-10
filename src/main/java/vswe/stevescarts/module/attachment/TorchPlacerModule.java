@@ -5,15 +5,9 @@ import io.github.cottonmc.cotton.gui.networking.ScreenNetworking;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
-import vswe.stevescarts.StevesCarts;
-import vswe.stevescarts.entity.CartEntity;
-import vswe.stevescarts.module.CartModule;
-import vswe.stevescarts.module.Configurable;
-import vswe.stevescarts.module.ModuleType;
-import vswe.stevescarts.module.Worker;
-import vswe.stevescarts.screen.CartHandler;
-import vswe.stevescarts.screen.widget.WLightThreshold;
-
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,14 +17,18 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.module.CartModule;
+import vswe.stevescarts.module.Configurable;
+import vswe.stevescarts.module.ModuleType;
+import vswe.stevescarts.module.Worker;
+import vswe.stevescarts.screen.CartHandler;
+import vswe.stevescarts.screen.widget.WLightThreshold;
 
 public class TorchPlacerModule extends CartModule implements Configurable, Worker {
 	private static final BlockState TORCH_STATE = Blocks.TORCH.getDefaultState();

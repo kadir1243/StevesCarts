@@ -1,13 +1,13 @@
 package vswe.stevescarts.block;
 
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
-
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.item.StevesCartsItems;
 
@@ -53,8 +53,14 @@ public class StevesCartsBlocks {
 	}
 
 	public static <T extends Block> T registerBlockAndItem(String name, T block) {
-		Registry.register(Registry.BLOCK, StevesCarts.id(name), block);
-		Registry.register(Registry.ITEM, StevesCarts.id(name), new BlockItem(block, new Item.Settings().group(StevesCartsItems.BLOCKS)));
+		Registry.register(Registries.BLOCK, StevesCarts.id(name), block);
+		BlockItem item = new BlockItem(block, new Item.Settings());
+		Registry.register(Registries.ITEM, StevesCarts.id(name), item);
+		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
+			if (group == StevesCartsItems.BLOCKS) {
+				entries.add(item);
+			}
+		});
 		return block;
 	}
 }

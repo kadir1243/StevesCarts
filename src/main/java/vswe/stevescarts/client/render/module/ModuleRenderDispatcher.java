@@ -72,7 +72,7 @@ public class ModuleRenderDispatcher implements SimpleSynchronousResourceReloadLi
 			//noinspection unchecked
 			ModuleRenderer<T> renderer = (ModuleRenderer<T>) renderers.get(module.getType());
 			if (renderer == null) {
-				throw new NullPointerException("No renderer registered for module " + module.getType().toString());
+				throw new NullPointerException("No renderer registered for module " + module.getType());
 			}
 
 			matrices.push();

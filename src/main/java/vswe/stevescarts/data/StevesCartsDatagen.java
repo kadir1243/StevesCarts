@@ -6,8 +6,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 public class StevesCartsDatagen implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
-		dataGenerator.addProvider(new StevesCartsModelProvider(dataGenerator));
-		dataGenerator.addProvider(new StevesCartsRecipeProvider(dataGenerator));
-		dataGenerator.addProvider(new StevesCartsLootTableProvider(dataGenerator));
+		FabricDataGenerator.Pack pack = dataGenerator.createPack();
+		pack.addProvider(StevesCartsModelProvider::new);
+		pack.addProvider(StevesCartsRecipeProvider::new);
+		pack.addProvider(StevesCartsLootTableProvider::new);
 	}
 }

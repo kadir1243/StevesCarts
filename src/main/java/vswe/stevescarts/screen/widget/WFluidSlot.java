@@ -26,8 +26,7 @@ public class WFluidSlot extends WWidget {
 	@Override
 	public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
 		super.paint(matrices, x, y, mouseX, mouseY);
-		RenderUtil.
-		renderGuiTank(this.tank.getFluidInstance(), this.tank.getFluidValueCapacity(), this.tank.getFluidAmount(), x + 1, y + 1, 100.0, 34, 49);
+		RenderUtil.renderGuiTank(this.tank.getFluidInstance(), this.tank.getFluidValueCapacity(), this.tank.getFluidAmount(), x + 1, y + 1, 100.0, 34, 49);
 
 		ScreenDrawing.texturedRect(matrices, x, y, 36, 51, TEXTURE, 0xFFFFFFFF);
 	}

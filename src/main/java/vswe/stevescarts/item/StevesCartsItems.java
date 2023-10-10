@@ -1,19 +1,18 @@
 package vswe.stevescarts.item;
 
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.registry.Registry;
-
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.module.StevesCartsModules;
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-
 public class StevesCartsItems {
-	public static final ItemGroup COMPONENTS = FabricItemGroupBuilder.build(StevesCarts.id("components"), () -> StevesCartsItems.WOODEN_WHEELS.getDefaultStack());
-	public static final ItemGroup BLOCKS = FabricItemGroupBuilder.build(StevesCarts.id("blocks"), () -> StevesCartsBlocks.CART_ASSEMBLER.asItem().getDefaultStack());
-	public static final ItemGroup MODULES = FabricItemGroupBuilder.build(StevesCarts.id("modules"), () -> StevesCartsModules.STANDARD_HULL.getItem().getDefaultStack());
+	public static final ItemGroup COMPONENTS = FabricItemGroup.builder(StevesCarts.id("components")).icon(() -> StevesCartsItems.WOODEN_WHEELS.getDefaultStack()).build();
+	public static final ItemGroup BLOCKS = FabricItemGroup.builder(StevesCarts.id("blocks")).icon(() -> StevesCartsBlocks.CART_ASSEMBLER.asItem().getDefaultStack()).build();
+	public static final ItemGroup MODULES = FabricItemGroup.builder(StevesCarts.id("modules")).icon(() -> StevesCartsModules.STANDARD_HULL.getItem().getDefaultStack()).build();
 	// Components
 	public static final CartComponentItem WOODEN_WHEELS = registerSimpleComponent("wooden_wheels");
 	public static final CartComponentItem IRON_WHEELS = registerSimpleComponent("iron_wheels");
@@ -101,7 +100,7 @@ public class StevesCartsItems {
 	public static final CartItem CART = register("cart", new CartItem(new Item.Settings().maxCount(1)));
 
 	private static <T extends Item> T register(String name, T item) {
-		return Registry.register(Registry.ITEM, StevesCarts.id(name), item);
+		return Registry.register(Registries.ITEM, StevesCarts.id(name), item);
 	}
 
 	private static CartComponentItem registerSimpleComponent(String name) {

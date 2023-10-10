@@ -1,18 +1,36 @@
 package vswe.stevescarts.entity;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
-
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import vswe.stevescarts.entity.network.CartSpawnS2CPacket;
 import vswe.stevescarts.entity.network.CartUpdateS2CPacket;
 import vswe.stevescarts.module.CartModule;
@@ -23,32 +41,9 @@ import vswe.stevescarts.module.engine.EngineModule;
 import vswe.stevescarts.module.storage.TankModule;
 import vswe.stevescarts.screen.CartHandler;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.vehicle.MinecartEntity;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
+import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class CartEntity extends MinecartEntity {
 	private final Int2ObjectMap<CartModule> modules = new Int2ObjectLinkedOpenHashMap<>();
@@ -112,7 +107,7 @@ public class CartEntity extends MinecartEntity {
 	}
 
 	@Override
-	public Packet<?> createSpawnPacket() {
+	public Packet<ClientPlayPacketListener> createSpawnPacket() {
 		return CartSpawnS2CPacket.create(this);
 	}
 
@@ -281,7 +276,7 @@ public class CartEntity extends MinecartEntity {
 		public long insert(FluidVariant resource, long maxAmount, TransactionContext transaction) {
 			return CartEntity.this
 					.getTanks()
-					.filter(tank -> tank.getTank().simulateInsert(resource, maxAmount, transaction) > 0)
+					.filter(tank -> StorageUtil.simulateInsert(tank.getTank(), resource, maxAmount, transaction) > 0)
 					.findFirst()
 					.map(tank -> tank.getTank().insert(resource, maxAmount, transaction))
 					.orElse(zero);
@@ -291,7 +286,7 @@ public class CartEntity extends MinecartEntity {
 		public long extract(FluidVariant resource, long maxAmount, TransactionContext transaction) {
 			return CartEntity.this
 					.getTanks()
-					.filter(tank -> tank.getTank().simulateExtract(resource, maxAmount, transaction) > 0)
+					.filter(tank -> StorageUtil.simulateExtract(tank.getTank(), resource, maxAmount, transaction) > 0)
 					.findFirst()
 					.map(tank -> tank.getTank().extract(resource, maxAmount, transaction))
 					.orElse(zero);

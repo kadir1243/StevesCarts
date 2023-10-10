@@ -1,14 +1,13 @@
 package vswe.stevescarts.mixin;
 
-import java.util.Map;
-
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.TagManagerLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import net.minecraft.tag.TagManagerLoader;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import java.util.Map;
 
 @Mixin(TagManagerLoader.class)
 public interface TagManagerLoaderAccessor {

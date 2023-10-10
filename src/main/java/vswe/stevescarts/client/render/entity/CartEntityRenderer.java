@@ -1,19 +1,16 @@
 package vswe.stevescarts.client.render.entity;
 
-import vswe.stevescarts.client.StevesCartsClient;
-import vswe.stevescarts.entity.CartEntity;
-import vswe.stevescarts.module.CartModule;
-
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
+import vswe.stevescarts.client.StevesCartsClient;
+import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.module.CartModule;
 
 public class CartEntityRenderer extends EntityRenderer<CartEntity> {
 	public CartEntityRenderer(EntityRendererFactory.Context ctx) {
@@ -61,15 +58,15 @@ public class CartEntityRenderer extends EntityRenderer<CartEntity> {
 			}
 		}
 		matrices.translate(0.0, 0.375, 0.0);
-		matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0f - yaw));
-		matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-renderPitch));
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f - yaw));
+		matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-renderPitch));
 		float p = (float) entity.getDamageWobbleTicks() - tickDelta;
 		float q = entity.getDamageWobbleStrength() - tickDelta;
 		if (q < 0.0f) {
 			q = 0.0f;
 		}
 		if (p > 0.0f) {
-			matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.sin(p) * p * q / 10.0f * (float) entity.getDamageWobbleSide()));
+			matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.sin(p) * p * q / 10.0f * (float) entity.getDamageWobbleSide()));
 		}
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		for (CartModule module : entity.getModules()) {

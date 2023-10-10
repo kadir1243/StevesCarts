@@ -1,36 +1,23 @@
 package vswe.stevescarts.data;
 
-import java.util.Arrays;
-import java.util.Optional;
-
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.minecraft.block.Block;
+import net.minecraft.data.client.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.block.UpgradeBlock;
 import vswe.stevescarts.item.CartComponentItem;
 import vswe.stevescarts.module.ModuleItem;
 
-import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateSupplier;
-import net.minecraft.data.client.BlockStateVariant;
-import net.minecraft.data.client.BlockStateVariantMap;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Model;
-import net.minecraft.data.client.ModelIds;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureKey;
-import net.minecraft.data.client.TextureMap;
-import net.minecraft.data.client.VariantSettings;
-import net.minecraft.data.client.VariantsBlockStateSupplier;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
-
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import java.util.Arrays;
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class StevesCartsModelProvider extends FabricModelProvider {
@@ -39,7 +26,7 @@ public class StevesCartsModelProvider extends FabricModelProvider {
 	public static final Model UPGRADE_HORIZONTAL_DOWN = new Model(Optional.of(StevesCarts.id("block/upgrade_horizontal_down")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
 	public static final Model UPGRADE_IDLE = new Model(Optional.of(StevesCarts.id("block/upgrade_idle")), Optional.empty(), TextureKey.LAYER0, TextureKey.FRONT);
 
-	public StevesCartsModelProvider(FabricDataGenerator dataGenerator) {
+	public StevesCartsModelProvider(FabricDataOutput dataGenerator) {
 		super(dataGenerator);
 	}
 
@@ -83,14 +70,14 @@ public class StevesCartsModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-		Registry.ITEM.stream().filter(obj -> obj instanceof CartComponentItem || obj instanceof ModuleItem).forEach(item -> {
-			itemModelGenerator.register(item, Models.GENERATED);
-		});
+		Registries.ITEM.stream()
+				.filter(obj -> obj instanceof CartComponentItem || obj instanceof ModuleItem)
+				.forEach(item -> itemModelGenerator.register(item, Models.GENERATED));
 	}
 
 	public TextureMap createUpgradeBlockTextureMap(UpgradeBlock block) {
 		TextureMap t = new TextureMap();
-		t.put(TextureKey.LAYER0, StevesCarts.id("block/" + Registry.BLOCK.getId(block).getPath() + "_icon"));
+		t.put(TextureKey.LAYER0, StevesCarts.id("block/" + Registries.BLOCK.getId(block).getPath() + "_icon"));
 		t.put(TextureKey.FRONT, StevesCarts.id("block/upgrade_side_0"));
 		return t;
 	}
@@ -145,7 +132,7 @@ public class StevesCartsModelProvider extends FabricModelProvider {
 	}
 
 	public static TextureMap getUpgradeItemTextureMap(UpgradeBlock block) {
-		Identifier blockId = Registry.BLOCK.getId(block);
+		Identifier blockId = Registries.BLOCK.getId(block);
 		return TextureMap.layer0(StevesCarts.id("block/" + blockId.getPath() + "_icon"));
 	}
 }

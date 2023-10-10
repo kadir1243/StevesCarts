@@ -1,10 +1,20 @@
 package vswe.stevescarts.module;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.function.BiFunction;
-
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.tag.convention.v1.TagUtil;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
@@ -12,21 +22,12 @@ import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.module.hull.HullModuleType;
 import vswe.stevescarts.module.tool.ToolModuleType;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.tag.TagKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-
-import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.fabricmc.fabric.api.tag.convention.v1.TagUtil;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class ModuleType<T extends CartModule> implements ItemConvertible {
-	public static final Registry<ModuleType<?>> REGISTRY = (Registry<ModuleType<?>>) (Object) FabricRegistryBuilder.createSimple(ModuleType.class, StevesCarts.id("module_type")).buildAndRegister();
+	public static final Registry<ModuleType<?>> REGISTRY = (Registry<ModuleType<?>>) (Object) FabricRegistryBuilder.createSimple(RegistryKey.ofRegistry(StevesCarts.id("module_type"))).buildAndRegister();
 
 	// TODO
 	private final RegistryEntry.Reference<ModuleType<?>> registryEntry = null;
@@ -64,8 +65,13 @@ public class ModuleType<T extends CartModule> implements ItemConvertible {
 		this.incompatibilities = incompatibilities;
 		this.tagRequirements = requirements;
 		this.translationKeyText = Text.translatable(this.translationKey);
-		this.item = new ModuleItem(new Item.Settings().group(StevesCartsItems.MODULES).maxCount(1), this);
-		Registry.register(Registry.ITEM, id, this.item);
+		this.item = new ModuleItem(new Item.Settings().maxCount(1), this);
+		Registry.register(Registries.ITEM, id, this.item);
+		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) -> {
+			if (itemGroup == StevesCartsItems.MODULES) {
+				entries.add(item);
+			}
+		});
 	}
 
 	public RegistryEntry.Reference<ModuleType<?>> getRegistryEntry() {

@@ -12,12 +12,10 @@ import net.minecraft.util.Util;
 
 import vswe.stevescarts.StevesCarts;
 
+import java.util.Arrays;
+
 public class CoalEngineInsideModel extends AbstractCoalEngineModel {
-	public static final Identifier[] FIRE_TEXTURES = Util.make(new Identifier[4], textures -> {
-		for (int i = 0; i < textures.length; i++) {
-			textures[i] = StevesCarts.id("textures/modules/engine/engine_fire" + (i + 1) + ".png");
-		}
-	});
+	public static final Identifier[] FIRE_TEXTURES = Util.make(new Identifier[4], textures -> Arrays.setAll(textures, i -> StevesCarts.id("textures/modules/engine/engine_fire" + (i + 1) + ".png")));
 	private final Identifier[] textures;
 	private final Identifier otherTexture;
 

@@ -1,6 +1,15 @@
 package vswe.stevescarts.client;
 
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.resource.ResourceType;
 import vswe.stevescarts.block.StevesCartsBlocks;
 import vswe.stevescarts.client.render.entity.CartEntityRenderer;
 import vswe.stevescarts.client.render.module.ModuleRenderDispatcher;
@@ -11,18 +20,6 @@ import vswe.stevescarts.item.StevesCartsItems;
 import vswe.stevescarts.screen.CartAssemblerHandler;
 import vswe.stevescarts.screen.CartHandler;
 import vswe.stevescarts.screen.StevesCartsScreenHandlers;
-
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.util.math.Vec3f;
-
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 
 public class StevesCartsClient implements ClientModInitializer {
 	private static ModuleRenderDispatcher moduleRenderDispatcher;

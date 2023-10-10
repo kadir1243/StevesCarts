@@ -1,11 +1,10 @@
 package vswe.stevescarts.module;
 
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import vswe.stevescarts.entity.CartEntity;
-
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
 
 public abstract class CartModule {
 	private final ModuleType<?> type;

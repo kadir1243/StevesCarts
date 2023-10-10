@@ -1,26 +1,25 @@
 package vswe.stevescarts.screen.widget;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.WWidget;
-import vswe.stevescarts.entity.CartEntity;
-import vswe.stevescarts.module.ModuleType;
-
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.floatprovider.FloatSupplier;
 import net.minecraft.world.World;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.module.ModuleType;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import java.util.List;
+import java.util.function.Supplier;
 
 public class WCart extends WWidget {
 	public static boolean renderingCart = false;
@@ -60,9 +59,9 @@ public class WCart extends WWidget {
 		MatrixStack matrixStack2 = new MatrixStack();
 		matrixStack2.translate(0.0, 0.0, 1000.0);
 		matrixStack2.scale(50, 50, 50);
-		Quaternion quaternion = Vec3f.POSITIVE_Z.getDegreesQuaternion(180.0f);
-		Quaternion quaternion2 = Vec3f.POSITIVE_X.getDegreesQuaternion(g * 20.0f);
-		quaternion.hamiltonProduct(quaternion2);
+		Quaternionf quaternion = RotationAxis.POSITIVE_Z.rotationDegrees(180.0f);
+		Quaternionf quaternion2 = RotationAxis.POSITIVE_X.rotationDegrees(g * 20.0f);
+		quaternion.mul(quaternion2);
 		matrixStack2.multiply(quaternion);
 		DiffuseLighting.method_34742();
 		EntityRenderDispatcher entityRenderDispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();

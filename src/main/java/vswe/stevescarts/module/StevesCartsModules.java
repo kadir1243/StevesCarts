@@ -1,21 +1,17 @@
 package vswe.stevescarts.module;
 
-import java.util.EnumSet;
-import java.util.function.BiFunction;
-
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import reborncore.common.fluid.FluidValue;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.addon.BrakeModule;
 import vswe.stevescarts.module.addon.InvisibilityModule;
-import vswe.stevescarts.module.attachment.BridgeBuilderModule;
-import vswe.stevescarts.module.attachment.FireworkDisplayModule;
-import vswe.stevescarts.module.attachment.HydratorModule;
-import vswe.stevescarts.module.attachment.RailerModule;
-import vswe.stevescarts.module.attachment.SeatModule;
-import vswe.stevescarts.module.attachment.TorchPlacerModule;
+import vswe.stevescarts.module.attachment.*;
 import vswe.stevescarts.module.engine.AdvancedThermalEngineModule;
 import vswe.stevescarts.module.engine.CoalEngineModule;
 import vswe.stevescarts.module.engine.SolarEngineModule;
@@ -27,10 +23,8 @@ import vswe.stevescarts.module.storage.ChestModule;
 import vswe.stevescarts.module.storage.ExtractingChestsModule;
 import vswe.stevescarts.module.storage.TankModule;
 
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
+import java.util.EnumSet;
+import java.util.function.BiFunction;
 
 public class StevesCartsModules {
 	public static final HullModuleType<HullModule> WOODEN_HULL = registerHull("wooden_hull", HullModule::new, new HullData(50, 1, 0, 15));

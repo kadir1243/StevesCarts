@@ -1,24 +1,23 @@
 package vswe.stevescarts.entity.network;
 
-import java.util.UUID;
-
-import vswe.stevescarts.StevesCarts;
-import vswe.stevescarts.entity.CartEntity;
-import vswe.stevescarts.entity.StevesCartsEntities;
-
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
+import vswe.stevescarts.StevesCarts;
+import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.entity.StevesCartsEntities;
+
+import java.util.UUID;
 
 public class CartSpawnS2CPacket {
 	public static final Identifier ID = StevesCarts.id("spawn_minecart");
@@ -55,7 +54,7 @@ public class CartSpawnS2CPacket {
 		});
 	}
 
-	public static Packet<?> create(CartEntity entity) {
+	public static Packet<ClientPlayPacketListener> create(CartEntity entity) {
 		PacketByteBuf buf = PacketByteBufs.create();
 		buf.writeUuid(entity.getUuid());
 		buf.writeVarInt(entity.getId());

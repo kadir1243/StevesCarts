@@ -62,8 +62,8 @@ public class CartHandler extends SyncedGuiDescription {
 	}
 
 	@Override
-	public void close(PlayerEntity player) {
-		super.close(player);
+	public void onClosed(PlayerEntity player) {
+		super.onClosed(player);
 		this.minecartEntity.get().onScreenClose();
 	}
 

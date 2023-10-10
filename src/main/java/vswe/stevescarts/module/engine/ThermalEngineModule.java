@@ -2,6 +2,7 @@ package vswe.stevescarts.module.engine;
 
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.module.ModuleType;
 import vswe.stevescarts.module.StevesCartsModules;
@@ -39,7 +40,7 @@ public class ThermalEngineModule extends EngineModule {
 	}
 
 	protected boolean checkSimulate(FluidVariant variant, long amount) {
-		return this.getEntity().getFluidStorage().simulateExtract(variant, amount, null) == amount;
+		return StorageUtil.simulateExtract(this.getEntity().getFluidStorage(), variant, amount, null) == amount;
 	}
 
 	protected void consume(FluidVariant variant, long amount) {

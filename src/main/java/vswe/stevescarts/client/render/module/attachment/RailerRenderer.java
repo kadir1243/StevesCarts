@@ -1,12 +1,7 @@
 package vswe.stevescarts.client.render.module.attachment;
 
-import java.util.Map;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import vswe.stevescarts.client.render.module.ModuleRenderer;
-import vswe.stevescarts.module.attachment.RailerModule;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -16,7 +11,11 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
+import vswe.stevescarts.client.render.module.ModuleRenderer;
+import vswe.stevescarts.module.attachment.RailerModule;
+
+import java.util.Map;
 
 public class RailerRenderer extends ModuleRenderer<RailerModule> {
 	private static BiMap<Item, Block> BLOCK_ITEMS;
@@ -38,8 +37,8 @@ public class RailerRenderer extends ModuleRenderer<RailerModule> {
 		BlockState state = BLOCK_ITEMS.get(first.getItem()).getDefaultState();
 		matrices.push();
 		matrices.translate(-0.5, -0.3, -0.5);
-		matrices.multiply(Vec3f.POSITIVE_X.getRadialQuaternion(3.1415927f));
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(1.5707964f));
+		matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(3.1415927f));
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(1.5707964f));
 		MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(state, matrices, vertexConsumers, entityLight, OverlayTexture.DEFAULT_UV);
 		matrices.pop();
 	}

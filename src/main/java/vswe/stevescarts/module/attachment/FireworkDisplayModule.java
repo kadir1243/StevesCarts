@@ -3,6 +3,7 @@ package vswe.stevescarts.module.attachment;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
+import net.minecraft.util.math.MathHelper;
 import vswe.stevescarts.entity.CartEntity;
 import vswe.stevescarts.mixin.DispenserBlockAccessor;
 import vswe.stevescarts.module.CartModule;
@@ -91,7 +92,7 @@ public class FireworkDisplayModule extends CartModule implements Configurable {
 
 		@Override
 		public BlockPos getPos() {
-			return new BlockPos(this.getX(), this.getY(), this.getZ());
+			return new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ()));
 		}
 
 		@Override

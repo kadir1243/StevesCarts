@@ -1,12 +1,11 @@
 package vswe.stevescarts.module;
 
-import java.util.HashMap;
-
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.text.Text;
 import vswe.stevescarts.StevesCarts;
 import vswe.stevescarts.mixin.TagManagerLoaderAccessor;
 
-import net.minecraft.tag.TagKey;
-import net.minecraft.text.Text;
+import java.util.HashMap;
 
 public class ModuleTags {
 	public static final TagKey<ModuleType<?>> CHESTS = of("chests");
@@ -18,7 +17,7 @@ public class ModuleTags {
 	public static final TagKey<ModuleType<?>> TANKS = of("tanks");
 
 	static void init() {
-		var map = new HashMap<>(TagManagerLoaderAccessor.getDirectories());
+        var map = new HashMap<>(TagManagerLoaderAccessor.getDirectories());
 		map.put(ModuleType.REGISTRY.getKey(), "tags/stevescarts/module_types");
 		TagManagerLoaderAccessor.setDirectories(map);
 	}

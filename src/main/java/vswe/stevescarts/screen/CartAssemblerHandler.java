@@ -110,9 +110,7 @@ public class CartAssemblerHandler extends SyncedGuiDescription {
 			toolSlot.toggleSlots(e);
 			engineSlots.toggleSlots(e);
 		}));
-		WItemSlot.ChangeListener moduleListener = ((slot, inventory, index, stack) -> {
-			hullSlot.setModifiable(!((WModuleSlot) slot).hasModule());
-		});
+		WItemSlot.ChangeListener moduleListener = ((slot, inventory, index, stack) -> hullSlot.setModifiable(!((WModuleSlot) slot).hasModule()));
 		addonsSlots.addChangeListener(moduleListener);
 		storageSlots.addChangeListener(moduleListener);
 		attachmentSlots.addChangeListener(moduleListener);

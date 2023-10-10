@@ -1,14 +1,7 @@
 package vswe.stevescarts.item;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.jetbrains.annotations.Nullable;
-import vswe.stevescarts.entity.CartEntity;
-import vswe.stevescarts.entity.StevesCartsEntities;
-import vswe.stevescarts.module.CartModule;
-import vswe.stevescarts.module.ModuleStorage;
-
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.RailShape;
@@ -17,16 +10,21 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
+import vswe.stevescarts.entity.CartEntity;
+import vswe.stevescarts.entity.StevesCartsEntities;
+import vswe.stevescarts.module.CartModule;
+import vswe.stevescarts.module.ModuleStorage;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import java.util.Collection;
+import java.util.List;
 
 public class CartItem extends Item {
 	public static final Text PRESS_SHIFT = Text.translatable("tooltip.stevescarts.press_shift").formatted(Formatting.GRAY);
